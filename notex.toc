@@ -15,3 +15,5 @@
 \contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{7}{subsubsection.3.6.1}%
 \contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{7}{subsubsection.3.6.2}%
 \contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{7}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{8}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{8}{subsubsection.3.6.5}%

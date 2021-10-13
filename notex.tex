@@ -5,6 +5,7 @@
 \usepackage[italian]{babel}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -184,16 +185,60 @@ Consideriamo il seguente esempio:
 $$f:\mathbb{N}\rightarrow\mathbb{N}$$
 $$f(n)=\lfloor\frac{1}{n}\rfloor \text{ non è definita su } n=0\implies f(0)\uparrow \forall n\in\mathbb{N}\setminus{0}, f(n)\downarrow$$
 
-Una funzione viene definita \textbf{parziale}
+Una funzione viene definita \textbf{parziale} se a \textit{qualche} elemento di $A$ si associa un elemento di $B$. Si amplia un nuovo concetto che è quello del \textbf{dominio} (o campo di esistenza) della funzione,
+ovvero quell'insieme costituito da tutti gli elementi di $A$ tali per cui è definita una immagine appartenente a $B$.
+$$Dom_f=\left\{a\in A : f(a)\downarrow \right\}\subseteq A$$
 
+Allora vale precisare le due seguenti regole:
+$$Dom_f\nsubseteq A\implies f\text{ parziale}$$
+$$Dom_f\equiv A\implies f \text{ totale}$$
 
+Alcuni esempi:
+$$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\}$$
+  $$f(n)=\lfloor\log{n}\rfloor\implies Dom_f=\mathbb{N}\setminus\{0\}$$
+$$f(n)=\lfloor\sqrt{-n} \implies Dom_f=\{0\}$$
+\subsubsection{Totalizzazione di una funzione parziale}
+Teniamo conto di una cosa, possiamo convenzionalmente rendere totale una funzione parziale, basta estendere
+il codominio con un \textbf{simbolo convenzionale} $\bot$ che buttiamo fuori tutte le volte che la funzione non è definita.
+$$f:A\rightarrow B\text{ parziale } \implies \widetilde{f}:A\rightarrow B\cap\{\bot\}$$
+ La totalizzazione di $f$ viene raggiunta con l'aggiunta di questo simbolo.
+\[   
+  \widetilde{f}(a) = 
+     \begin{cases}
+       f(a) &\quad\text{se }a\in Dom_f\\
+       \bot &\quad\text{altrimenti} \\
+     \end{cases}
+\] 
+Quindi per i punti dove il campo di esistenza non è definito verrà restituito $\bot$, per convenzione
+quando una funzione parziale viene totalizzata ovvero $B\cap\bot$ possiamo utilizzare la seguente 
+notazione $B_{\bot}$.
 
+\subsubsection{Prodotto cartesiano}
+$$A\times B=\{(a,b):a\in A \land b\in B\}$$
+Il \textbf{prodotto cartesiano} di due insiemi è l'insieme di coppie dove il primo elemento della coppia appartiene al primo insieme, ed il secondo elemento della coppia appartiene al secondo insieme.
 
+Il prodotto cartesiano è un'operazione che non commuta.
+$$A\times B \neq B\times A$$
+Ovviamente l'unico caso dove un prodotto cartesiano è commutativo è quando $A\equiv B$.
+Il prodotto cartesiano può essere esteso al prodotto di ennuple di più insiemi cartesiani,
+dove questa volta il risultato è costituito da un insieme ordinato (non più di coppie) delle ennuple
+rispettive agli insiemi di provenienza:
+$$A_1\times A_2 \times ... \times A_n=\{(a_1,a_2,...,a_n):a_i\in A_i$$
 
+Associato alla definizione di prodotto cartesiano abbiamo anche quella di \textbf{proiettore i'esimo},
+essa è una funzione che agisce su un prodotto cartesiano. Ha come dominio l'insieme i-esimo di questo prodotto data una tupla del prodotto cartesiano non fa altro che estrapolare la componente i-esima di quella tupla (\textit{destruttura la tupla}).
+$$\pi_i:A_1\times ...\times A_n\rightarrow A_i$$
+$$\pi_i(a_1,...,a_n)=a_i$$
+Utilizzeremo la seguente notazione esponenziale per calcolare il prodotto cartesiano di un insieme cartesiano
+con se stesso:
+$$A_1\times A_2\times A_3 ... \times A_n = A^n$$
 
+Alcuni esempi:
 
+$$C=\{(x,y)\in\mathbb{R}^2 : x^2+y_2=1\}\implies \text{ punti che si trovano lungo la circonferenza}$$
+$$I=\{(x,y)\in\mathbb{R}^2 : x^2+y_2<1\}\implies \text{ punti che si trovano all'interno della circonferenza}$$
+$$E=\{(x,y)\in\mathbb{R}^2 : x^2+y_2>1\}\implies \text{ punti che si trovano all'esterno della circonferenza}$$
 
-
-
+$$C\cap I\cap E = \mathbb{R}^2$$
 
 \end{document}
