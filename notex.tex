@@ -1,0 +1,199 @@
+\documentclass{article}
+
+\usepackage[OT1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[italian]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\title{\textbf{Informatica Teorica}}
+\author{Manuel Pagliuca}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\pagebreak
+\section{Introduzione}
+Nei corsi di informatica applicata come quelli di: Sistemi Operativi, Basi di dati, ecc... l'oggetto di studio è definito dal corso, e l'informatica è lo strumento per studiare questo oggetto.
+
+Nel corso di informatica teorica l'oggetto di studio è l'informatica stessa, si studiano i fondamenti dell'informatica (come un corso di sistemi operativi effettua uno studio sui fondamenti dei sistemi operativi).
+
+Per eseguire lo studio di questa disciplina ci si pone le due domande fondamentali nei confronti dell'informatica \textit{cosa} e \textit{come}.
+\subsection{Cosa studia l'informatica ?}
+L'informatica è una disciplina che studia l'informazione e l'elaborazione automatica mediante sistemi di calcolo che eseguono programmi.
+
+Ma sappiamo che tutti i problemi sono risolubili per via automatica, e questo porta proprio alla nostra domanda, quali problemi sono in grado di risolvere \textit{automaticamente}?
+
+Ciò che studia il \textit{cosa} dell'informatica si chiama \textbf{teoria della calcolabilità}, mostreremo nelle successive lezioni che non è una domanda cosi facile da rispondere, poichè esistono delle cose che non sono calcolabili. Quindi dato che non ci sono cose calcolabili, la teoria della calcolabilità si domanda \textit{che cosa è calcolabile?}.
+\newline
+Nella teoria della calcolabilità vogliamo una risposta generale, non cerchiamo dei casi particolari per dire questo è calcolabile o meno, esistono delle proprietà che accomunano tutto ciò che è calcolabile ? La risposta è si, la nozione di calcolabilità è denotabile attraverso la matematica e quindi posso affrontare l'insieme di cose fattibili dell'informatica con gli strumenti della matematica.
+\subsection{Come l'informatica risolve i problemi?}
+La branca dell'informatica che si chiama \textbf{teoria della complessità} risponde alla domanda \textit{come è risolubile questo problema ?}. Essa studia la quantità di risorse computazionali richieste dalla \textit{soluzione automatica} dei problemi. Una \textit{risorsa computazionale} è qualsiasi cosa venga sprecata per l'esecuzione dei programmi:
+
+Le principali risorse su cui ci concentreremo sono il \textbf{tempo} e \textbf{spazio di memoria}, dovremo quindi dare una definizione rigorosa di queste risorse computazionali. Successivamente si potrà porre delle domande ovvie : \textit{quale è la classe di problemi che vengono risolti efficientemente in termini di tempo e di memoria ?}. Notare che nella teoria della complessità non si parla solo di \textbf{risolubilità} (come nella teoria della calcolabilità) ma anche dell'\textbf{efficienza} con cui risolvo questo problema.
+\newline
+Esistono problemi che si trovano in una zona grigia, che non sappiamo se hanno una risoluzione efficiente, ma sono problemi molto importanti, nessuno è riuscito a dimostrare se avranno soluzioni efficienti ma nemmeno il contrario, ovvero nessuno è riuscito a dimostrare che saranno risolubili efficientemente. Questa classe di problemi è la classe di problemi NP, vedremo poi di cosa si tratta.
+\section{Syllabus}
+
+\begin{itemize}
+  \item Teoria della calcolabilità: individuare la qualità della calcolabilità dei problemi, quali sono le categorie di problemi calcolabili e distinguerla da quella dei problemi non calcolabili.
+  \item Teoria della complessità: studio quantitativo dei problemi, dopo aver delimitato il confini di ciò che è calcolabile cercare un sotto insieme di problemi \textbf{efficientemente calcolabili}.
+\end{itemize}
+
+\pagebreak
+\section{Il nostro linguaggio: la matematica}
+\subsection{Funzione}
+Una funzione dall'insieme $A$ all'insieme $B$ è una \textbf{legge}, che chiamiamo solitamente $f$, che spiega come associare ad ogni elemento di $A$ un elemento di $B$.
+\newline
+
+Dal punto di vista formale l'espressione della funzione viene definita \textbf{globalmente}:
+$$f:A\rightarrow B$$
+Dove $A$ viene chiamato \textbf{dominio} e $B$ \textbf{codominio}, questa notazione dice che ogni elemento del dominio è associato attraverso una legge $f$ ad un elemento del codominio. Esiste anche uan notazione che permette di stabilire localmente l'operato della funzione, essa rappresenta l'operato della legge $f$ sull'elemento $a$ che porta all'elemento $b$.
+$$a \xrightarrow[\text{}]{\text{f}} b$$
+\newline
+La notazione comunemente più utilizzata (in particolare nei libri di testo, ma anche nei corsi di matematica), è la seguente:
+$$f(a)=b$$
+Solitamente $b$ è l'\textbf{immagine} di $a$ secondo $f$, e meno usualmente si dice che $a$ è la \textbf{controimmagine} di $b$ (sempre secondo $f$).
+\newline
+\newline
+Per esempio:
+$$f:\mathbb{N} \rightarrow \mathbb{N}$$
+Dove $\mathbb{N}$ è l'insieme dei numberi naturali ${0,1,2,3,...}$, e per utilizzi futuri denotiamo con $\mathbb{N}^+$ l'insieme dei numeri naturali positivi (zero escluso) ${1,2,3,4,...}$.
+\newline
+Ora vediamo la specifica della funzione $f$
+$$f(n)=\lfloor \sqrtsign{n}\rfloor$$
+Considerando $n=5$ l'immagine di quest'ultima sarà $f(5)=\rfloor\sqrt{5}\lfloor=2$.
+\newline
+Quindi possiamo dedurre che per più elementi del dominio una \textbf{funzione} effettua un mapping ad uno ed un solo valore del codominio (nel caso in cui un valore del dominio venga mappato a più valori del codominio allora si parla di relazione, ma non più di funzione).
+\subsection{Classi di funzioni}
+\subsubsection{Funzioni iniettive}
+
+Una funzione è \textbf{iniettiva} se e solo se elementi diversi del dominio vengono mappati in elementi diversi del codominio.
+$$f:A\rightarrow B\text{ è iniettiva sse } \forall a_1,a_2\in A \text{ dove } a_1\neq a_2 \implies f(a_1)\neq f(a_2)$$
+\newline
+\textit{Esempio 1}
+$$f(n)=\lfloor\sqrt(n)\rfloor$$
+Abbiamo visto precedentemente che questa funzione non è iniettiva, perchè avviene un mapping per più elementi del dominio ad un unico elemento del codominio.
+\newline
+\newline
+\textit{Esempio 2}
+$$f(n)=[n]_2$$
+Questa funzione è fortemente non iniettiva, le due metà dell'insieme dei numeri naturali vengono mappate solamente su due numeri $f(2k)=0$ e $f(2k+1)=1$.
+\newline
+\newline
+\textit{Esempio 3}
+$$f(n)=n^2$$
+Questa è una funzione iniettiva, poichè ad ogni controimmagine corrisponde una immagine distinta.
+
+\subsubsection{Funzioni suriettive}
+Una funzione è suriettiva quando tutti gli elementi del codominio hanno una corrispondenza con un elemento del dominio.
+$$f:A\implies B\text{ sse } \forall b\in B, \exists a \in A : f(a)=b$$
+
+\newline
+\noindent
+\textit{Esempio 1}
+\newline
+$f(n)=\lfloor\sqrt{n}\rfloor$ è suriettiva, questo perchè $\forall m\in \mathbb{N}, m=\lfloor\sqrt{m^2}\rfloor=f(m^2)$. Sostanzialmente, posso tornare con facilità al dominio perchè mi basta elevare al quadrato l'immagine, e questo è fattibile per tutto l'insieme dei numeri naturali.
+\noindent
+\newline
+\linebreak
+\textit{Esempio 2}
+\newline
+$f(n)=[n]_2$ non è una funzione suriettiva, questo perchè per esempio $3$ non è immagine di niente rispetto a $f$ (il codominio è tutto $\mathbb{n}$).
+
+\subsection{Insieme immagine di una funzione}
+$$Im_f={b\in B:\exists a,f(a)=b}={f(a):a\in A}$$
+
+Data $f$ definitiamo l'\textbf{insieme immagine di $f$} come gli elementi del codominio $\in B$ che sono immagine di un elemento del dominio $A$.
+\newline 
+La relazione tra questo insieme $Im_f$ ed il codominio stesso di $f$ quale è $B$, consiste in:
+$$Im_f\subseteq B$$
+Allora possiamo dire che una funzione è suriettiva quando:
+$$Im_f=B$$
+\newline
+\textit{Esempi}
+$$Im_{\lfloor\sqrt{n}\rfloor}=\mathbb{N}\implies f(n)=\lfloor\sqrt{n}\rfloor \text{ è suriettiva}$$
+$$Im_{[n]_2}={0,1}\subseteq \mathbb{N} \implies f(n)=[n]_2 \text{ non è suriettiva}$$
+
+\subsection{Funzioni biettive}
+Una funzione si dice biettiva quando è sia suriettiva che iniettiva, devono valere entrambe le due condizioni (questo due condizioni è possibile fonderle in un unica condizione).
+$$f:A\rightarrow B \textbf{ sse }$$
+$$\forall a_1,a_2 \in A, a_1\neq a_2 \implies f(a_1)\neq f(a_2) \land \forall b\in B, \exists a\in A:f(a)=b$$
+Che converge in un unica definizione:
+$$\forall b \in B,\exists !a\in A : f(a)=b$$
+Per esempio: $f(n)=n$, oppure considerando gli insiemi dei numeri reali $f(x)=x^3$. Solo per questa tipologia di funzioni esiste il concetto di \textbf{funzione inversa}.
+
+\subsection{Inversa di una funzione}
+Data una funzione $f$ biettiva si definisce l'inversa come $f^{-1}$ la funzione tale che crei un mapping tra l'immagine del codominio rispetto alla controimmagine del dominio.
+$$f:A\rightarrow B$$
+$$f^{-1}:B\rightarrow A \text{ tale che } f^{-1}(b)=a \Longleftrightarrow (a)=b$$
+
+Per esempio l'inversa di $f(n)$ è $f^{-1}=n$, oppure l'inversa di $f(x)=x^3$ è $f^{-1}=\sqrt[3]{x}$ (considerando l'insieme dei numeri reali).
+
+\subsection{Composizione di funzioni}
+Date due funzioni $f:A\rightarrow B$ e $g:B\rightarrow C$, notiamo che queste funzioni hanno una caratteristica in comune, ovvero che il codominio di una è il dominio dell'altra.
+Definiamo la composizione di funzione $g\circ f:A\rightarrow C$ come la funzione che va da dal dominio di $f$ al codominio di $g$, definita come $g(f(a))$.
+$$g\circ f=g(f(a))$$
+
+Per esempio $f(n)=n+1 \text{ e } g(n)=n^2$:
+\begin{itemize}
+  \item $f \text{ composto } g: g\circ f(n)=(n+1)^2$
+  \item $g \text{ composto } f: f\circ g(n)=n^2+1$
+\end{itemize}
+
+N.B. L'operazione di composizione restituisce una funzione, e l'operatore $\circ$ non è commutativo, però quando dominio e codominio lo permettono è \textbf{associativo}: $(f\circ g)\circ h=f\circ (g \circ h)$.
+
+\subsubsection{Funzione identità}
+La funzione identità sull'insieme $A$ è una funzione che effettua un mappaggio ricorsivo sullo stesso elemento.
+$$i_A:A\rightarrow A : i_A(a)=a\text{ }\forall a\in A$$
+Per esempio la funzione identità sull'insieme $\mathbb{N}$ è $i_\mathbb{N}(n)=n$.
+
+\subsubsection{Definizione alternativa di funzione inversa}
+Data una funzione $f:A\rightarrow B$ biettiva, la sua inversa è l'unica funzione $f^{-1}:B\rightarrow A$ che soddisfa:
+$$f^{-1}(b)=a \longleftrightarrow f(a)=b$$
+$$oppure$$
+$$f^{-1}\circ f=i_A \land f\circ f^{-1}=i_B$$
+
+Infatti considerando $f^{-1}\circ f(x) = \sqrt[3]{x^3}=x=i_\mathbb{N}(x)$ e $f\circ f^{-1}(x)=(\sqrt[3]{x})^3=x=i_\mathbb{N}(x)$
+
+\subsubsection{Funzioni totali e parziali}
+Considerando una funzione $f:A\rightarrow B$ essa è una legge che ad \textbf{ogni} elemento di $A$ si associa
+un elemento di $B$, questo significa che ogni immagine $f(a)$ è definita per ogni elemento $a\in A$. Esiste 
+un apposita notazione:
+$$f(a)\downarrow \forall a\in A$$
+
+Una funzione di questo tipo viene chiamata \textbf{totale} poiché risulta definita sulla totalità del suo dominio.
+
+Certe funzioni potrebbero \textit{non essere definita} per quale che elemento di $a\in A$, e quindi non avere delle immagini corrispondenti, la notazione:
+$$f(a)\uparrow$$
+Ovvero, che per un elemento $a$ non esiste immagine nell'insieme $B$ tramite la funzione $f$.
+
+Consideriamo il seguente esempio:
+$$f:\mathbb{N}\rightarrow\mathbb{N}$$
+$$f(n)=\lfloor\frac{1}{n}\rfloor \text{ non è definita su } n=0\implies f(0)\uparrow \forall n\in\mathbb{N}\setminus{0}, f(n)\downarrow$$
+
+Una funzione viene definita \textbf{parziale}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

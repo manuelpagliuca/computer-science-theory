@@ -1,0 +1,17 @@
+\babel@toc {nil}{}
+\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica ?}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Syllabus}{3}{section.2}%
+\contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Funzione}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Classi di funzioni}{4}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Funzioni iniettive}{4}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Funzioni suriettive}{5}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Insieme immagine di una funzione}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Funzioni biettive}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Inversa di una funzione}{6}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Composizione di funzioni}{6}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{7}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{7}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{7}{subsubsection.3.6.3}%
