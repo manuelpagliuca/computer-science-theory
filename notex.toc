@@ -1,4 +1,5 @@
-\babel@toc {nil}{}
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
 \contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica ?}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{2}{subsection.1.2}%

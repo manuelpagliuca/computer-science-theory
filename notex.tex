@@ -49,8 +49,8 @@ Esistono problemi che si trovano in una zona grigia, che non sappiamo se hanno u
 \section{Syllabus}
 
 \begin{itemize}
-  \item Teoria della calcolabilità: individuare la qualità della calcolabilità dei problemi, quali sono le categorie di problemi calcolabili e distinguerla da quella dei problemi non calcolabili.
-  \item Teoria della complessità: studio quantitativo dei problemi, dopo aver delimitato il confini di ciò che è calcolabile cercare un sotto insieme di problemi \textbf{efficientemente calcolabili}.
+    \item Teoria della calcolabilità: individuare la qualità della calcolabilità dei problemi, quali sono le categorie di problemi calcolabili e distinguerla da quella dei problemi non calcolabili.
+    \item Teoria della complessità: studio quantitativo dei problemi, dopo aver delimitato il confini di ciò che è calcolabile cercare un sotto insieme di problemi \textbf{efficientemente calcolabili}.
 \end{itemize}
 
 \pagebreak
@@ -86,7 +86,7 @@ $$f:A\rightarrow B\text{ è iniettiva sse } \forall a_1,a_2\in A \text{ dove } a
 \newline
 \textit{Esempio 1}
 $$f(n)=\lfloor\sqrt(n)\rfloor$$
-Abbiamo visto precedentemente che questa funzione non è iniettiva, perchè avviene un mapping per più elementi del dominio ad un unico elemento del codominio.
+Abbiamo visto precedentemente che questa funzione non è iniettiva, perché avviene un mapping per più elementi del dominio ad un unico elemento del codominio.
 \newline
 \newline
 \textit{Esempio 2}
@@ -96,13 +96,11 @@ Questa funzione è fortemente non iniettiva, le due metà dell'insieme dei numer
 \newline
 \textit{Esempio 3}
 $$f(n)=n^2$$
-Questa è una funzione iniettiva, poichè ad ogni controimmagine corrisponde una immagine distinta.
+Questa è una funzione iniettiva, poiché ad ogni controimmagine corrisponde una immagine distinta.
 
 \subsubsection{Funzioni suriettive}
 Una funzione è suriettiva quando tutti gli elementi del codominio hanno una corrispondenza con un elemento del dominio.
 $$f:A\implies B\text{ sse } \forall b\in B, \exists a \in A : f(a)=b$$
-
-\newline
 \noindent
 \textit{Esempio 1}
 \newline
@@ -118,7 +116,7 @@ $f(n)=[n]_2$ non è una funzione suriettiva, questo perchè per esempio $3$ non 
 $$Im_f={b\in B:\exists a,f(a)=b}={f(a):a\in A}$$
 
 Data $f$ definitiamo l'\textbf{insieme immagine di $f$} come gli elementi del codominio $\in B$ che sono immagine di un elemento del dominio $A$.
-\newline 
+\newline
 La relazione tra questo insieme $Im_f$ ed il codominio stesso di $f$ quale è $B$, consiste in:
 $$Im_f\subseteq B$$
 Allora possiamo dire che una funzione è suriettiva quando:
@@ -150,8 +148,8 @@ $$g\circ f=g(f(a))$$
 
 Per esempio $f(n)=n+1 \text{ e } g(n)=n^2$:
 \begin{itemize}
-  \item $f \text{ composto } g: g\circ f(n)=(n+1)^2$
-  \item $g \text{ composto } f: f\circ g(n)=n^2+1$
+    \item $f \text{ composto } g: g\circ f(n)=(n+1)^2$
+    \item $g \text{ composto } f: f\circ g(n)=n^2+1$
 \end{itemize}
 
 N.B. L'operazione di composizione restituisce una funzione, e l'operatore $\circ$ non è commutativo, però quando dominio e codominio lo permettono è \textbf{associativo}: $(f\circ g)\circ h=f\circ (g \circ h)$.
@@ -171,7 +169,7 @@ Infatti considerando $f^{-1}\circ f(x) = \sqrt[3]{x^3}=x=i_\mathbb{N}(x)$ e $f\c
 
 \subsubsection{Funzioni totali e parziali}
 Considerando una funzione $f:A\rightarrow B$ essa è una legge che ad \textbf{ogni} elemento di $A$ si associa
-un elemento di $B$, questo significa che ogni immagine $f(a)$ è definita per ogni elemento $a\in A$. Esiste 
+un elemento di $B$, questo significa che ogni immagine $f(a)$ è definita per ogni elemento $a\in A$. Esiste
 un apposita notazione:
 $$f(a)\downarrow \forall a\in A$$
 
@@ -194,23 +192,23 @@ $$Dom_f\nsubseteq A\implies f\text{ parziale}$$
 $$Dom_f\equiv A\implies f \text{ totale}$$
 
 Alcuni esempi:
-$$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\}$$
-  $$f(n)=\lfloor\log{n}\rfloor\implies Dom_f=\mathbb{N}\setminus\{0\}$$
+$$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\right\}$$
+$$f(n)=\lfloor\log{n}\rfloor\implies Dom_f=\mathbb{N}\setminus\{0\}$$
 $$f(n)=\lfloor\sqrt{-n} \implies Dom_f=\{0\}$$
 \subsubsection{Totalizzazione di una funzione parziale}
 Teniamo conto di una cosa, possiamo convenzionalmente rendere totale una funzione parziale, basta estendere
 il codominio con un \textbf{simbolo convenzionale} $\bot$ che buttiamo fuori tutte le volte che la funzione non è definita.
 $$f:A\rightarrow B\text{ parziale } \implies \widetilde{f}:A\rightarrow B\cap\{\bot\}$$
- La totalizzazione di $f$ viene raggiunta con l'aggiunta di questo simbolo.
-\[   
-  \widetilde{f}(a) = 
-     \begin{cases}
-       f(a) &\quad\text{se }a\in Dom_f\\
-       \bot &\quad\text{altrimenti} \\
-     \end{cases}
-\] 
+La totalizzazione di $f$ viene raggiunta con l'aggiunta di questo simbolo.
+\[
+    \widetilde{f}(a) =
+    \begin{cases}
+        f(a) & \quad\text{se }a\in Dom_f \\
+        \bot & \quad\text{altrimenti}    \\
+    \end{cases}
+\]
 Quindi per i punti dove il campo di esistenza non è definito verrà restituito $\bot$, per convenzione
-quando una funzione parziale viene totalizzata ovvero $B\cap\bot$ possiamo utilizzare la seguente 
+quando una funzione parziale viene totalizzata ovvero $B\cap\bot$ possiamo utilizzare la seguente
 notazione $B_{\bot}$.
 
 \subsubsection{Prodotto cartesiano}
