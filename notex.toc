@@ -18,3 +18,13 @@
 \contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{7}{subsubsection.3.6.3}%
 \contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{8}{subsubsection.3.6.4}%
 \contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{8}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Insieme di funzioni}{9}{subsubsection.3.6.6}%
+\contentsline {subsubsection}{\numberline {3.6.7}Funzione di valutazione}{10}{subsubsection.3.6.7}%
+\contentsline {subsection}{\numberline {3.7}Modellare teoricamente un sistema di calcolo}{10}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Potenza computazionale}{11}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Importanza del calcolo di funzione}{12}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Cardinalità degli insiemi - I°}{12}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Relazione}{13}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{14}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{16}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{17}{subsubsection.3.7.7}%

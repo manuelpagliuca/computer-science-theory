@@ -4,12 +4,18 @@
 \usepackage{mathpazo}
 \usepackage[italian]{babel}
 
+%math
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
+\usepackage{cancel}
+
+%Graphics&Float
 \usepackage{graphicx}
 \usepackage{float}
+
+%Hypelinks
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -18,6 +24,18 @@
     linkcolor=black,
     urlcolor=black
 }
+
+% TIKZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+
+%Algorithm
+\usepackage[]{algorithm2e}
 
 \title{\textbf{Informatica Teorica}}
 \author{Manuel Pagliuca}
@@ -238,5 +256,362 @@ $$I=\{(x,y)\in\mathbb{R}^2 : x^2+y_2<1\}\implies \text{ punti che si trovano all
 $$E=\{(x,y)\in\mathbb{R}^2 : x^2+y_2>1\}\implies \text{ punti che si trovano all'esterno della circonferenza}$$
 
 $$C\cap I\cap E = \mathbb{R}^2$$
+
+\subsubsection{Insieme di funzioni}
+L'insieme delle funzioni che vanno dall'insieme $A$ a $B$ viene indicato con:
+$$B^A=\{f:A\rightarrow B\} = \text{ insieme delle funzioni da } A \text{ a } B$$
+
+L'insieme delle funzioni \textit{parziali} che vanno da $A$ a $B$:
+$$B_{\bot}^A =\{f:A\rightarrow B_{\bot}\}=\text{ insieme delle funzioni parziali che va da A a B}$$
+
+\subsubsection{Funzione di valutazione}
+Dati due insiemi $A,B$ e $B_{\bot}^A$ si definisce una funzione di valutazione come:
+$$\omega : B_{\bot}^A\times A \rightarrow B \text{ con } \omega (f,a)=f(a)$$
+Essa è una funzione che valuta il punto del codominio $A$ in termini di $B$, ovvero restituisce un
+$f(a)$, quindi il suo compito è strettamente quello di valutare.
+
+\begin{itemize}
+    \item Tenendo fisso $a$ e facendo variare $f$, è come se $a$ fosse un \textit{benchmark}
+          su cui testiamo una serie di funzioni.
+    \item Tenendo fisso $f$ e facendo variare $a$ ottengo il grafico di $f$.
+\end{itemize}
+
+\subsection{Modellare teoricamente un sistema di calcolo}
+Un sistema di calcolo è architettato come un architettura di Von Neumann, è un sistema che dato
+in input un \textit{dato} $x$ ed un \textit{programma} $P$. L'output può essere indicato con $y$ quando è definito,
+mentre con $\bot$ quando va in \textit{loop}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=2cm]
+        \node (dati)[
+            minimum width=1cm,
+            minimum height=1cm] at (0,1) {$x$};
+        \node (prog)[
+            minimum width=1cm,
+            minimum height=1cm] at (2,1) {$P$};
+        \node (model)[draw,
+            minimum width=2cm,
+            minimum height=1cm] at (1,-1) {$\mathcal{C}$};
+        \draw [arrow] (dati) -- (model);
+        \draw [arrow] (prog) -- (model);
+        \node (output)[
+            minimum width=1cm,
+            minimum height=1cm] at (1,-3) {$y$ o $\bot$};
+        \draw [arrow] (model) -- (output);
+    \end{tikzpicture}
+\end{figure}
+
+$P\in PROG$: Un programma è una \textbf{sequenza di regole} scritte in un certo linguaggio
+che prende un input e lo trasforma in un output (o in un loop).
+Essenzialmente un programma è la definizione di una funzione scritta a mano, esso
+realizza una funzione che parte dai dati in input ed ottiene i dati in output.
+
+$$P\in DATI_{\bot}^DATI\text{ è una funzione in un linguaggio di programmazione.}$$
+
+Quindi, ribadendo per l'ennesima volta un programma è la realizzazione di una
+funzione, che va da un insieme di dati ad un altro.
+
+Il sistema di calcolo in se prende in input dei dati ed una funzione (il programma),
+che mi da un output, esso è definito come una \textbf{funzione di valutazione} $\mathcal{C}$.
+
+$$\mathcal{C}:DATI_{\bot}^{DATI}\times DATI\rightarrow DATI_{\bot}$$
+Quindi $\mathcal{C}$ è una funzione di valutazione, e $\mathcal{C}(P,x)$ è la funzione di valutazione
+del programma $P$ sul dato $x$.
+
+Per esempio, consideriamo il seguente programma:
+
+\begin{algorithm}[H]
+    \KwIn{$x$}
+    \eIf{$\langle x\rangle_2==0$}{
+        return $x$;
+    }
+    {
+        \lWhile{$1<2$}{}
+        return $1$;
+    }
+
+    \caption{Semantica di $P$}
+\end{algorithm}
+
+Voglio capire la semantica di questo programma è per capirlo voglio definire una
+funzione che mi rappresenti il legame input-output rispetto ad un dato elemento.
+
+Il programma prende in ingresso un numero intero, se il numero è pari restituisce
+esattamente il numero intero, altrimenti entra in un loop (non termina).
+
+$$\mathcal{C}(P,\_):\mathbb{N}\rightarrow\mathbb{N}_{\bot}$$
+La \textbf{semantica} è la seguente :
+\[
+    \mathcal{C}(P,n) =
+    \begin{cases}
+        n    & \quad\text{se }n\text{ è pari} \\
+        \bot & \quad\text{altrimenti}         \\
+    \end{cases}
+\]
+
+\subsubsection{Potenza computazionale}
+I sistemi di calcolo servono per calcolare le funzioni, ogni programma che immetto
+nel mio sistema di calcolo mi viene calcolato. Indico con potenza computazionale
+del mio sistema di calcolo è \textit{tutto quello che sa fare} il mio sistema di calcolo, o meglio,
+tutte quelle funzioni che il mio sistema di calcolo può calcolare.
+
+Tutte le funzioni che può calcolare il mio sistema di calcolo è un sottoinsieme
+di tutte le funzioni immaginabili che possono andare da dati in dati. I programmi
+in generale sono delle funzioni da dati in dati, quindi il mio sistema di calcolo
+è ovvio che calcoli questo tipo di funzioni, è un sottoinsieme perchè non so quali
+funzioni è in grado di risolvere il mio sistema di calcolo (e questa è la domanda
+a \textit{cosa} a cui risponde l'informatica teorica).
+
+$$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
+
+Questo significa che esistono delle funzioni che non possono essere risolte dal mio
+sistema di calcolo, e che quindi \textbf{non sono automatizzabili}.
+$$F(\mathcal{C})\nsubseteq DATI_{\bot}^{DATI}$$
+Sono presenti funzioni che l'informatica può risolvere e fare tutto.
+
+$$F(\mathcal{C})=DATI_{\bot}^{DATI}$$
+
+Quindi abbiamo ridotto il quesito \textit{che cosa sono in grado di fare i programmi},
+ad un quesito matematico di inclusione propria ed impropria.
+\subsubsection{Importanza del calcolo di funzione}
+Calcolare una funzione significa risolvere problemi in \textit{generale}. Questo
+perchè ad ogni problema posso associare una \textit{funzione soluzione}, non è altro che
+quella funzione che ad un dato input associa una determinata \textit{soluzione}.
+Per esempio, il \textit{problema del calcolo del determinante}:
+\newline
+DET:
+\begin{algorithm}[H]
+    \KwIn{$M\in \mathbb{R}^{n\times n}$}
+    \KwOut{Determinante di $M$}
+\end{algorithm}
+La rispettiva funzione soluzione:
+$$f_{DET}:\mathbb{N}^{n\times n}\rightarrow \mathbb{Z}$$
+$$f_{DET}(M)=Det(M):$$
+Vediamo che risolvere il dato problema consiste nel calcolare la funzione soluzione,
+o risolvere il problema significa sostanzialmente avere un programma in grado
+di risolvere quella funzione.
+
+Find-Replace:
+\begin{algorithm}[H]
+    \KwIn{Testo, parola da cercare, parola da sostituire}
+    \KwOut{Testo in cui ogni occorrenza della parola da cercare è sostituita dall'altra}
+\end{algorithm}
+La funzione soluzione:
+$$f_{Find-Replace}:TESTI\times PAROLE\times PAROLE\rightarrow TESTI$$
+$$f_{Find-Replace}(\text{La nostra vita,nostra,vostra})=\text{La vostra vita}$$
+
+\subsubsection{Cardinalità degli insiemi - I°}
+Siamo arrivati al primo punto fondamentale, il \textit{cosa} dell'informatica, ed
+abbiamo visto che si concretizza nell'interrogarsi sulla relazione tra l'insieme della
+potenza computazionale e quello di tutte le funzioni che vanno da dati in dati possibili.
+$$F(\mathcal{C})\text{ ? }DATI_{\bot}^{DATI}$$
+
+Per cercare di dare una dimostrazione sul carattere dell'inclusione, è molto utile
+fare riferimento al concetto matematica di \textbf{cardinalità}.
+
+Dato un insieme $A$, la sua cardinalità si indica con $|A|$. Intuitivamente che la cardinalità
+di un insieme è il numero di elementi da cui è formato l'insieme. Questa idea intuitiva
+è abbastanza corretta quando si ha a che fare con insiemi finiti (la cardinalità mi può
+aiutare a capire quale insieme è più grande degli altri).
+
+Purtroppo però quando tiriamo in ballo insiemi di cardinalità infinita, questo potrebbe
+portare a conclusioni più complicate da elaborare. Si potrebbe \textit{erroneamente}
+pensare $|\mathbb{N}|=\infty=|\mathbb{B}|$, ma questo sappiamo che
+non è assolutamente vero, perchè l'insieme dei numeri reali è molto più fitto
+di quello dei numeri interi.
+
+Quindi dobbiamo aggiungere dei nuovi concetti, visto che \textit{"l'infinito di $\mathbb{R}$"} è
+diverso da quello di $\mathbb{N}$. Il concetto da introdurre è quello di \textbf{relazione}.
+
+\subsubsection{Relazione}
+Consideriamo un insieme $A$, si definisce \textbf{relazione binaria} $R$ su $A$,
+il sottoinsieme del prodotto cartesiano di $A$ su se stesso.
+$$R\subseteq A^2$$
+Gli elementi $a,b\in A$ stanno in una relazione $R$ se e solo se $(a,b)\in R$. Sono
+presenti due notazioni infisse per denotare l'esistenza della relazione tra i due
+elementi:
+$$a\text{ R }b \text{ oppure } a\text{ \cancel{R} }b$$
+Consideriamo per esempio la relazione $R$ come la relazione che agisce sui numeri naturali,
+tale che un numero divida l'altro.
+$$R\equiv \text{divide}: 3\text{ R }6, 5\text{ R }45, ...,3\text{ \cancel{R} }10$$
+$$R=\{(a,b)\in\mathbb{N}^2:\langle b\rangle_a=0\}$$
+Introduciamo anche il concetto di \textit{equivalenza in modulo} $k$, la quale mi
+descrive una relazione del tipo:
+$$a\equiv_k b \text{ sse } \langle a\rangle_k =\langle b\rangle_k$$
+Per esempio: $5\equiv_2 7, 4\equiv_2 16,...$ (quando il resto dato dal divisore $k$ è
+uguale su entrambi gli operandi).
+\newline
+Parliamo di \textbf{relazione di equivalenza} se e solo se soddisfa le seguenti
+proprietà:
+\begin{itemize}
+    \item \textbf{Riflessiva}: $\forall a\in A, a\text{ R }a$
+    \item \textbf{Simmetrica}: $\forall a,b\text{, } a\text{ R }b \Leftrightarrow b\text{ R }a$
+    \item \textbf{Transitiva}: $\forall a,b,c\text{, }a\text{ R }b\land b\text{ R }c\implies a\text{ R }c$
+\end{itemize}
+
+Ora considerando le precedenti relazioni, vediamo che la relazione $R\equiv\textit{"divide"}$
+non è una relazione di equivalenza:
+\begin{itemize}
+    \item È riflessiva.
+    \item \textbf{Non è simmetrica}: $3\text{ R }6$ ma $6\text{ \cancel{R} }3$.
+    \item È transitiva.
+\end{itemize}
+Mentre per la seconda relazione $\equiv_k$ possiamo dire che essa è una
+relazione di equivalenza:
+\begin{itemize}
+    \item È riflessiva.
+    \item È simmetrica, vengono valutati i modulo non direttamente gli operandi.
+    \item è transitiva (per lo stesso motivo ancora).
+\end{itemize}
+Con una relazione di equivalenza è possibile effettua un \textbf{partizionamento
+    delle classi di equivalenza}.
+\subsubsection{Relazioni di equivalenza e partizioni}
+Considerando una relazione di equivalenza $R\subseteq A^2$ induce una
+\textbf{partizione} su $A$.
+Le partizioni sono dei sottoinsiemi $A_1,A_2,A_3,...\subseteq A$ tali che:
+\begin{itemize}
+    \item $A_i\neq\emptyset$ (non sono vuoti).
+    \item $i\neq j\implies A_i \cap A_j =\emptyset$ (non sono sovrapponibili).
+    \item $\bigcup\limits_{i=1} A_i=A$ (la loro unione ricompone $A$).
+\end{itemize}
+
+Una \textbf{classe di equivalenza} di un elemento $a\in A$ è l'insieme di tutti
+gli elementi che sono in relazione con $a$, notazione:
+$$[a]_R=\{b\in A: a\text{ R }b\}$$
+Si dimostra facilmente che :
+\begin{itemize}
+    \item Non esistono classi di equivalenza vuote, questo per via della proprietà
+          \textit{riflessiva} delle relazioni di equivalenza.
+    \item Se prendo due elementi diversi del dominio le classi di equivalenza relative
+          o sono disgiunti o sono la stessa classe di equivalenza: $a,b\in A$ vale che
+          $[a]_R\cap[b]_R=\emptyset$ o $[a]_r = [b]_R$.
+    \item $\bigcup\limits_{a\in A}[a]_R=A$
+\end{itemize}
+
+Quindi la partizione indotta da una relazione di equivalenza non è altro che l'insieme
+delle classi di equivalenza relative a quella relazione.
+\newline
+L'insieme delle classi di equivalenza di $R$ è la partizione indotta da $R$ su $A$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/rel_equi_graph.png}
+    \caption{Insieme $A$ partizionato}
+\end{figure}
+
+L'insieme $A$ partizionato rispetto alla relazione $R$ è detto \textbf{insieme quoziente}:
+$$A / R$$
+
+Quindi il quoziente di $A$ rispetto a $R$ è lo \textit{"spezzettamento"} di $A$ in classi
+di equivalenza.
+
+Consideriamo il seguente esempio di insieme quoziente, consideriamo la relazione di equivalenza $\equiv_4\subseteq\mathbb{N}$.
+\textit{Quali classi di equivalenza ammette questa relazione ?}
+$$[0]_4={4k}\text{ tutti i multipli di 4 hanno lo stesso resto di 1}$$
+$$[1]_4={4k+1}\text{ tutti i multipli di 4 aumentati di 1 hanno lo stesso resto 1}$$
+$$[2]_4={4k+2}; [3]_4={4k+3};...$$
+\textit{Ne esistono altre ?} No, non esistono altre classi di equivalenza perché
+ogni caso successivo a quelli \textit{"base"} si riconduce a quelli \textit{"base"}.
+$$\langle n\rangle_2\in\{0,1,2,3\}$$
+Voglio vedere se queste classi di equivalenza può rappresentare una partizione:
+\begin{itemize}
+    \item Nessuna classe è vuota.
+    \item Sono mutuamente disgiunte, poiché se prendo un numero esso ricadrà
+          solamente in una di queste classi di equivalenza.
+    \item L'unione di queste $3$ classi di equivalenza restituisce l'insieme originale
+          $\bigcup\limits_{i=0}^3 [i]_4=\mathbb{N}$.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/rel_equi_quot.png}
+    \caption{Insieme quoziente di $\equiv_4$}
+\end{figure}
+
+$\{[i]_4 : 0\leq i\leq 3\}$ è una partizione di $\mathbb{N}$ indotta dalla relazione
+$\equiv_4$, tale per cui mi dia il rispettivo insieme quoziente (a volte impropriamente
+chiamato $\mathbb{Z}_4$):
+$$N / \equiv_4 \text{ }=\{[i]_4 : 0\leq i\leq 3\}=\mathbb{Z}_4$$
+
+Adesso abbiamo in mano gli strumenti per definire in maniera molto più fine il concetto
+di cardinalità.
+
+\subsubsection{Cardinalità degli insiemi - II°}
+Sia $\mathcal{U}$ (insieme universo) la classe di tutti gli insiemi,
+definiamo la relazione $\sim\subseteq\mathcal{U}^2$ detta relazione
+di \textit{equi numerosità} (hanno la stessa dimensione numerica), tra le coppie degli insiemi, se e solo se esiste
+una \textbf{biezione} tra $A$ e $B$ (ovvero, se riesco ad esibire una funzione
+iniettiva e suriettiva che va da $A$ in $B$).
+
+Questa relazione tra insiemi è una relazione di equivalenza, poiché:
+\begin{itemize}
+    \item $\sim$ è riflessiva, se utilizzo la funzione identità $i_A$.
+    \item $\sim$ è simmetrica, se esiste una biezione $A\rightarrow B$ allora
+          esiste una biezione anche $B\rightarrow A$. Ovvero $A\sim B$ e $B\sim A$.
+    \item $\sim$ è transitiva, se compongo funzioni biettive ottengo ancora una
+          funzione biettiva.
+\end{itemize}
+
+Due insiemi che stanno in questa relazione vengono detti \textit{equi numerosi}. Ora
+considerando l'insieme quoziente del nostro universo $\mathcal{U}$ rispetto alla
+relazione di equi numerosità $\sim$ (quindi stesso numero di elementi in entrambi
+i due insiemi), esso mi rappresenta il concetto di \textbf{cardinalità}
+di un insieme.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/insieme_quoziente_cardinalità.png}
+    \caption{Insieme quoziente $\mathcal{U} / \sim$}
+\end{figure}
+
+Quindi spezzettando l'insieme $\mathcal{U}$ in classi di equivalenza
+in questa classe di equivalenza ci sono tutti gli insiemi
+che sono equi numerosi (seppur diversi).
+
+Questo concetto permette di parlare in maniera molto precisa anche di
+insiemi di cardinalità infinita.
+Questi insiemi possono avere lo stesso numero
+\newline
+\newline
+Per esempio, consideriamo $n\in\mathbb{N}^+$, si consideri l'insieme $J_n=\{1,2,,...,n\}$. Per questo
+insieme è ovvio quale sia il concetto di cardinalità perchè è finito.
+
+Allora diciamo che un insieme $A$ ha cardinalità \textbf{finita} se è equi
+numeroso con $J_n$ (ovvero $A\sim J_n$) per un dato $n$ ed in quel caso scriviamo che $|A|=n$.
+
+Quindi nella classe di equivalenza $J_1$ troviamo tutti gli insiemi con un
+elemento, nella classe di equivalenza di $J_2$ troveremo tutti gli insiemi con due elementi, ecc.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/U_insiemi_esemp_card2.png}
+    \caption{Esempio $\mathcal{U}/\sim$ rispetto all'insieme $J_n$}
+\end{figure}
+Un insieme che non ha cardinalità si dice banalmente che ha cardinalità \textbf{infinità}. Fin qui abbiamo
+parlato ancora di cardinalità finita, ma adesso faremo un esempio con cardinalità infinita.
+
+\subsubsection{Insiemi numerabili}
+$A$ si dice \textbf{numerabile} se è nella stessa classe di equivalenza dell'insieme dei numeri naturali
+$\mathbb{N}$, ovvero se esiste una \textit{biezione} tra l'insieme $A$ e l'insieme $\mathbb{N}$.
+
+Siccome stanno in relazione di equi numerosità
+vuol dire che è presente una biezione fra i due elementi, quindi due elementi non possono collidere.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/A_numerabile_N.png}
+    \caption{$A$ è un insieme numerabile}
+\end{figure}
+
+La presenza di questa biezione significa che come $A$ può essere \textbf{listato} con
+$f(0),f(1),f(2),...$ su $\mathbb{N}$ senza perdere un elemento, anche l'insieme $\mathbb{N}$ può essere
+listato a sua volta su $A$.
+
+Alcuni esempi di insiemi numerabili:
+\begin{itemize}
+    \item I numeri pari $f(n)=2n$ , essi sembrerebbero la metà dei numeri naturali ma sono tanti quanto i numeri
+          naturali perchè esiste questa biezione (vale anche per i dispari $f(n)=2n+1$).
+    \item L'insieme $\mathbb{Z}$, possono essere presenti diverse funzioni, per esempio
+          posso mappare i negativi sui numeri pari ed i positivi sui numeri dispari.
+    \item L'insieme $\mathbb{Q}$, vedremo più avanti.
+\end{itemize}
 
 \end{document}
