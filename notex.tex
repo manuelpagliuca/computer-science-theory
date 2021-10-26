@@ -50,7 +50,7 @@ Nei corsi di informatica applicata come quelli di: Sistemi Operativi, Basi di da
 Nel corso di informatica teorica l'oggetto di studio è l'informatica stessa, si studiano i fondamenti dell'informatica (come un corso di sistemi operativi effettua uno studio sui fondamenti dei sistemi operativi).
 
 Per eseguire lo studio di questa disciplina ci si pone le due domande fondamentali nei confronti dell'informatica \textit{cosa} e \textit{come}.
-\subsection{Cosa studia l'informatica ?}
+\subsection{Cosa studia l'informatica?}
 L'informatica è una disciplina che studia l'informazione e l'elaborazione automatica mediante sistemi di calcolo che eseguono programmi.
 
 Ma sappiamo che tutti i problemi sono risolubili per via automatica, e questo porta proprio alla nostra domanda, quali problemi sono in grado di risolvere \textit{automaticamente}?
@@ -616,5 +616,107 @@ Alcuni esempi di insiemi numerabili:
           dove una funzione $f(n)=bin(n)$ è in grado di associare un numero naturale (utilizzando
           le potenze in posizione) ad una stringa binaria.
 \end{itemize}
+
+\subsubsection{Insiemi non numerabili}
+Esistono degli insiemi che non sono listabili, dette in altre parole sono più fitti di $\mathbb{N}$,
+è un altro tipo di categoria di infinito.
+$$\mathbb{R}\text{ non è numerabile}$$
+\paragraph{Dimostrazione}\mbox{}\\L'idea consiste nel dimostra per assurdo che non esiste una biezione
+perchè sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazione:
+\begin{itemize}
+    \item Dimostro che $\mathbb{R}\sim[0,1]$ (si dice che è \textit{isomorfo/equi numeroso} all'intervallo $[0,1]$),
+          ovvero che è fitto quanto l'intervallo citato.
+    \item Dimostro che $\mathbb{N}\nsim[0,1]$
+    \item $\mathbb{R}\sim[0,1]\nsim\mathbb{N}\implies\mathbb{R}\nsim\mathbb{N}$
+\end{itemize}
+
+\paragraph{$R\sim[0,1]$}\mbox{}\\ \noindent Significa riuscire a rappresentare una funzione
+che mappa gli elementi tra i due insiemi in maniera che sia suriettiva ed iniettiva.
+
+Prima di tutto abbiamo una retta cartesiana con un origine fissata e che copre tutti i numeri reali.
+Pongo l'intervallo $[0,1]$ in modo che si trovi in corrispondenza del punto mediano della retta $0$,
+successivamente prendo un compasso punto il centro nel mediano dell'intervallo e traccio la
+semi circonferenza rispetto alla metà dell'intervallo.
+
+Gli elementi dell'insieme $\mathbb{R}$ vengono mappati tracciando una retta in direzione del punto
+mediano di $[0,1]$, nel punto di intersezione si traccia la retta perpendicolare che interseca
+l'intervallo ed in quel punto si trova il valore corrispondente. Si può fare lo stesso
+in maniera opposta partendo da $[0,1]$, trovando l'intersezione si parte dal punto mediano
+di quest'ultima e si attraversa l'intersezione toccando $\mathbb{R}$.
+
+Questo dimostra che tutti i valori di $\mathbb{R}$ sono associabili
+su $[0,1]$, quindi $\mathbb{R}\sim[0,1]$.
+\pagebreak
+\paragraph{$\mathbb{N}\nsim[0,1]$ (diagonalizzazione)}\mbox{}\\ Supponiamo per assurdo che $\mathbb{N}\sim[0,1]\implies[0,1]$,
+ovvero che sia listabile in maniera esaustiva. Quindi quello che penso di fare consiste nel
+costruire un elenco di numeri (tutti gli elementi iniziano con $0.$).
+\[
+    \begin{array}{ccccc}
+        \underline{0.a_{11}} & 0.a_{12}             & 0.a_{13}             & 0.a_{14}             & ... \\
+        0.a_{21}             & \underline{0.a_{22}} & 0.a_{23}             & 0.a_{24}             & ... \\
+        0.a_{31}             & 0.a_{32}             & \underline{0.a_{33}} & 0.a_{34}             & ... \\
+        0.a_{41}             & 0.a_{42}             & 0.a_{43}             & \underline{0.a_{44}} & ... \\
+        ...                  & ...                  & ...                  & ...                  & ... \\
+    \end{array}
+\]
+Per costruire un numero elusivo che non si trova in nessuno di questi elementi della lista,
+vado a guardare le cifre sulla diagonale.
+
+Per esempio costruiamo:
+$$0.c_1c_2c_3c_4$$
+L'$i$-esima cifra è fatta in questo modo
+\[
+    c_i=
+    \begin{cases}
+        a_{ii} + 1\text{ se }a_{ii} < 9 \\
+        a_{ii} - 1\text{ se }a_{ii} = 9 \\
+    \end{cases}
+\]
+Ora usando questa regola non riuscirò mai a costruire un numero tra quelli elencati,
+questo perchè ovviamente cambio le cifre.
+Il numero $0.c_1c_2...\in[0,1]$, ma non appartiene nelle liste poiché:
+\begin{itemize}
+    \item Differisce dal primo perché $c_1\neq a_{11}$
+    \item Differisce dal secondo perché $c_2\neq a_{22}$
+    \item Differisce da qualunque numero presente sulla diagonale
+\end{itemize}
+Quindi la lista non è esaustiva $\implies \mathbb{N}\nsim[0,1]$.
+
+\paragraph{Conclusione}\mbox{}\\
+$$\mathbb{R}\sim[0,1]\nsim\implies\mathbb{R}\nsim\mathbb{N}$$
+\begin{itemize}
+    \item $\mathbb{R}$ non è numerabile.
+    \item Esso è più \textit{"fitto"} di $\mathbb{N}$.
+    \item Qualsiasi tentativo di listare anche solo un segmento non è esaustivo.
+    \item $\mathbb{R}$ è un insieme \textbf{continuo}, e tutti gli insiemi equi numerosi
+          $\mathbb{R}$ si dicono continui.
+    \item Altri esempi di insiemi non numerabili:
+\end{itemize}
+%da capire ancora.
+
+\subsubsection{Insieme delle parti di $\mathbb{N}$}
+$$P(\mathbb{N})=2^{\mathbb{N}} = \{\text{sottoinsiemi di }\mathbb{N}\}\nsim\mathbb{N}$$
+Posso rappresentare i sotto insiemi di $\mathbb{N}$ utilizzando un \textbf{vettore caratteristico}
+$A\subseteq\mathbb{N}$.
+\[
+    \mathbb{N}\rightarrow
+    \begin{array}{cccccccc}
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & ... \\
+    \end{array}
+\]
+\[
+    A\rightarrow
+    \begin{array}{cccccccc}
+        0 & 1 & 1 & 0 & 1 & 1 & 0 & ... \\
+    \end{array}
+\]
+Questo è un vettore di booleani (o bit) che mette segnala la presenza degli elementi dell'insieme
+dei numeri naturali in $A$, quindi $0$ quando l'elemento corrispondente di $\mathbb{N}$ non
+appartiene ad $A$, e viceversa $1$ se appartiene.
+%terminare
+\subsection{Insieme non numberabile $\mathbb{N}^{\mathbb{N}}$}
+
+
+
 
 \end{document}

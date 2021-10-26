@@ -1,7 +1,7 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica ?}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica?}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{2}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Syllabus}{3}{section.2}%
 \contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{4}{section.3}%
@@ -28,3 +28,10 @@
 \contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{14}{subsubsection.3.7.5}%
 \contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{16}{subsubsection.3.7.6}%
 \contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{17}{subsubsection.3.7.7}%
+\contentsline {subsubsection}{\numberline {3.7.8}Insiemi non numerabili}{18}{subsubsection.3.7.8}%
+\contentsline {paragraph}{Dimostrazione}{18}{section*.2}%
+\contentsline {paragraph}{$R\sim [0,1]$}{18}{section*.3}%
+\contentsline {paragraph}{$\PazoBB {N}\nsim [0,1]$ (diagonalizzazione)}{19}{section*.4}%
+\contentsline {paragraph}{Conclusione}{19}{section*.5}%
+\contentsline {subsubsection}{\numberline {3.7.9}Insieme delle parti di $\PazoBB {N}$}{20}{subsubsection.3.7.9}%
+\contentsline {subsection}{\numberline {3.8}Insieme non numberabile $\PazoBB {N}^{\PazoBB {N}}$}{20}{subsection.3.8}%
