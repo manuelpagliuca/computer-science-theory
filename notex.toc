@@ -1,37 +1,38 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica?}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{2}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Syllabus}{3}{section.2}%
-\contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Funzione}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Classi di funzioni}{4}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Funzioni iniettive}{4}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Funzioni suriettive}{5}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Insieme immagine di una funzione}{5}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Funzioni biettive}{6}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Inversa di una funzione}{6}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Composizione di funzioni}{6}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{7}{subsubsection.3.6.1}%
-\contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{7}{subsubsection.3.6.2}%
-\contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{7}{subsubsection.3.6.3}%
-\contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{8}{subsubsection.3.6.4}%
-\contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{8}{subsubsection.3.6.5}%
-\contentsline {subsubsection}{\numberline {3.6.6}Insieme di funzioni}{9}{subsubsection.3.6.6}%
-\contentsline {subsubsection}{\numberline {3.6.7}Funzione di valutazione}{10}{subsubsection.3.6.7}%
-\contentsline {subsection}{\numberline {3.7}Modellare teoricamente un sistema di calcolo}{10}{subsection.3.7}%
-\contentsline {subsubsection}{\numberline {3.7.1}Potenza computazionale}{11}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}Importanza del calcolo di funzione}{12}{subsubsection.3.7.2}%
-\contentsline {subsubsection}{\numberline {3.7.3}Cardinalità degli insiemi - I°}{12}{subsubsection.3.7.3}%
-\contentsline {subsubsection}{\numberline {3.7.4}Relazione}{13}{subsubsection.3.7.4}%
-\contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{14}{subsubsection.3.7.5}%
-\contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{16}{subsubsection.3.7.6}%
-\contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{17}{subsubsection.3.7.7}%
-\contentsline {subsubsection}{\numberline {3.7.8}Insiemi non numerabili}{18}{subsubsection.3.7.8}%
-\contentsline {paragraph}{Dimostrazione}{18}{section*.2}%
-\contentsline {paragraph}{$R\sim [0,1]$}{18}{section*.3}%
-\contentsline {paragraph}{$\PazoBB {N}\nsim [0,1]$ (diagonalizzazione)}{19}{section*.4}%
-\contentsline {paragraph}{Conclusione}{19}{section*.5}%
-\contentsline {subsubsection}{\numberline {3.7.9}Insieme delle parti di $\PazoBB {N}$}{20}{subsubsection.3.7.9}%
-\contentsline {subsection}{\numberline {3.8}Insieme non numberabile $\PazoBB {N}^{\PazoBB {N}}$}{20}{subsection.3.8}%
+\contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica?}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Syllabus}{4}{section.2}%
+\contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Funzione}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Classi di funzioni}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Funzioni iniettive}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Funzioni suriettive}{6}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Insieme immagine di una funzione}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Funzioni biettive}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Inversa di una funzione}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Composizione di funzioni}{7}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{8}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{8}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{8}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{9}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{9}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Insieme di funzioni}{10}{subsubsection.3.6.6}%
+\contentsline {subsubsection}{\numberline {3.6.7}Funzione di valutazione}{11}{subsubsection.3.6.7}%
+\contentsline {subsection}{\numberline {3.7}Modellare teoricamente un sistema di calcolo}{11}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Potenza computazionale}{12}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Importanza del calcolo di funzione}{13}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Cardinalità degli insiemi - I°}{13}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Relazione}{14}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{15}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{17}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{18}{subsubsection.3.7.7}%
+\contentsline {subsection}{\numberline {3.8}Insiemi non numerabili}{19}{subsection.3.8}%
+\contentsline {paragraph}{Dimostrazione}{19}{section*.2}%
+\contentsline {paragraph}{Dimostrazione $R\sim [0,1]$}{19}{section*.3}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\nsim [0,1]$ (per diagonalizzazione)}{20}{section*.4}%
+\contentsline {paragraph}{Conclusione}{21}{section*.5}%
+\contentsline {subsubsection}{\numberline {3.8.1}Insieme delle parti di $\PazoBB {N}$}{21}{subsubsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.2}Insieme $\PazoBB {N}^{\PazoBB {N}}$}{22}{subsubsection.3.8.2}%
+\contentsline {subsection}{\numberline {3.9}Cosa è calcolabile?}{22}{subsection.3.9}%

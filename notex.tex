@@ -11,6 +11,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{cancel}
 
+%table
+\usepackage{booktabs} % for better looking tables
+\usepackage{siunitx}  % for units of measure and data in tables
+    \usepackage{array}
+    \usepackage{multirow}
+    \usepackage{hhline,booktabs,amsmath}
+    \usepackage{makecell}
 %Graphics&Float
 \usepackage{graphicx}
 \usepackage{float}
@@ -617,7 +624,7 @@ Alcuni esempi di insiemi numerabili:
           le potenze in posizione) ad una stringa binaria.
 \end{itemize}
 
-\subsubsection{Insiemi non numerabili}
+\subsection{Insiemi non numerabili}
 Esistono degli insiemi che non sono listabili, dette in altre parole sono più fitti di $\mathbb{N}$,
 è un altro tipo di categoria di infinito.
 $$\mathbb{R}\text{ non è numerabile}$$
@@ -630,13 +637,18 @@ perchè sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazion
     \item $\mathbb{R}\sim[0,1]\nsim\mathbb{N}\implies\mathbb{R}\nsim\mathbb{N}$
 \end{itemize}
 
-\paragraph{$R\sim[0,1]$}\mbox{}\\ \noindent Significa riuscire a rappresentare una funzione
+\paragraph{Dimostrazione $R\sim[0,1]$}\mbox{}\\ \noindent Significa riuscire a rappresentare una funzione
 che mappa gli elementi tra i due insiemi in maniera che sia suriettiva ed iniettiva.
 
 Prima di tutto abbiamo una retta cartesiana con un origine fissata e che copre tutti i numeri reali.
 Pongo l'intervallo $[0,1]$ in modo che si trovi in corrispondenza del punto mediano della retta $0$,
 successivamente prendo un compasso punto il centro nel mediano dell'intervallo e traccio la
 semi circonferenza rispetto alla metà dell'intervallo.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/dim_1.png}
+    \caption{Dimostrazione  $R\sim[0,1]$}
+\end{figure}
 
 Gli elementi dell'insieme $\mathbb{R}$ vengono mappati tracciando una retta in direzione del punto
 mediano di $[0,1]$, nel punto di intersezione si traccia la retta perpendicolare che interseca
@@ -646,10 +658,11 @@ di quest'ultima e si attraversa l'intersezione toccando $\mathbb{R}$.
 
 Questo dimostra che tutti i valori di $\mathbb{R}$ sono associabili
 su $[0,1]$, quindi $\mathbb{R}\sim[0,1]$.
-\pagebreak
-\paragraph{$\mathbb{N}\nsim[0,1]$ (diagonalizzazione)}\mbox{}\\ Supponiamo per assurdo che $\mathbb{N}\sim[0,1]\implies[0,1]$,
-ovvero che sia listabile in maniera esaustiva. Quindi quello che penso di fare consiste nel
-costruire un elenco di numeri (tutti gli elementi iniziano con $0.$).
+
+\paragraph{Dimostrazione $\mathbb{N}\nsim[0,1]$ (per diagonalizzazione)}\mbox{}\\Supponiamo per assurdo che $\mathbb{N}\sim[0,1]\implies[0,1]$,
+ovvero che sia listabile (\textit{elencabile}) in maniera esaustiva così come lo è $\mathbb{N}$.
+Siccome sto ipotizzando che sia elencabile, allora creo una lista di tutti gli elementi in $[0,1]$, i numeri
+all'interno di questo numero seguono il formato "$0.$", quindi:
 \[
     \begin{array}{ccccc}
         \underline{0.a_{11}} & 0.a_{12}             & 0.a_{13}             & 0.a_{14}             & ... \\
@@ -659,12 +672,13 @@ costruire un elenco di numeri (tutti gli elementi iniziano con $0.$).
         ...                  & ...                  & ...                  & ...                  & ... \\
     \end{array}
 \]
-Per costruire un numero elusivo che non si trova in nessuno di questi elementi della lista,
-vado a guardare le cifre sulla diagonale.
+Se riesco a costruire un numero che non fa parte di questa lista infinita (elusivo alla biezione),
+allora vuol dire che la lista non è elencabile, e quindi $[0,1]$ non è numerabile.
 
-Per esempio costruiamo:
+Per costruire questo numero elusivo che non si trova in nessuno di questi elementi della lista,
+vado a guardare le cifre sulla \textit{diagonale}.\\Costruiamo il numero elusivo alla lista
 $$0.c_1c_2c_3c_4$$
-L'$i$-esima cifra è fatta in questo modo
+Tale che rispetti la seguente regola rispetto alla diagonale del elenco dei numeri $\in [0,1]$
 \[
     c_i=
     \begin{cases}
@@ -672,15 +686,18 @@ L'$i$-esima cifra è fatta in questo modo
         a_{ii} - 1\text{ se }a_{ii} = 9 \\
     \end{cases}
 \]
-Ora usando questa regola non riuscirò mai a costruire un numero tra quelli elencati,
-questo perchè ovviamente cambio le cifre.
+Ora usando questa regola non riuscirò mai a posizionare il mio nuovo numero
+tra quelli elencati, questo perchè ovviamente cambio le cifre (il perché questo accade
+probabilmente è collegato al fatto che $\mathbb{R}$ è più fitto di $\mathbb{N}$, proprio
+quello che vogliamo dimostrare).
 Il numero $0.c_1c_2...\in[0,1]$, ma non appartiene nelle liste poiché:
 \begin{itemize}
     \item Differisce dal primo perché $c_1\neq a_{11}$
     \item Differisce dal secondo perché $c_2\neq a_{22}$
     \item Differisce da qualunque numero presente sulla diagonale
 \end{itemize}
-Quindi la lista non è esaustiva $\implies \mathbb{N}\nsim[0,1]$.
+Quindi la lista non è esaustiva $\implies \mathbb{N}\nsim[0,1]$, significa che non cattura tutto l'intervallo $[0,1]$,
+quindi non può esistere una biezione tra questo ed $\mathbb{N}$, ovvero $[0,1]$ \textbf{non è numerabile}.
 
 \paragraph{Conclusione}\mbox{}\\
 $$\mathbb{R}\sim[0,1]\nsim\implies\mathbb{R}\nsim\mathbb{N}$$
@@ -692,12 +709,20 @@ $$\mathbb{R}\sim[0,1]\nsim\implies\mathbb{R}\nsim\mathbb{N}$$
           $\mathbb{R}$ si dicono continui.
     \item Altri esempi di insiemi non numerabili:
 \end{itemize}
-%da capire ancora.
 
 \subsubsection{Insieme delle parti di $\mathbb{N}$}
-$$P(\mathbb{N})=2^{\mathbb{N}} = \{\text{sottoinsiemi di }\mathbb{N}\}\nsim\mathbb{N}$$
+Un altro insieme non numerabile è quello costituito dalla famiglia di sottoinsiemi possibili di $\mathbb{N}$,
+quindi mettendo assieme uno dopo l'altro tutti i sottoinsiemi di differenti cardinalità (talvolta chiamato
+\textbf{insieme potenza} o \textbf{booleano di} $\mathbb{N}$). Per esempio su un insieme $S=\{a,b,c\}$,
+l'insieme delle parti è $\mathcal{P}(S)=\{\emptyset,\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},S\}$.
+
+$$\mathcal{P}(\mathbb{N})=2^{\mathbb{N}} = \{\text{sottoinsiemi di }\mathbb{N}\}\nsim\mathbb{N}$$
+Anche questa dimostrazione avviene per diagonalizzazione, per assurdo suppongo che esista una
+biezione che mi permetta di elencare tutti i sottoinsiemi di $\mathbb{N}$.
+
 Posso rappresentare i sotto insiemi di $\mathbb{N}$ utilizzando un \textbf{vettore caratteristico}
-$A\subseteq\mathbb{N}$.
+$A\subseteq\mathbb{N}$, questo è un vettore dove metto il bit di appartenenza rispetto alla corrispondenza
+dell'elemento.
 \[
     \mathbb{N}\rightarrow
     \begin{array}{cccccccc}
@@ -710,11 +735,96 @@ $A\subseteq\mathbb{N}$.
         0 & 1 & 1 & 0 & 1 & 1 & 0 & ... \\
     \end{array}
 \]
-Questo è un vettore di booleani (o bit) che mette segnala la presenza degli elementi dell'insieme
-dei numeri naturali in $A$, quindi $0$ quando l'elemento corrispondente di $\mathbb{N}$ non
-appartiene ad $A$, e viceversa $1$ se appartiene.
-%terminare
-\subsection{Insieme non numberabile $\mathbb{N}^{\mathbb{N}}$}
+Allora se io suppongo per assurdo che $\mathcal{P}(\mathbb{N})\sim\mathbb{N}$, ovvero che è numerabile
+rispetto all'insieme dei numeri naturali, allora posso elencare in maniera esaustiva i sotto insiemi
+di $\mathbb{N}$, questo elencandone i vettori caratteristici.
+\[
+    \begin{array}{ccccc}
+        \underline{0.b_{11}} & 0.b_{12}             & 0.b_{13}             & 0.b_{14}             & ... \\
+        0.b_{21}             & \underline{0.b_{22}} & 0.b_{23}             & 0.b_{24}             & ... \\
+        0.b_{31}             & 0.b_{32}             & \underline{0.b_{33}} & 0.b_{34}             & ... \\
+        0.b_{41}             & 0.b_{42}             & 0.b_{43}             & \underline{0.b_{44}} & ... \\
+        ...                  & ...                  & ...                  & ...                  & ... \\
+    \end{array}
+\]
+Se riesco a costruire un sottoinsieme di $\mathbb{N}$ (vettore caratteristico) che non fa parte da di questa lista,
+allora l'insieme delle parti non è un insieme numerabile poiché non è equi-numeroso con $\mathbb{N}$. Questo
+è possibile procedendo per \textit{diagonalizzazione}, per esempio se considerassi il seguente vettore negato:
+\[
+    \begin{array}{ccccc}
+        \overline{b_{01}} & \overline{b_{12}} & \overline{b_{23}} & \overline{b_{34}} & ... \\
+    \end{array}
+\]
+riesco a constatare che esso non appartiene alla lista nonostante sia un sottoinsieme di $\mathbb{N}$
+in quanto composto solo da valori booleani.
+
+$$\mathcal{P}(\mathbb{N})\nsim\mathbb{N}$$
+
+\subsubsection{Insieme $\mathbb{N}^{\mathbb{N}}$}
+Consideriamo l'insieme di tutte le funzioni possibili funzioni che vanno da $\mathbb{N}$ in $\mathbb{N}$.
+$$\mathbb{N}^{\mathbb{N}}=\{f:\mathbb{N}\rightarrow\mathbb{N}\}$$
+
+Ipotizzando che $\mathbb{N}^{\mathbb{N}}\sim\mathbb{n}$, consideriamo la seguente tabella dove nella prima
+colonna si trova l'elenco esaustivo di tutte le funzioni $\in\mathbb{N}$, e nelle colonne successive tutto
+il dominio completo di $\mathbb{N}$. Significa che per ogni riga sara presente l'insieme dei valori che
+fornisce il grafico di una funzione $f_i$.
+\begin{center}
+    \begin{tabular}{c|ccccc}
+        \toprule
+        Elenco delle funzioni di $\mathbb{N}$ & \textbf{0}           & \textbf{1}           & \textbf{2}           & \textbf{3}            & \textbf{...$\in\mathbb{N}$} \\
+        \midrule
+        $f_0$                                 & $\underline{f_0(0)}$ & $f_0(1)$             & $f_0(2)$             & $f_0(3)$              & $...$                       \\
+        $f_1$                                 & $f_1(0)$             & $\underline{f_1(1)}$ & $f_1(2)$             & $f_1(3)$              & $...$                       \\
+        $f_2$                                 & $f_2(0)$             & $f_2(1)$             & $\underline{f_2(2)}$ & $f_2(3)$              & $...$                       \\
+        $f_3$                                 & $f_3(0)$             & $f_3(1)$             & $f_3(2)$             & $\underline{f_ 3(3)}$ & $...$                       \\
+        $...$                                 & $...$                & $...$                & $...$                & $...$                 & $\underline{...}$           \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+Allora anche in questo caso per diagonalizzazione voglio costruire una funzione $\in\mathbb{N}^{\mathbb{N}}$ ma
+elusiva all'elenco delle funzioni della tabella:
+$$\varphi:\mathbb{N}\rightarrow\mathbb{N}\text{ come }\varphi(n)=f_n(n)+1$$
+Siamo d'accordo che $\varphi$ sia ben definita, visto che per ogni immagine corrisponderà un immagine numero naturale,
+ma notiamo che una qualsiasi $\varphi(n)$ presa sulla lista avrà per forza una immagine della diagonale discordante
+rispetto a quelle elencate nella tabella.\\ Quindi abbiamo una funzione elusiva all'elenco, e la nostre ipotesi si rivela assurda:
+$$\varphi(0)=f_0(0)+1\neq f_0(0)$$
+$$\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$$
+N.B.: Gli insiemi $\mathcal{P}(\mathbb{N})$ e $\mathbb{N}^{\mathbb{N}}$ sono detti \textbf{insiemi continui},
+e sono equinumerosi a $\mathbb{R}$.
+
+\subsection{Cosa è calcolabile?}
+Sappiamo che la potenza computazionale di un sistema di calcolo $\mathcal{C}$ corrisponde a:
+$$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
+Il nostro problema consiste nel comprendere se questa inclusione sia propria o impropria,
+per dimostrare ciò posso utilizzare il concetto di cardinalità precedentemente appreso.\\
+Se riesco a dimostrare che il primo insieme ha una cardinalità numerabile ed il secondo ha
+una cardinalità continua allora il secondo insieme sarà molto più grande del primo.\\Prendiamo alcune
+\textbf{assunzioni} che verranno dimostrate successivamente nel corso:
+\begin{itemize}
+    \item $PROG\sim\mathbb{N}$, i programmi sono tanti quanti i numeri naturali, questo
+          perché un programma viene digitalizzato in una fila di bit (finiti). Questo vuol dire che per ogni
+          programma corrisponderà un numero che fa parte dei numeri naturali.
+
+    \item $DATI\sim\mathbb{N}$, i dati sono tanti quanto i numeri, questo per lo stesso motivo
+          di digitalizzazione (o traduzione) in binario delle informazioni.
+\end{itemize}
+Possiamo dire che la potenza computazionale sia equinumerosa rispetto al numero di programmi,
+al variare del programma cambio la funzione di potenza computazionale. A questo punto agganciamo
+la prima assunzione.
+$$F(\mathcal{C})\sim PROG\sim\mathbb{N}$$
+Sapendo che l'insieme dei dati in dati definito come $DATI_{\bot}^{DATI}$, grazie alla
+seconda assunzione che abbiamo fatto allora possiamo asserire:
+$$DATI_{\bot}^{DATI}\sim\mathbb{N}_{\bot}^{\mathbb{N}}$$
+
+Abbiamo visto precedentemente che $\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$, allora unendo le precedenti
+dimostrazioni possiamo confermare:
+$$F(\mathcal{C})\sim PROG\sim\mathbb{N}\nsim\mathbb{N}^{\mathbb{N}}\sim DATI_{\bot}^{DATI}$$
+$$F(\mathcal{C})\nsim DATI_{\bot}^{DATI}$$
+Ovvero, che l'insieme dei programmi (corrispondente all'insieme delle funzioni di potenza di calcolo)
+non è equinumeroso (o \textit{isomorfo}) all'insieme delle funzioni che vanno da dati in dati. In parole
+povere ho un numero di programmi nettamente inferiore (fitto quanto i numeri naturali) rispetto al numero
+di funzioni (o problemi) calcolabili (fitto quanto i reali $\mathbb{N}_{\bot}^{\mathbb{N}}$).
+
 
 
 
