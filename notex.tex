@@ -10,7 +10,9 @@
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
 \usepackage{cancel}
-
+\usepackage{listing}
+\usepackage{listingsutf8}
+\usepackage{listings}
 %table
 \usepackage{booktabs} % for better looking tables
 \usepackage{siunitx}  % for units of measure and data in tables
@@ -18,6 +20,7 @@
     \usepackage{multirow}
     \usepackage{hhline,booktabs,amsmath}
     \usepackage{makecell}
+
 %Graphics&Float
 \usepackage{graphicx}
 \usepackage{float}
@@ -51,6 +54,7 @@
 \maketitle
 \tableofcontents
 \pagebreak
+\newpage
 \section{Introduzione}
 Nei corsi di informatica applicata come quelli di: Sistemi Operativi, Basi di dati, ecc... l'oggetto di studio è definito dal corso, e l'informatica è lo strumento per studiare questo oggetto.
 
@@ -72,7 +76,6 @@ Le principali risorse su cui ci concentreremo sono il \textbf{tempo} e \textbf{s
 \newline
 Esistono problemi che si trovano in una zona grigia, che non sappiamo se hanno una risoluzione efficiente, ma sono problemi molto importanti, nessuno è riuscito a dimostrare se avranno soluzioni efficienti ma nemmeno il contrario, ovvero nessuno è riuscito a dimostrare che saranno risolubili efficientemente. Questa classe di problemi è la classe di problemi NP, vedremo poi di cosa si tratta.
 \section{Syllabus}
-
 \begin{itemize}
     \item Teoria della calcolabilità: individuare la qualità della calcolabilità dei problemi, quali sono le categorie di problemi calcolabili e distinguerla da quella dei problemi non calcolabili.
     \item Teoria della complessità: studio quantitativo dei problemi, dopo aver delimitato il confini di ciò che è calcolabile cercare un sotto insieme di problemi \textbf{efficientemente calcolabili}.
@@ -825,8 +828,268 @@ non è equinumeroso (o \textit{isomorfo}) all'insieme delle funzioni che vanno d
 povere ho un numero di programmi nettamente inferiore (fitto quanto i numeri naturali) rispetto al numero
 di funzioni (o problemi) calcolabili (fitto quanto i reali $\mathbb{N}_{\bot}^{\mathbb{N}}$).
 
+\subsubsection{Dimostrazione $DATI\sim\mathbb{N}$}
+Vogliamo stabilire una corrispondenza \textbf{biunivoca} tra dati e numeri naturali, ovvero
+che devo riuscire a "nascondere" un dato all'interno di un numero naturale, tale che
+se lo dovessi riportare all'insieme dei dati otterrei esattamente quel dato (e non un altro).
 
+Questa biezione la voglia rendere effettiva e programmabile, ovvero costruirci delle primitive che
+operino direttamente sulla codifica numerica dei dati così che possiamo smaterializzare completamente
+il mondo dei dati in quello dei numeri.
+
+Questa volta vogliamo dimostrare che l'\textbf{insieme delle coppie} $\mathbb{N}\times\mathbb{N}$
+è numerabile. Questo avverrà per passi, prima dimostreremo che l'insieme delle coppie è isomorfo a
+$\mathbb{N}^+$ (quindi escluso lo $0$) e poi di conseguenza che lo è per tutto $\mathbb{N}$.
+Questo per effetto collaterali che anche l'insieme dei razionali $\mathbb{Q}$ è numerabile,
+questo perché sono una frazione, quindi una coppia di interi.
+\paragraph{Dimostrazione $\mathbb{N}\times\mathbb{N}\sim\mathbb{N}^+$}\mbox{}\\
+$$\langle ,\rangle :\mathbb{N}\times\mathbb{N}\rightarrow\mathbb{N}^+$$
+$$\langle x,y\rangle =n$$
+La \textbf{funzione coppia di Cantor} è definita per mezzo delle parentesi
+angolari, prende due argomenti $x,y$ e restituisce un numero $n$, questo
+in maniera iniettiva e suriettiva (biettività).
+
+Ovvero che coppie diverse vengono mappate in numeri diversi, e se
+ho un numero devo essere in grado di tornare alla stessa coppia $x,y$. Quindi esibiremo sia
+l'andata della funzione coppia di Cantor che il ritorno, esibiremo anche i due proiettori
+\textit{sin} e \textit{des} tali che mi restituiscano i due argomenti in questione.
+$$sin:\mathbb{N}^+\rightarrow\mathbb{N}\text{ e }des:\mathbb{N}^+\rightarrow\mathbb{N}$$
+$$sin(n)=x\text{ e }des(n)=y$$
+Vogliamo dare una rappresentazione grafica di questa funzione, Cantor ha pensato di realizzare
+una tabella che ha come righe e colonne l'insieme $\mathbb{N}$. In questa tabella
+il valore della coppia si trova esattamente posizionato all'incrocio tra l'$x$-esima riga
+e della $y$-esima colonna.
+\[
+    \begin{tabular}{c|ccccc}
+        x/y & 0  & 1   & 2   & 3   & 4   \\
+        \midrule
+        0   & 1  & 3   & 6   & 10  & 15  \\
+        1   & 2  & 5   & 9   & 14  & ... \\
+        2   & 4  & 8   & 13  & ... & ... \\
+        3   & 7  & 12  & ... & ... & ... \\
+        4   & 11 & ... & ... & ... & ... \\
+    \end{tabular}
+\]
+La disposizione ingegnosa della tabella evita di andare in un elenco infinito,
+nel senso che se dovessi elencare tutti i numeri naturali andando verso il basso (o
+destra) non riuscirei a finire mai, ed inoltre non sarebbe un buon approccio visuale per trovare
+la corrispondenza con l'altro insieme. I numeri sono disposti in maniera che il successivo
+si trovi sulla diagonale (andando verso l'alto).
+$$\langle 2,1\rangle =8$$
+Con questa rappresentazione, coppie diverse non riusciranno mai a confluire nella stessa
+casella (coordinate di punti che individuano un punto univoco), e viceversa (iniettiva),
+questo mi conferma che la funzione è biettiva.\\Adesso mettiamo da parte la forma tabellare e
+consideriamo la \textbf{forma analitica} di $\langle ,\rangle $.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/coord_dim.png}
+    \caption{Diagonale che passa per $\langle x,y\rangle $}
+\end{figure}
+Notiamo che per il valore che voglio valutare attraverso la funzione di Cantor passa una diagonale,
+questa diagonale parte dalla colonna $0$ e dalla riga $x+y$ (il punto $\langle x+y,0\rangle $). La funzione
+coppia nell'origine della diagonale assumerà un certo valore, e visto che i numeri sulla
+diagonali incrementano in maniera crescente di una sola unità, allora potrò raggiungere $\langle x,y\rangle $
+sommando $y$.\\A questo punto il mio problema si riduce a trovare delle coppie particolari ovvero,
+la cui seconda coordinata è $0$, le chiamiamo $\langle z,0\rangle$. Notiamo nella prima colonna
+c'è una correlazione con gli elementi di $x$, e vediamo che l'elemento $i$-esimo della prima
+colonna corrisponde alla somma tra il corrispettivo elemento $x$ e l'elemento $i-1$ della colonna,
+allora riusciamo ad esprimere una \textbf{legge matematica} per descrivere questa \textit{codifica}.
+
+\begin{enumerate}
+    \item $\langle x,y\rangle =\langle x+y,0\rangle +y$
+    \item $\langle z,0\rangle ? \implies \langle z,0\rangle = \sum_{i=1}^z i+1=\frac{z(z+1)}{2}+1$
+\end{enumerate}
+\noindent Allora $(1)+(2)$:
+$$\langle x,y\rangle = \langle x+y,0\rangle+y=\frac{(x+y)(x+y+1)}{2}+y+1$$
+
+\paragraph{Come tornare da $\mathbb{N}^2$ a $\mathbb{N}^+$}
+Ovvero, come trovare le funzioni $sin$ e $des$.
+$$\langle x,y \rangle = n \longrightarrow sin(n)=x \text{ e } des(n)=y$$
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{images/coord_dim_2.png}
+    \caption{$n=13$}
+\end{figure}
+
+Partiamo da un elemento $n$ presente nell'intersezione dei due insiemi definiti da
+$x$ e $y$ e vogliamo individuare le due relative componenti. Procedo trovando
+le coordinate dell'origine della diagonale che passa per $n$, ovvero $\langle\gamma ,0\rangle$.
+Considerando la dimostrazione precedente possiamo dire che $y = n-\langle\gamma ,0\rangle$, ovvero
+procedo a ritroso sulla diagonale partendo da $n$ ed andando verso $\langle\gamma ,0\rangle$.\\Allora,
+sapendo che $\gamma=x+y$ posso trovare facilmente le parti destre e sinistre.\\ Il problema principale
+ora è trovare $\gamma$, questo non è altro che l'intero più grande valore tale per cui l'origine
+della diagonale sia minore di $n$.
+$$\gamma = \max\{z\in\mathbb{N}:\langle z,0\rangle\leq n\}$$
+Quindi dobbiamo risolvere la disuguaglianza la quale ci darà un range su $n$, all'interno di questo
+range $\langle z,0\rangle\leq n$ andiamo a prendere l'intero più grande che soddisfa questa disuguaglianza.
+$$\langle z,0\rangle\leq n\longrightarrow\frac{z(z+1)}{2}+1\leq n\longrightarrow z^2+z+2-2n\leq 0$$
+$$z_{1,2}=\frac{-1 \pm\sqrt{8n-7}}{2}$$
+Quindi devo scoprire quale è l'intero più grande dati:
+$$\frac{-1 -\sqrt{8n-7}}{2}\leq z\leq \frac{-1 +\sqrt{8n-7}}{2} $$
+l'elemento a destra è il più grande valore, ma non so se è intero, quindi dovrò correggere ciò:
+$$\gamma=\left\lfloor\frac{-1+\sqrt{8n-7}}{z} \right\rfloor$$
+Questa è un formula che utilizza la variabile in input $n$, quindi riusciamo a ricavare il parametro
+sinistro e destro della funzione di Cantor e ritornare allo stato iniziale:
+$$des(n)=y=n-\langle\gamma ,0\rangle \text{ e }sin(n)=x=\gamma -y$$
+
+\paragraph{Esempio andata e ritorno tra $\mathbb{N}^2$ e $\mathbb{N}^+$}
+$$\text{Andata : }\mathbb{N}^2 \longrightarrow\mathbb{N}^+$$
+
+$$\langle 10,20\rangle = \frac{30\cdot31}{2}+20+1=15\cdot31+21=485+21=486$$
+
+$$\text{Ritorno : }\mathbb{N}^+\longrightarrow\mathbb{N}^2$$
+$$\gamma = \left\lfloor \frac{-1 + \sqrt{8 \cdot 436-7}}{2} \right\rfloor = \lfloor 30.6448\rfloor = 30$$
+$$y=486- \langle 30,0\rangle = 486- \left(\frac{30\cdot31}{2}+1\right)=486-466=20=des(486)$$
+$$x=30-20=10=sin(486)$$
+Adesso noi abbiamo dimostrato che $\mathbb{N}^2\sim\mathbb{N}^+$.
+
+\paragraph{Dimostrazione $\mathbb{N}\times\mathbb{N}\sim\mathbb{N}$}
+Definisco una nuova funzione:
+$$[,]:\mathbb{N}\times\mathbb{N}\text{ tale che }[x,y]=\langle x,y\rangle-1$$
+Adesso ho una funzione esplicita per mappare $\mathbb{N}^2$ su $\mathbb{N}$.\\Nota: A questo
+punto otteniamo che l'insieme dei razionali $\mathbb{Q}$ sono coppie di interi $(num,den)$. Dunque
+$[,]$ mostra che $\mathbb{Q}$ è numerabile.
+
+\paragraph{Dimostrazione rigorosa che $DATI\approxeq\mathbb{N}$}
+Mostriamo le nozioni appena apprese sulle principali strutture dati.
+\paragraph{Liste d'interi}\mbox{}\\
+$$\textit{codifichiamo } x_1,x_2,...,x_n\rightarrow\langle x_1,x_2,...,x_n\rangle$$
+Quindi il numero che rappresenta la codifica è indicato con il numero all'interno delle parentesi angolari.
+L'idea consiste nell'incapsulare il risultato di una coppia di elementi come elemento destro
+della coppia più esterna. Non sapendo quanto sia lunga la lista dovrò porre un elemento che mi
+segnali il termine, e questo lo posso fare con $\langle x_n,0 \rangle$.
+
+$$\langle x_1,x_2,...,x_n\rangle = \langle x_1,\langle x_2,\langle ...\langle x_n,0\rangle ...\rangle\rangle\rangle$$
+
+\noindent Per esempio:
+$$\textit{codifica }1,2,5\rightarrow\langle 1,2,5\rangle=\langle 1,\langle 2,\langle 5,0\rangle\rangle\rangle=$$
+$$\langle 1,\langle2,16\rangle\rangle=\langle 1,188\rangle=$$
+$$=18144$$
+Per l'operazione di decodifica quello che facciamo è di considerare la codifica della mia lista $M$ (mon il
+risultato ma la lista di coppie incapsulate) come un albero binario. Allora dato questo albero il figlio
+sinistro è l'elemento sinistro (la testa della lista) ed il figlio destro è la parte restante della lista,
+allora continuando a considerare il figlio sinistro come una struttura dati lineare ottengo
+la lista codificata, questo attraversamento dell'albero in pre-ordine terminerà quando incontrerà un
+figlio destro $0$ (l'ultimo elemento, c'è solo un elemento  con $0$).\\Vogliamo effettuare
+delle implementazione in pseudo-codice (simile C), assumiamo $0$ come la lista nulla, e $\langle,\rangle,sin,des$
+come la funzione di Cantor $\langle , \rangle$.
+\paragraph{Implementazione codifica}\mbox{}
+\begin{lstlisting}[mathescape=true]
+int encode($x_1,...,x_n$){
+    int $k$ = 0;
+    for(int $i$ = $n$; $i$ >= 1; $i$--)
+        $k$ = $\langle x_i,k\rangle$;
+    return $k$;
+}
+\end{lstlisting}
+\paragraph{Implementazione decodifica}\mbox{}
+\begin{lstlisting}[mathescape=true]
+void decode(int $n$){
+    if($n$!=0){
+        print($sin(n)$);
+        decode($des(n)$);
+    }
+}
+\end{lstlisting}
+
+Altre operazioni utili possono essere sono quelle per calcolare la \textbf{lunghezza}:
+\begin{lstlisting}[mathescape]
+int length(int n){
+    return $n$==$0$ ? $0$ : $1$ + length($des(n)$);
+}
+\end{lstlisting}
+Oppure per calcolare la \textbf{proiezione}:
+\[
+    proj(t,b)=
+    \begin{cases}
+        -1  & \text{se } t>length(n)\text{ o }t==0                                           \\
+        x_t & \text{se }1\leq t\leq length(n)\text{ e }n=\langle x_1,...,x_t,..., x_m\rangle
+    \end{cases}
+\]
+\begin{lstlisting}[mathescape]
+int proj(int $t$, int $n$){
+    if ($t$ == $0$ || $t$ > length($n$))
+        return $-1$;
+    else {
+        if ($t$ == $1$)
+            return $sin(n)$;
+        else
+            return proj($t-1$,$des(n)$);
+    }
+}
+\end{lstlisting}
+\paragraph{Esercizi - $incr,decr$ (da implementare)}\mbox{}
+\[incr(t,n)=
+    \begin{cases}
+        -1                                    & \text{se }t>length(n)\text{ o }t==0                                            \\
+        \langle x_1, ...,x_t+1,...,x_n\rangle & \text{se } 1\leq t\leq length(n)\text{ e }n=\langle x_1,...,x_t,...,x_n\rangle
+    \end{cases}
+\]
+$decr(t,n)=\text{ come sopra ma con }\langle x_1,...,x_t-1,...,x_m$
+
+\paragraph{Corrispondente numerico : $DATI\sim\mathbb{N}$}\mbox{}\\
+Adesso sappiamo codificare liste di interi, questo ci da un idea del fatto che i dati siano
+isomorfi ad $\mathbb{N}$. Questo ci da un modo per nascondere testi, suoni, immagini dietro ad
+un numero. Per esempio, per compattare un testo in un numero posso imporre una codifica (tipo
+ASCII), in questa maniera posso associare un numero per ogni carattere numerico, un insieme
+di caratteri numerici è codificabile utilizzando $\langle , \rangle$ il quale mi darà un
+singolo numero.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/test_codifica.png}
+    \caption{Codifica di un testo}
+\end{figure}
+\textit{Posso usare questo modo per comprimere i testi?} In realtà questa tecnica non
+è un buon compressore, questo perché la crescita del numero è quadratica rispetto
+al numero di caratteri codificati (otteniamo un $n$ troppo grande e si verifica un espansione,
+altroché). \textit{Perché non è un buon modo per crittografare i dati?} Il primo problema
+è che il testo crittografato sarebbe molto lungo (aumenta il rischio nella perdita
+di dati durante la trasmissione), secondo problema la coppia di Cantor è una funzione biettiva,
+esiste un modo abbastanza diretto per tornare indietro.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/suono_codifica.png}
+    \caption{Discretizzazione del suono in segnale digitale e poi codifica in numero naturale}
+\end{figure}
+Per i suoni il discorso è molto simile, grazie alla \textbf{campionatura} (o
+\textbf{discretizzazione}) dei segnali analogici in un segnale digitale, ovvero una grandezza
+discreta sotto forma di numeri naturali.\\Per le immagini potrei usare la tecnica bitmap,
+quindi per ogni bit registro un colore che verrà codificato con un numero (e da qui come per
+gli altri casi sappiamo come muoverci).
+
+\paragraph{Codifica di altre stutture dati}\mbox{}\\
+Codifica di un \textbf{array} a dimensione finita, proprio per questo non necessità di
+un elemento che mi ponga fine alla sequenza (so già dove fermarmi).
+$$x_1,...,x_n\rightarrow[x_1,...,x_n]$$
+$$[x_1,...,x_n]=[x_1,...,[x_{n-1},x_n]]...]$$
+Codifica di una \textbf{matrice}, esse sono array bidimensionali dove hanno anch'esse
+dimensione fissa e nota. Quindi mi basta codificare per riga le matrici e poi codificare
+le codifiche.
+\[
+    \begin{bmatrix}
+        x_{11} & x_{12} \\
+        x_{21} & x_{22} \\
+    \end{bmatrix}
+    =\left[[x_{11},x_{12}],[x_{21},x_{22}]\right]
+\]
+Sia per la codifica di array che per quello delle matrici sono facilmente implementabili
+le primitive numeriche ad esempio $elem(i,j,n)$ che restituisce l'elemento $(i,j)$-esimo
+di una matrice codificata dal numero $n$.\\Codifica dei \textbf{grafi}, sappiamo
+che un grafo è rappresentabile con lista di adiacenza, matrice di adiacenza,...
+quindi possiamo codificare la lista o la matrice.
+\paragraph{Conclusione}\mbox{}\\
+Abbiamo mostrato effettivamente che grazie alla
+corrispondenza effettiva di $DATI\sim\mathbb{N}$ che i dati possono essere "scartati" e tenuti solamente i
+numeri, questo perché ogni dato può essere rappresentato con un numero naturale, questo
+grazie a delle leggi matematica effettive ed implementabili, che mi
+permettono di codificare e decodificare il dato.\\Quindi la nostra funzione $f:DATI\rightarrow DATI_{\bot}$
+che rappresenta un qualsiasi problema può essere sostituita da una funzione $f:\mathbb{N}\rightarrow\mathbb{N}_\bot$,
+ed è questo quello che i nostri calcolatori calcoleranno, quindi possiamo dire che il nostro universo
+dei problemi $DATI^{DATI}_\bot$ non è altro che $\mathbb{N}^{\mathbb{N}}_\bot$
+
+\subsubsection{Dimostrazione $PROG\sim\mathbb{N}$}
 
 
 
 \end{document}
+
