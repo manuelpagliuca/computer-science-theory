@@ -52,6 +52,7 @@
 
 \begin{document}
 \maketitle
+\pagebreak
 \tableofcontents
 \pagebreak
 \newpage
@@ -1087,9 +1088,250 @@ che rappresenta un qualsiasi problema può essere sostituita da una funzione $f:
 ed è questo quello che i nostri calcolatori calcoleranno, quindi possiamo dire che il nostro universo
 dei problemi $DATI^{DATI}_\bot$ non è altro che $\mathbb{N}^{\mathbb{N}}_\bot$
 
-\subsubsection{Dimostrazione $PROG\sim\mathbb{N}$}
+\subsubsection{Prefazione alla dimostrazione $PROG\sim\mathbb{N}$}
+Per spiegare ciò utilizzeremo un linguaggio apposito detto
+\textit{"linguaggio RAM"} e su un sistema formale apposito detto \textit{"sistema RAM"}.
+Grazie alla semplicità di questo potrò mostrare molto semplicemente:
+\begin{itemize}
+    \item Che i programmi sono numerabili $PROG\sim\mathbb{N}$
+    \item In maniera rigorosa la semantica dei programmi, $\mathcal{C}(P,\_)\rightarrow RAM(P,\_)$
+    \item Ed altrettanto formalmente potrò definire la potenza computazionale $F(RAM)$, questo fornirà
+          un idea di \textit{che cosa è calcolabile}.
+\end{itemize}
+Il linguaggio RAM è un \textit{assembly} molto semplificato, per questo motivo l'idea di
+calcolabilità è altamente criticabile, poiché il modello potrebbe fare scappare qualcosa
+per via della banalità.
 
+Si introduce un altro modello molto più sofisticato la macchina \textit{while(JVM)}, quello
+che è calcolabile è effettivamente calcolabile da questo.
 
+Metteremo poi a confronto il modello formale $F(RAM)$ con quello sofisticato $F(while)$. Se
+quest due idee di calcolabilità risultassero diverse allora la cosa è un po'
+pericolosa, perchè l'dea di calcolabilità dipenderebbe dal periodo storico.
+Se invece due idee così diametralmente opposte risultassero uguali, ovvero che calcolano
+lo stesso insieme di funzioni, allora incomincio a capire che l'idea di calcolabilità è intrinseca
+ai problemi. Ed è questo che ci porterà alla \textbf{tesi di Church} (spoiler).
+
+Prima di arrivare a ciò dobbiamo dimostrare che $PROG\sim\mathbb{N}$, e per fare questo dobbiamo
+introdurre la macchina RAM.
+
+\subsubsection{}{Sistema di calcolo RAM}
+L'hardware della macchina RAM:
+\begin{itemize}
+    \item Una \textbf{memoria} $R$ costituita contigua di registri, ognuno di questi registri può memorizzare
+          i numeri naturali arbitrariamente grandi (non hanno una capienza).
+          Il registro $R1$ è il registro di input; $R0$ registro di output.
+
+    \item Il \textbf{program counter} $L$, un registro contenente l'indirizzo dell prossima
+          istruzione da eseguire.
+
+    \item Un \textbf{programma} $P$, costituito da una  sequenza di istruzioni, un istruzione RAM può essere:
+          \begin{itemize}
+              \item Incremento: $R_k \leftarrow R_k +1$
+              \item Decremento: $R_k \leftarrow R_k -1$ (non può mai andare sotto lo zero)
+                    \[
+                        x-y=
+                        \begin{cases}
+                            x-y & \text{se } x\geq y \\
+                            0   & \text{altrimenti}
+                        \end{cases}
+                    \]
+              \item Salto condizionato: $\text{IF } R_k=0\text{ THEN GOTO } m, m\in{1,...,|P|}$
+          \end{itemize}
+\end{itemize}
+\paragraph{Esecuzione su una macchina RAM}
+\begin{enumerate}
+    \item Fase di inizializzazione del programma $P$.
+    \item Si carica il dato $m$ nel registro di output $R_1$.
+    \item Si comincia ad eseguire l'istruzione al posto $1$, e man mano
+          il PC continua ad incrementare così da poi eseguire l'istruzione successiva
+          (eccetto nel caso in cui non si incontri un istruzione di salto).
+    \item Per convenzione la macchina si arresta quanto ik PC il numero $0$
+          $$L=0\implies HALT$$
+          c'è possibilità per via dell'istruzione di salto di mandare in loop
+          l'esecuzione della macchina.
+    \item L'output di questo programma dato un input $x$ ha due possibilità
+          \begin{itemize}
+              \item Il programma si ferma ($HALT$) e l'output è presente all'interno del registro $R_0$.
+              \item Il programma non termina, allora in questo caso l'output
+                    per l'input sarà indefinito
+          \end{itemize}
+          Quello che fa il programma è calcolare una funzione:
+          $$\varphi(x)=cout(R_0)/\bot$$
+          Chiameremo \textbf{semantica del programma $P$}:
+          $$\varphi_p = \mathbb{N}\rightarrow\mathbb{N}_\bot$$
+\end{enumerate}
+Questa è una definizione di semantica del programma molto intuitiva, quello che voglio
+fare però è utilizzare degli oggetti matematici con i quali specificare
+in maniera formale e corretta la semantica del programma.
+
+\paragraph{Definizione formale di semantica di un programma RAM}\mbox{}\\
+Introduciamo il concetto di \textbf{semantica operazionale}, questo è il tipo di semantica
+più semplice. Significa specificare che cosa fa una data istruzione andando a vedere quale
+è l'effetto di quell'istruzione sulla data macchina.
+
+Per descrivere l'effetto di un istruzione, prendiamo una foto della macchina prima dell'esecuzione
+e dopo. La "foto" solitamente si chiama \textbf{stato} della macchina. Quindi spiego la semantica
+di una istruzione specificando il cambiamento di stato indotto dall'esecuzione di quell'istruzione.
+Questo significa dare la semantica operazionale di una macchina.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/cambio_stato.png}
+\end{figure}
+
+\paragraph{Esecuzione di un programma $P$ e sua semantica}
+L'esecuzione di un programma consiste nell'esecuzione di molteplici cambiamenti di stato a partire
+dallo stato iniziale $S_{init}$ (partendo un inpput $n$)
+e giungendo a quello finale $S_{final}$. Si dice che la computazione
+di $P$ induce una sequenza di stati.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/stati_seq.png}
+    \caption{Sequenza di stati indotta da $P$}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/stato_init.png}
+    \caption{Situazione globale durante $S_{init}$}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/stato_fina.png}
+    \caption{Situazione globale durante $S_{final}$ (in caso di $HALT$)}
+\end{figure}
+Quindi la semantica del programma sarà:
+\[
+    \varphi_p(x) =
+    \begin{cases}
+        y \\
+        \bot
+    \end{cases}
+\]
+Dove $\bot$ mi indica una sequenza infinita di stati in loop.
+\paragraph{Ingredienti della definizione formale della semantica}\mbox{}\\
+\begin{itemize}
+    \item \textbf{Stato} di una macchina RAM, è lo stato dei registri di quella macchina.
+          Matematicamente modella to come una funzione che mi restituisce il contenuto
+          del risultato quando la macchine è nello stato $S$
+          $$S:\{L, R_i\}\implies\mathbb{N}$$
+          $$STATI=\mathbb{N}^{\{L,R_i\}}=\{\text{insieme di tutti i possibili stati della macchina}\}$$
+          $$S(R_j) = \textit{contenuto di } R_j\text{ durante lo stato } S$$
+
+    \item \textbf{Stato finale} della macchina RAM, uno stato tale per cui:$$S(L)=0\implies HALT$$
+    \item \textbf{Dato}, rappresentato da $\mathbb{N}$, questo perchè sappiamo che $\mathbb{N}\sim DATI$.
+    \item \textbf{Inizializzazione}, dato il dato $n$ prepara la macchina nell ostato iniziale
+          con input $n$. Quindi sarà una funzione $in$ questa creerà uno stato $S_{init}$ a partire
+          da un input $n$:
+          $$in:DATI\rightarrow STATI \text{ t.c. } in(n)=S_{init}$$
+          Essa imposterà il contenuto del primo registro ad $1$, e tutti gli altri a $0$, e poi
+          il caricherà nel program counter l'indirizzo della prima istruzione (contenuto
+          del registro).
+          \[
+              S_{init}(R_i)=
+              \begin{cases}
+                  n & \text{se } i=1 \\
+                  0 & \text{se } i=0
+              \end{cases}
+          \]
+          $$S_{init}(L)=1$$
+
+    \item \textbf{Programmi}, insieme dei programmi RAM $PROG=\{\text{programmi RAM}\}$, un
+          singolo programma $P\in PROG$, tale per cui la sua cardinalità indica
+          il numero di istruzioni contenute $|P| = \#istr$.
+    \item \textbf{Esecuzione}, essa mi specifica la dinamica del programma che mi fa
+          passare da uno stato al successivo. Questo è possibile con utilizzando la \textit{funzione
+              stato prossimo} $\delta$. Tale funzione mi permette di spostarmi dallo stato attuale
+          $S$ a quello successivo $S'$.
+          $$\delta:STATI\times PROG \rightarrow STATI_\bot$$
+          $$\delta(S,P)=S'$$
+          Lo stato prossimo dipenderà dall'istruzione che in quel momento deve essere eseguita,
+          e per conoscere tale istruzione devo andare a vedere il contenuto del program counter
+          allo stato attuale $S(L)$ (quindi lo stato prossimo dipenderà da $S(L)$).\\\textit{Come
+              è definito lo stato prossimo in funzione dello stato attuale?}
+          \begin{enumerate}
+              \item Se $S(L)=0$ (ovvero in terminazione), allora lo stato prossimo non è definito
+                    $S'=\bot$.
+              \item Se $S(L)>|P|$, significa che abbiamo superato l'ultima istruzione
+                    e che il program counter è stato incrementato diventando così più
+                    grande del numero di istruzioni del programma. Quello che si fa è:
+                    $$S'(L)=0\text{ HALT}$$
+                    $$\forall i:S'(R_i)=S(R_i)$$
+              \item Se $1\leq S(L)\leq |P|$, questo è il caso comune e considerando
+                    la $S(L)$-esima istruzione:
+                    \begin{itemize}
+                        \item $R_k\leftarrow R_k \pm 1$, definite come:
+                              \begin{lstlisting}[mathescape=true]
+$S'(R_k) = S(R_k) \pm 1$
+$S'(L)=S(L)+1$
+$S'(R_i)=S(R_i)\text{ con } i\neq k$
+                        \end{lstlisting}
+                        \item $\text{IF }R_k=0\text{ THEN GOTO }m$, definita come:
+                              \begin{lstlisting}[mathescape]
+$S'(R_i) = S(R_i)$
+if $S(R_k)==0$ then
+    $S'(L)=m$
+else
+    $S'(L)=S(L)+1$
+                        \end{lstlisting}
+                    \end{itemize}
+          \end{enumerate}
+          \paragraph{Esecuzione del programma $P\in PROG$}\mbox{}\\
+          Ora posso definire la sequenza di computazione di un programma $P\in PROG$ su un input $n\in\mathbb{N}$.
+          Una computazione è una sequenza di stati indotta dalla dinamica:
+          $$in(n)=S_0, S_1,...,S_i,S_{i+1},...$$
+          Eventualmente la sequenza può essere infinita (loop), o terminare se un $S_m$
+          raggiunge un $S_m(L)=0$ (halt).
+
+          Dobbiamo vincolare la sequenza di stati alla funzione $\delta (S,P)$,
+          e dire che per ogni $\delta(S_i,P)= S_{i+1}$.
+
+          Quindi, la semantica di $P$, è definita come $\varphi_P:\mathbb{N}\rightarrow\mathbb{N}_\bot$:
+          \[
+              \varphi_P(n)=
+              \begin{cases}
+                  y    & \text{se la computazione del programma termina in} S_m\text{ con } S(L)=0 \text{
+                  ed il contenuto di } S_m(R_0)=y                                                         \\
+                  \bot & \text{ se la computazione del programma va in loop}
+              \end{cases}
+          \]
+\end{itemize}
+Ora posso definire formalmente la potenza computazionale del sistema RAM:
+$$F(RAM)=\{f\in\mathbb{N}^{\mathbb{N}}:\exists P\in PROG,\varphi_P = f\}=\{\varphi_P : P\in PROG\}\nsubseteq\mathbb{N}^{\mathbb{N}}_{\bot}$$
+Ovvero tutte le funzioni per cui esiste un programma $P$ tale per cui $\varphi_P = f$ (o $\varphi_P$ al variare di $P$).
+
+\paragraph{Alcuni programmi RAM e le loro funzioni che vengono calcolate}\mbox{}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/2n.png}
+    \caption{$n$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/n_complx.png}
+    \caption{Funzione più complicata}
+\end{figure}
+
+Questi programmi possono essere spiegati formalmente con gli strumenti matematici precedentemente
+forniti, per esempio con il primo programma:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/n_formale.png}
+    \caption{Rappresentazione formale di $\varphi_P(n)=2n$}
+\end{figure}
+
+Questo è il modo corretto di procedere, e questo modo permette di definire formalmente
+la potenza computazionale di una macchina RAM, non lasciando nulla al caso.
+
+\paragraph{Alcune considerazioni}
+\begin{itemize}
+    \item $F(RAM)$ \textit{conterrà funzioni più complesse o solo quelle banali?} In realtà
+    si posso fare delle funzioni più complesse, questo comunque è un primo
+    tentativo di fare qualcosa di ragionevole che mi permette la completa formalizzazione.
+    \item Indubbiamente la semplicità di questo sistema di calcolo ci permette l'estrema
+    formalizzazione, tale che vedremo che sarà possibile dimostrare $PROG\sim\mathbb{N}$
+\end{itemize}
 
 \end{document}
-
