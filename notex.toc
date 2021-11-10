@@ -1,0 +1,69 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica?}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Syllabus}{4}{section.2}%
+\contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Funzione}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Classi di funzioni}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Funzioni iniettive}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Funzioni suriettive}{6}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Insieme immagine di una funzione}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Funzioni biettive}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Inversa di una funzione}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Composizione di funzioni}{7}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{8}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{8}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{8}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{9}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{9}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Insieme di funzioni}{10}{subsubsection.3.6.6}%
+\contentsline {subsubsection}{\numberline {3.6.7}Funzione di valutazione}{11}{subsubsection.3.6.7}%
+\contentsline {subsection}{\numberline {3.7}Modellare teoricamente un sistema di calcolo}{11}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Potenza computazionale}{12}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Importanza del calcolo di funzione}{13}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Cardinalità degli insiemi - I°}{13}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Relazione}{14}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{15}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{17}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{18}{subsubsection.3.7.7}%
+\contentsline {subsection}{\numberline {3.8}Insiemi non numerabili}{19}{subsection.3.8}%
+\contentsline {paragraph}{Dimostrazione}{19}{section*.2}%
+\contentsline {paragraph}{Dimostrazione $R\sim [0,1]$}{19}{section*.3}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\nsim [0,1]$ (per diagonalizzazione)}{20}{section*.4}%
+\contentsline {paragraph}{Conclusione}{21}{section*.5}%
+\contentsline {subsubsection}{\numberline {3.8.1}Insieme delle parti di $\PazoBB {N}$}{21}{subsubsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.2}Insieme $\PazoBB {N}^{\PazoBB {N}}$}{22}{subsubsection.3.8.2}%
+\contentsline {subsection}{\numberline {3.9}Cosa è calcolabile?}{22}{subsection.3.9}%
+\contentsline {subsubsection}{\numberline {3.9.1}Dimostrazione $DATI\sim \PazoBB {N}$}{23}{subsubsection.3.9.1}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}^+$}{24}{section*.6}%
+\contentsline {paragraph}{Come tornare da $\PazoBB {N}^2$ a $\PazoBB {N}^+$}{25}{section*.7}%
+\contentsline {paragraph}{Esempio andata e ritorno tra $\PazoBB {N}^2$ e $\PazoBB {N}^+$}{27}{section*.8}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}$}{27}{section*.9}%
+\contentsline {paragraph}{Dimostrazione rigorosa che $DATI\approxeq \PazoBB {N}$}{27}{section*.10}%
+\contentsline {paragraph}{Liste d'interi}{27}{section*.11}%
+\contentsline {paragraph}{Implementazione codifica}{28}{section*.12}%
+\contentsline {paragraph}{Implementazione decodifica}{28}{section*.13}%
+\contentsline {paragraph}{Esercizi - $incr,decr$ (da implementare)}{29}{section*.14}%
+\contentsline {paragraph}{Corrispondente numerico : $DATI\sim \PazoBB {N}$}{29}{section*.15}%
+\contentsline {paragraph}{Codifica di altre stutture dati}{30}{section*.16}%
+\contentsline {paragraph}{Conclusione}{30}{section*.17}%
+\contentsline {subsubsection}{\numberline {3.9.2}Prefazione alla dimostrazione $PROG\sim \PazoBB {N}$}{30}{subsubsection.3.9.2}%
+\contentsline {subsubsection}{\numberline {3.9.3}Sistema di calcolo RAM}{31}{subsubsection.3.9.3}%
+\contentsline {paragraph}{Esecuzione su una macchina RAM}{31}{section*.18}%
+\contentsline {paragraph}{Definizione formale di semantica di un programma RAM}{32}{section*.19}%
+\contentsline {paragraph}{Esecuzione di un programma $P$ e sua semantica}{32}{section*.20}%
+\contentsline {paragraph}{Ingredienti della definizione formale della semantica}{33}{section*.21}%
+\contentsline {paragraph}{Esecuzione del programma $P\in PROG$}{35}{section*.22}%
+\contentsline {paragraph}{Alcuni programmi RAM e le loro funzioni che vengono calcolate}{35}{section*.23}%
+\contentsline {paragraph}{Alcune considerazioni}{37}{section*.24}%
+\contentsline {subsubsection}{\numberline {3.9.4}Dimostrazione $PROG\sim \PazoBB {N}$}{37}{subsubsection.3.9.4}%
+\contentsline {paragraph}{Aritmetizzare biunivocamente le istruzioni RAM}{38}{section*.25}%
+\contentsline {paragraph}{Primo programma RAM}{39}{section*.26}%
+\contentsline {paragraph}{Sorgente RAM da un numero}{40}{section*.27}%
+\contentsline {paragraph}{Riflessioni su $PROG\sim \PazoBB {N}$}{41}{section*.28}%
+\contentsline {subsubsection}{\numberline {3.9.5}Il sistema di calcolo While}{41}{subsubsection.3.9.5}%
+\contentsline {paragraph}{Esempio di programma WHILE}{42}{section*.29}%
+\contentsline {paragraph}{Esempio}{43}{section*.30}%
+\contentsline {paragraph}{Esempio 2}{44}{section*.31}%

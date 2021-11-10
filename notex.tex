@@ -24,7 +24,9 @@
 %Graphics&Float
 \usepackage{graphicx}
 \usepackage{float}
-
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+%
 %Hypelinks
 \usepackage{hyperref}
 \hypersetup{
@@ -1115,7 +1117,7 @@ ai problemi. Ed è questo che ci porterà alla \textbf{tesi di Church} (spoiler)
 Prima di arrivare a ciò dobbiamo dimostrare che $PROG\sim\mathbb{N}$, e per fare questo dobbiamo
 introdurre la macchina RAM.
 
-\subsubsection{}{Sistema di calcolo RAM}
+\subsubsection{Sistema di calcolo RAM}
 L'hardware della macchina RAM:
 \begin{itemize}
     \item Una \textbf{memoria} $R$ costituita contigua di registri, ognuno di questi registri può memorizzare
@@ -1290,8 +1292,8 @@ else
           \[
               \varphi_P(n)=
               \begin{cases}
-                  y    & \text{se la computazione del programma termina in} S_m\text{ con } S(L)=0 \text{
-                  ed il contenuto di } S_m(R_0)=y                                                         \\
+                  y    & \parbox[t]{.6\textwidth}{se la computazione del programma termina in con  S(L)=0
+                  ed il contenuto di $S_m(R_0)=y$}                                                        \\
                   \bot & \text{ se la computazione del programma va in loop}
               \end{cases}
           \]
@@ -1328,10 +1330,270 @@ la potenza computazionale di una macchina RAM, non lasciando nulla al caso.
 \paragraph{Alcune considerazioni}
 \begin{itemize}
     \item $F(RAM)$ \textit{conterrà funzioni più complesse o solo quelle banali?} In realtà
-    si posso fare delle funzioni più complesse, questo comunque è un primo
-    tentativo di fare qualcosa di ragionevole che mi permette la completa formalizzazione.
+          si posso fare delle funzioni più complesse, questo comunque è un primo
+          tentativo di fare qualcosa di ragionevole che mi permette la completa formalizzazione.
     \item Indubbiamente la semplicità di questo sistema di calcolo ci permette l'estrema
-    formalizzazione, tale che vedremo che sarà possibile dimostrare $PROG\sim\mathbb{N}$
+          formalizzazione, tale che vedremo che sarà possibile dimostrare $PROG\sim\mathbb{N}$
 \end{itemize}
+
+\subsubsection{Dimostrazione $PROG\sim\mathbb{N}$}
+Dato un programma RAM vogliamo associare un numero a tale programma
+in maniera che partendo quel numero sia possibile tornare al sorgente.
+
+Ovvero vogliamo dimostrare che anche i programmi possono essere in corrispondenza biunivoca
+con i numeri naturali (utilizzeremo la semplicità della macchina RAM).
+
+$$P\equiv Istr_1,Istr_2,...,Istr_m$$
+Il primo passo consiste nell'aritmetizzazione dell'istruzione, ovvero trasformare una lista
+di istruzioni in una lista di codici numerici. Successivamente utilizzando la funzione lista
+di Cantor possiamo trasformare questo elenco di codici in un singolo numero $n$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/PROG_to_num.png}
+\end{figure}
+Sappiamo che la funzione lista di Cantor è invertibile quindi possiamo ricostruire le codifiche
+associate alle istruzioni. Ora se l'operazione di aritmetizzazione del sorgente è
+invertibile, allora ci sarà possibile risalire al sorgente partendo da $n$.
+
+In generale un procedimento che fa corrispondere ad una qualsiasi struttura matematica
+un numero, si chiama operazione di \textbf{aritmetizzazione} o \textbf{Godelizzazione}.
+
+Il nostro scopo è quello di aritmetizzare ogni istruzione.
+
+\paragraph{Aritmetizzare biunivocamente le istruzioni RAM}
+$$Ar:Istr\rightarrow\mathbb{N}\text{ e }Ar^{-1}:\mathbb{N}\rightarrow Istr\text{ t.c. }
+    Ar(Istr)=n\Leftrightarrow Ar^{-1}(n)=Istr$$
+Nel caso di un programma RAM significa aritmetizzare tre tipi di istruzioni.
+$$Ar(R_n\leftarrow R_n+1)=3k$$
+$$Ar(R_n\leftarrow R_n-1)=3k+1$$
+$$Ar(\text{If }R_k=0\text{ then goto }m)=3\langle k,m\rangle-1$$
+
+Come è fatta $Ar^{-1}$? La funzione di decodifica è biunivoca ? La funzione
+risulta sia iniettiva che suriettiva, l'applicazione di questa funzione è permessa
+attraverso l'operatore di modulo per $3$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/mod3.png}
+\end{figure}
+
+Ricapitolando, il passaggio da programmi a numeri è molto semplice
+$$cod(P)=\langle Ar(Istr_1),...,Ar(Istr_m)\rangle$$
+mentre il passaggio da numeri a programmi, parto da $n$ e trovo la parte sinistra e
+la parte destra. Vediamo passo per passo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/decod_bin.png}
+\end{figure}
+
+Al primo passo dalla parte sinistra trovo il codice della prima istruzione
+(aritmetizzato), quindi nel caso in cui io voglia il sorgente del programma
+quello che devo fare è applicare $Ar^{-1}$ sulla parte sinistra. Questo finché
+non si incontra il terminatore sul figlio destro.\\Se io volessi sempre
+scompattare il programma $P$ e dato $n$ io volessi sapere il numero di istruzioni
+del programma $|P|$, che cosa devo calcolare?
+$$|P|=length(cod(P))$$
+Abbiamo quindi dimostrato in maniera inequivocabile il secondo tassello, ovvero
+che i programmi sono equinumerosi rispetto ai numeri naturali.
+$$PROG\sim\mathbb{N}$$
+
+Adesso che abbiamo acquisito gli strumenti, proviamo a vedere ad occhio qualche
+esempio.
+
+\paragraph{Primo programma RAM}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/prog_1.png}
+\end{figure}
+
+La corrispettiva aritmetizzazione delle istruzioni :
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/cod_1.png}
+\end{figure}
+$$cod(P)=\langle 44,\langle 1,\langle 14,\langle 1,0\rangle\rangle\rangle\rangle=50556496$$
+Questo non è un ottimo modo per compattare i programmi ram, poiché cresce esponenzialmente
+rispetto al programma. Tuttavia questo ha scopi didattici.
+$$\varphi_{50556496}(n)=0$$
+
+\paragraph{Sorgente RAM da un numero}\mbox{}\\
+Il numero è il 311, ha come parte sinistra 14 e come parte destra 10. Facendo il modulo 3
+del figlio sinistro otteniamo otteniamo 2, quindi si tratta di un istruzione condizionale,
+in questo caso troviamo che il valore dell coppia di Cantor $\langle k,m\rangle = 5$. Quindi
+dobbiamo trovare il figlio sinistro e destri di $5$, che sono entrambi $1$. Quindi
+la prima istruzione sarà:
+$$\text{If }R_1=0\text{ then goto }1$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/sorgente_p.png}
+
+\end{figure}
+Quale é la semantica di questo programma ? (ovvero $\varphi_P(n)$)
+\[
+    \varphi_P(n)=\varphi_{311}(n)=
+    \begin{cases}
+        \bot & \text{se }n=0 \\
+        3    & \text{se }n>0
+    \end{cases}
+\]
+Se l'input $n$ è 0 vado in loop, poiché continuo a rieseguire la stessa istruzione,
+altrimenti parto dalla terza istruzione.
+
+\paragraph{Riflessioni su $PROG\sim\mathbb{N}$}
+\begin{itemize}
+    \item Abbiamo dimostrato che i numeri sono un linguaggio di programmazione, questo
+          perché un numero può rappresentare un linguaggio.
+
+    \item $F(RAM)=\{\varphi_P :P\in PROG\}$, la potenzia computazionale del sistema di programmazione
+          RAM, adesso la posso scrivere come $F(RAM)=\{\varphi_i\}_{i\in\mathbb{N}}$ questo mostra ina maniera inequivocabile che la potenza
+          computazionale della macchina RAM è enumerabile.
+
+    \item Per il sistema RAM si ha rigorosamente che $F(RAM)\sim\mathbb{N}\nsim\mathbb{N}^{\mathbb{N}^\mathbb{N}}$,
+
+    \item Questa è una prima idea di calcolabilità, esploriamo un sistema di calcolo $\mathcal{C}$ più complesso
+          e vediamo la sua potenza computazionale di questo, e vediamo se è più complessa. Questo va fatto è onestamente
+          dire che ciò che è calcolabile sia $F(RAM)$ è troppo restrittivo.
+
+    \item Possiamo avere che questo sistema di clacolo più avanzato ampli l'insieme $F(RAM)$.
+\end{itemize}
+
+\subsubsection{Il sistema di calcolo While}
+Il linguaggio è basato su un linguaggio moderno, contrapposto all'assembly della macchina RAM (quindi
+anni 50'), adesso ci troviamo nell'utilizzo di un linguaggio strutturato.
+
+Hardware:
+\begin{itemize}
+    \item \textbf{Memoria} costituita da 21 registri. Siccome parliamo di linguaggio strutturato
+          non si parla più con il termine registri ma ci si riferirà con \textit{variabili}.
+          $$x_0,x_1,...,x_{20}$$. La variabile $x_1$ ci si troverà l'input del programma, mentre
+          l'output si troverà su $x_0$.
+    \item Program counter non presente, poiché si parla di linguaggio strutturato, ed in questo
+          le istruzioni vengono eseguite una dopo l'altra (punti di inizio ciclo e finale
+          sono ben definiti, ed il \textit{goto} non è presente).
+\end{itemize}
+20 variabili potrebbero sembrare poche, in realtà la numerosità dei dati non è un problema
+poiché abbiamo primitive che mi permettono di condensare (coppia di Cantor) un infinità
+di variabili.\\Il linguaggio while ha una sintassi induttiva (dove i costrutti dei linguaggi
+sono definiti su delle basi semplici, i mattoni, e man mano costruisco istruzioni più
+complesse):
+\begin{itemize}
+    \item Comando di \textbf{assegnamento}: $x_k:=0 x_k:=x_j+1 x_k:=x_j-1$
+    \item Comando \textbf{while}: $\text{while }x_k\neq 0\text{ do } G$, dove $G$
+          ovvero il corpo del loop, può essere un comando di assegnamento, while o composto.
+    \item Comando \textbf{composto}: $\underline{\text{begin }}C_1; C_2; ...;C_m;
+              \underline{\text{ end}}$ dove la sequenza è composta da comandi che possono essere
+          di assegnamento, while o composto.
+\end{itemize}
+Come si può vedere sono strutture che sono in grado di nascondere altre strutture, di per sè
+un programma while è un comando composto.\\Indicheremo com $W-PROG=\{\text{programmi WHILE}\}$
+come l'insieme dei programmi WHILE, dove ciascuno è un programma costruito induttivamente.
+
+\paragraph{Esempio di programma WHILE}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/esempio_prog_while.png}
+\end{figure}
+Indicheremo con $\psi_w$ le semantiche dei programmi WHILE (in questo caso il programma $w$).
+$$\psi_w :\mathbb{N}\rightarrow\mathbb{N}_\bot$$
+$$\psi_w (x)=2x$$
+
+Le prime due istruzioni sono messe perché non è possibile effettuare una copia diretta,
+non stiamo utilizzando il linguaggio di programmazione RAM.
+
+Il parsing del programma ne rivela la struttura induttiva,
+W-PROG è un insieme definito induttivamente (ovvero partendo
+dalla base ed utilizzando dei passi induttivi): per dimostrare una proprietà $P$ su W-PROG:
+\begin{enumerate}
+    \item Dimostro che $P$ vale sui comandi base (passo base).
+
+    \item Suppongo vero quella proprietà $P$ sui comandi $C$ base, e
+          poi dimostro che vale sul comando più complesso $\text{while }x_n\neq 0\text{ do } C$
+          (passo induttivo).
+
+    \item Suppongo vera $P$ su $C_1,...,C_m$ e la dimostro vera su $\underline{\text{begin}}\text{ }
+              C_1;...;C_m\text{ }\underline{\text{end}}$
+\end{enumerate}
+
+Quando abbiamo di fronte una struttura induttiva il modo migliore per dimostrare che una certa proprietà valaga su tutti
+gli elementi della struttura dobbiamo farlo per induzione (in questo caso si parla di \textbf{induzione strutturale}).
+
+\paragraph{Esempio}\mbox{}\\
+L'insieme degli alberi binari è un insieme definito induttivamente. Sappiamo che è un DAG.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/BT.png}
+    \label{fig:bt}
+\end{figure}
+Possiamo definire l'insieme degli alberi binari come l'insieme di tutti gli oggetti composti come
+mostrato in figura \ref{fig:bt}. Oppure, possiamo definirli induttivamente
+
+\begin{itemize}
+    \item Base: Un nodo solo è considerabile un albero binario (con una singola foglia).
+    \item Induzione: Se $T_1$ e $T_2$ sono alberi binari anche
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.6]{images/BT_1.png}
+              \caption{Binary Tree (indicati i nodi interni con le frecce marroni)}
+          \end{figure}
+    \item Nient'altro è un albero binario.
+\end{itemize}
+Allora vogliamo dimostrare pre induzione la proprietà $P$, tale che:
+$$P\equiv \parbox[t]{.6\textwidth}{"Su ogni albero binario, il numero dei nodi interni è minore di uno rispetto
+        a quello delle foglie."}$$
+
+Allora dimostriamola per induzione:
+\begin{itemize}
+    \item Base: \textit{è vero che se ho un solo nodo la proprietà $P$ è vera?} Si poiché
+          nodi interni non sono presenti.
+    \item Induzione: supponiamo vera $P$ su $T_1,T_2$
+          \begin{itemize}
+              \item $T_1$: foglie $f_1$ foglie e $f_1-1$ nodi interni.
+              \item $T_2$: foglie $f_2$ foglie e $f_2-1$ nodi interni.
+          \end{itemize}
+
+          Per esempio, prendiamo questo albero:
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.6]{images/BT_2.png}
+          \end{figure}
+          notiamo che il numero di foglie è pari a $f_1+f_2$. Adesso la domanda fondamentale è la seguente
+          \textit{quanti nodi interni ha questo albero?} Il numero di nodi interni è pari alla somma tra i nodi
+          interni di $T_1$ con quelli di $T_2$. Ma questo riutilizzando i mattoncini basilari non è altro che
+          $$(f_1-1) + (f_2-1) + 1 = f_1 + f_2 -1$$
+          $P$ risulta dimostrata per induzione su tutta la struttura.
+\end{itemize}
+
+\paragraph{Esempio 2}\mbox{}\\
+Voglio definire una funzione $depth: \tau\rightarrow\mathbb{N}$ su un albero binario che
+dato un qualsiasi albero binario mi restituisce la \textbf{profondità}: ovvero, la lunghezza del
+cammino più lungo dalla radice ad una foglia dell'albero.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/profondità.png}
+    \caption{Definizione grafica}
+\end{figure}
+Questa è una possibile definizione, oppure potremmo definirla induttivamente:
+\begin{enumerate}
+    \item Base: Dato un BT costituito da una sola radice darà $depth=0$
+    \item Induzione: Dato questo albero binario
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.6]{images/passo_ind_depth.png}
+          \end{figure}
+          si prende la profondità maggiore due due sotto alberi più uno, ovvero il nuovo livello
+          $depth=1+max\{depth(T_1),depth(T_2)\}$
+    \item Nient'altro è in $\tau$
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
