@@ -1586,13 +1586,171 @@ Questa è una possibile definizione, oppure potremmo definirla induttivamente:
     \item Nient'altro è in $\tau$
 \end{enumerate}
 
+\paragraph{Esecuzione su una macchina WHILE}\mbox{}\\
+Considerando un input $n$
+\begin{itemize}
+    \item La prima è una fase di inizializzazione, quindi si avvia la macchina con il nostro
+          programma $w$, dove tutte i registri della variabili sono inizializzati a 0, tranne per il registro
+          in input $x_1$ che contiene $n$.
+
+    \item Si comincia ad eseguire il programma $w$, sequenzialmente sulle istruzioni, in questo caso non
+          c'è assolutamente bisogno di program counter (motivi già spiegati).
+
+    \item Possiamo avere due casi, o l'esecuzione effettivamente termina o si incappa in un loop (while true).
+          Nel primo caso l'output lo andiamo a leggere nella variabile $x_0$ (se HALT), altrimenti diciamo che è indefinito
+          $\bot$. Definendo così la semantica del programma $w$, $\psi_w(n)=cont(x_0)/\bot$.
+\end{itemize}
+
+Vogliamo essere precisi anche in questo caso, ed espandere il discorso della sequenza di istruzioni durante l'esecuzione
+di un programma WHILE (introducendo anche qui il concetto di stato).
+
+\subsubsection{Definizione formale di semantica di un programma WHILE}
+\begin{itemize}
+    \item \textbf{Stato}, una foto dove compare in maniera completa tutto ciò che accade sulla macchina in quel dato istante.
+          Rispetto alla macchina RAM lo stato viene definito in maniera differente, dal punto di vista matematico uno stato è
+          una tupla di 21 elementi $(c_0, ..., c_{20})$. Detto ciò, l'insieme di tutti i possibili stati $w-stati$ è composto
+          da $\mathbb{N}^{21}$ ovvero tutte le possibili 21-tuple (tuple di lunghezza 21) infinite.
+
+    \item \textbf{Dati}, sono l'insieme dei numeri naturali.
+    \item \textbf{Inizializzazione}, sta volta la funzione può essere modellata su 21 elementi, la funzione prende un
+          numero e restituisce uno stato
+          $$w-in:\mathbb{N}\rightarrow\mathbb{N}^{21}\text{ con }w-in(n)=(0,n,0,...,0)$$
+    \item \textbf{Semantica operazionale}
+          $$[]():w-com\times w-stati\rightarrow w-stati_\bot$$
+          Dato un comando while $C$ e uno stato $\underline{x}$, allora
+          $$[c](\underline{x})=\underline{y}$$
+          sarà la funzione stato prossimo dove $\underline{y}$ è lo stato prossimo di $\underline{x}$ a seguito
+          dall'esecuzione del comando $C$.
+          Ovviamente possiamo definire induttivamente $[C](\underline{x})$ sulla struttura induttiva
+          del comando $C$.
+\end{itemize}
+
+\subsubsection{Definizione induttiva della semantica while}
+\begin{itemize}
+    \item Base: gli \textbf{assegnamenti}
+          \[
+              [x_k=0](\underline{x})=\underline{y}\text{ con }y_i=
+              \begin{cases}
+                  x_i & \text{se }i\neq k \\
+                  0   & \text{se }i=k
+              \end{cases}
+          \]
+
+          \[
+              [x_k:=x:j \pm 1](\underline{x})=\underline{y}\text{ con }y_i=
+              \begin{cases}
+                  x_i       & \text{se } i\neq k \\
+                  x_j \pm 1 & \text{se } i=k
+              \end{cases}
+          \]
+
+
+    \item Passo:
+          \begin{itemize}
+              \item Comando \textbf{composto}
+                    $$[\underline{\text{begin}}\;C_1;...;C_m;\underline{\text{end}}](\underline{x})$$
+                    induttivamente conosco la semantica di ciascuno di questi programmi, come essi agiscono.
+                    Allora posso definire la semantica di questo comando come:
+
+                    $$[C_m](\dots([C_2]([C_1](\underline{x})))\dots)=\underline{y}=[C_1]$$
+                    Quindi l'applicazione del primo comando (che provoca cambiamento di stato)
+                    sullo stato iniziale, seguita iterativamente dall'applicazione degli $m$ comandi
+                    sugli stati risultanti.
+
+              \item Comando \textbf{while}
+                    $$[\text{while }x_k\neq 0 \text{ do }C](\underline{x})$$, anche qui conosco
+                    per ipotesi induttiva la semantica del comando $C$.
+
+                    $$[C](\dots([C]([C](\underline{x})))\dots)=\underline{y}=[C_1]\text{ e }...\text{ e }[C_m](\underline{x})$$
+                    Il numero di volte che applicherò il comando $C$ quante volte serve per azzerare il contenuto di $x_k$
+                    \[
+                        =\begin{cases}
+                            [C]^e(\underline{x}) & \text{con }\mu t \text{ k-esima componente di }[C]^{(t)}(\underline{k})=0 \\
+                            \bot                 & \text{altrimenti}
+                        \end{cases}
+                    \]
+                    Ovvero il più piccolo numero di volte che mi serve per azzerare la componente $k$-esima, altrimenti
+                    vado in un loop interminabile.
+          \end{itemize}
+
+    \item Semantica di $W$ e $W-PROG$: a questo punto so definire in maniera formale la semantica
+          di un programma while, prendiamo il programma while $w$ (il quale è un comando composto).
+
+          Quindi è la semantica del comando composto che rappresenta $w$, quindi non è altro che preparare
+          la macchina su input $x$.
+
+          $$\Psi_w(x)=Pro(0,[w](w-in(x)))$$
+          Ovvero la proiezione 0-esima dell'esecuzione del comando composto di $w$ dato uno stato finale $x$ (avviato
+          da uno stato iniziale),
+          significa che se il programma termina devo pescare il contenuto di $x_0$ (la proiezione di uno stato finale
+          di un programma $w$).
+          Nel caso in cui non avvenisse l'HALT allora avrò una semantica indefinita $\bot$.
+\end{itemize}
+
+\paragraph{Esempio di semantica di un piccolo programma while}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{images/smallprog.png}
+    \caption{Programma che calcola $2n$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{images/comanodwhiòe.png}
+    \caption{Deduzione della semantica $\Psi_w$}
+\end{figure}
+
+\paragraph{Potenza computazionale del sistema while}\mbox{}\\
+$$F(WHILE)=\{f\in\mathbb{N}_\bot^\mathbb{N} : \exists w\in w-PROG, f=\Psi_w\}=\{\Psi_w : w\in w-PROG\}$$
+Definiamo la potenza computazionale di
+una macchina while come l'insieme di tutte le funzioni per cui
+esiste un programma while per cui si può calcolare quella funzione.Naturalmente la domanda è: \textit{che relazione esiste tra $F(RAM)$ e -$F(WHILE)$?}, quindi
+che cosa è calcolabile di questi due sistemi? $\{\varphi_P:P\in PROG\}$?
+Magari la macchina WHILE mi fornisce più potenza della macchina RAM? L'unico modo di scoprirlo
+è confrontando le due idee. Quali situazioni si possono verificare:
+\begin{enumerate}
+    \item Una situazione dove $F(RAM)\nsubseteq F(WHILE)$ (inclusione propria) ovvero, che ci sono funzioni
+          calcolabili con i programmi WHILE che non sono calcolabili sulle macchine RAM.
+
+    \item Le due idee di calcolabilità non sono confrontabili, ovvero un intersezione tra i due insiemi
+          dove magari alcune funzioni sono calcolabili da entrambe le architetture, oppure sono due insiemi
+          totalmente disgiunti. In entrambi i casi siamo preoccupati, perché l'idea di calcolabilità è dipendente
+          dal modello di calcolo adottato.
+
+    \item Una situazione dove $F(WHILE)\nsubseteq F(RAM)$ questo sarebbe sorprendente, la macchina
+          sofisticata non riesce a calcolare delle funzioni più semplici.
+
+    \item Una situazione dove $F(WHILE)=F(RAM)$, ovvero due cose filosoficamente diverse eppure entrambe
+          riescono a calcolare la stessa classe di funzioni, questo sarebbe molto interessante, perché allora
+          vuol dire che calcolabile non dipende dalla tecnologia-
+\end{enumerate}
+
+
+Iniziamo con il confrontare $F(RAM)$ e $F(WHILE)$ introducendo due sistemi di calcolo $\mathcal{C}_1$ e $\mathcal{C}_2$
+con i loro relativi linguaggi di programmazione.
 
 
 
+%\subsubsection{Forma del compilatore}
+%$$comp:w-PROG\rightarrow PROG$$
+%$w-PROG$ è un insieme costruito induttivamente, quindi $comp$ può essere definito induttivamente:
+%\begin{enumerate}
+%\item Mostrando come compilare le basi del linguaggio ovvero gli \textit{assegnamenti} (base).
+%\item Per ipotesi induttiva assumo di saper compilare i seguenti comandi
+%$$Comp(C_1),...,Comp(C_m)$$
+%e mostrare come compilare il comando composto
+%$\underline{\text{begin}}\;C_1; ...; C_m;\underline{\text{end}}$
+%\item Per ipotesi induttiva di saper compilare il comando $Comp(C)$ e mostrare come
+%compilare il comando while che ha come corpo $C$ $\text{while }x_n\neq 0 \text{ do } C$
+%\end{enumerate}
+
+%Adesso vediamo nello specifico come compilare ciascuno di questi punti
 
 
 
-
+%lez 8
+%Vogliamo dimostrare che la potenza computazionale della macchina RAM $F(RAM)$ sia disgiunto
+%dalla potenza computazionale $F(WHILE)$.
 
 
 
