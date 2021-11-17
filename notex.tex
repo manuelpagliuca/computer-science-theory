@@ -1724,10 +1724,216 @@ Magari la macchina WHILE mi fornisce più potenza della macchina RAM? L'unico mo
           riescono a calcolare la stessa classe di funzioni, questo sarebbe molto interessante, perché allora
           vuol dire che calcolabile non dipende dalla tecnologia-
 \end{enumerate}
+Adesso dobbiamo cercare di capire quali tra i seguenti punti è quello veritiero.
 
-
+\paragraph{Confrontiamo $F(RAM)$ e $F(WHILE)$}\mbox{}\\
 Iniziamo con il confrontare $F(RAM)$ e $F(WHILE)$ introducendo due sistemi di calcolo $\mathcal{C}_1$ e $\mathcal{C}_2$
-con i loro relativi linguaggi di programmazione.
+con i loro relativi linguaggi di programmazione. Attraverso i quali riusciamo a scrivere l'insieme dei
+programmi scritti con i relativi linguaggi $\mathcal{C}_1-PROG$ e $\mathcal{C}_2-PROG$. Le relative
+potenze computazioneli
+
+$$F(\mathcal{C}_1)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\Psi_{P_1}\text{ per qualche }P_1\in\mathcal{C}_1-PROG\}=\{\Psi_{P_1}:P_1\in\mathcal{C}_1-PROG\}$$
+$$F(\mathcal{C}_2)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\Psi_{P_2}\text{ per qualche }P_2\in\mathcal{C}_2-PROG\}=\{\Psi_{P_2}:P_2\in\mathcal{C}_2-PROG\}$$
+Cominciamo a cercare degli strumenti per confrontare le potenze computazionali. Come faccio a dimostrare
+$F(\mathcal{C}_2)\subseteq F(\mathcal{C}_2)$
+Per dimostrare che tale inclusione sia vera, mi basta dimostrare che un elemento di un insieme appartenga
+all'altro, in linguaggio matematico:
+$$\forall f\in F(\mathcal{C}_1)\implies f\in F(\mathcal{C}_2)$$
+Quando stiamo compilando un programma quello che stiamo dimostrando è che il linguaggio utilizzato
+come sorgente è potente uguale al linguaggio macchina/oggetto.
+$$\exists P_1\in\mathcal{C}_1-PROG : f=\Psi_{P_1}\implies\exists P_2\in\mathcal{C}_2-PROG:f=\varphi_{P_2}$$
+Ovvero vuol dire che esiste un programma $P_1$ tale per cui ne esiste uno equivalente nel secondo
+sistema (allora ho dimostrato che tutto ciò che è fattibile in $\mathcal{C}_1$ è fattibile in $\mathcal{C}_2$,
+questo attraverso una \textit{traduzione}).
+
+\subsubsection{Concetto di traduzione}
+Dati i sistemi $\mathcal{C}_1,\mathcal{C}_2$, una \textbf{traduzione} (controparte di \textit{compilazione}) dal primo verso il secondo è
+una funzione:
+$$T:\mathcal{C}_1-PROG\rightarrow\mathcal{C}_2-PROG$$
+con le seguenti proprietà (che sono quelle che vogliamo nei nostri compilatori):
+\begin{itemize}
+    \item deve essere \textbf{programmabile} effettivamente.
+    \item deve essere \textbf{completa}, ovvero che traduce \textit{ogni} programma scritto in $\mathcal{C}_1$ in
+          uno scritto in $\mathcal{C}_2$.
+    \item deve essere \textbf{corretta}, ovvero che mantiene la semantica del programma
+          $$\forall P\in\mathcal{C}_1-PROG :\varphi_{T(P)}=\Psi_P$$
+\end{itemize}
+questa è la formalizzazione del concetto di compilatore. Allora il \textbf{teorema} che posso scrivere
+è il seguente, se esiste $T:\mathcal{C}_1-PROG\rightarrow\mathcal{C}_2-PROG$, allora $F(\mathcal{C}_1)\subseteq F(\mathcal{C}_2)$
+se esiste una traduzione da $\mathcal{C}_1$ a $\mathcal{C}_2$, allora ho dimostrato che la potenza computazionale del
+primo linguaggio è contenuto (o uguale) a quella del secondo.
+
+\paragraph{Dimostrazione}\mbox{}\\
+$$f\in F(\mathcal{C}_1)\implies\exists P\in\mathcal{C}_1-PROG:f=\Psi_P$$
+$$\text{Applico } T \text{ ed ottengo}$$
+$$T(P)\in\mathcal{C}_2-PROG\text{ (completa) con }\varphi_{T(P)}=\Psi_P=f$$
+allora esiste dunque un programma $T(P)\in\mathcal{C}_2-PROG$ per $f$ per cui
+$f\in F(\mathcal{C}_2)$.
+
+Sostanzialmente, ipotizzo l'esistenza di una funzione che rientri nella potenza computazionale
+del primo linguaggio $\mathcal{C}_1$,
+esiste un programma $p$ scritto in questo linguaggio che è in grado di calcolare $f$.
+Siccome esiste la traduzione, prendo $p$ e lo compilo, e questo funziona perché la traduzione è completa.
+
+\subsubsection{Dimostrazine $F(WHILE)\subseteq F(RAM)$}
+Da un punto di vista immediato sembrerebbe la cosa più difficile da dimostrare, ma se ci si pensa
+è proprio quello che accade durante la compilazione dei programmi (per esempio C, C++,...).
+Quindi vogliamo a dimostrare che la macchina RAM non ha nulla da invidiare rispetto alla macchina WHILE.
+
+Dimostrare questa inclusione mi spinge ad esibire che esiste una traduzione da un programma WHILE ad
+uno RAM
+$$Comp:W-PROG\rightarrow PROG$$
+Chiamerò questa traduzione \textit{compilazione} (la quale è una funzione di traduzione che
+rispetta le tre proprietà). Per pura comodità, scrivere un compilatore da un programma WHILE ad uno
+RAM vuol dire prendere un programma del primo tipo e scrivere un frammento del secondo, per semplicità
+ammetterò di utilizzare un programma RAM che utilizza delle \textit{label} (cosa che mi permette
+di fare salti nel codice).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/ram_etichettato.png}
+\end{figure}
+
+semplicemente al posto di utilizzare i riferimenti numerici alle righe utilizzeremo delle parole,
+con un semplice post-processing posso trasformare il "RAM etichettato" in "RAM puro" (l'aggiunta
+di etichette non aumenta la potenza del linguaggio RAM).
+
+\paragraph{Forma del compilatore}\mbox{}\\
+Teniamo conto della natura degli oggetti su cui agirà il compilatore $W-PROG$ è un insieme definito
+induttivamente. Questo significa che anche $Comp$ può essere definito induttivamente.
+
+\begin{enumerate}
+    \item mostriamo come compilare le basi di quel linguaggio, quindi gli assegnamenti (base).
+    \item posso usare l'ipotesi induttiva, quindi assumo di saper compilare il comando $Comp(C_1),\dots,Comp(C_m)$ e ti
+          faccio vedere come compilare il comando composto
+          $$\underline{\text{begin}}\;C_1;\dots ;C_m; \underline{\text{end}}$$
+    \item posso usare l'ipotesi induttiva, quindi di saper compilare $Comp(C)$ e mostrarlo come compilare il comando
+          $while$ che ha come corpo $C$, $\underline{\text{while}}\;x_n\neq 0\;\underline{\text{do}}\;C$
+\end{enumerate}
+
+In tale maniera si saprà come compilare tutto $W-PROG$. Sia nota la seguente proprietà di compilazione,
+ogni volta che durante una traduzione incontreremo nel programma una variabile $x_k$ ad essa verrà
+associata il registro $R_k$ (abbiamo tranquillamente lo spazio per mappare tutte le variabili, visto
+che il numero di registri è infinito).
+
+\paragraph{Base: assegnamenti}\mbox{}\\
+Vogliamo considerare i seguenti frammenti RAM per eseguire gli assegnamenti base dei programmi WHILE:
+\begin{itemize}
+    \item $Comp(x_k:=0)=$
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.4]{images/assegnamento_ram.png}
+          \end{figure}
+          controllo se un registro è azzerato, nel caso non fosse azzerato allora lo decremento
+          e ripeto il controllo ($R_21$ non sarà mai azzerato). Ad un certo punto uscirò dal ciclo,
+          l'ultima operazione è praticamente nulla perché non danneggia l'operato precedente (è già zero).
+          Tutti i registri da $R_21$ in poi sono tutti azzerati, perché non vengono utilizzati dal programma
+          WHILE, quindi possiamo utilizzarli come meglio crediamo.
+
+    \item $Comp(x_k:=x_j\pm 1)=$
+
+          notiamo che c'è un caso dove la compilazione è immediata, in un caso di quest'istruzione
+          troviamo subito l'istruzione RAM che fa la stessa cosa. Il caso particolare accade quando
+          $k=j$. Se $k==j\rightarrow R_k\leftarrow R_k\pm 1$, il problema allora è nell'altro caso,
+          ovvero quando $k\neq j$.
+
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/assegnamento_ram2.png}
+          \end{figure}
+          \begin{enumerate}
+              \item Salvo $x_j$ in $R_{22}$
+              \item Azzero $x_k$, ovvero $R_k$
+              \item Rigenero $x_j$ e $x_k$ da $R_{22}$
+              \item Sommo/sottraggo 1 da $x_k$
+          \end{enumerate}
+
+          \paragraph{Passo induttivo}
+          Consideriamo il comando composto $\underline{\text{begin}}\;C_1;...;C_m;\;\underline{\text{end}}$,
+          considerando che esiste l'ipotesi induttiva, quindi assumo noti $Comp(C_1),\dots ,Comp(C_m)$
+          mostro che la compilazione $Comp(\underline{\text{begin}}\;C_1;\dots;C_m\;\underline{\text{end}})$
+          sarà:
+          $$Comp(C_1);$$
+          $$Comp(C_2);$$
+          $$\dots$$
+          $$Comp(C_m);$$
+
+          Consideriamo il comando $\underline{\text{while}}\;x_k\neq 0\;\underline{\text{do}}\; C$,
+          allora vogliamo mostrare che la compilazione $Comp(\underline{\text{while}}\;x_k\neq 0\;\underline{\text{do}}\; C)$
+          corrisponde al frammento RAM:
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/comandowhile_ram.png}
+          \end{figure}
+
+          \paragraph{Ricapitolando}\mbox{}\\
+          La funzione $Comp:W-PROG\rightarrow PROG$ che abbiamo definito induttivamente soddisfa:
+          \begin{enumerate}
+              \item è facilmente \textbf{programmabile}.
+              \item compila ogni sorgente WHILE (\textbf{completo}).
+              \item mantiene la semantica $\Psi_w=\varphi_{Comp(w)}\implies\textbf{ corretta}$
+          \end{enumerate}
+          I punti 2 e 3 si dimostrano facilmente per induzione strutturale, quindi possiamo dimostrare
+          che $Comp$ è una traduzione da WHILE a RAM, e che quindi $F(WHILE)\subseteq F(RAM)$
+
+\end{itemize}
+
+\subsubsection{Dimostrazione $F(RAM)\subseteq F(WHILE)$}
+Il problema in questo caso è dato dal fatto che di deve gestire il "go to", che non
+è presente nel linguaggio WHILE (ed è proprio per questo motivo che utilizzare
+goto nei linguaggi strutturati è solo un problema). Dimostreremo come è possibile evitare l'utilizzo
+delle istruzioni "go to" nella programmazione strutturata.
+
+Introduciamo il concetto di \textbf{interprete}, per quasi tutti i linguaggi di programmazione
+ormai c'è la possibilità di avere la versione compilata che interpretata
+(con differenze prestazionali).
+La compilazione produce un programma equivalente che sta in piedi da solo
+che può essere eseguito direttamente dalla macchina, l'interpretazione simula l'esecuzione
+di un programma attraverso un interprete.
+
+Vediamo come scrivere un interprete di programmi RAM scritto in WHILE, che chiameremo $I_W$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/interprete_while.png}
+\end{figure}
+Esso prenderà in ingresso un programma scritto in RAM ed un input, e produrrà in uscita
+non un codice oggetto ma la semantica del programma $P$ sul dato $x$. Notiamo che in ingresso
+viene dato un programma $P$ che è listato, ma sappiamo che i nostri programmi WHILE non lavorano
+sulle stringhe. Un programma WHILE ha una sola variabile di input $x_1$ che può solo contenere
+numeri.\textit{Come facciamo a fornire il listato di $P$ al programma WHILE?} Il mio $I_W$
+prenderà in ingresso la codifica del programma $p$ che sarà fornito sotto forma di numero.
+
+\textit{Ma il nostro programma può veramente prendere due dati in questa maniera?} Notiamo bene
+che nel linguaggio WHILE $x_1$ non può prendere una coppia di numeri distinti, ma allora
+dobbiamo passare un ulteriore coppia di Cantor di questi due numeri.
+
+Il risultato sarà il funzionamento del programma con codice $n$ che in realtà è $P$.
+
+Quindi la semantica di $I_W$:
+$$\forall x,n\in\mathbb{N}:\Psi_{I_W}(\langle x,n\rangle)=\varphi_n(x)=\varphi_P(x)$$
+
+\paragraph{Macro-WHILE}\mbox{}\\
+Siccome devo scrivere un interprete in WHILE, voglio facilitarmi il lavoro utilizzando una
+versione modificata del linguaggio (sempre permettendo di tornare al WHILE puro e senza
+avere guadagni o perdite prestazionali). Questo per permettere di scrivere un codice
+più semplice.
+
+Per esempio:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/macro-while.png}
+\end{figure}
+
+Come vediamo queste non sono istruzioni di WHILE puro, dovremmo scrivere molte più istruzioni
+per ottenere ciò. Si ha anche la possibilità di rappresentare la coppia di cantor di due numeri,
+visto che si ottengono con somme/sottrazioni, ed anche la possibilità di rappresentare la
+lista di Cantor.
+
+Ciascuna di queste MACRO può essere sostituita da un frammento di WHILE puro (seppur risulti piò comodo
+da utilizzare)
+$$F(MACRO-WHILE)=F(WHILE)$$
+
 
 
 
