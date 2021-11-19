@@ -1934,30 +1934,181 @@ Ciascuna di queste MACRO può essere sostituita da un frammento di WHILE puro (s
 da utilizzare)
 $$F(MACRO-WHILE)=F(WHILE)$$
 
+\paragraph{Interprete WHILE di programmi RAM}\mbox{}\\
+Lo scopo di questo interprete è quello di ricreare esattamente al suo interno (scritto
+in WHILE) utilizzando le variabili la situazione della macchina RAM, entro cui fare
+eseguire il programma.
 
+Sappiamo che la macchina RAM riceve un programma $P$ che è un listato delle istruzioni di un programma
+RAM. Sappiamo che la memoria della macchina RAM ha un numero infinito di registri
+(a destra) ed un registro $L$ che è il program counter.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/interprete_while_ram.png}
+\end{figure}
+Questo interprete scritto in WHILE si trova davanti ad un problema iniziale, si ha un
+numero di registri \textit{infinito} sulla macchina RAM (mi servono quindi un
+numero infinito di variabili, ma purtroppo sono solo 21). Però sappiamo che il
+nostro programma $P$ ha come codifica il numero $n$, allora sicuramente non userà
+mai un registro il cui registro sarà mai superiore di $n$, sicuramente $R_j<n$. Significa
+che posso limitarmi a maneggiare un numero di registri che va da $R_0,\dots,R_{n+2}$,
+quindi potrò sviluppare questa dinamica in una lista.
 
+Utilizzo delle variabili da parte dell'interprete:
+\begin{itemize}
+    \item $x_0$ per indicare la porzione di \textbf{memoria della macchina} RAM
+          che identifica i registri del programma, quindi lo stato della memoria istante
+          per istante del programma che devo simulare.
+    \item $x_1$ giocherà il ruolo del \textbf{program counter} $L$.
+    \item $x_2$ metterò il dato su cui deve girare il programma (\textbf{input}).
+    \item $x_3$ ci metterò il \textbf{listato del programma} ovvero $n$ (ovvero $cod(p)$).
+    \item $x_4$ di volta in volta verrà caricata l'istruzione che il
+          program counter deve eseguire (gioca il ruolo del registro di istruzione
+          corrente \textit{instruction register}, IR).
+\end{itemize}
+è opportuno ricordare che inizialmente $I_W$ troverà il suo input nella variabile
+$x_1$, ovvero $\langle x,n\rangle$, nella variabile input $x_1$:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/x_1.png}
+\end{figure}
+Composizione dell'interprete:
+$$I_W(\langle x,n\rangle)=\varphi_n(x)$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/inter_0.png}
+\end{figure}
+Rispettivamente i primi due registri $x_2$ ed $x_3$ vengono definiti facilmente, poiché
+l'input del programma ed il listato si trovano sono rispettivamente il figlio sinistro
+ed il figlio destro.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/inter_1.png}
+\end{figure}
+La variabile $x_0$ deve contenere la memoria del programma $P$, sappiamo che sarà
+costituita dalla lista di tutti i registri che vanno da $R_0$ a $R_{n+2}$, dove in
+$R_1$ sarà presente l'input del programma $P$ (che andremo a prelevare da $x_2$),
+tutti i restanti registri saranno azzerati (la lista è ovviamente rappresentata
+da una coppia di Cantor). Il program counter viene impostato all'inizio del programma
+ad 1, in maniera che punti alla prima istruzione del programma.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/fetch_decode_execute.png}
+    \caption{Fetch - Decode - Execute}
+\end{figure}
+\begin{itemize}
+    \item L'esecuzione di un programma RAM si ferma quando il program counter $L=0$ (HALT),
+          l'interprete non è altro che un ciclo che esegue sempre le operazioni di
+          fetch,decode e execute del processore.
+    \item Sappiamo che l'interpretazione di un programma termina nel caso in cui
+          abbiamo terminato la simulazione ci dobbiamo fermare, sappiamo che questo
+          accade quando il program counter supera il numero di istruzioni. Il numero di
+          istruzioni è condensato nella variabile $x_3$ , al superamento della dimensione
+          di quest'ultima da parte di $x_1$, impostiamo l'HALT (altrimenti continuiamo
+          con l'esecuzione del programma).
+    \item Usiamo la macro $Pro()$ per prendere la codifica dell'istruzione del programma
+          caricato in $x_3$ che viene puntato da $x_1$ e la carichiamo in $x_4$ (fetch).
+    \item Si deve capire che tipo di istruzione stiamo trattando, questo lo possiamo
+          fare considerando il resto della divisione per 3:
+          \begin{itemize}
+              \item Resto = 0, si tratta di un incremento di un registro $R_k$,
+                    dove $k=x_4/3$. Questo significa andare nella memoria simulata in $x_0$, posizionarsi
+                    nel registro $x_4/3$ ed incrementarlo di 1. Per sapere la posizione di $k$ utilizzo
+                    una delle variabili disponibili, $x_5$, utilizzo la macro $Incr()$ per incrementare
+                    l'elemento in posizione $x_5$ della lista $x_0$ (memoria del programma). Al termine avanzo
+                    il program counter perché ho eseguito l'istruzione.
+              \item Resto = 1, si tratta di un decremento di un registro $R_k$, in questo caso
+                    il valore di $k=x_4-1/3$, la macro che utilizzo è $Decr()$ (per il resto come prima).
+              \item Resto = 2, si tratta di un condizionale, allora devo trovare sia il $R_k$ (la condizione)
+                    che $m$ (l'istruzione da eseguire). Una volta individuate si va a cercare l'istruzione
+                    $m$ nella memoria della macchina, se presente si sposta il program counter a quell'istruzione,
+                    altrimenti si continua linearmente con l'istruzione successiva.
+          \end{itemize}
+    \item Si carica nella variabile di output $x_0$ l'output del programma simulato che è
+          il primo registro del programma (quindi il figlio sinistro della coppia di Cantor).
+\end{itemize}
+\paragraph{Conseguenze di $I_W$}
+Una volta che ho l'interprete io posso creare un compilatore da programmi WHILE a programmi RAM.
+$$\Psi_{I_W}\left(\langle x,n\rangle\right)=\varphi_W(x)=\varphi_P(x)$$
+$$Comp:Prog\rightarrow W-PROG$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/compi_Iw.png}
+\end{figure}
+Prima di tutto calcolo la codifica di $P$, poi la posso cablare nella variabile $x_1$
+ed infine chiamo l'interprete (il listato precedente descritto).
+\begin{itemize}
+    \item \textbf{programmabile}: nel listato di un programma RAM si può calcolare
+          tranquillamente la codifica.
+    \item \textbf{completo}: in nessuno dei 3 passaggi rischiamo di andare in loop.
+    \item \textbf{corretto}: \textit{mantiene la semantica?} Vediamo che la semantica
+          del programma compilato non è altro che la semantica dell'interprete chiamata
+          sulla coppia, ma questa sappiamo essere l'esecuzione del programma $n$ su $x$, che
+          ha sua volta è esattamente l'esecuzione del programma $P$ su $x$:
+          $$\Psi_{Comp(P)}(x)=\Psi_{I_W}\left(\langle x,n\rangle\right)=\varphi_n (x)=\varphi_P (x)$$
+          $$P\in PROG\rightarrow Comp(P)\in W-PROG$$
+          quindi è corretto.
+\end{itemize}
+Quindi è un compilatore da programma RAM a WHILE funzionante e corretto.
+$$F(RAM)\subseteq F(WHILE)$$
+La presenza di questo compilatore ci presenta in maniera formale che i \textit{goto}
+possono non essere utilizzati nella programmazione strutturata.
+\paragraph{Teorema di Böhm Jacopini - 1970}\mbox{}\\
+Per ogni programma (RAM) con \textit{goto} ne esiste uno equivalente in linguaggio
+strutturato (WHILE).
+\begin{itemize}
+    \item Significa che la programmazione a basso livello può essere tranquillamente
+          sostituita da quello ad alto livello.
+    \item Quindi il \textit{goto} va eliminato.
+\end{itemize}
 
-%\subsubsection{Forma del compilatore}
-%$$comp:w-PROG\rightarrow PROG$$
-%$w-PROG$ è un insieme costruito induttivamente, quindi $comp$ può essere definito induttivamente:
-%\begin{enumerate}
-%\item Mostrando come compilare le basi del linguaggio ovvero gli \textit{assegnamenti} (base).
-%\item Per ipotesi induttiva assumo di saper compilare i seguenti comandi
-%$$Comp(C_1),...,Comp(C_m)$$
-%e mostrare come compilare il comando composto
-%$\underline{\text{begin}}\;C_1; ...; C_m;\underline{\text{end}}$
-%\item Per ipotesi induttiva di saper compilare il comando $Comp(C)$ e mostrare come
-%compilare il comando while che ha come corpo $C$ $\text{while }x_n\neq 0 \text{ do } C$
-%\end{enumerate}
+\paragraph{Conseguenza 1 $F(RAM)=F(WHILE)$}\mbox{}\\
+Sapevamo già che $F(WHILE)\supseteq F(RAM)$ (o viceversa) grazie alla presenza
+di un apposito compilatore, ed adesso sappiamo che grazie ad un interprete
+(che viene trasformato "\textit{rozzamente}" in un compilatore) $F(WHILE)\subseteq F(RAM)$
+Quindi quello che abbiamo ottenuto:
 
-%Adesso vediamo nello specifico come compilare ciascuno di questi punti
+Che la potenza computazionale di una macchina piccola come quella RAM è esattamente
+identica a quella di una macchina WHILE molto più complessa , entrambe le macchine sono in
+grado di calcolare la stessa cosa.
+$$F(RAM)=F(WHILE)$$
+Utilizzando una concatenazione logica, sappiamo che
+grazie alla Gödelizzazione che la potenza computazionale di una macchina RAM è equinumerosa
+al numero di programmi, che a sua volta sono tanti quanti i numeri naturali (che non sono
+equinumerosi a tutte le funzioni calcolabili dai naturali ai naturali):
+$$\mathbb{N}^{\mathbb{N}}_\bot\nsim\mathbb{N}\sim PROG \sim F(RAM)=F(WHILE)$$
 
+A questo punto la nozione di calcolabilità si capisce che è intrinseca ai problemi,
+questo perché ho provato sia a catturarla con la potenza computazionale di RAM che di WHILE,
+ma in entrambi i casi ho catturato la stessa cosa ($\mathbb{N}$). \textit{Riesco
+    a catturare il concetto di calcolabilità da un punto più astratto?}
 
+\paragraph{Conseguenza 2: interprete universale}\mbox{}\\
+Un altra conseguenza importante derivata dal compilatore e dall'interprete, sappiamo
+anche che il nostro interprete $I_W$ è un programma RAM. Se io do in pasto questo
+interprete al compilatore di programmi WHILE, quello che ottengo è un programma
+RAM $U$.
+$$U=Comp(I_W)\in PROG$$
+La semantica di tale programma:
+$$\varphi_U\left(\langle x,n\rangle\right)=\Psi_{I_W}\left(\langle x,n\rangle\right)=\varphi_n\left( x\right)$$
+abbiamo scoperto che in RAM esiste un programma molto particolare che è in
+grado di prendere un qualsiasi programma RAM e di simularlo, e non è un caso che
+questo programma si chiami \textbf{interprete universale} RAM. Ovvero un programma
+scritto in quel linguaggio di programmazione che è in grado di simulare un qualsiasi
+altro programma scritto in quel linguaggio di programmazione.
 
-%lez 8
-%Vogliamo dimostrare che la potenza computazionale della macchina RAM $F(RAM)$ sia disgiunto
-%dalla potenza computazionale $F(WHILE)$.
+Questo programma $U$ rappresenta tutta la potenza di tutti i programmi RAM, perché
+è in grado di simularli tutti.
 
-
+\paragraph{Riflessione sul concetto di calcolabilità}\mbox{}\\
+Sappiamo che esistono delle funzioni calcolabili e non calcolabili, siccome esistono delle funzioni
+non calcolabili è naturale cercare di caratterizzare ciò che è calcolabile, questo lo abbiamo
+fatto attraverso la macchina RAM e WHILE. Entrambe però catturano la stessa classe di funzioni
+calcolabili, \textit{il concetto di calcolabile non è intrinseco ai problemi? quindi
+    un concetto matematico non informatico}.
+Quindi a prescindere dallo strumento di calcolo, se riuscirò in questo intento
+allora risponderò una volta per tutte a questo quesito (non dipenderà mai
+dallo strumento di calcolo utilizzato). Ne verremo a conoscenza con il formalismo
+introdotto da S. Kleene.
 
 \end{document}
