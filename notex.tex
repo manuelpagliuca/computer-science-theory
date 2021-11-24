@@ -2111,4 +2111,172 @@ allora risponderò una volta per tutte a questo quesito (non dipenderà mai
 dallo strumento di calcolo utilizzato). Ne verremo a conoscenza con il formalismo
 introdotto da S. Kleene.
 
+\subsection{Concetto di calcolabilità}
+Iniziamo a sospettare che questa idea di calcolabilità sorga dai problemi (
+\textit{come caratteristica intrinseca dei problemi}) più che dal
+tipo di tecnologia che stiamo utilizzando. Quindi si cerca di astrarre il concetto che
+si vuole trattare, ovvero quello di \textbf{calcolabilità}.
+Quello che vogliamo fare è definire il concetto in modo matematico e assiomatico, in modo
+che ci siano solo riferimenti matematici (e non informatici), in modo che si possa utilizzare
+tutti gli strumenti matematici (che possono essere spostati in maniera diretta nel mondo informatico).
+Dobbiamo ripassare degli strumenti matematici e fissare un linguaggio comune:
+
+\subsubsection{Strumenti matematici (chiusure di insiemi)}
+Dato un insieme $U$, si definisce \textbf{operazione} su $U$ una qualunque
+funzione
+$$op:U\times\dots\times\implies U$$
+che va da $k$-volte il cartesiano di $U$ ad $U$. Il numero $k$ di operazioni cartesiane
+non è altro che il numero di argomenti, detto anche \textbf{arietà}.
+
+\paragraph{Per esempio}\mbox{}\\
+L'insieme universo è l'insieme dei numeri naturali, per esempio l'operazione somma è un
+esempio di operazione binaria, la somma è una funzione definita su $\mathbb{N}^2$, poiché
+prende in ingresso due numeri e ne restituisce uno.
+$$+:\mathbb{N}\times\mathbb{N}\implies\mathbb{N}\text{ (operazione binaria)}$$
+Anche la radice è un operazione (unaria)
+$$\lfloor\sqrt\rfloor:\mathbb{N}\implies\mathbb{N}\text{ (operazione unaria)}$$
+Un esempio di operazione $n$-aria è quella del proiettore su di $t$, non
+fa altro che restituirà la componente $t$-esima.
+$$Pro_t^n:\mathbb{N}\times\dots\times\mathbb{N}\implies\mathbb{N}\text{ (operazione n-aria)}$$
+
+Tornando al nostro discorso, definiamo con \textbf{chiusura} di un insieme $A\subseteq U$
+rispetto ad un operazione $op:U^k\implies U$, quando il risultato dell'operazione è ancora
+interno all'insieme $A$.
+$$\forall a_1,\dots,a_k\in A:op(a_1,\dots,a_k)\in A$$
+
+\paragraph{Esempio}\mbox{}\\
+L'insieme dei numeri pari è chiuso rispetto alla somma (2+2=4), la controparte invece no, l'insieme
+dei numeri dispari non è chiuso rispetto alla somma (3+3=6).
+
+In generale questo concetto di chiusura può essere esteso ad un insieme di operazioni $\Omega$,
+un insieme viene considerato chiuso se è chiuso per ciascuna operazione $\in\Omega$.
+\paragraph{Esempio}\mbox{}\\
+$$\Omega=\{+,*\}$$
+L'insieme dei numeri pari è chiuso rispetto ad $\Omega$ (2*4=8 e 2+4=6). Mentre l'insieme
+dei numeri dispari non è chiuso rispetto ad $\Omega$ poiché non è chiuso rispetto alla somma.
+
+Consideriamo il seguente problema, sia $A\subseteq U$ e $op:U^k\implies U$. Quale è il più
+piccolo sottoinsieme di $U$ che contiene $A$, che sia chiuso rispetto all'operazione $op$?
+(Notare che sono tre condizioni e non due). Voglio allargare $A$ il meno possibile in maniera
+che contenga $A$ ma garantisca la chiusura rispetto ad $op$.
+
+Alcune risposte ovvie:
+\begin{itemize}
+    \item Se $A$ è chiuso rispetto ad $op$, allora l'insieme cercato è $A$ stesso.
+    \item Sicuramente $U$ soddisfa 1 e 2. Però $U$ potrebbe avere il difetto di non
+          essere il più piccolo (non è detto che sia il più piccolo).
+\end{itemize}
+Consideriamo il seguente esempio: sia $A=\{2,3\}\subseteq\mathbb{N}$ come operazione
+abbiamo la somma $+:\mathbb{N}^2\implies\mathbb{N}$, banalmente vediamo che $A$ è un insieme
+che non può essere chiuso rispetto alla somma. Quale è il più piccolo sottoinsieme di $\mathbb{N}$
+che contiene $A$ ed è chiuso rispetto a $+$?
+Sappiamo che sicuramente $\mathbb{N}$:
+\begin{enumerate}
+    \item contiene $A$
+    \item è chiuso rispetto a $+$
+    \item non è il più piccolo che soddisfa le precedenti due condizioni (1 e 2).
+\end{enumerate}
+Il problema è dato dal fatto che il risultato dell'operazione da un risultato che sarà
+al di fuori di $A$, ma se io stessi costruendo questo questo insieme man mano che eseguo
+l'operazione ed aggiungo il nuovo numero al sottoinsieme, al termine delle operazioni quello
+che avrò è il più piccolo sottoinsieme (approccio euristico costruttivo).
+
+Teorema: Sia $A\subseteq U$ e $op:U^k\implies U$. Il più piccolo sottoinsieme di $U$
+contenente $A$ e chiuso rispetto ad $op$ si ottiene calcolando la \textbf{chiusura di $A$
+    rispetto a $op$}, i ciò è, l'insieme $A^{op}$ definito induttivamente come:
+\begin{enumerate}
+    \item $\forall a\in A\implies a\in A^{op}$
+    \item $\forall a_1,\dots,a_k\in A^{op}\implies op(a_1,\dots,a_k)\in A^{op}$
+    \item Nient'altro sta in $A^{op}$
+\end{enumerate}
+La definizione induttiva dice che nella base dell'induzione sono presenti tutti gli elementi
+originari in $A^{op}$. Ed ogni elemento a cui si applica l'operazione è un elemento
+presente all'interno dell'insieme. Questa definizione è identica alla definizione "più
+operativa" di $A^{op}$:
+\begin{enumerate}
+    \item Metti in $A^{op}$ tutti gli elementi di $A$.
+    \item Applica $op$ a una $k$-tupla di elementi in $A^{op}$
+    \item Trovi un risultato che non è già in $A^{op}$ allora
+          aggiungilo ad $A^{op}$
+    \item Ripeti i punti 2 e 3 finché $A^{op}$ cresce.
+    \item Output $A^{op}$
+\end{enumerate}
+
+\paragraph{Esempi di chiusure}\mbox{}\\
+Voglio il più piccolo sottoinsieme di $\mathbb{N}$ contenente $A=\{2,3\}$ e chiuso rispetto
+a $+\implies A^+$, come ottenerlo "operativamente"?
+\begin{enumerate}
+    \item $A^+\leftarrow A$
+    \item $(2+3)=5 \notin A^+ \rightarrow A^+ =\{2,3,5\}$
+    \item $(2+2),(3+3),(5+5),(2+5),(3+5), \notin A^+\implies A^+=\{2,3,4,5,6,7,8,10\}$
+    \item \dots
+\end{enumerate}
+Ottenendo in output $A^+=\mathbb{N}\setminus\{0,1\}$
+Questo è anche dimostrabile banalmente con i risultati di un \textbf{equazione diofantea}
+che utilizza gli elementi iniziali dell'insieme di $A$.
+
+Un altro esempio, voglio il più piccolo sottoinsieme di $\mathbb{N}$ contenente $A=\{7,10\}$
+e chiuso rispetto a $\dot{-}$ (\textbf{sottrazione troncata}).
+$$A^{\dot{-}}=\{0,1,2,\dots,10\}=\mathbb{Z}_{11}$$
+Tutti i numeri da 0 a 10 sono in grado di generare un numero all'interno dello stesso
+insieme, risultando chiuso rispetto all'operazione di sottrazione troncata.
+
+Un altro esempio, voglio il più piccolo sottoinsieme di $\mathbb{N}$ contenente $A=\{0\}$
+che sia chiuso rispetto a $+$.
+$$A^+=\{0\}=A$$
+L'insieme $A$ è già chiuso rispetto alla somma.
+
+Un'altro esempio, voglio il più piccolo sottoinsieme di $\mathbb{N}$ contenente $A=\{0\}$
+e chiuso per $succ(n)=n+1$
+$$A^{succ}=\mathbb{N}\text{ se }A=\{1\}\implies A^{succ}=\mathbb{N}^+$$
+
+Lo stesso concetto di chiusura si può estendere rispetto ad un insieme di operazioni, $\Omega=\{op_1,\dots,op_t\}$,
+ogni operazione ha una proprietà arietà $k_1,\dots,k_t$ di argomenti. Vogliamo il
+più piccolo sottoinsieme di $U$ contenente $A$ tale che sia chiuso rispetto ad $\Omega$. Questo
+viene chiamato come \textbf{chiusura di $A$ rispetto ad $\Omega$}, ciò è l'insieme $A^\Omega$
+definito induttivamente (induzione strutturale) come:
+\begin{itemize}
+    \item $\forall a\in A\implies a\in A^\Omega$ (base)
+    \item $\forall i\in\{1,\dots,t\}, \forall a_1,\dots,a_{k_i}\in A^\Omega \implies op_i(a_i,\dots,a_{k_i})\in A^\Omega$
+    \item Nient'altro è presente in $A^\Omega$
+\end{itemize}
+Anche qui ovviamente essendo una definizione induttiva di un insieme induttivo se devo dimostrare
+una proprietà su $A^\Omega$ la dimostro per induzione strutturale.
+Analogamente possiamo dare una definizione più "operativa" (o costruttiva), al caso
+dove $|\Omega|=1$, quindi si effettua tutte le operazioni possibili finché non sarà più
+possibile estendere l'insieme che si sta costruendo si avrà il più piccolo sottoinsieme di
+$U$ che è chiuso rispetto all'insieme di operazioni $\Omega$.
+
+Questi sono esattamente i concetti che ci serviranno per definire in maniera astratta il concetto
+di calcolabilità (quindi che astrae da qualunque connotato informatico). Il nostro approccio
+sarà così strutturato:
+\begin{enumerate}
+    \item Partiremo da un nucleo di tre funzioni $ELEM$ che saranno così facili che "qualunque"
+          idea di calcolabile si voglia proporre le deve considerare calcolabili. Si vedrà
+          subito che quelle tre funzioni non possono essere tutte le funzioni calcolabili, quindi
+          sarà obbligatorio ampliare il nucleo di sicura calcolabilità.
+
+    \item Per l'ampliamento del nucleo introdurremo un insieme $\Omega$ di operazioni su funzioni,
+          ovvero operazioni che prendono funzioni e restituiscono funzioni (per esempio la
+          composizione di funzioni). Usiamo delle funzioni che mi generano altre funzioni, questo
+          insieme $\Omega$ è fatto in maniera che sia calcolabile, sono banalmente implementabili in
+          qualunque linguaggio di programmazione. Sono operatori che agiscono su cose calcolabili ($ELEM$)
+          e sicuramente generano cose calcolabili data la loro semplice implementazione.
+
+    \item Calcolero la chiusura di $ELEM^\Omega=\mathcal{P}$, il risultato sarà una classe di funzioni
+          che sarà la nostra idea di calcolabilità data da un punto di vista puramente matematico, si chiamerà
+          \textbf{classe delle funzioni ricorsive parziali}.
+\end{enumerate}
+(approccio di Kleene).
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/mat_info.png}
+\end{figure}
+Abbiamo due idee di calcolabilità una data dal punto di vista informatico e matematico, la domanda che ci
+dovremo porre è \textit{l'approccio matematico è in grado di catturare interamente l'approccio informatico?}
+Dobbiamo trovare un punto dove le due idee coincidono, quindi ritrovare ciò che abbiamo definito in maniera informatica
+con gli strumenti matematici (che saranno sempre quelli per l'eternità).
+
+
+
 \end{document}
