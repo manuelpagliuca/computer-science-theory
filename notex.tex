@@ -798,6 +798,7 @@ $$\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$$
 N.B.: Gli insiemi $\mathcal{P}(\mathbb{N})$ e $\mathbb{N}^{\mathbb{N}}$ sono detti \textbf{insiemi continui},
 e sono equinumerosi a $\mathbb{R}$.
 
+\section{Calcolabilità}
 \subsection{Cosa è calcolabile?}
 Sappiamo che la potenza computazionale di un sistema di calcolo $\mathcal{C}$ corrisponde a:
 $$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
@@ -2263,7 +2264,7 @@ sarà così strutturato:
           qualunque linguaggio di programmazione. Sono operatori che agiscono su cose calcolabili ($ELEM$)
           e sicuramente generano cose calcolabili data la loro semplice implementazione.
 
-    \item Calcolero la chiusura di $ELEM^\Omega=\mathcal{P}$, il risultato sarà una classe di funzioni
+    \item Calcolerò la chiusura di $ELEM^\Omega=\mathcal{P}$, il risultato sarà una classe di funzioni
           che sarà la nostra idea di calcolabilità data da un punto di vista puramente matematico, si chiamerà
           \textbf{classe delle funzioni ricorsive parziali}.
 \end{enumerate}
@@ -2276,6 +2277,286 @@ Abbiamo due idee di calcolabilità una data dal punto di vista informatico e mat
 dovremo porre è \textit{l'approccio matematico è in grado di catturare interamente l'approccio informatico?}
 Dobbiamo trovare un punto dove le due idee coincidono, quindi ritrovare ciò che abbiamo definito in maniera informatica
 con gli strumenti matematici (che saranno sempre quelli per l'eternità).
+
+
+\subsubsection{Il nucleo di funzioni calcolabili}
+L'insieme delle funzioni elementari (intuitivamente calcolabili) è composto da tre funzioni.
+$$ELEM=\{$$
+$$\textit{successore: }s(x)=x+1, x\in\mathbb{N},$$
+$$\textit{zero: }0^n(x_1,\dots,x_n)=x_k, x_i\in\mathbb{N}$$
+$$\textit{proiettori: }pro_k^n(x_1,\dots,x_n)=x_k,x_i\in\mathbb{N}\}$$
+
+
+\begin{itemize}
+    \item La funzione successore è in grado di effettuare una somma atomica ad una certa quantità.
+    \item La funzione zero che restituisce sempre 0.
+    \item La funzione proiezione è in grado di restituire un $k$ fissato da una $n$-upla.
+\end{itemize}
+La nostra idea di calcolabilità si origina da qui poiché sono funzioni
+banalmente calcolabili (un programma while è banalmente scrivibile). Questa classe delle funzioni
+elementari deve essere un punto da cui partire, poiché sono presenti delle funzioni che
+sono estremamente semplici da calcolare ma non presenti nel nucleo iniziale (es. predecessore, una funzione
+che sommi 2 anziché 1 \dots).
+
+\textit{Quindi cosa devo fare?} Devo ampliare la classe delle funzioni elementari. Quindi
+si pensa di mettere in campo degli operatori che prendono in ingresso delle funzioni e restituiscono
+delle funzioni. \textit{Quale é il primo operatore che prende funzioni e restituisce funzioni?}
+La \textbf{composizione} di funzione, indicata con $\circ$ prende in ingresso due funzioni e restituisce
+la composizione di due funzioni passata come argomento. Quella che vogliamo implementare è una
+composizione su più funzioni non solo 2.
+
+\paragraph{L'operatore di composizione di funzioni}\mbox{}\\
+Sia $h:\mathbb{N}^k\rightarrow\mathbb{N}$ e $g_1,\dots,g_k:\mathbb{N}^n\rightarrow\mathbb{N}$;
+denoteremo $\underline{x}\in\mathbb{N}^n$.
+Definisco la composizione degli argomenti come $COMP(h,g_1,\dots,g_k):\mathbb{N}^n\rightarrow\mathbb{N}$
+definito come
+$$COMP(h,g_1,\dots,g_n)(\underline{x})=h(g_1(\underline{x}),\dots,g_k(\underline{x}))$$
+
+Si parte dalla ennupla $\underline{x}$ la si da in pasto alla prima fino alla $k$-esima,
+il risultato di ogni funzione viene dato in pasto alla funzione $h$ per ottenere la composizione.
+Notiamo che il caso di una composizione con due funzioni è un caso particolare di questo che è
+quello generale.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/composizione_ooperazine.png}
+\end{figure}
+L'operazione di composizione suona come qualcosa di implementabile, come potrebbe essere
+fatto un programma che calcola la composizione di funzioni. La mia idea di calcolabilità
+se viene espansa con questo operatore è una cosa corretta, perché parte da cose calcolabili
+per generare cose calcolabili.
+\paragraph{Ampliamo ELEM chiudendo rispetto a COMP}\mbox{}\\
+$ELEM^{COMP}$ effettivamente amplia $ELEM$, infatti:
+$$f(x)=x+2\notin ELEM\text{ ma }f(x)\in ELEM^{COMP}$$
+Non fosse altro che la mia funzione x+2, è banalmente dimostrabile che $f(x)$ (la funzione
+che somma 2 ad x) appartiene ad $ELEM^{COMP}$, questo perchè basta
+comporre la funzione successore con se stessa. Infatti $$f(x)=COMP(s,s)(x)=s(s(x))=s(x+1)=x+2=f(x)$$
+
+Abbiamo visto che qualcosa in più riusciamo a calcolare, ma la domanda è \textit{questa
+    nuova classe di funzione è considerabile come la nuova classe di tutte le funzioni
+    calcolabili oppure manca qualcosa?} Purtroppo questo primo ampliamento non basta a definire
+un intera classe di funzioni calcolabili. Per esempio la somma di due numeri non è
+calcolabile, ed è facile anche da dimostrare la non appartenenza ad $ELEM^{COMP}$. Devo
+ampliare ancora il mio insieme, perché sono presenti ancora funzioni troppo banali che devono
+essere considerate calcolabili.
+
+\paragraph{L'operatore di ricorsione primitiva}\mbox{}\\
+A tutti è nota la definizione induttiva di fattoriale di $n$, il concetto di questo
+operatore matematico è descrivibile induttivamente con la seguente espressione
+\[
+    fatt(n)=
+    \begin{cases}
+        1                & n=0 \\
+        n\cdot fatt(n-1) & n>0
+    \end{cases}
+\]
+Allora introduciamo l'operatore di ricorsione primitiva $RP$. Per definire tale
+operatore necessito di due funzioni argomento $g,h$ (una con una singola ennupla come
+argomenti, l'altra con una ennupla più altri due argomenti).
+$$g:\mathbb{N}^n\rightarrow\mathbb{N}$$
+$$h:\mathbb{N}^{n+2}\rightarrow\mathbb{N}$$
+rispettivamente $g(x)$ e $h(z,y,\underline{x})$ con $\underline{x}\in\mathbb{N}^n$
+L'operatore di ricorsione primitiva prende in ingresso due funzioni e restituisce
+una terza funzione ottenuta per \textbf{ricorsione} delle altre due. La ricorsione
+primitiva applicata ad $h$ e $g$ restituisce una nuova funzione $f$ che dipende da
+una sola ennupla $\underline{x}$ e da un solo parametro $y$ che è definita
+\[
+    RP(h,g)=f(\underline{x},y)=
+    \begin{cases}
+        g(\underline{x})                          & y=0 \\
+        h(f(\underline{x},y-1),y-1,\underline{x}) & y=0
+    \end{cases}
+\]
+Notiamo che nel caso in cui il parametro $y$ sia 0, la funzione $g(x)$ non è altro che
+il caso base, ma ricordiamo che effettivamente $g$ può essere una qualsiasi funzione.
+Mentre quando il parametro $y$ è positivo notiamo che la funzione restituita da $RP$ è
+la composizione della funzione $h$ su $f$ su valori $y$ minori (\textbf{passo induttivo}).
+In particolare si vede che è una \textbf{induzione} che generalizza il concetto di ricorsione.
+
+Questa generalizzazione ci permette di definire funzioni in termini di se stesse, le
+definizione ricorsive a cui siamo abituati sono casi particolari di questo caso generale. Sia
+risaputo che tutti i metodi per la risoluzione di equazioni differenziali utilizzano
+questa forma tabella come risoluzione.
+
+Ora ampliamo ulteriormente $ELEM$
+$$ELEM^{COMP,RP}=RICPRIM=\{\text{funzioni ricorsive primitive}\}$$
+la chiusura comincia a creare una classe abbastanza consistente di funzioni, che contiene
+anche molte funzioni complicate (anche quelle differenziali). Prende il nome come
+\textbf{classe delle funzioni ricorsive primitive}. Questa classe contiene la funzione
+somma tra due numeri.
+\[
+    somma(x,y)=
+    \begin{cases}
+        x=Pro^2_1(x,y)  & y=0 \\
+        s(somma(x,y-1)) & y>0
+    \end{cases}
+\]
+questo utilizzando il successore ed il proiettore, ma è anche possibile definire il prodotto
+riutilizzando la somma (e via via anche l'esponenziale).
+\[
+    prodotto(x,y)=
+    \begin{cases}
+        O=O^2(x,y)                & y=0 \\
+        Somma(x, prodotto(x,y-1)) & y>0
+    \end{cases}
+\]
+possiamo definire l'operazione di $\dot{-}$ definendo a priori l'operatore di predecessore
+\[
+    P(x)=
+    \begin{cases}
+        0   & x=0 \\
+        x-1 & x>0
+    \end{cases}
+    \implies
+    x\dot{-}y=
+    \begin{cases}
+        x                & y=0 \\
+        P(x)\dot{-}(y-1) & y>0
+    \end{cases}
+\]
+Si può facilmente notare che la classe delle funzioni ricorsive primitive è una classe
+importante che ricopre molte funzioni.
+
+\subsubsection{$RICPRIM$ vs $F(WHILE)$}
+$RICPRIM$ contiene molte funzioni e potrei già chiedermi se ho raggiunto $F(WHILE)$. Mostreremo
+che $RICPRIM\subseteq F(WHILE)$ per induzione strutturale. Vogliamo capire che tipo di relazione
+c'è tra la mia idea di calcolabilità matematica e informatica. Quello che mostreremo
+è che questa idea di calcolabilità matematica è inclusa all'interno di quella informatica.
+
+Ovvero che ogni funzione presente in $RICPRIM$ sia $WHILE$-programmabile, ovvero che sia
+possibile scrivere un programma $WHILE$ che la calcoli. Significa che siamo sulla strada
+giusta che ci stiamo muovendo su qualcosa di significativo.
+
+Possiamo notare che però in $RICPRIM$ sono presenti funzioni totali, ovvero che terminano,
+le funzioni non possono andare in loop, quindi l'inclusione dovrà essere per forza propria
+se dimostrata.
+La dimostrazione seguirà i seguenti punti:
+\begin{itemize}
+    \item Definizione induttiva di $RICPRIM=ELEM^{COMP,RP}$
+          \begin{enumerate}
+              \item Le funzioni in $ELEM$ sono in $RICPRIM$
+              \item Se prendo delle funzioni $RICPRIM$ allora la loro composizione è
+                    $RICPRIM$ anch'essa.
+              \item Se prendo delle funzioni $RICPRIM$ allora la loro composizione mendiante l'operatore
+                    di ricorsione primitiva genera una funzione $RP$.
+              \item Nient'altro è in $RICPRIM$
+          \end{enumerate}
+\end{itemize}
+
+Quindi data questa definizione induttiva abbiamo dimostrato che $ELEM\subseteq F(WHILE)$,
+proseguirò sempre per induzione sui seguenti punti:
+\begin{itemize}
+    \item Assumo per induzione che $h,g_1,\dots,g_k\in RICPRIM$ siano in $F(WHILE)$
+          e dimostro che $COMP(h,g_1,\dots,g_k)\in F(WHILE)$
+    \item Assumo per ipotesi induttiva che $g,h\in RICPRIM$ siano in $F(WHILE)$
+          e dimostro che $RP(g,h)$ e $F(WHILE)$.
+\end{itemize}
+
+allora per induzione avrò dimostrato che le ricorsive primitive sono un sottoinsieme
+dell'insieme $WHILE$.
+
+\subsubsection{$RICPRIM\subseteq F(WHILE)$}
+\begin{itemize}
+    \item passo base: $ELEM\subseteq F(WHILE)$ (sappiamo calcolare funzione successore, zero
+          e proiezione k-esima con un programma WHILE).
+    \item passi induttivi:
+          \begin{itemize}
+              \item
+                    Consideriamo delle funzioni $h,g_1,\dots,g_k$ per ipotesi induttiva assumo
+                    che siano $WHILE$-programmabili ($\in F(WHILE)$). Ovvero che per ciascuna funzione
+                    esisti un rispettivo programma $H,G_1,\dots,G_k\in W-PROG$ che le calcola. Ovvero
+                    la cui semantica sia corrisponda esattamente alle funzioni originali.
+                    $$\Psi_H=h, \Psi_{G_1},\dots\Psi_{G_k}=g_k$$
+                    allora devo mostrarti un programma WHILE che calcoli la loro composizione.
+                    $$COMP(h,g_1,\dots,g_k)=h(g_1(\underline{x}),\dots,g_k(\underline{x}))$$
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[scale=0.5]{images/while-comp.png}
+                        \caption{Programma WHILE che calcola la composizione}
+                    \end{figure}
+                    Supponiamo che in $x_1$ ci sia il nostro input del programma, in $x_0$
+                    calcolo il primo argomento. In realtà $G_1(x_1)$ è una macro del $WHILE$
+                    che è in grado di calcolare la sua corrispettiva funzione $g_1$ che
+                    so esistere per ipotesi induttiva. Poi in $x_0$ ci condenso il secondo argomento
+                    $G_2$ , continuo in questa maniera fino al $k$-esimo argomento. In $x_0$ ottengo la
+                    condensazione di tutti gli argomenti su un solo numero, seguendo lo schema di Cantor (
+                    non è un problema se abbiamo un numero finito di variabili, i motivi sono già stati spiegati).
+          \end{itemize}
+          adesso il primo passo induttivo è stato dimostrato, ovvero che la composizione di funzioni
+          è WHILE-programmabile.
+    \item passo induttivo sull'operatore di ricorsione primitiva: per ipotesi induttiva
+          assumo che le due rispettive funzioni $g,h$ siano $WHILE$-programmabili.
+          Che quindi esistano $G,H\in W-PROG$ con $\Psi_G=g$ e $\Psi_h=h$.
+          Allora riesco a
+          a scrivere un programma $WHILE$ che riesce a calcolare l'opreazione di ricorsione primitivaù
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/while-rico.png}
+          \end{figure}
+          questo è un programma perfettamente legale che calcola la ricorsione primitiva di due funzioni
+          che sono $WHILE$-programmabili.
+\end{itemize}
+Allora ho dimostrato che per induzione strutturale che la classe delle funzioni ricorsive primitive
+è all'interno delle funzioni $WHILE$
+$$RICPRIM\subseteq F(WHILE)$$
+
+A sto punto ci chiediamo se questo sotto insieme sia proprio oppure no. Questo però è facile
+da dimostrare, tutte le $RICPRIM$ sono funzioni totali:
+\begin{itemize}
+    \item tutte le funzioni elementari sono totali.
+    \item la composizione delle funzioni totali è ancora una funzione totale
+\end{itemize}
+Chiaramente $F(WHILE)$ contiene anche funzioni \textbf{parziali} (che non terminano),
+questo grazie ad i loop che possono non far terminare i programmi.
+$$RICPRIM\nsubseteqF(WHILE)$$
+Significa che devo ampliare ulteriormente $RICPRIM$ per raggiungere $F(WHILE)$
+
+\paragraph{Ulteriori considerazioni su $RICPRIM$}\mbox{}\\
+Consideriamo questo while, notiamo che è possibile riscrivere la stessa cosa
+con una sintassi semplificata quella del for.
+Le $RICPRIM$ caratterizzano la potenza computazionale con un linguaggio più semplice
+di quello WHILE, ovvero il $FOR$ language, però come un for del PASCAL dove è presente
+una variabile di controllo che scandisce le iterazioni, che parte da un certo valore
+e termina in un altro valore e che non può essere toccata nel FOR.
+Prendiamo tale $FOR$-language, e vediamo che le $RICPRIM$ sono esattamente la classe delle funzioni
+calcolate da questo linguaggio che ha un numero di iterazioni che è fissato e non
+potrà mai andare all'infinito (non stiamo considerando for loop del C/Java ma quello del PASCAL).
+$$RICPRIM=F(FOR)\nsubseteq F(WHILE)$$
+Questa è una inclusione propria.
+
+Ora effettuiamo un ulteriore considerazione, ipotizziamo di usare un linguaggio while
+che non possa andare in loop, quindi mi restringo ad una classe $\tilde{F}(WHILE)$
+di funzioni while che non possono andare in loop. \textit{Adesso come sarà il
+    confronto tra il $FOR$ language ed il $WHILE$ indebolito?} L'inclusione è propria?
+
+Le $RICPRIM$ sono incluse propriamente nella classe delle funzioni $\tilde{F}(WHILE)$,
+questo è dimostrabile sia per diagonalizzazione che utilizzando la funzione di Ackermann.
+Una funzione di Ackermnann (1928) è una funzione che non è ricorsiva primitiva ma
+può essere calcolata in un programma $WHILE$ da un programma che termina.
+Questa funzione sfrutta una doppia induzione, perché lo schema ricorsivo della funzione
+di Ackermann non è lo stesso di quello delle $RICPRIM$.
+
+\[
+    \mathcal{A}(m,n)=
+    \begin{cases}
+        n+1                                 & m=0      \\
+        \mathcal{A}(m+1,1)                  & m>0, n=0 \\
+        \mathcal{A}(m-1,\mathcal{A}(m,m-1)) & m,n>0
+    \end{cases}
+\]
+Se usiamo solamente la composizione di $RICPRIM$ non siamo in grado di esprimere tale
+classe di funzioni. L'idea è che le $RICPRIM$ hanno un determinato tasso di crescita
+che è nettamente inferiore rispetto alle funzioni di Ackermann.
+N.B.: Già nel 1927 Sudau aveva proposto una funzione con le stesse caratteristiche
+di quella di Ackermann\dots
+Occorre ampliare $RICPRIM$\dots
+
+
+
+
+
+
+
+
 
 
 
