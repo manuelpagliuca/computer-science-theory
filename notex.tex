@@ -2507,7 +2507,7 @@ da dimostrare, tutte le $RICPRIM$ sono funzioni totali:
 \end{itemize}
 Chiaramente $F(WHILE)$ contiene anche funzioni \textbf{parziali} (che non terminano),
 questo grazie ad i loop che possono non far terminare i programmi.
-$$RICPRIM\nsubseteqF(WHILE)$$
+$$RICPRIM\nsubseteq F(WHILE)$$
 Significa che devo ampliare ulteriormente $RICPRIM$ per raggiungere $F(WHILE)$
 
 \paragraph{Ulteriori considerazioni su $RICPRIM$}\mbox{}\\
@@ -2549,10 +2549,274 @@ che è nettamente inferiore rispetto alle funzioni di Ackermann.
 N.B.: Già nel 1927 Sudau aveva proposto una funzione con le stesse caratteristiche
 di quella di Ackermann\dots
 Occorre ampliare $RICPRIM$\dots
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/classi_funzioni.png}
+\end{figure}
 
+\paragraph{Operatore di minimalizzazione di funzioni}\mbox{}\\
+Vogliamo ampliare ancora di più l'attuale classe di funzioni, introduciano il nuovo operatore
+di minimalizzazione.
+Sia $f:\mathbb{N}^{n+1}\rightarrow\mathbb{N}$, $f(\underline{x},y)$ con
+$\underline{x}\in\mathbb{N}^n$. La minimalizzazione di una funzione ad $n+1$ genera una
+funzione ad $n$ argomenti, definita come:
+\[
+    MIN(f(\underline{x},y))=g(\underline{x})=
+    \begin{cases}
+        y    & \text{se }f(\underline{x},y)=0\text{ e }\forall t<y:f(\underline{x},t)\neq 0 \\
+        \bot & \text{altrimenti}
+    \end{cases}
+\]
+$$= \mu y(f(\underline{x},y)=0) (\bot\text{ se }\nexists \text{ tale }y)$$
+Nella prima condizione $y$ è tale da essere il più piccolo valore
+che azzeri la funzione $f(\underline{x},y)$. Vediamo alcuni esempi di minimalizzazione
+di funzioni:
+\begin{center}
+    \begin{tabular}{c|c}
+        \toprule
+        $x+y+1$       & $\bot$                 \\
+        \midrule
+        $x\dot{-}y$   & $x$                    \\
+        \midrule
+        $y\dot{-}x$   & $0$                    \\
+        \midrule
+        $x\dot{-}y^2$ & $\lceil\sqrt{x}\rceil$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
 
+\begin{itemize}
+    \item La minimalizzazione di $x+y+1$ è una funzione $g(x)$ che dato un certo $x$ mi deve
+          trovare il più piccolo $y$ tale che $x+y+1=0$ (attenzione che è una funzione
+          che va da naturali a naturali, quindi i numeri negativi non possiamo considerarli).
+          Qualsiasi sia questo numero nella parte sinistra avremo sempre 1, perché con qualunque
+          valore di $x$ sia fissato ed $y$ (naturali) non azzererà la funzione.
 
+    \item nel caso della sottrazione troncata il più piccolo $y$ che azzera $x$ è $x$ stesso,
+          notare che lo si potrebbe azzerare anche con un $x+1,+2,\dots$ ma questo non sarebbe il più piccolo.
 
+    \item invertendo l'ordine degli operandi il più piccolo $y$ che azzera la funzione è 0.
+
+    \item nell'ultimo caso è la parte superiore della radice di $x$ (la radice quadrata
+          è una operazione presente in RICPRIM).
+
+\end{itemize}
+Vediamo che con l'operatore di minimalizzazione otteniamo delle funzioni interessanti,
+adesso proviamo a chiudere rispetto a queste funzioni.
+
+$$RICPRIM^{MIN}= ELEM^{COMP,RP,MIN}=\mathcal{P}={\text{funzioni ricorsive parziali}}$$
+Questa nuova classe di funzioni è detta \textbf{classe delle funzioni ricorsive
+    parziali} $\mathcal{P}$. Sicuramente $\mathcal{P}$, che grazie a $MIN$ contiene anche
+funzioni parziali, amplia $RICPRIM$ fatto solo da funzioni totali. Ma come si pone
+rispetto a $F(WHILE)$?
+\subsubsection{$\mathcal{P}\subseteq F(WHILE)$}
+Riesco a dimostrare che sia un sottoinsieme (non so se sia tanto quanto $F(WHILE))$,
+possiamo dimostrare tenendo conto della natura induttiva delle ricorsive parziali che
+sono la chiusura delle ricorsive primitive rispetto all'operatore di minimalizzazione.
+
+\begin{enumerate}
+    \item Le funzioni in $RICPRIM$ sono tutte in $\mathcal{P}$
+    \item Se $f$ è una $\mathcal{P}$ allora la minimalizzazione di $f$ è
+          una ricorsiva parziale.
+    \item Nient'altro è in $\mathcal{P}$
+\end{enumerate}
+Allora cosa faccio per dimostrare che $P\subseteq F(WHILE)$ ? Dimostro che le ricorsive
+primitive che sono ricorsive parziali sono $WHILE$-programmabili (ma questo lo abbiamo
+già dimostrato precedentemente).
+
+L'unico punto veramente da dimostrare è il passo induttivo, ovvero che il nuovo oggetto
+che andiamo a costruire sia $WHILE$-programmabile.
+
+\begin{enumerate}
+    \item Dimostrare che le $RICPRIM$ sono $WHILE$-programmabili (fatto).
+    \item Sia $f\in\mathcal{P}$ una funzione $WHILE$-programmabile per ipotesi induttiva.
+          Allora, esiste un programma $WHILE$ che calcola la minimalizzazione di quella funzione
+          $MIN(f)$ (da dimostrare).
+\end{enumerate}
+\paragraph{Dimostrazione che $MIN(f)$ è $WHILE$-programmabile}\mbox{}\\
+Sia $f(\underline{x},y)\in\mathcal{P}$; per ipotesi induttiva, sia $f$ calcolata dal
+programma $WHILE$ $F$. Allora devo mostrarti un programma $WHILE$ tale che sia in grado
+di calcolare tale funzione:
+\[
+    MIN(f(\underline{x},y))=g(\underline{x})
+    \begin{cases}
+        \mu y & f(\underline{x},y)=0             \\
+        \bot  & \text{se }\nexists\text{ tale }y
+    \end{cases}
+\]
+questo è un programma che prende in ingresso $x$ e va a cercare il più piccolo $y$
+tale per cui la funzione si azzeri.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/while-prog-min.png}
+    \caption{Programma WHILE che implementa la minimalizzazione di una funzione}
+\end{figure}
+Sia tale che questa dicitura è legale, poiché $F$ è un programma $WHILE$, se però
+$y$ dovesse mancare questo programma andrà in loop (semantica indeterminata,. $\bot$). Si introduce
+la possibilità di programmi che vanno in loop.
+
+Per induzione strutturale abbiamo mostrato che $\mathcal{P}\subseteq F(WHILE)$. Sorge una
+domanda, \textit{la nostra "idea teorica" di calcolabilità $\mathcal{P}$ raggiungerà
+    quella "pratica" di $F(WHILE)$? Può valore $F(WHILE)\subseteq\mathcal{P}$?}
+
+Nel caso in cui si possa dimostrare tale inclusione (e quindi poi dimostrare che $F(WHILE)=\mathcal{P}$).
+
+\subsubsection{Dimostrazione $F(WHILE)\subseteq\mathcal{P}$}
+Vogliamo dimostrare $F(WHILE)=\{\Psi_W : W\in W-PROG\}\subseteq\mathcal{P}=ELEM^{COMP,RP,MIN}$
+le funzioni $WHILE$ programmabili sono anche delle ricorsive parziali.
+$$\Psi_W\in F(WHILE)\implies\Psi_W\in\mathcal{P}=ELEM^{COMP,RP,MIN}$$
+Quindi prendiamo una funzione tale e dimostriamo che essa sia ricorsiva parziale, ma questo
+per definizione vuol dire dimostrare che $\Psi_W$ può essere ottenuta come composizione,
+ricorsione primitiva e minimalizzazione a partire da funzioni in $ELEM$.
+
+Se riesco a dimostrare questo allora ho dimostrato che la semantica di un qualsiasi programma
+$WHILE$ è ricorsiva parziale.
+
+Ricordiamo come è definita la semantica di un programma $WHILE$ si definisce a partire
+dall'input $x$ inserito in una funzione che inizializza la macchina (delle 21 variabili
+disponibili $x_1=x$ ed il resto impostate a 0). Dopo di che si fa agire la semantica nel
+programma $W$, la quale è la funzione stato prossimo, ci restituisce lo stato successivo.
+L'output è lo stato finale che viene salvato sul registro/variabile 0 delle 21 disponibili,
+questo significa effettuare la proiezione.
+$$\Psi_W(x)=Pro_0^{21}([W](W-in(x)))$$
+(la funzione stato prossimo $[C](\underline{x})=\underline{y}$ calcola lo stato
+$\underline{y}\in\mathbb{N}^{21}$ a seguito dall'esecuzione del comando $WHILE$ $C$
+partendo dallo stato $\underline{x}\in\mathbb{N}^{21}$).
+
+Quindi vogliamo dimostrare che $\Psi_W(x)=Pro_0^{21}([W](W-in(x)))$ faccia parte delle
+ricorsive parziali, noto che la semantica di un programma $WHILE$ si ottiene effettuando
+la composizione di una funzione elementare (la proiezione) con la funzione stato prossimo.
+Allora questo significa che posso rappresentare con le ricorsive parziali la funzione
+stato prossimo, vediamo perché:
+\begin{enumerate}
+    \item $Pro_0^{21}\in ELEM\implies Pro_0^{21}\in\mathcal{P}$
+    \item $\mathcal{P}$ è chiuso rispetto alla composizione
+    \item Questo dimostra che $[C](\underline{x})=y\in\mathcal{P}$ allora $\Psi_W\in\mathcal{P}$. Qui
+          però c'è da aggiungere un dettagli tecnico, la funzione stato prossimo è definita come $[]():\mathbb{N}^{21}\rightarrow\mathbb{N}^{21}$
+          ha come codominio $\mathbb{N}^21$ (funzione che va da stati in stati). Mentre $\mathcal{P}$ per come le abbiamo
+          definite hanno come codominio $\mathbb{N}$. \textit{Questo è un problema?} a dire il vero no, sappiamo che possiamo
+          esprimere ciò con una codifica di 21 elementi utilizzando la lista di Cantor.
+\end{enumerate}
+Quindi quello che faremo non sarà dimostrare che una funzione da vettore a vettore appartiene
+alle funzioni ricorsive ($[C](\underline{x})=\underline{y}\in\mathcal{P}$ con $\underline{x},\underline{y}\in\mathbb{N}^{21}$).
+Quanto $f_C(x)=y\in\mathcal{P}$ con $x=[\underline{x}]$ e $y=[\underline{y}]$, ovvero la funzione
+correlata con gli stati che non sono visti come vettori ma la codifica di array di 21 elementi (ovvero
+gli stati contenuti nelle 21 variabili) secondo Cantor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/ric-parz.png}
+\end{figure}
+Quindi diciamo che se dimostro che $f_C$ è ricorsiva parziale allora anche $[C]$ è ricorsiva
+parziale. Utilizzando le parentesi quadre per impacchettare gli stati e le proiezioni per
+spacchettarli (importante sottolineare che queste operazioni sono sicuramente
+funzioni elementari $\in ELEM$).
+
+\paragraph{Dimostrazione che $f_C\in\mathcal{P}$}\mbox{}\\
+Dimostrazione per induzione sul comando $C$ che $f_C$ è ricorsiva parziale, quindi prima di
+tutto vado ad individuare $f_C$ sulla base del linguaggio $WHILE$ ovvero gli assegnamenti.
+\begin{itemize}
+    \item $C\equiv x_k :=0$ (azzeramento della componente $k$)
+          $$f_{x_k:=0}(x)=[Pro(0,x),\dots,0,\dots,Pro(20,x)]$$
+          tutte le operazioni qui effettuate sono ricorsive parziali, le funzioni di proiezione
+          sono elementari, fondere con le parentesi quadra consiste in una serie di somme. Quindi
+          lo stato prossimo di un azzeramento è una funzione che globalmente è ricorsiva parziale.
+
+    \item $C\equiv x_k:=x_j +/\dot{-}1$ (incremento/decremento di 1)
+          $$f_{x_k:=x_j +/\dot{-}1}=[Pro(0,x),\dots,Pro(j,x)+/\dot{-}1,\dots,Pro(20,x)]$$
+          anche qui molto similmente,
+          prendiamo lo stato $x$ e lo spacchettiamo, raggiungiamo la componente $k$-esima e gli
+          sommiamo o decrementiamo di 1 il valore. Il risultato è un numero che è la "condensa"
+          dello stato prossimo (identico a prima solo che incremento). Anche qui sono coinvolte
+          solo funzioni ricorsive parziali, quindi lo stato prossimo per l'operatore di incremento
+          decremento è una funzione ricorsiva parziale.
+          $$f_{x_k:=x_j +/\dot{-}1}(x)\in\mathcal{P}$$
+\end{itemize}
+
+adesso vediamo la funzione stato prossimo per i comandi composti
+\begin{itemize}
+    \item $C\equiv \underline{begin}\;C_1;\dots;C_m\;\underline{end}$
+          ipotizzando induttivamente che $f_C\in\mathcal{P}$ (la funzione composta)
+          $f_C(x)=f_{C_m}(\dots\;f_{C_1}(x)\dots)$
+          effettuo la composizione, ovvero applico la funzione diverse volte sulla funzione degli
+          altri comandi composti. Però noi sappiamo che la funzione composizione è una funzione
+          ricorsiva parziale (questo per ipotesi induttiva).
+
+    \item $C'\equiv\text{while }\;x_k\neq 0\text{ do }C$, consideriamo sempre per ipotesi
+          induttiva che la funzione composta faccia parte delle ricorsive parziali $f_c\in\mathcal{P}$
+
+          $$f_{c'}(x)=f_c^{e(x)}(x)\text{ con }e(x)=\mu y(Pro(k,f_e^y(x))=0)$$
+          ovvero applichiamo il comando $C$ nello stato $x$ un numero $e$ di volte, tale per cui
+          questo numero sia il più piccolo numero di volte che serve per azzerare la variabile $k$.
+
+          Inizio a notare qualcosa chem i piace, ci sono operazioni di minimizzazione e proiezione,
+          questi sono costrutti ricorsivi parziali.
+
+          Siamo attualmente tentati da dire che la semantica del $WHILE$ sia ricorsiva parziale, ma
+          c'é qualcosa che non va. Ma questa composizione non è un costrutto ricorsivo parziale, questo
+          perché questa composizione è parametrizzata rispetto ad $y$. Il nostro operatore $COMP$ è definito
+          su un numero costante di argomenti, qui abbiamo un numero di argomenti \textbf{variabili}.
+\end{itemize}
+
+Quindi dato che $f_C^{e(x)}$ è la composizione di $f_C$ per $e(x)$ volte, che non è un numero
+costante. Io so scrivere $COMP(h,g_1,\dots,g_k)$ con $k$ costante. Quindi ci si chiede
+\textit{come rappresentare in $\mathcal{P}$ la composizione di una funzione con se stessa
+    un numero \textbf{non costante} di volte?} ovvero l'operatore $T(x,y)=f_C^y(x)$
+
+\[
+    T(x,y)=
+    \begin{cases}
+        x             & y=0 \\
+        f_C(T(x,y-1)) & y>0
+    \end{cases}
+\]
+Da notare che questo costrutto è ricorsivo parziale, perchè è ottenuto attraverso una
+ricorsione primitiva sfruttando delle funzioni $f_C$ che sappiamo per induzione essere ricorsive
+parziali. Ed è proprio quello che ci serviva, posso riscrivere utilizzando l'operatore
+ricorsivo parziale:
+$$e(x)=\mu y(Pro(x,T(x,y))=0)$$
+Questa è la minimizzazione dell'esponente della composizione di funzione, per esprimere
+la forma completa mi bastare dire:
+$$f_{C'}(x)=f_C^{e(x)}=T(x,e(x))$$
+anche lo stato prossimo del comando while è esprimibile con costrutti ricorsivi parziali, quindi
+abbiamo dimostrato che $F(WHILE)\subseteq\mathcal{P}$
+
+Allora, abbiamo dimostrato che
+$$F(WHILE)=\mathcal{P}$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/situazione_funz.png}
+\end{figure}
+Abbiamo caratterizzato matematicamente ciò che prima avevamo definito con un linguaggio
+ed una macchina. Da un punto di vista teorico i linguaggi $F(WHILE)$ e $F(RAM)$ si chiamano
+\textbf{classe delle funzioni ricorsive parziali}.
+
+Esiste un interessante sottoclasse delle funzioni ricorsive parziali, la \textbf{classe
+    delle funzioni ricorsive totali} indicata con $\mathcal{T}$.
+
+\subsubsection{Tesi di Church-Turing}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/church-turing.png}
+\end{figure}
+Qualunque modello di calcolo sintetizzato negli anni '30 che individuasse le cose
+calcolabili va sempre ad attingere dalla classe delle funzioni ricorsive parziali:
+WHILE, RAM, Macchine di Turing, $\lambda$-calcolo, Grammatiche, \dots
+
+Tutti questi punti di vista diversi della calcolabilità hanno sempre detto che la classe delle
+funzioni calcolabili è sempre quella delle ricorsive parziali $\mathcal{P}$. Per questo
+è stata proposta la tesi di Church-Turing (entrambi hanno pensato la stessa cosa): la classe
+delle funzioni intuitivamente calcolabili coincide con la
+classe delle funzioni ricorsive parziali.
+
+Tutto ciò che pensi sia calcolabile sarà sempre catturato dalla classe delle funzioni ricorsive parziali.
+\textit{Perché non si parla di teorema?} Perché non è presente una caratterizzazione di tutti
+i modelli di calcolo presenti, la vediamo come una presa di posizione prudente. Fin'ora è
+una tesi che è stata sempre confermata da un qualsiasi modello di calcolo ragionevole.
+
+In altre parole, aderendo alla tesi di Church un sinonimo di "calcolabile" è \textit{"ricorsivo parziale"},
+mentre se dico che un compito è \textit{"ricorsivo totale"} intendo che è calcolabile da programmi che
+non possono andare mai in loop (ovvero che si arrestano su ogni input).
 
 
 
