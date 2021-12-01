@@ -2818,10 +2818,212 @@ In altre parole, aderendo alla tesi di Church un sinonimo di "calcolabile" è \t
 mentre se dico che un compito è \textit{"ricorsivo totale"} intendo che è calcolabile da programmi che
 non possono andare mai in loop (ovvero che si arrestano su ogni input).
 
+\subsection{Sistemi di programmazione}
+In un sistema di calcolo posso studiare altre proprietà, come studiare certi programmi specifici
+per un determinato compito. Oppure vorrei poter dimostrare che per certi compiti specifici non
+sono in grado di scrivere dei programmi.
 
+Vorrei guardare all'interno di un sistema formale di programmazione e studiare altre proprietà che
+non siano la potenza di calcolo. Il nostro atteggiamento sarà quello che abbiamo tenuto fin'ora,
+\textit{vogliamo dare delle risposte che siano generali ed astratte, e che non prendano in
+    considerazione un solo sistema di programmazione ma tutti i sistemi di programmazione}.
 
+\paragraph{Definizione di sistema di programmazione accettabile}\mbox{}\\
+% riprendere appunti
+Individuare alcune proprietà (dette assiomi) che auspicabili per un sistema di programmazione
+qualunque. Un sistema di programmazione viene definito come \textbf{accettabile} se soddisfa
+queste tre proprietà (le quali vengono soddisfatte dal maggior numero di sistemi di programmazione).
 
+Cercherò di dimostrare queste tre proprietà utilizzando questo sistema molto ristretto di assiomi
+per dimostrare certi risultati, questi risultati si estendono a tutti i sistemi di programmazione che
+soddisfano questo sistema di assiomi.
 
+Definizione di un gruppo utilizzando una serie di proprietà,
+per esempio l'insieme $\mathbb{R}$ rispetto alla somma forma un gruppo, ovvero tutti gli insiemi che
+soddisfano una serie di assiomi.
+Una volta stabilito che cosa è un gruppo si provano i risultati sui gruppi, utilizzando gli assiomi
+che definiscono che cosa è un gruppo.
 
+\subsubsection{Proprietà auspicabili per un sistema di programmazione}
+Un sistema di programmazione che solitamente definisco dicendo come è fatta la macchina, il linguaggio, \dots
+Ma noi vogliamo definire in generale, quindi definiamo un sistema di programmazione utilizzando la sua potenza
+computazionale $\{\varphi_i\}_{I\in\mathbb{N}}$
+
+$$\{\varphi_i\}_{i\in\mathbb{N}}=\text{Insieme delle funzioni calcolabili con quel sistema}$$
+Dove $i\in\mathbb{N}$ sono le codifiche dei programmi di quel sistema.
+Possiamo cercare di ispirarci ad un sistema di programmazione particolare, per capire
+quali siano le proprietà più auspicabili, consideriamo il sistema RAM:
+\begin{enumerate}
+    \item \textbf{Potenza computazionale}, ovvero $\{\varphi_i\}=\mathcal{P}$, significa che RAM
+          aderisce alla tesi di Church-Turing. Questa mi sembra una proprietà ragionevole da avere,
+          questo perché la tesi stessa dice che "ciò che è ragionevolmente calcolabile è la classe della
+          funzioni ricorsive parziali", visto che vogliamo un sistema ragionevole vogliamo aderire con
+          questa classe di funzioni (non vogliamo nulla di più o di meno).
+    \item \textbf{Interprete universale}, ovvero un programma $u\in\mathbb{N}$ tale che
+          $\forall x,n\in\mathbb{N}:\varphi(\langle x,n\rangle)=\varphi_n(x)$, ovvero in grade di
+          simulare un qualsiasi altro programma scritto in RAM (esso stesso è scritto in RAM). Possiamo
+          rivedere i passi con cui abbiamo dimostrato l'esistenza di questo programma universale:
+          La presenza di un interprete universale è molto interessante, vogliamo trattare sistemi di programmazione
+          dove è presente un interprete universale, questo perché ci garantisce un algebra dei programmi, ovvero
+          la possibilità di trasformare un programma in un altro programma.
+    \item \textbf{Teorema $S_1^1$}: è possibile scrivere dei programmi che automaticamente danno in output dei programmi
+          più specifici a partire da un programma più generale. Il programma più specifico è un programma generale dove
+          alcuni input vengono prefissati. Il teorema garantisce che per quel sistema sono in grado di scrivere un programma
+          che preso in ingresso un programma generale ed un modo di fissare un suo input riesco ad ottenere un listato dove uno dei
+          suoi input è stato fissato (quindi una versione più specifica).
+          Per esempio, in un sistema di programmazione $RAM$ consideriamo $P\in PROG:\varphi_P(\langle x,y\rangle)=x+y$.
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/programma_p.png}
+              \caption{Codice del programma $P$}
+          \end{figure}
+
+          Prima di tutto prende un addendo estraendo il primo numero da sommare e lo mette in $R_2$,
+          nel registro $R_3$ estrapola l'altro addendo (le macro sono tutte ricorsive parziali). \textit{Siamo
+              in grado di scrivere un programma che dia in output il listato di un programma $\overline{P}$
+              la cui semantica sia $x+3$?}
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/programma_pseg.png}
+              \caption{Codice del programma $\overline{P}$}
+          \end{figure}
+          Questa è una versione più specifica, perché uno dei due input è
+          fissato. Questo è possibile caricando in $R_0$ mi preparo il numero 3, una volta che ho questa costante
+          mi preparo in $R_1$ mi preparo la coppia $\langle x,3\rangle$ poi ripulisco $R_0$, alla fine avvio $P$.
+          Quando avvio $P$, esso prenderà l'input da $R_1$ che ha come secondo elemento della coppia una costante 3,
+          e salverà l'output su $R_0$. Questo programma lo chiamerò $S_1^1$, questo modo di calcolare
+          programmi specifici a partire da un programma generale, supponiamo di avere un programma $n$
+          in $RAM$ che parte da due input e un $\overline{n}$ che ne ha bisogno solo di 1 perché l'altro
+          è fissato.
+
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=0.5]{images/psegnato.png}
+          \end{figure}
+
+          $$S_1^1(n,y)=\overline{n}\text{ tale che }\varphi_{\overline{n}}(x)=\varphi_n(x,y)$$
+          Si chiama $S^1_1$ perché funziona su programmi $n$ che hanno 2 input, e fissa 1 input (il
+          pedice) e lascia libero l'altro input (l'apice).
+
+          Posso esplicitare la funzione $S_1^1$ come
+          $$S_1^1(n,y)=\overline{n}=\langle 0,\dots,0,s,t,n\rangle$$
+          dove:
+          \begin{itemize}
+              \item codifica delle prima $y$ istruzioni che hanno come aritmetizzazione tutte 0.
+              \item $s$ è la codifica della coppia.
+              \item $t$ è la codifica dell'azzeramento di $R_0$.
+              \item $n$ è la codifica del mio programma $P$.
+          \end{itemize}
+          Che caratteristiche ha questa funzione? Prima di tutto è una funzione \textbf{totale}, inoltre
+          è una funzione \textbf{programmabile}. Questo significa che la funzione $S_1^1\in\mathcal{T}$,
+          è una funzione \textbf{ricorsiva totale} (non andrà mai in loop). In sintesi
+          abbiamo scoperto che nel sistema di programmazione RAM, esiste una funzione ricorsiva totale che
+          accetta i seguenti argomenti: un codice $n$ di un programma con due input, un valore $y$ su cui
+          fissare uno dei due input. Questa funzione produce un numero $S_1^1(n,y)$ che è il codice del
+          programma che esattamente lo stesso significato di $n$ dove $y$ è fissato su una delle variabili.
+          Significa che per il sistema $RAM$ vale il teorema $S_1^1$: Dato il sistema $RAM$ $\{\varphi_i\}$,
+          esiste una funzione $S_1^1\in\mathcal{T}$ tale che $\forall n,x,y\in\mathbb{N}$:
+          $$\varphi_n\left(\langle x,n\rangle\right)=\varphi_{S_1^1(n,y)}(x)$$
+          Anche il teorema $S_1^1$ è una proprietà auspicabile, per le stesse ragioni per cui mi piacerebbe
+          un interprete universale, perché sono in grado di avere un algebra dei programmi che mi permetta di
+          prendere un programma e restringerlo sul dominio degli input.
+
+          Il teorema $S_n^m$ è la generalizzazione del teorema $S_1^1$, abbiamo un programma composto da
+          $m+n$ variabili, dove si fissano gli ultimi $n$ input e si lasciano variare i primi $m$.
+          Formalmente, dato $\{\varphi_i\}$ RAM, esiste una funzione $S_n^m\in\mathcal{T}$ tale che per
+          ogni programma $k\in\mathbb{N},\underline{x}\in\mathbb{N}^m$ e ogni $\underline{y}\in\mathbb{N}^n$ vale:
+          $$\varphi_k\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_m^n(k,\underline{y})}\left(\rangle\underline{x}\langle\right)$$
+          La dimostrazione è una semplice generalizzazione di quella fornita per il teorema $S_1^1$.
+\end{enumerate}
+
+Queste sono le tre proprietà auspicabili di un sistema di programmazione per prenderlo da un punto
+di vista teorico. Questi vengono chiamati tre assiomi di Rogers (1959), un sistema di programmazione viene
+definito accettabile se:
+\begin{enumerate}
+    \item aderisce alla testi di Church-turing.$$\{\varphi_i\}=\mathcal{P}$$
+    \item esiste un interprete universale.$$\exists u\in\mathbb{N}:\varphi_u\left(\langle x,n\right)=\varphi_n(x)$$
+    \item se vale il teorema $S_n^m$.$$\exists S_n^m\in\mathcal{T}:\forall k\in\mathbb{N},\underline{x}\in\mathbb{N}^m,\underline{y}\in\mathbb{N}^n\text{ vale }\varphi_n\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_n^m(k,\underline{y})(\langle\underline{x}\rangle)}$$
+\end{enumerate}
+Questi non sono assiomi restrittivi, il rischio è che la serie di assiomi individuano pochi oggetti
+perché sono molto restrittivi, in realtà tutti i linguaggi di programmazione che abbiamo
+conoscenza soddisfano questi tre assiomi di calcolo.
+
+\subsubsection{Esistenza di compilatori tra S.P.A.}
+Dati due linguaggi, una cosa interessante da verificare è: \textit{sono in grado di scrivere
+    un compilatore tra questi due linguaggi?} (qualunque essi siano, purché siano sistemi di programmazione
+accettabili). Dal punto di vista pratico dipende dai linguaggi che vengono forniti, quello che possiamo
+dimostrare però è che qualunque sia la coppia dei linguaggi scelti è che \textbf{sicuramente
+    esiste un compilatore tra di essi}.
+
+Dati due sistemi di programmazione accettabili $\{\varphi_i\}$ e $\Psi_i$ un compilatore è un modo
+per trasformare un programma in un altro in maniera che mantenga la semantica. Per noi i
+programmi sono numeri, quindi un compilatore è una funzione $t:\mathbb{N}\rightarrow\mathbb{N}$
+tale che abbia le seguenti caratteristiche:
+\begin{enumerate}
+    \item \textbf{Correttezza}: deve valere la semantica, ciò che fa il programma sorgente
+          lo deve fare anche il programma oggetto. $\forall i\in\mathbb{N}\text{ vale }\varphi_i=\Psi_{t(i)}$
+    \item \textbf{Completezza}: compila ogni $i\in\mathbb{N}$.
+    \item \textbf{Programmabile}: esiste un programma che implementa $t$.
+\end{enumerate}
+Da un punto di vista formale, un compilatore è una funzione che va dai naturali ai naturali che
+è ricorsiva totale (punto 2 e 3) e corretta. Quello che si vuole dimostrare è che dati due sistemi di programmazione accettabili
+esisterà sempre un compilatore tra essi.
+\paragraph{Teorema}\mbox{}\\
+Sia $\{\varphi_i\}$ che $\{\Psi_i\}$ valgono gli assiomi degli s.p.a.:
+\begin{enumerate}
+    \item $\{\varphi_i\}=\mathcal{P}$
+    \item $\exists u:\varphi_u\left(\langle x,n\rangle\right)=\varphi_n(x)$
+    \item $\exists S_1^1\in\mathcal{T}:\varphi_n\left(\langle x,y\rangle\right)=\varphi_{S_1^1(n,y)}(x)$
+\end{enumerate}
+devo dimostrare che posso esibire una funzione $t\in\mathcal{T}$ compilatore
+che sia ricorsiva totale e che sia corretta (solamente utilizzando questi tre assiomi).
+\begin{itemize}
+    \item Prendiamo un programma $i$-esimo, $\varphi_i(x)$ in questo sistema di programmazione
+          accettabile ho garantiti i tre assiomi. Se uso l'esistenza di un interprete universale allora
+          posso dire che esiste un programma $u$ per cui posso simulare il programma
+          $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)$$
+    \item Noto che tutto ciò che è calcolato nel sistema $\{\varphi_i\}$, questo grazie
+          alla tesi di Church-Turing, e lo stesso vale per $\Psi_i$. Allora esiste un programma $e$
+          in grado di calcolare il programma $u$, ovvero che ha la sua stessa semantica.
+          $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)=\Psi_e\left(\langle x,i\rangle\right)$$
+    \item Il terzo assioma mi dice che è possibile rubare una delle variabili in input grazie al
+          teorema $S_1^1$.
+          $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)=\Psi_e\left(\langle x,i\rangle\right)=\Psi_{S_1^1(e,i)}(x)$$
+\end{itemize}
+Il compilatore cercato è la funzione $t(i)=S_1^1(e,i)$ per ogni $i\in\mathbb{N}$, quindi
+questa funzione $t(i)$ è effettivamente un compilatore tra i due sistemi di programmazione
+accettabili
+\begin{enumerate}
+    \item $t\in\mathcal{T}$ in quanto $S_1^1\in\mathcal{T}$
+    \item $t$ è corretta: $\varphi_i=\Psi_{t(i)}$ per quanto dimostrato in
+          $\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)=\Psi_e\left(\langle x,i\rangle\right)=\Psi_{S_1^1(e,i)}(x)$
+\end{enumerate}
+Solamente grazie a queste tre proprietà matematiche sono riuscito a dimostrare che esiste un compilatore
+fra due s.p.a.
+\paragraph{Corollario}\mbox{}\\
+Dati i seguenti s.p.a. $A$,$B$ e $C$, voglio costruire un compilatore tra $A$ e $B$ scritto
+nel linguaggio $C$ (sappiamo che esiste tra $A$ e $B$, ma lo vogliamo scrivere nel $C$).\\Dimostrazione:
+
+\begin{itemize}
+    \item Per il teorema precedente, esiste il compilatore $t\in\mathcal{T}$ da $A$ a $B$.
+    \item Poiché $C$ è un s.p.a., per l'assioma 1, $C$ contiene programmi per tutte le funzioni
+          ricorsive parziali.
+    \item Dunque, conterrà un programma anche per $t$ che è una funzione ricorsiva totale.
+\end{itemize}
+In pratica, dimostro che posso scrivere questo compilatore nel con un qualsiasi linguaggio
+a patto che sia un s.p.a., non mi interessa il compilatore tra cosa sarà e cos'altro sarà,
+quello che sappiamo è che sicuramente esiste.
+
+\subsubsection{Teorema di isomorfismo di Rogers}
+In realtà esiste un risultato più forte tra l'esistenza di due compilatori,
+esiste un compilatore con una qualità in più tra due sistemi accettabili. Il teorema dice che
+dati due s.p.a. $\{\varphi_i\}$ e $\{\Psi_i\}$ esiste sicuramente una funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ tale che:
+\begin{enumerate}
+    \item $t\in\mathcal{T}$
+    \item $\forall i\in\mathbb{N}:\varphi_i=\Psi_{t(i)}$
+    \item $t$ è invertibile: $t^{-1}$, significa che è un \textbf{decompilatore}, ovvero un modo
+          che sia possibile recuperare il sorgente da cui sono partito con corrispondenza 1:1, ovvero
+          una funzione biettiva (che si dice anche isomorfismo).
+\end{enumerate}
 
 \end{document}

@@ -108,3 +108,10 @@
 \contentsline {subsubsection}{\numberline {4.2.6}Dimostrazione $F(WHILE)\subseteq \mathcal {P}$}{75}{subsubsection.4.2.6}%
 \contentsline {paragraph}{Dimostrazione che $f_C\in \mathcal {P}$}{76}{section*.58}%
 \contentsline {subsubsection}{\numberline {4.2.7}Tesi di Church-Turing}{78}{subsubsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.3}Sistemi di programmazione}{79}{subsection.4.3}%
+\contentsline {paragraph}{Definizione di sistema di programmazione accettabile}{79}{section*.59}%
+\contentsline {subsubsection}{\numberline {4.3.1}Proprietà auspicabili per un sistema di programmazione}{79}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Esistenza di compilatori tra S.P.A.}{83}{subsubsection.4.3.2}%
+\contentsline {paragraph}{Teorema}{83}{section*.60}%
+\contentsline {paragraph}{Corollario}{84}{section*.61}%
+\contentsline {subsubsection}{\numberline {4.3.3}Teorema di isomorfismo di Rogers}{84}{subsubsection.4.3.3}%
