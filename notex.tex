@@ -798,7 +798,7 @@ $$\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$$
 N.B.: Gli insiemi $\mathcal{P}(\mathbb{N})$ e $\mathbb{N}^{\mathbb{N}}$ sono detti \textbf{insiemi continui},
 e sono equinumerosi a $\mathbb{R}$.
 
-\section{Calcolabilità}
+\section{Teoria della calcolabilità}
 \subsection{Cosa è calcolabile?}
 Sappiamo che la potenza computazionale di un sistema di calcolo $\mathcal{C}$ corrisponde a:
 $$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
@@ -3260,7 +3260,7 @@ $$\text{Istanza: }G=(V,E)$$
 $$\text{Domanda: esiste un circuito/ciclo Euleriano nel grafo }G?$$
 gli archi sono coinvolti nel ciclo una e una sola volta.
 
-\subsection{Decidibilità}
+\subsubsection{Decidibilità}
 Quando un problema viene detto decidibile? Il problema $\pi$ si dice decidibile se è risolubile
 per via automatica, se esiste $P_\pi$ tale che:
 \begin{figure}[H]
@@ -3362,7 +3362,7 @@ vertici di grado dispari che sono la sorgente ed il pozzo (del cammino). Dato il
 un algoritmo che risolve il circuito Euleriano verifica che ogni nodo del grafo $G$ abbia
 grado pari. Questo significa che questo problema è decidibile.
 
-\subsection{Esistono problemi indecidibili?}
+\subsubsection{Esistono problemi indecidibili?}
 Problema dell'arresto per un programma $P$ (non è un problema dell'arresto generale).
 Abbiamo un programma $P$ e vogliamo costruire un problema di decisione dato
 il programma $P$.
@@ -3412,11 +3412,266 @@ Da notare che ora il programma in questo modo non è più fissato, lo stesso pro
 è legato all'input ovvero varia al variare dell'input. Dimostreremo che
 questo problema di decisione è \textbf{indecidibile}.
 
+\paragraph{Dimostrazione per assurdo}\mbox{}\\
+Quindi assumiamo che $AR_{\hat{P}}$ sia un problema decidibile, quindi esiste un programma
+che su input $x$ si ferma sempre e mi da 1 se il programma $x$ su se stesso termina e 0 altrimenti.
+\[
+    \Phi_{AR_{\hat{P}}}(x)=
+    \begin{cases}
+        1 & \varphi_{\hat{P}}(x)=\varphi_n(x)\downarrow \\
+        0 & \varphi_{\hat{P}}(x)=\varphi_n(x)\uparrow
+    \end{cases}
+\]
+Se $\Phi_{AR_{\hat{P}}}\in\mathcal{T}$ (poiché la funzione termina sempre), allora è abbastanza
+immediato concludere che anche un altra funzione che costruisco utilizzando quest'ultima
+risulta $\in\mathcal{T}$
+
+\[
+    f(x)=
+    \begin{cases}
+        0                      & \text{se }\Phi_{AR_{\hat{P}}}(x)=0  \\
+        \varphi_{\hat{P}}(x)+1 & \text{se } \Phi_{AR_{\hat{P}}}(x)=1
+    \end{cases}
+\]
+Difatti possiamo scrivere un programma per $f$:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.65]{images/prog_f.png}
+    \caption{Programma che implementa $f$}
+\end{figure}
+Questo programma non fa altro che chiamare il programma che implementa
+la funzione soluzione, se quel programma restituisce 0 allora do in output 0.
+Altrimenti richiamo l'interprete universale su $x$ sia come dato che come programma
+e poi gli aggiungo 1.
+
+Allora esiste un programma $\alpha$ in grado di calcolare $f$, la cui semantica
+$\varphi_\alpha=f$. Allora calcoliamo la funzione $\varphi_\alpha$ su $\alpha$
+stesso:
+\[
+    \varphi_\alpha(\alpha)=
+    \begin{cases}
+        0                        & \text{se }\varphi_\alpha(\alpha)\uparrow   \\
+        \varphi_\alpha(\alpha)+1 & \text{se }\varphi_\alpha(\alpha)\downarrow
+    \end{cases}
+\]
+purtroppo però una funzione di questo tipo non può esistere nella realtà matematica,
+poiché il suo risultato è uguale al suo risultato più 1, questa è una \textbf{contraddizione}.
+
+Fondamentalmente abbiamo ottenuto che assumere la decidibilità di questo problema ci porta
+a definire una costruzione matematica assurda, la funzione matematica $\varphi_\alpha(\alpha)$
+è una contraddizione, questo significa che sono partito da un assunzione sbagliata ovvero
+che il problema dell'arresto per $\hat{P}$ sia decidibile, esso è indecidibile.
+
+\subsubsection{Il problema generale dell'arresto}
+Problema generale introdotto da Alan Turing (1936), che getta le basi dell'informatica.
+$$\pi=\text{ARRESTO(AR)}$$
+$$\text{Istanza: }x,y\in\mathbb{N}$$
+$$\text{Domanda: }\varphi_y(x)\downarrow?$$
+Notiamo che la versione generale del problema ha in ingresso due input slegati tra di loro,
+$x$ è il dato ed $y$ il programma (precedentemente $x$ era tutti e due). Intuitivamente
+possiamo capire che il problema è indecidibile, poiché è la versione più generale dell'altro,
+ma questa è informatica teorica e vogliamo dimostrare formalmente che il problema dell'arresto
+è indecidibile.
+
+\paragraph{Dimostrazione per assurdo}\mbox{}\\
+Assumiamo per assurdo che questo problema sia decidibile, questo significa che esiste
+un programma che lo risolve tale che $P_{AR}(x,y)$ restituisce 1 se $\varphi_{P}(x)\downarrow$,
+altrimenti 0.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.65]{images/prob_gen_ind.png}
+\end{figure}
+Il trucco sta nel fissare il secondo termine $y$ come $x$, quindi lo specializzo facendolo
+funzionare su $(x,x)$.
+
+Sappiamo che il problema dell'arresto su $\hat{P}$ è indecidibile, perché porta ad un programma
+che è indecidibile. Quindi abbiamo che il problema generale dell'arresto è indecidibile.
+
+\subsection{Riconoscibilità automatica di insiemi}
+Supponiamo di avere l'insieme $A\subseteq\mathbb{N}$, questo senza perdita di generalità,
+esso è \textbf{riconoscibile automaticamente} se esiste un programma $P_A$ che cataloga
+esattamente tutti gli elementi di $\mathbb{N}$ come appartenenti o meno ad $A$:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/insiemi_riconoscibili.png}
+\end{figure}
+Il nostro programma deve dare in output 1 se $x$ appartiene all'insieme $A$, altrimenti 0. Quindi
+$P_A$ deve essere un programma corretto nel senso che deve classificare correttamente
+gli elementi di $A$ e che deve sempre terminare per ogni $x$ classificato.
+
+\textit{Quali insiemi possono essere riconosciuti grazie a dei programmi? Quali no?} Esistono
+degli insiemi per cui non esiste un riconoscimento automatico.
+
+\subsubsection{Insiemi ricorsivi}
+Un insieme $A\subseteq\mathbb{N}$ viene definito come ricorsivo se è riconoscibile per via automatica, quindi
+esiste un programma $P_A$ che riesce a catalogare gli elementi $x\in\mathbb{N}$
+come appartenenti ad $A$. Posso dare una definizione leggermente più formale utilizzando
+la sua funzione caratteristica
+$$\chi_A:\mathbb{N}\rightarrow\{0,1\}\text{ t.c. }\chi_A(x)=1\text{ se }x\in A;\text{ altrimenti }0$$
+$$\chi_A\in\mathcal{T}$$
+Le due definizioni sono equivalenti:
+\begin{enumerate}
+    \item $P_A$ implementa $\chi_A\implies \chi_A\in\mathcal{T}$
+    \item se $\chi_A\in\mathcal{T}$ allora esiste un programma che la calcola,
+          quel programma fa al caso nostro ed è quello che classifica gli elementi.
+\end{enumerate}
+
+\subsubsection{Ricorsivo vs Decidibile}
+Spesso si fa confusione tra ricorsivo e decidibile, questo è un abuso di linguaggio,
+spesso si dice che "un insieme ricorsivo è decidibile" ma può essere decidibile
+solamente un problema di decisione non gli insieme.
+
+Però in realtà un insieme ricorsivo
+possiamo chiamarlo insieme decidibile, perchè se è un insieme ricorsivo allora è decidibile
+il corrispondente \textbf{problema di riconoscimento}. Cio è dato un insieme $A$ possiamo
+associare a questo insieme il problema di riconoscimento:
+$$RIC_A$$
+$$\text{Istanza: }x\in\mathbb{N}$$
+$$\text{Domanda: }x\in A?$$
+Questo problema di riconoscimento ha la sua funzione soluzione (1 se risposta
+positiva 0 per risposta negativa alla domanda del nostro problema):
+\[
+    \Phi_{RIC_A}(x)=
+    \begin{cases}
+        1 & \text{se }x\in A    \\
+        0 & \text{se }x\notin A
+    \end{cases}
+\]
+La funzione soluzione non è altro che la funzione caratteristica dell'insieme $A$,
+e se l'insieme $A$ è ricorsivo questa funzione caratteristica sarà ricorsiva totale.
+
+$$\Phi_{RIC_A}=\chi_A$$
+Quindi la funzione soluzione è ricorsiva totale, noi sappiamo che in un problema
+che ha la funzione soluzione $\in\mathcal{T}$ esso è un problema decidibile.
+$$\Phi_{RIC_A}=\chi_A\in\mathcal{T}\implies\Phi_{RIC_A}\in\mathcal{T}\implies RIC_A\text{ è decidibile}$$
+
+Simmetricamente, sempre con abuso di linguaggio si dice che un problema di decisione è
+ricorsivo, quando in realtà sono ricorsivi solo gli insiemi. Questo perché in questo
+caso preso quel problema di decisione l'insieme delle istanze a risposta positiva
+o quelle negative diventa ricorsivo.
+Prendiamo un problema di decisione generico $\pi$ su cui mi chiederò se una certa
+proprietà vale oppure no, a questo problema di decisione possiamo associare l'insieme
+delle istanze tale per cui la funzione soluzione è vera.
+
+$$\text{Istanza: }x\in D$$
+$$\text{Domanda: }p(x)?$$
+$$A_\pi=\{x\in D:\Phi_\pi(x)=1\}$$
+$$\left(\Phi_\pi(x)=1\equiv p(x)\right)$$
+Se $\pi$ è decidibile abbiamo che la sua funzione soluzione è ricorsiva totale, quindi
+esiste un programma che la calcola, ma quel programma che la calcola non fa nient'altro che
+calcolare l'appartenenza o meno a $\pi$. Quindi un programma che calcola $\Phi_\pi$
+riconosce automaticamente l'insieme $A_\pi\implies A_\pi$ è ricorsivo.
+
+\begin{itemize}
+    \item decidibili possono essere solo i problemi di decisione.
+    \item ricorsivi possono essere solo gli insiemi.
+\end{itemize}
+Però anche se usiamo in maniera interscambiabile questi problemi siamo lo stesso
+in grado di capirci per le cose che abbiamo dimostrato fin'ora.
 
 
+\paragraph{Esempi di insiemi ricorsivi}\mbox{}\\
+Pari, dispari, primi,\dots e quindi l'insieme $A_\pi$ con $\pi$ decidibile.
+Possiamo considerare il problema delle equazioni diofantee. Io posso associare
+a questo problema il problema delle terne a risposta positiva.
+$$A_\pi\subseteq N^{+^3}$$
+$$A_\pi=\{(a,b,c)\in\mathbb{N}^{+^3}:\exists x,y\in\mathbb{Z}(ax+by=c)\}$$
+Questo è un insieme ricorsivo, mentre la domanda del problema:
+$$\exists x,y\in\mathbb{Z}:ax+by=c?$$
+è un problema decidibile.
+
+\subsubsection{Esistono insiemi non ricorsivi?}
+Se io faccio riferimento al problema dell'arresto per il programma $\hat{P}$, con
+istanze $x\in\mathbb{N}$ e domanda $\varphi_{\hat{P}}(x)=\varphi_x(x)\downarrow?$
+allora prendiamo il corrispondente insieme $A$ delle istanze a risposta positiva
+$$A=\{x\in\mathbb{N}:\varphi_x(x)\downarrow\}$$
+ovvero codifiche di programmi che eseguiti su se stessi sono in grado di terminare.
+
+L'insieme $A$ non può essere riconosciuto da nessun programma, se io avesse un programma
+che preso in ingresso $x$ mi da 1 se appartiene al suo insieme e 0 se non appartiene,
+allora io uso tranquillamente questo programma per decidere questo problema di decisione.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/a_non_ric.png}
+\end{figure}
+
+Ovviamente potrei usare $P_A$ per decidere $AR_{\hat{P}}$ che però abbiamo mostrato
+essere indecidibile. Quindi, $P_A$ non può esistere per cui concludiamo che $A$ non è
+ricorsivo.
+Come vedete non è facile inventarsi degli elementi non ricorsivi. La nozione di insieme
+ricorsivo è ben posta perché sono presenti insiemi ricorsivi ed insiemi non ricorsivi.
+
+\subsubsection{Relazioni ricorsivi}
+Il concetto di ricorsività può anche essere esteso a costrutti più sofistica degli
+insiemi a quello delle relazioni. Se noi prendiamo una relazione binaria $R\subseteq\mathbb{N}\times\mathbb{N}$
+essa è una \textbf{relazione ricorsiva} se e solo se vista come un insieme (prodotto cartesiano) è un insieme ricorsivo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/rel_ricors.png}
+\end{figure}
+
+Equivalentemente se ho un programma $P_R$ che implementa quella relazione, e mi restituisce
+1 se quei due numeri stanno in relazione altrimenti 0.
+\paragraph{Esempio}\mbox{}\\
+Consideriamo la relazione di divisibilità tra $x$ e $y$, nella quale la relazione
+è definita se e solo se $x$ divide $y$
+$$x\text{ R }y$$
+$$R=\{(x,y)\in\mathbb{N}^2:\exists k\in\mathbb{N}(y=k\cdot x)\}$$
+La sua funzione caratteristica
+$$\chi_R:\mathbb{N}^2\rightarrow \{0,1\}$$
+può essere definita come:
+$$\chi_R(x,y)=1\dot{-}(y\mod x)$$
+(composizione di funzioni $\in\mathcal{T}$)
+quindi abbiamo che $\chi_R\in\mathcal{T}$
+
+\paragraph{Importante relazione ricorsiva}\mbox{}\\
+Dato un programma $P$ si definisce:
+$$R_P=\{(x,y)\in\mathbb{N}^2:P\text{ su input }x\text{ termina in }y\text{ passi}\}$$
+si può dimostrare che questa relazione $R_P$ è ricorsiva, a prescindere dal
+problema fissato. In altre parole sono in grado di scrivere un programma $P$ che prendendo
+in ingresso $x$ e $y$ termina in $y$ passi. Questo assomiglia al problema dell'arresto,
+ma in realtà non è il problema dell'arresto.
+
+Possiamo costruire un programma che realizza $R_P$ che non è altro che l'interprete universale
+a cui attacco un \textbf{clock}, la quale è una variabile che si incrementa di 1
+ogni volta che l'interprete fa un passo di interpretazione del programma in ingresso.
+$$\tilde{U}=U+clock+check\_clock$$
+in aggiunta è presente un controllo che il clock abbia raggiunto $y$ oppure no.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/tilde_U.png}
+    \caption{Esplicitazione di $\tilde{U}$ come programma}
+\end{figure}
+Questo è un programma che implementa la relazione, ed è una relazione ricorsiva.
 
 
+\paragraph{Ancora sull'insime dell'arresto $A$}\mbox{}\\
+$$AR_{\hat{P}}$$
+$$x\in\mathbb{N}$$
+$$\varphi_{\hat{P}}(x)=\varphi_x(x)\downarrow?\implies A=\{x\in\mathbb{N}:\varphi_x(x)\downarrow\}=\text{non ricorsivo}$$
+Ed è interessante perché posso utilizzare la relazione $R_P$ in maniera alternativa
+l'insieme associato al problema dell'arresto $\hat{P}$. Abbiamo visto che
+l'insieme associato delle istanze a risposta positiva non è ricorsivo.
 
+Questo insieme associato al problema di decisione è stato formulato in maniera diretta mettendo
+all'interno la condizione. \textit{Come poso esprimere $A$ attraverso
+la relazione $R_{\hat{P}}?$}
+L'insieme degli $x\in\mathbb{N}$ tale per cui esiste un $y\in\mathbb{N}$ tale che
+$x$ è in relazione con $y$ rispetto a $R_{\hat{P}}$:
+$$B=\{x\in\mathbb{N}:\exists y\in\mathbb{N}(x\;R_{\hat{P}}\;y)\}$$
 
+Perché questi due insiemi $A=B$ sono la stessa cosa?
+\begin{itemize}
+    \item $A\subseteq B$, si prende che $x\in A\implies$ il programma $x$ su input $x$
+    termina in $y$ passi. Vuol dire che il programma $\hat{P}(x)$ termina in $y$ passi
+    ma questo vuol dire che la coppia $(x,y)\in R_{\hat{P}}\implies x\in B$
+
+    \item $B\subseteq A$, si prende $x\in B\implies\exists y:x\;R_{\hat{P}\;y\implies\hat{P}(x,x)}$
+    termina in $y$ passi. Ma se termina in $y$ passi vuol dire che il programma termina, quindi
+    vuol dire che $x\in A$.
+\end{itemize}
+Unendo queste due informazioni diciamo che $A=B$.
 
 \end{document}

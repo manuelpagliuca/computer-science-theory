@@ -35,7 +35,7 @@
 \contentsline {paragraph}{Conclusione}{22}{section*.5}%
 \contentsline {subsubsection}{\numberline {3.8.1}Insieme delle parti di $\PazoBB {N}$}{22}{subsubsection.3.8.1}%
 \contentsline {subsubsection}{\numberline {3.8.2}Insieme $\PazoBB {N}^{\PazoBB {N}}$}{23}{subsubsection.3.8.2}%
-\contentsline {section}{\numberline {4}Calcolabilità}{23}{section.4}%
+\contentsline {section}{\numberline {4}Teoria della calcolabilità}{23}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Cosa è calcolabile?}{23}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Dimostrazione $DATI\sim \PazoBB {N}$}{24}{subsubsection.4.1.1}%
 \contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}^+$}{25}{section*.6}%
@@ -129,11 +129,23 @@
 \contentsline {paragraph}{Esempio problema: Equazioni diofantee}{90}{section*.70}%
 \contentsline {paragraph}{Esempio problema: Fermat}{90}{section*.71}%
 \contentsline {paragraph}{Esempio problemi sui grafi}{91}{section*.72}%
-\contentsline {subsection}{\numberline {4.5}Decidibilità}{91}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.4.1}Decidibilità}{91}{subsubsection.4.4.1}%
 \contentsline {paragraph}{Parità}{92}{section*.73}%
 \contentsline {paragraph}{Equazioni Diofantee}{92}{section*.74}%
 \contentsline {paragraph}{Fermat}{92}{section*.75}%
 \contentsline {paragraph}{Raggiungibilità}{92}{section*.76}%
 \contentsline {paragraph}{Hamiltonian circuit}{93}{section*.77}%
 \contentsline {paragraph}{Eulerian circuit}{93}{section*.78}%
-\contentsline {subsection}{\numberline {4.6}Esistono problemi indecidibili?}{93}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.4.2}Esistono problemi indecidibili?}{93}{subsubsection.4.4.2}%
+\contentsline {paragraph}{Dimostrazione per assurdo}{95}{section*.79}%
+\contentsline {subsubsection}{\numberline {4.4.3}Il problema generale dell'arresto}{96}{subsubsection.4.4.3}%
+\contentsline {paragraph}{Dimostrazione per assurdo}{96}{section*.80}%
+\contentsline {subsection}{\numberline {4.5}Riconoscibilità automatica di insiemi}{96}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Insiemi ricorsivi}{97}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Ricorsivo vs Decidibile}{97}{subsubsection.4.5.2}%
+\contentsline {paragraph}{Esempi di insiemi ricorsivi}{99}{section*.81}%
+\contentsline {subsubsection}{\numberline {4.5.3}Esistono insiemi non ricorsivi?}{99}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Relazioni ricorsivi}{99}{subsubsection.4.5.4}%
+\contentsline {paragraph}{Esempio}{100}{section*.82}%
+\contentsline {paragraph}{Importante relazione ricorsiva}{100}{section*.83}%
+\contentsline {paragraph}{Ancora sull'insime dell'arresto $A$}{101}{section*.84}%
