@@ -3026,4 +3026,397 @@ dati due s.p.a. $\{\varphi_i\}$ e $\{\Psi_i\}$ esiste sicuramente una funzione $
           una funzione biettiva (che si dice anche isomorfismo).
 \end{enumerate}
 
+\subsubsection{Teorema di ricorsione}
+\paragraph{Primo quesito}\mbox{}\\
+Dato un s.p.a., \textit{esistono all'interno di esso è possibili che al suo interno dei programmi
+    che stampano se stessi?} Questi programmi auto replicanti sono detti \textbf{Quine}, questo in onore
+di un filosofo americano W.Quine che aveva studiato nell'ambito della logica delle formule che
+parlavano di se stesse.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/python.png}
+    \caption{Programma Quine in Python}
+\end{figure}
+Nel caso di linguaggi di programmazione come C, C++,Java, Python, SQL, PHP, \dots
+Il fatto che ci siano così tanti casi positivi per così molti linguaggi ci da una sensazione
+che la risposta generalmente sia si, ma noi vogliamo una dimostrazione astratta, generale e
+formale di ciò.
+
+Per fissare un contesto più matematico possiamo per esempio ambientare questa domanda nel
+sistema di programmazione RAM dove sappiamo che tutti i programmi possono essere rappresentati
+da dei numeri, allora posso rappresentare il quesito con questa domanda:
+$$\exists j\in\mathbb{N}:\varphi_j(x)=j\text{ per ogni input }x\in\mathbb{N}?$$
+ovvero dove l'output è il suo listato.
+
+\paragraph{Secondo quesito}\mbox{}\\
+Dati due s.p.a., so che è presente un compilatore tra essi, \textit{sono in grado di scrivere
+    compilatori completamente errati?} Un compilatore è una trasformazione tra programmi che sono
+visti come numeri:
+\begin{enumerate}
+    \item in grado di compilare un qualsiasi programma automaticamente, questo rappresentato
+          dalla funzione $t\in\mathcal{T}$.
+    \item la semantica del sorgente deve essere uguale alla semantica dell'oggetto
+          $$\forall i\in\mathcal{N}:\varphi_i=\Psi_{t(i)}$$
+\end{enumerate}
+Un compilatore che è completamente errato è una funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ t.c.
+\begin{enumerate}
+    \item $t\in\mathcal{T}$
+    \item in questo caso il mio compilatore sbaglia sempre la semantica
+          $$\forall i\in\mathbb{N}:\varphi_i\neq\Psi_{t(i)}$$
+\end{enumerate}
+Partendo dall'assunzione che non è possibile carpire la semantica di un programma in ingresso.
+Per rispondere a questo quesito dobbiamo introdurre un teorema detto "Teorema di ricorsione".
+
+\paragraph{Teorema di ricorsione}\mbox{}\\
+Data una s.p.a. e prendiamo una qualsiasi funzione ricorsiva totale $t:\mathbb{N}\rightarrow\mathbb{N}$,
+sappiamo che tutti i programmi possono essere definiti come un intero, quindi è giusto
+pensar alla funzione definita da programma a programma.
+
+$$\exists n\in\mathbb{N}:\varphi_n=\varphi_{t(n)}$$
+ovvero, esisterà un programma il cui significato non subirà la trasformazione. Prendiamo $t$ (la
+funzione trasformazione dei programmi), qualsiasi sia la trasformazione esisterà un programma
+che non sarà intaccato da questa trasformazione (qualsiasi trasformazione essa sia). Grazie
+al teorema di ricorsione riusciamo a rispondere ai precedenti due requisiti (vedremo
+dopo la dimostrazione):
+\begin{itemize}
+    \item Nel 1° quesito: \textit{esistono Quine negli s.p.a.?} Consideriamo il seguente
+          programma $P$
+          \begin{figure}
+              \centering
+              \includegraphics[scale=0.5]{images/P_teoremaric.png}
+          \end{figure}
+          Notiamo che è un programma che se ne frega, \textit{quale è la semantica di questo
+              programma?} (in $RAM$: $\exists j\in\mathbb{N}:\varphi_j(x)=j?$) Notiamo che il programma mette $j$ nel registro, quindi è $j$.
+          In poche parole la codifica di questo programma è la lista di Cantor $\langle0,0,\dots, 0\rangle$
+          ovvero una funzione $Z_{(j)\in\mathcal{T}}$ che mette $j$ volte lo 0 in lista di Cantor. Ovviamente
+          questa è una funzione ricorsiva totale sempre definita su $j$.
+          Quindi la semantica del programma è $\varphi_{Z(j)}(x)=j$.
+          Ora posso introdurre il teorema di ricorsione visto che ho una funzione ricorsiva totale (lui
+          la necessita) esso dice che:
+          $$\exists j\in\mathbb{N}:\varphi_j(x)=\varphi_{Z(j)}(x)=j$$
+          quindi esiste un Quine all'interno del sistema di programmazione.
+
+    \item Nel 2° quesito: \textit{dati due s.p.a. $\{\varphi_i\},\{\Psi_i\}$ esistono compilatori completamente errati?}
+          ($t\in\mathcal{T}:\forall i \varphi_i\neq\Psi_{t(i)}$) Supponiamo di avere in mano un modo
+          per "maltrattare i programmi" $t\in\mathcal{T}$ che prende in ingresso un programma $i$ del sistema $\varphi_i$
+          e restituisca un programma fallato nel linguaggio del s.p.a. $\Psi_i$.
+          Consideriamo la semantica del programma maltrattato, descriviamola utilizzando
+          i tre assiomi fondamentali (enumerati per applicazione nell'equazione):
+          $$\Psi_{t(i)}(x)=^{(2)}\Psi_u(x,t(i))=^{(1)}\varphi_e(x,t(i))=^{(3)}\varphi_{S_1^1(e,t(i))}(x)$$
+          La funzione $S_1^1$ dipende solamente da una variabile, perché la $e$ è fissata, in più è
+          una funzione ricorsiva totale questo perchè anche $t(i)\in\mathcal{T}$ (e la stessa $S_1^1$ è per
+          il terzo assioma). Quindi in realtà lei è una funzione
+          $$g(i)=S_1^1(e,t(i))$$ è la composizione di $t,S_1^1\in\mathcal{T}$, e quindi $g\in\mathcal{T}$
+          questo significa che posso applicare il teorema di ricorsione:
+          $$\exists i\in\mathcal{N}:\varphi_i=\varphi_{g(i)}$$
+          e quindi concatenandolo alla prima serie di equazioni otteniamo:
+          $$\exists i\in\mathbb{N}:\Psi_{t(i)}=\varphi_i,\text{ per ogni }t\in\mathcal{T}$$
+          il mio modo di maltrattare i programmi non è andato a buon fine, questo perché esiste
+          una soluzione dell'equazione fornita dal teorema di ricorsione, e quindi la risposta al
+          secondo quesito è no.
+\end{itemize}
+
+\begin{center}
+    \textit{"Anche un orologio rotto segna l'ora esatta almeno due volte al giorno."} - H.Hesse
+\end{center}
+
+\paragraph{Dimostrazione del teorema di ricorsione}\mbox{}\\
+Dato un s.p.a. $\{\varphi_i\}$ per ogni $t:\mathbb{N}\rightarrow\mathbb{N}$ esiste
+$n\in\mathbb{N}$ tale che $\varphi_n=\varphi_{t(n)}$.
+Ricordiamo che un s.p.a. soddisfa:
+\begin{enumerate}
+    \item Tesi di Church-Turing.
+    \item Interprete universale.
+    \item Teorema $S_1^1$
+\end{enumerate}
+D'ora in avanti, per semplicità, scriveremo $\varphi_n(x,y)$ per $\varphi_n(\langle x,y\rangle)$.
+
+$$\varphi_{\varphi_i(i)}(x)=^{(2)}\varphi_{\varphi_u (i,i)}(x)=^{(2)}\varphi_u(x,\varphi_u(i,i))=\text{(composizione di funzioni )}\mathcal{P}=f(x,i)\in\mathcal{P}$$
+Semantica dell'$i$-esimo programma dell'$i$-esimo input su $x$. Grazie all'interprete
+universale può essere visto come l'interprete universale attivato sulla coppia $i,i$,
+successivamente si fa agire ancora l'interprete universale su l'intero programma esterno,
+semplificando ulteriormente. Notiamo la semantica di questo programma consiste nel calcolare
+una funzione di due valori, e questa è la composizione di due funzioni ricorsive parziali (
+quindi è una ricorsiva parziale).
+
+$$=^{(1)}\varphi_e(x,i)=^{(3)}\varphi_{S_1^1(e.i)}(x)$$
+posso fare un altro passo, e rubare grazie all'assioma 3 un argomento da dare in pasto alla funzione
+$S_1^1(e,i)$, quindi partendo da questa scrittura perfettamente legale dal nostro s.p.a. ed
+usando solamente gli assiomi che definiscono un s.p.a. abbiamo potuto porre la seguente uguaglianza
+$$\varphi_{\varphi_i(i)}(x)=\varphi_{S_1^1(e.i)}(x)$$
+Ora facciamo un altro passo, consideriamo la funzione $t(S_1^1(e,i))$: è una funzione
+che è composizione di due funzioni ricorsive totali, ed essa dipende solamente da una variabile
+$i$ ($e$ è fissato). Come tale classe di funzione essa risulta \textbf{programmabile}, quindi
+esiste un programma $m$ che la può calcolare.
+$$t,S_1^1\in\mathcal{T}\implies\exists m\in\mathcal{N}:\varphi_m(i)=t(S_1^1(e,i))$$
+Ed ecco che $n=S_1^1(e,m)$, il quale è un $n$ tale per cui $\varphi_n=\varphi_{t(n)}$ il
+che prova il teorema di ricorsione.
+
+Vediamo se è vero
+$$\varphi_n(x)=\varphi_{S_1^1(e,m)}=\varphi_{\varphi_m(m)}(x)$$
+$$\varphi_{t(n)}(x)=\varphi_{t(S_1^1(e,m))}(x)=\varphi_{\varphi_m(m)}(x)$$
+Ma entrambe sono la stessa cosa, allora $\varphi_n=\varphi_{t(n)}$
+
+\paragraph{Conseguenze}\mbox{}\\
+Esistono sempre dei Quine negli s.p.a. e non è possibile progettare compilatori completamente
+errati.
+
+\subsubsection{Equazioni su s.p.a.}
+Il teorema di ricorsione è un ottimo strumento per risolvere equazioni su s.p.a.
+nelle quali si richiede l'esistenza di certi programmi con una determinata semantica
+in un s.p.a. Per esempio: dato un s.p.a. $\{\varphi_i\}$, $\exists n\in\mathbb{N}$ tale che
+$\varphi_n(x)=\varphi_x(n+\varphi_{\varphi_n(0)}(x))?$
+Strategia:
+\begin{enumerate}
+    \item Trasforma la parte destra dell'equazione in $f(x,n)$ (come nella dimostrazione del teorema di ricorsione).
+    \item Mostra che $f(x,n)\in\mathcal{P}$ (tipicamente per composizione), se esiste, allora esiste un programma che la calcola
+          $f(x,n)=\varphi_e(x,n)$
+    \item L'equazione iniziale diventa $\varphi_n(x)=\varphi_e(x,n)$, dove $e$ è un particolare programma,
+          applicando il teorema $S_1^1$, e rubo uno degli argomenti che sono in input al programma $e$,
+          così posso ottenere una funzione ricorsiva totale che dipende da $n$ (perché $e$ è fissato) $=^{(3)}\varphi_{S_1^1(e,n)}(x)$
+    \item Noto che $S_1^1(e,n)$ è una funzione ricorsiva totale in $n$ dato che $S_1^1\in\mathcal{T}$.
+    \item Il quesito iniziale è diventato $\exists n\in\mathbb{N}:\varphi_n(x)=\varphi_{S_1^1 (e,n)}(x)$
+          con $S_1^1(e,n)\in\mathcal{T}$
+    \item La risposta è si per il teorema di ricorsione.
+\end{enumerate}
+
+\paragraph{Esempio 1}\mbox{}\\
+
+\paragraph{Esempio 2}\mbox{}\\
+
+\subsection{Problemi di decisione}
+Essenzialmente è semplicemente una domanda che ci viene posta che possiamo rispondere con SI o NO. In termini
+più formali, un problema di decisione viene specificato dando tre punti fondamentali:
+\begin{itemize}
+    \item un nome: nome del problema di decisione.
+    \item istanza (generica): essa descrive di quale dominio parleremo, ovvero su quali oggetti porremo la nostra
+          domanda.
+    \item la domanda: qualcosa su cui rispondere a riguardo degli oggetti stabiliti sull'istanza generica. Dato
+          un oggetto del dominio, devo rispondere SI se l'oggetto soddisfi una determinata \textit{proprietà}?
+\end{itemize}
+In termini ancora più formali:
+\begin{itemize}
+    \item $\pi$: Nome del problema di decisione.
+    \item $x\in D$: input per la nostra domanda, ovvero l'istanza di un dato dominio.
+    \item $p(x)?$: la domanda ovvero la formulazione della presenza di una data proprietà sull'oggetto $x$.
+\end{itemize}
+In altre parole un problema di decisione risponde alla domanda: $p(x)$ è vera?
+
+\paragraph{Esempio problema: Parità}\mbox{}\\
+$$\pi=\text{Parità}$$
+$$\text{Istanza: }n\in\mathbb{N}$$
+$$\text{Domanda: }n \text{ è pari?}$$
+Per ogni elemento del dominio sono in grado di rispondere SI o NO rispetto alla data proprietà, quindi,
+devo essere in grado di scrivere un programma che per tutti gli input forniti deve rispondere correttamente
+al mio problema di decisione.
+Tutti gli input forniti a questo programma vengono detti \textbf{istanze particolari}.
+\begin{itemize}
+    \item per 3 rispondo NO.
+    \item per 26 rispondo SI.
+\end{itemize}
+
+\paragraph{Esempio problema: Equazioni diofantee}\mbox{}\\
+$$\pi=\text{Equazione Diofantea}$$
+$$\text{Istanze: }a,b,c\in\mathbb{N}^+$$
+$$\text{Domanda: }\exists x,y\in\mathbb{Z}:ax+by=c?$$
+Il problema si interroga su tre numeri, e chiede se esistono delle soluzioni intere rispetto alla data
+equazione (che rendono valide l'uguaglianza). Alcune istanze particolari:
+\begin{itemize}
+    \item $3,4,5 \implies SI$ per $x=3,y=-1$
+    \item $126,72,45 \implies NO$ (due numeri dispari non fanno uno dispari)
+    \item $10,12,125 \implies NO$ (due numeri pari non fanno uno dispari)
+\end{itemize}
+
+\paragraph{Esempio problema: Fermat}\mbox{}\\
+$$\pi=\text{Fermat}$$
+$$\text{Istanza: }n\in\mathbb{N}^+$$
+$$\text{Domanda: }\exists x,y,z\in\mathbb{N}^+:x^n+y^n=z^n?$$
+Prendi un numero $n$ positivo, esistono altri tre numeri positivi per cui valga l'equazione data? Anche
+qui la difficoltà come nella diofantea è data dal fatto che sto lavorando su numeri interi. Esso
+fondamentalmente è l'ultimo teorema di Fermat (che per $n>2$ la data equazione non è soddisfacibile).
+Istanze particolari:
+\begin{itemize}
+    \item per 1 rispondo SI.
+    \item per 2 rispondo SI (sono le famose terne pitagoriche).
+    \item per 3 rispondo NO (non esiste un cubo che è la somma di due cubi).
+    \item per 4 rispondo NO.
+\end{itemize}
+Nel 1994, un matematico britannico Andrew Wiles è riuscito a dimostrare che il teorema
+di Fermat è vero, e che per $n>2$ la risposta è NO (il teorema di A.Wiles
+ha come corollario il teorema di Fermat).
+
+\paragraph{Esempio problemi sui grafi}\mbox{}\\
+$$\pi=\text{Raggiungibilità}$$
+$$\text{Istanza: }G=(V,E)$$
+$$\text{Domanda: esiste un cammino dal nodo }1\text{ al nodo }n?$$
+
+$$\pi=\text{Ciclo Hamiltoniano}$$
+$$\text{Istanza: }G=(V,E)$$
+$$\text{Domanda: esiste un circuito/ciclo Hamiltoniano nel grafo }G?$$
+i vertici sono coinvolti nel ciclo una e una sola volta.
+
+$$\pi=\text{Ciclo Euleriano}$$
+$$\text{Istanza: }G=(V,E)$$
+$$\text{Domanda: esiste un circuito/ciclo Euleriano nel grafo }G?$$
+gli archi sono coinvolti nel ciclo una e una sola volta.
+
+\subsection{Decidibilità}
+Quando un problema viene detto decidibile? Il problema $\pi$ si dice decidibile se è risolubile
+per via automatica, se esiste $P_\pi$ tale che:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/decidibilità.png}
+\end{figure}
+ovvero che per ogni elemento del dominio emette 1 se esso possiede quella proprietà, altrimenti 0.
+Questa è una definizione informatica, equivalentemente possiamo dire che associamo
+$\pi$ la sua \textbf{funzione soluzione}:
+\[
+    \Phi_\pi:D\rightarrow\{0,1\}\text{ tale che }\Phi_\pi(x)=
+    \begin{cases}
+        1 & p(x)       \\
+        0 & \lnot p(x)
+    \end{cases}
+\]
+posso dire che un problema è decidibile se la sua funzione soluzione è ricorsiva totale,
+ovvero una funzione che è programmabile da programmi che terminano sempre.
+$$\pi\text{ è decidibile se e solo se }\Phi_\pi\in\mathcal{T}$$
+Quindi le due definizioni si equivalgono, il programma $P_\pi$ calcola $\Phi_\pi$, implica
+che $\Phi_\pi\in\mathcal{T}$. E se esiste una $\Phi_\pi\in\mathcal{T}$ allora esiste un
+programma che calcola $\Phi_pi$ e che ha il comportamento di $P_\pi$.
+
+Quindi abbiamo un problema decidibile perchè siamo in gradi di esibire un programma, o perché
+la sua funzione soluzione è una ricorsiva totale. Riassumendo, dato il problema di decisione
+$\pi$, posso dimostrare la decidibilità:
+\begin{enumerate}
+    \item esibendo un algoritmo risolutivo (anche inefficiente, basta che esista e che termini).
+    \item mostrando con strumenti matematici che $\Phi_\pi$ sia ricorsiva totale.
+\end{enumerate}
+Dimostriamo che i problemi di decisione visti precedentemente siano effettivamente
+dei problemi decidibili.
+\paragraph{Parità}\mbox{}\\
+Dobbiamo esibire un programma che dato un qualsiasi numero intero mi sappia dire se il numero è
+pari o dispari. Questo è ovviamente un problema decidibile, ma vogliamo dimostrare che la
+sua funzione soluzione sia una ricorsiva totale (che sia una composizione di funzioni
+ricorsive totali).
+
+$$\Phi_{PR}(n)=1\dot{-}(n\mod{2}) \in\mathcal{T}$$
+Sia che $n$ sia dispari che pari il risultato della funzione è 0, inoltre per tutti gli $n$
+l'operazione termina, in fine e la composizione di due funzioni ricorsive totali il $\dot{-}$
+ed il modulo, quindi la funzione soluzione di questo problema è ricorsiva totale e quindi
+il problema è decidibile.
+
+\paragraph{Equazioni Diofantee}\mbox{}\\
+Stavolta la funzione soluzione dipende da tre numeri. La risoluzione
+è data da un teorema che dice che una ED ammette una soluzione intera se e solo se il MCD
+tra $a$ e $b$ divide $c$. Non solamente ci dice che ammette soluzione,
+ma che ne ammette un infinità (una ED risolubile ammette un infinità di soluzioni).
+
+$$\Phi_{ED}(a,b,c)=1\dot{-}(c\mod\text{mcd}(a,b))\in\mathcal{T}$$
+
+\paragraph{Fermat}\mbox{}\\
+Grazie a Wyle possiamo scrivere la funzione soluzione
+$$\Phi_{PR}(n)=1\dot{-}(n\dot{-}2)\in\mathcal{T}$$
+
+\paragraph{Raggiungibilità}\mbox{}\\
+Esistono tonnellate di algoritmi che risolvono questo problema, per vedere se esiste
+un cammino tra una coppia di nodi su un grafo. Questo usando una visita
+in ampiezza o profondità di $G$, algoritmi per cammini minimi,\dots oppure:
+$$\Phi_{RG}(G)=(M_G^n)_{1,n}\in\mathcal{T}$$
+dove $M_G$ è la matrice di adiacenza di $G$, che è $n\times n$ di booleani, dove
+all'elemento che si trova all'incrocio tra la riga $i$ e la colonna $j$ è presente
+1 se è presente un arco fra i due vertici.
+
+\paragraph{Hamiltonian circuit}\mbox{}\\
+Può risultare più difficile pensare ad un algoritmo, sappiamo però che un circuito
+Hamiltoniano tocca ogni nodo in $G$ una ed una sola volta. Significa che
+se costruisco la lista dei nodi incontrati percorrendo un circuito Hamiltoniano
+ottengo una \textbf{permutazione} (corrispondenza biunivoca di un
+insieme a se stesso) di $V$, che identifica il senso di percorrenza del circuito.
+Viceversa, se una lista di nodi non è una permutazione
+del nodo di un arco non è un circuito Hamiltoniano perché mancano dei nodi o
+dei nodi sono ripetuti.
+
+In una permutazione per essere definita tale deve contenere gli elementi di un
+insieme esattamente una sola volta, ma questo è il senso del circuito Hamiltoniano.
+La sequenza di tappe che percorro è una permutazione, questo mi suggerisce il seguente algoritmo.
+\begin{itemize}
+    \item Prova tutte le permutazioni di $V$.
+    \item Se per qualche permutazione è possibile rappresentare concretamente
+          un circuito in $G$, allora questo circuito è Hamiltoniano altrimenti NO.
+\end{itemize}
+Al momento non esistono algoritmi efficienti riconosciuti per il circuito Hamiltoniano.
+Tuttavia è stato dimostrato che il problema è un problema decidibile.
+
+\paragraph{Eulerian circuit}\mbox{}\\
+Assomiglia al problema precedente, solo che questa volta viene tutto basato rispetto a gli archi.
+Esistono degli algoritmi che permettono di risolvere questo problema molto velocemente,
+questo stabilendo una condizione che è immediatamente risolubile guardando il grafo.
+Il teorema di Eulero (1736) che era fondamentalmente un teorema che stabilisce un
+grafo che presenta un circuito Euleriano, questo è il primo teorema di teoria dei grafi (nata
+da questo teorema).
+
+\textit{Un grafo contiene un circuito Euleriano se e soltanto se ogni vertice nel grafo ha grado
+    pari.} Questo è differente da un \textbf{cammino Euleriano}, il quale è presente all'interno
+di un grafo nel caso in cui tutti i nodi di un cammino abbiano grado pari eccetto per due
+vertici di grado dispari che sono la sorgente ed il pozzo (del cammino). Dato il teorema di Eulero,
+un algoritmo che risolve il circuito Euleriano verifica che ogni nodo del grafo $G$ abbia
+grado pari. Questo significa che questo problema è decidibile.
+
+\subsection{Esistono problemi indecidibili?}
+Problema dell'arresto per un programma $P$ (non è un problema dell'arresto generale).
+Abbiamo un programma $P$ e vogliamo costruire un problema di decisione dato
+il programma $P$.
+
+$$\pi=AR_P$$
+$$\text{Istanza: }x\in\mathbb{N}$$
+$$\text{Domanda: }\varphi_P(x)\downarrow?=\text{il programma P su input x termina?}$$
+$AR_P$ è decidibile? Questo dipende da P, questo dipende se la semantica del programma
+$P$ termina correttamente ed ha dato in output un numero, altrimenti il programma
+è entrato in loop e la semantica è indefinita (sappiamo che $P$ è fissato).
+
+Il corrispondente problema dell'arresto applicato al seguente programma:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/programma_Pincr.png}
+\end{figure}
+la sua funzione soluzione sarà, poiché il programma termina per un qualsiasi $x$:
+$$\Phi_{AR_P}(x)=1\in\mathcal{T}$$
+
+Invece, per quest'altro programma:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/programma_P_pari.png}
+\end{figure}
+quando il numero pari il programma termina, altrimenti se il numero è dispari
+entro in loop.
+$$\Phi_{AR_P}(x)=1\dot{-}(x \mod{2})\in\mathcal{T}$$
+
+adesso consideriamo il problema $\hat{P}$ che ammette il problema dell'arresto come
+indecidibile:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/programma_P_hat.png}
+\end{figure}
+esso prende in ingresso $x$ e poi chiama come sub-routine l'interprete universale (
+ovvero quel programma che prende in ingresso $x$ e $n$ e restituisce il risultato
+del funzionamento del programma $n$ su $x$). La semantica di $\hat{P}$ rispetto
+ad $x$:
+$$\varphi_{\hat{P}}(x)=\varphi_U(x,x)=\varphi_x(x)$$
+questo programma emette il funzionamento del programma $x$ sul dato $x$, notare è un
+programma che prende in ingresso se stesso. Questo programma $\hat{P}$ è un programma
+che testa un altro programma su se stesso.
+Possiamo associare il problema dell'arresto a questo programma $\hat{P}$ considerando
+l'input $x\in\mathbb{N}$.
+$$\varphi_{\hat{P}}(x)\downarrow?$$
+Da notare che ora il programma in questo modo non è più fissato, lo stesso programma
+è legato all'input ovvero varia al variare dell'input. Dimostreremo che
+questo problema di decisione è \textbf{indecidibile}.
+
+
+
+
+
+
+
+
 \end{document}

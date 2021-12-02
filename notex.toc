@@ -115,3 +115,25 @@
 \contentsline {paragraph}{Teorema}{83}{section*.60}%
 \contentsline {paragraph}{Corollario}{84}{section*.61}%
 \contentsline {subsubsection}{\numberline {4.3.3}Teorema di isomorfismo di Rogers}{84}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Teorema di ricorsione}{85}{subsubsection.4.3.4}%
+\contentsline {paragraph}{Primo quesito}{85}{section*.62}%
+\contentsline {paragraph}{Secondo quesito}{85}{section*.63}%
+\contentsline {paragraph}{Teorema di ricorsione}{86}{section*.64}%
+\contentsline {paragraph}{Dimostrazione del teorema di ricorsione}{87}{section*.65}%
+\contentsline {paragraph}{Conseguenze}{88}{section*.66}%
+\contentsline {subsubsection}{\numberline {4.3.5}Equazioni su s.p.a.}{88}{subsubsection.4.3.5}%
+\contentsline {paragraph}{Esempio 1}{89}{section*.67}%
+\contentsline {paragraph}{Esempio 2}{89}{section*.68}%
+\contentsline {subsection}{\numberline {4.4}Problemi di decisione}{89}{subsection.4.4}%
+\contentsline {paragraph}{Esempio problema: Parità}{89}{section*.69}%
+\contentsline {paragraph}{Esempio problema: Equazioni diofantee}{90}{section*.70}%
+\contentsline {paragraph}{Esempio problema: Fermat}{90}{section*.71}%
+\contentsline {paragraph}{Esempio problemi sui grafi}{91}{section*.72}%
+\contentsline {subsection}{\numberline {4.5}Decidibilità}{91}{subsection.4.5}%
+\contentsline {paragraph}{Parità}{92}{section*.73}%
+\contentsline {paragraph}{Equazioni Diofantee}{92}{section*.74}%
+\contentsline {paragraph}{Fermat}{92}{section*.75}%
+\contentsline {paragraph}{Raggiungibilità}{92}{section*.76}%
+\contentsline {paragraph}{Hamiltonian circuit}{93}{section*.77}%
+\contentsline {paragraph}{Eulerian circuit}{93}{section*.78}%
+\contentsline {subsection}{\numberline {4.6}Esistono problemi indecidibili?}{93}{subsection.4.6}%
