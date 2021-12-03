@@ -3657,7 +3657,7 @@ l'insieme associato delle istanze a risposta positiva non è ricorsivo.
 
 Questo insieme associato al problema di decisione è stato formulato in maniera diretta mettendo
 all'interno la condizione. \textit{Come poso esprimere $A$ attraverso
-la relazione $R_{\hat{P}}?$}
+    la relazione $R_{\hat{P}}?$}
 L'insieme degli $x\in\mathbb{N}$ tale per cui esiste un $y\in\mathbb{N}$ tale che
 $x$ è in relazione con $y$ rispetto a $R_{\hat{P}}$:
 $$B=\{x\in\mathbb{N}:\exists y\in\mathbb{N}(x\;R_{\hat{P}}\;y)\}$$
@@ -3665,13 +3665,576 @@ $$B=\{x\in\mathbb{N}:\exists y\in\mathbb{N}(x\;R_{\hat{P}}\;y)\}$$
 Perché questi due insiemi $A=B$ sono la stessa cosa?
 \begin{itemize}
     \item $A\subseteq B$, si prende che $x\in A\implies$ il programma $x$ su input $x$
-    termina in $y$ passi. Vuol dire che il programma $\hat{P}(x)$ termina in $y$ passi
-    ma questo vuol dire che la coppia $(x,y)\in R_{\hat{P}}\implies x\in B$
+          termina in $y$ passi. Vuol dire che il programma $\hat{P}(x)$ termina in $y$ passi
+          ma questo vuol dire che la coppia $(x,y)\in R_{\hat{P}}\implies x\in B$
 
     \item $B\subseteq A$, si prende $x\in B\implies\exists y:x\;R_{\hat{P}\;y\implies\hat{P}(x,x)}$
-    termina in $y$ passi. Ma se termina in $y$ passi vuol dire che il programma termina, quindi
-    vuol dire che $x\in A$.
+          termina in $y$ passi. Ma se termina in $y$ passi vuol dire che il programma termina, quindi
+          vuol dire che $x\in A$.
 \end{itemize}
 Unendo queste due informazioni diciamo che $A=B$.
+
+\subsubsection{Insiemi ricorsivamente numerabili}
+$A\subseteq\mathbb{N}$ è un insieme \textbf{ricorsivo numerabile} (sinonimo di \textit{automaticamente
+    listabile} grazie ad un programma) se esiste una routine $F$ che su input $i\in\mathbb{N}$
+da in output $F(i)$ come l'$i$-esimo elemento di $A$.
+Quindi questa $F$ può essere usata per listare tutti gli elementi di $A$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/listare_A.png}
+    \caption{Esempio di un programma che mi elenca gli elementi di $A$}
+\end{figure}
+Vale detto che per alcuni insiemi è il meglio che posso fare, poiché non ho programma di
+riconoscimento ma solo programmi di elencazione (come quest'ultimo).
+\textit{Come faccio a scrivere un algoritmi di riconoscimento per un insieme che può essere solamente
+    listato?} (se il meglio che possono avere per $A\subseteq\mathbb{N}$ è una lista).
+\begin{figure}[H]
+    \centering
+    \caption{Algoritmo tentativo}
+    \includegraphics[scale=0.6]{images/a_non_ric_TENTATIVO.png}
+\end{figure}
+faccio partire l'elenco da 0, su input $x$ mi faccio dare gli elementi e continuo ad incrementare
+l'elenco, al termine do in output 1. Chiaramente se $x$ appartiene all'insieme prima o poi lo
+troverò nell'elenco, e si arresterà correttamente, però se $x$ non è un elemento appartenente
+dell'insieme allora rimarremo bloccati nel ciclo e continueremo a sperare di trovare $x$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/x_loop.png}
+    \caption{In questo caso non troviamo dei bei algoritmi di riconoscimento che siano in grado di terminare,
+        o si trova $x$ oppure si va in loop.}
+\end{figure}
+Per questo motivo \textbf{ricorsivamente numerabile} è sinonimo di \textbf{parzialmente
+    decidibile}, non decide il comportamento nella sua interezza ma solo in parte (semi decidibile).
+
+\paragraph{Definizione formale}\mbox{}\\
+L'insieme $A\subseteq\mathbb{N}$ è ricorsivamente numerabile se e solo se:
+\begin{itemize}
+    \item $A=\emptyset$ oppure
+    \item $A=Im_f$ con $f:\mathbb{N}\rightarrow\mathbb{N}\in\mathcal{T}$ ($A=\{\ f(0),f(1),\dots \}$)
+\end{itemize}
+Perché se $f\in\mathcal{T}$ allora esiste un programma $F$ che la calcola ed è esattamente
+il programma che mi consenti effettuare il riconoscimento parziale.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/prog_ricors_rico.png}
+    \caption{Comportamento del programma che riconosce parzialmente $A$}
+\end{figure}
+Da un punto di vista metaforico possiamo pensare un insieme ricorsivamente enumerabile come
+un insieme per cui si ha un elenco telefonico dei suoi membri. Ad ogni insieme ricorsivamente
+enumerabile può essere pensato come un libro infinito contenente un numero infinito di pagine
+su ognuna delle quali si trova un elemento dell'insieme. \textit{Questo elemento appartiene
+    all'insieme?} Sfogliando le pagine si va alla ricerca dell'elemento dell'insieme, questo
+modo di dire si o no soffre del problema che il libro è infinito, se è presente ci si
+potrà mettere molto ma prima o poi lo si troverà.
+
+\subsubsection{Caratteristiche insiemi ricorsivamente numerabili}
+Teorema: le seguenti definizioni sono equivalenti
+\begin{enumerate}
+    \item $A$ è ricorsivamente numerabile ($A=Im_{f\in\mathcal{T}}$).
+    \item $A=Dom_f$ con $f\in\mathcal{P}$, dimostrando che è il dominio di una funzione ricorsiva parziale.
+    \item Esiste una relazione $R\subseteq\mathbb{N}^2$ ricorsiva tale che:
+          $$A=\{x\in\mathbb{N}:\exists y\in\mathbb{N}((x,y)\in R)\}$$
+          esibendo una relazione ricorsiva e mostrando che l'insieme è l'insieme dei numeri $x$ per i quali
+          esiste un $y$ che in relazione ricorsiva con $x$.
+\end{enumerate}
+Queste tre proprietà definiscono la classe degli insiemi ricorsivamente numerabili.
+\paragraph{Dimostrazione}\mbox{}\\
+Per dimostrare che sono tutte e tre vere posso utilizzare una dimostrazione circolare delle proprietà
+$$1\implies 2 \implies 3\implies 1$$
+
+\paragraph{$1\implies 2$}\mbox{}\\
+Considera l'algoritmo di riconoscimento parziale di $A$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/prog_ricors_rico.png}
+    \caption{Algoritmo di parziale riconoscimento}
+\end{figure}
+Studiamo la semantica di questo programma:
+\[
+    \varphi_P(x)=
+    \begin{cases}
+        1    & x\in A    \\
+        \bot & x\notin A
+    \end{cases}
+    \implies A =Dom_{\varphi_P}
+\]
+Guardando questa funzione è ovvio che $A$ è il dominio di $\varphi_P$. Abbiamo trovato una funzione
+ricorsiva totale di cui $A$ è il dominio, $\varphi_P\in\mathcal{P}$.
+
+\paragraph{$2\implies 3$}\mbox{}\\
+$A=Dom_{f\in\mathcal{P}}\implies\exists R\subseteq\mathbb{N}^2$ è una funzione ricorsiva tale che:
+$$A=\{x|\}$$
+in altre parole $f\in\mathcal{P}$ è la semantica di un programma $P$ tale che $f=\varphi_P$.
+Allora posso costruire questa relazione ricorsiva introducendo la relazione $R_P$
+$$R_P=\{(x,y)\in\mathbb{N}^2:P\text{ su input }x\text{ termina in }y\text{ passi}\}$$
+Notare che $P$ è il programma che esiste per ipotesi che implementa la funzione $f$. Allora
+definiamo l'insieme $B?\{x|\exists y(x,y)\in R_P\}$, quello che si può dimostrare è che $A=B$,
+infatti:
+
+\begin{itemize}
+    \item $A\subseteq B: x\in A=Dom_{\varphi_P}\implies$ il programma $P$
+    su input $x$ termina, e se termina terminerà in un certo numero $y$ di passi.
+    Quindi $(x,y)\in R_P \implies$ ho dimostrato che $x\in B$.
+
+    \item $B\subseteq A: x\in B\implies (x,y)\in R_P$, deve esistere un certo $y$ per cui
+    sia in relazione con $x$ per $R_P$, ma questo vuol dire che il programma $P$
+    su input $x$ termina in $y$ passi. Quindi, $\varphi_P(x)\downarrow\implies x\in Dom_{\varphi_P}\implies x\in A$,
+    la semantica su input $x$ è definita e quindi $x$ appartiene al dominio della semantica del programma (quindi
+    $x\in A$).
+\end{itemize}
+In conclusione abbiamo dimostrato che $A=B=\{x|\exists y(x,y)\in R_P\}$ con $R_P$ relazione ricorsiva.
+
+\paragraph{$3\implies 1$}\mbox{}\\
+Dobbiamo chiudere il ciclo di implicazioni, ovvero che se $A$ è un insieme esprimibile grazie
+ad una relazione ricorsiva io sono in grado di mostrarti una funzione ricorsiva totale di cui $A$
+è l'immagine.
+$$A=\{x:\exists y(x,y)\in R\}\text{ con }R \text{ relazione ricorsiva }\implies Im_{f\in\mathcal{T}}$$
+Assumiamo che $A\neq\emptyset$ e scegliamo $a\in A$. Definiamo la funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ come:
+\[
+    t(n)=
+    \begin{cases}
+        sin(n) & (sin(n), des(n))\in R\\
+        a & \text{altrimenti}
+    \end{cases}
+\]
+questa funzione considera $n$ come una codifica di una coppia di Cantor. Se la parte sinistra e destra di $n$
+si trovano nella relazione ricorsiva $R$, allora emettiamo la parte sinistra di $n$. Altrimenti emettiamo
+l'elemento $a\in A$ che abbiamo scelto. Questa è una funzione totale, ma non solo, posso anche
+scrivere un programma che la calcola quindi è una funzione totale programmabile quindi è una ricorsiva
+totale.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{images/tdin.png}
+    \caption{Programma che implementa $t(n)$}
+\end{figure}
+Voglio dimostrare che l'immagine di questa funzione sia $A$:
+\begin{itemize}
+    \item $A\subseteq Im_t:x\in A\implies (x,y)\in R\implies t(\langle x,y\rangle)=x\implies x\in Im_t$
+    \item $Im_t\subseteq A: x\in Im_t\implies x=a\in A$ oppure $x=sin(n)$ con $n=\langle x,y\rangle$
+    per qualche $y$ t.c. $(x,y)\in R\implies x\in A$.
+    significa che che nel caso in cui $x$ non appartenga all'immagine di $t$, allora $x$ sarà la parte sinistra di qualche cosa, dove $n$ è la condensazione di una coppia di numeri,
+    vuol dire che esiste un $y$ che sta in relazione $R$ con $x$, che è in grado di fare tornare la proprietà
+    base di $A$, e quindi $x\in A$.
+\end{itemize}
+in conclusione $A=Im_{t\in\mathcal{T}}$
+
+Per dimostrare che un insieme sia ricorsivamente numerabile possono usare una qualsiasi
+di queste tre proprietà (romperei il ciclo se uan fosse invalida). Particolarmente
+interessante è la seconda condizione, perché lo strumento più semplice è dimostrare il dominio
+di una funzione ricorsiva parziale. \textit{Perché} basta utilizzare questa sequenza di passi:
+\begin{enumerate}
+    \item Scrivere un programma che lo riconosce parzialmente (che da 1 o $\bot$ se $X\in A$).
+    \item Il dominio di questa funzione è esattamente $A$, e siccome questa funzione è implementata
+    da un programma essa è ricorsiva parziale.
+    \[
+        \varphi_P(x)=
+        \begin{cases}
+            1 & x\in A\\
+            \bot & x\notin A
+        \end{cases}
+    \]
+    \item Chiaramente $\varphi_P\in\mathcal{P}$ e $A=Dom_{\varphi_P}$
+    \item $A$ è ricorsivamente numerabile per 2.
+\end{enumerate}
+
+\subsubsection{Un insieme ricorsivamente numerabile}
+$$AR_{\hat{P}}$$
+$$\text{Istanza: }x\in\mathbb{N}$$
+$$\text{Domanda: }\varphi_{\hat{P}}(x)=\varphi_x(x)\downarrow?$$
+Ovvero l'insieme $A=\{x:\varphi_x(x)\downarrow\}$, abbiamo detto che questo insieme non è ricorsivo,
+perché è un problema indecidibile. Adesso che abbiamo la nozione di \textbf{ricorsivamente numerabile}
+possiamo definirlo come tale. Ecco il programma che è in grado di decidere parzialmente questo insieme:
+\begin{figure}[H]
+    \centering
+    \includegraphics[]{images/interpuniv.png}
+    \caption{Programma che effettua il riconoscimento parziale}
+\end{figure}
+
+La semantica sarà:
+\[
+    \varphi_P(x)=
+    \begin{cases}
+        1 & \varphi_U(x,x)=\varphi_x(x)\downarrow\\
+        0 & \text{altrimenti}
+    \end{cases}
+\]
+
+Questo vul dire che ho dimostrato che il mio insieme è il dominio della
+funzione $\varphi_P$ che è ricorsiva parziale, ed allora applicando
+il punto 2 del teorema precedente ed ottengo che è ricorsivamente
+enumerabile.
+$$A=Dom_{\varphi_P\in\mathcal{P}}\implies\text{applicazione della proprietà 2 t.ric. enum.}$$
+Oppure, lo avevamo anche espresso anche grazie alla relazione $R_{\hat{P}}$
+
+$$A=\{x:\varphi_x(x)\downarrow\}=\{x:\exists y((x,y)\in R_{\hat{P}})\}$$
+$$R_{\hat{P}}=\{(x,y):\hat{P}\text{ se solo se l'input }x\text{ termina in }y \text{ passi}\}$$
+
+abbiamo anche dimostrato che questa relazione è ricorsiva, e quindi potrei anche applicare il punto
+3 del teorema degli insiemi ricorsivamente enumerabili.
+
+\subsubsection{Ricorsivi vs Ricorsivi enumerabili}
+Abbiamo introdotto due grandi classi di insiemi, abbiamo da una parte gli insiemi ricorsivi e dall'altra
+quella dei ricorsivi enumerabili. Vogliamo capire la relazione fra queste due classi, \textit{gli
+insiemi ricorsivi sono totalmente disgiunti da gli insiemi ricorsivamente enumerabili o hanno
+qualche intersezione?}
+
+Ogni insieme ricorsivo è anche un insieme ricorsivamente numerabile.
+\paragraph{Teorema}\mbox{}\\
+$A\subseteq\mathbb{N}$ ricorsivo $\implies A$ ricorsivamente numerabile.
+
+Proprio perché parto da un insieme ricorsivo ho un modo per scrivere se un elemento
+appare in un insieme oppure no. Quindi posso costruire un programma che preso
+in ingresso $n$ posso far partire il programma che decide $a$, se il programma che decide
+$a$ emette 1, emette 1 anche lui, se il programma che decide $a$ emette 0 allora mando in loop
+il programma.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/pdia.png}
+\end{figure}
+il significa di questo programma è il seguente:
+\[
+    \varphi_P(x)=
+    \begin{cases}
+        1 & x\in A\\
+        \bot &x\notin A
+    \end{cases}
+\]
+
+Quindi la situazione è la seguente, la classe degli insiemi ricorsivi è contenuta nella
+classe degli insiemi ricorsivamente numerabili.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/ric_ricenum.png}
+\end{figure}
+\textit{Ma questa è un inclusione
+propria o meno?}
+$$A=\{x\in\mathbb{N}:\varphi_x(x)\downarrow\}$$
+Ho dimostrato che è ricorsivamente numerabili ma non è ricorsivo, quindi i ricorsivi
+sono inclusi propriamente nei ricorsivi numerabili.
+$$Ricorsivi \subset Ricorsivi\;Numerabili$$
+
+Per completare la classificazione degli insiemi ci si domanda: \textit{è presente
+qualcosa al di fuori di questo mondo?} Ovvero degli insiemi talmente difficili
+che non riesco a realizzare degli algoritmi di parziale decisione?
+$$A^c=\{x\in\mathbb{N}:\varphi_x(x)\uparrow\}?$$
+Prendo il complemento di questo insieme, tale per cui il programma non termina, \textit{dove
+potrei posizionarlo questo insieme complemento?}
+
+Si può dimostrare il seguente \textbf{teorema}: la classe degli insiemi ricorsivi è un Algebra di Boole,
+vuol dire che è una classe chiusa per le operazioni di complemento, intersezione e unione. Quindi
+se prendo un elemento di quella classe il suo complemento è ancora in quella classe, e così
+via sia per unione che intersezione.
+Prendiamo due insiemi ricorsivi $A$ e $B$, questi insiemi possono essere decisi da due programmi,
+sia $P_A$ e $P_B$ i programmi che sono in grado di riconoscerli (con
+le rispettive funzioni caratteristiche $\chi_A,\chi_B\in\mathcal{T}$).
+Sfruttando questi programmi i programmi che è in grado di
+riconoscere il complemento, l'intersezione e l'unione:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/compl_A.png}
+    \caption{Complemento di $A$}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{images/intersab.png}
+    \caption{Intersezione tra $A$ e $B$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{images/unionab.png}
+    \caption{Unione tra $A$ e $B$}
+\end{figure}
+
+Equivalentemente le funzioni caratteristiche sono definite:
+$$\chi_{A^c}(x)=1\dot{-}\chi_A(x)$$
+$$\chi_{A\cap B}(x)=\chi_A(x)\cdot\chi_B(x)$$
+$$\chi_{A\cup B}(x)=1\dot{-}(1\dot{-}\chi_A(x))(1\dot{-}\chi_B(x))$$
+tutte queste funzioni caratteristiche sono \textbf{ricorsive totali},
+e quindi ho dimostrato che gli insiemi $A^c,A\cup B, A\cap B$ sono \textbf{ricorsivi}.
+
+\subsubsection{Complemento dell'insieme dell'arresto $A=\{x:\varphi_x(x)\downarrow\}$}
+$$A^c=\{x\in\varphi_x(x)\uparrow\}$$
+
+Come faccio a dire che il complemento di $A$ non è ricorsivo? Se $A^c$ fosse
+ricorsivo se io prendessi ancora il complemento otterrei ancora un insieme ricorsivo,
+questo perché la classe dei ricorsivi è chiusa rispetto all'operazione di complemento.
+Ma $(A^c)^c=A$, ma $A$ sappiamo che non è ricorsivo e questo mi porta ad un assurdo.
+
+Ho dimostrato che $A$ è ricorsivamente numerabile, ma non è ricorsivo:
+$$A=\{x:\varphi_x(x)\downarrow\}$$
+e che il suo complemento non è ricorsivo. \textit{Potrebbe essere ricorsivamente
+numerabili?}
+$$A^c=\{x:\varphi_x(x)\uparrow\}$$
+Ho perfettamente caratterizzato $A$ però siccome $A$ è ricorsivamente numerabili,
+magari il suo complemento potrebbe esserlo.
+
+\paragraph{Teorema}\mbox{}\\
+Se $A$ è ricorsivamente numerabile e $A^c$ è anche ricorsivamente numerabile allora ottengo
+che quell'insieme è ricorsivo. Quindi possiamo dire che $A^c$ non è ricorsivamente
+enumerabile, poiché in quel caso potrei concludere che $A$ sia ricorsivo, ma noi sappiamo
+che $A$ non è ricorsivo.
+Questo teorema ci da la panoramica completa sulla classificazione degli insiemi in base alla
+loro riconoscibilità.
+$$A^c\text{ non è ricorsivamente numerabile}$$
+
+\paragraph{Dimostrazione informale del teorema}\mbox{}\\
+Avevamo detto che un insieme ricorsivamente numerabile può essere visto come
+un elenco telefonico, dove ogni pagina ha presente un elemento dell'insieme.
+Il teorema dice che $A$ è ricorsivo numerabile, e lo stesso per $A^c$. Quindi abbiamo
+due elenchi telefonici. Io devo gestire questi due elenchi in maniera da decidere
+se uno di questi due elementi appartiene o meno ad $A$. \textit{Come sfogliare
+questi due libri per decidere l'appartenenza ad $A$?} Se io controllo ogni elemento
+di $x$ per verificare l'appartenenza all'insieme rischio di andare in loop, devo
+adoperare una tecnica che mi permetta di fermarmi. Come soluzione basterebbe sfogliare
+un numero finito di pagine \textbf{per volta} in tutti e due gli elenchi.
+\begin{enumerate}
+    \item Apri di due libri alla prima pagina.
+    \item Se $x$ compare sul libro di $A$ stampa 1. Se $x$ compare sul libro di $A^c$
+    stampa 0. Se $x$ non compare su alcuno dei due libri volta la pagina di ogni libro
+    e ripeti il passo 2.
+\end{enumerate}
+Quindi sfogliare gli elementi non in maniera esclusiva, così da evitare di andare
+in loop su un solo elenco. \textit{Perché sono sicuro che questo algoritmo non
+andrà in loop?} Questo perchè un elemento appartiene ad $A$ o ad $A^c$, quindi
+è ovvio che se ho un elemento in input esso comparirà in uno dei due elenchi (l'unione
+genera l'intero universo delle possibilità).
+Quindi ho un algoritmo che sfruttando questi due libri mi permette di riconoscere
+esattamente $A$.
+
+\paragraph{Dimostrazione formale del teorema}\mbox{}\\
+Essendo $A,A^c$ degli insiemi ricorsivamente numerabili, allora
+esistono $f,g\in\mathcal{T}$ tali che $A=Im_f$ e $A^c=Im_g$. Sia $f$ implementata
+dal programma $F$ e $g$ dal programma $G$. Il seguente programma riconosce $A$:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/prog_per_a.png}
+\end{figure}
+un ciclo infinito con un contatore $i$ inizializzato a 0, dentro al ciclo controllo
+se $x$ compare nell'elenco di $A$, altrimenti controllo se $x$ appartiene ad $A^c$
+in tal caso darò in output 0. Se entrambi i controlli non sono verificati
+aggiorno il contatore e ripeto il ciclo.
+L'algoritmo termina sempre perchè prima o poi manderà in output un risultato (return),
+in quando l'elemento appartiene sicuramente ad uno dei due insiemi.
+
+Questo teorema ci fornisce un ulteriore strumento di indagine su gli insiemi, per esempio
+possiamo avere davanti un insieme $A$ e io devo dimostrare che caratteristiche
+di riconoscimento ha quell'insieme $A$:
+\begin{itemize}
+    \item Se $A$ non è ricorsivo, potrebbe essere ricorsivamente numerabile.
+    \item Se non riesco a mostrarlo, prova a studiare $A^c$, magari il suo complemento
+    è più gestibile e riesco a dimostrare che è ricorsivamente numerabile.
+    \item Se $A^c$ è ricorsivamente numerabile allora per il teorema possiamo concludere che
+    $A$ non è ricorsivamente numerabile.
+\end{itemize}
+Con questo approccio si ottiene che $A^c\{x:\varphi_x(x)\uparrow\}$ non è ricorsivamente
+numerabile.
+
+\paragraph{Situazione finale}\mbox{}\\
+Il quadro finale è composta dalla classe degli insiemi ricorsivi che è sottoclasse degli
+insiemi ricorsivamente numerabili. Gli insiemi ricorsivi abbiamo molti esempi numeri pari,
+dispari, primi,...
+Abbiamo anche esempi di insiemi ricorsivamente numerabili che non sono ricorsivi, ovvero
+il problema dell'arresto, $A=\{x:\varphi_x(x)\downarrow\}$ . Non solo abbiamo visto che
+esiste qualcosa di extra-mondo, il complemento di un insieme ricorsivamente numerabile
+non è ricorsivamente numerabile $A^c=\{x:\varphi_x(x)\uparrow\}$.
+\begin{figure}[H]
+    \centering
+    \caption{Gerarchia}
+    \includegraphics[scale=0.5]{images/gerarchia.png}
+\end{figure}
+Questi livelli della gerarchia non sono vuoti, perché sono presenti esemplari in ogni insieme.
+
+\subsubsection{Proprietà di chiusura degli insiemi ricorsivamente numerabili}
+Il teorema dice che: la chiusura degli insiemi ricorsivamente numerabili è chiusura
+per unione e intersezione man on per complemento.
+
+\paragraph{Dimostrazione}\mbox{}\\
+Per complemento abbiamo mostrato che $A=\{x:\varphi_x(x)\downarrow\}$ è ricorsivamente
+numerabile, mentre $A^c=\{x:\varphi_x(x)\}$ non lo è. Siano $A,B$ ricorsivamente numerabili,
+se sono ricorsivamente numerabili allora sono listabili, ovvero esistono due funzioni $f,g\in\mathcal{T}$
+tali che $A=Im_f$ e $B=Im_g$. Sia $f$ implementata da $F$ e $g$ implementata da $G$. Siano i programmi:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/inters_AB.png}
+\end{figure}
+per la semantica:
+\[
+    \varphi_{P'}(x)=
+    \begin{cases}
+        1 & x\in A\cup B\\
+        \bot &\text{altrimenti}
+    \end{cases}
+    \]
+$$A\cap B = Dom_{\varphi_{P'}\in\mathcal{P}}$$
+Inizio a sfogliare il primo libro, se non esco da quel libro vuol dire che quell'elemento
+non appartiene ad $A$, e quindi non è presente intersezione. Quindi deve uscire "indenne"
+da questi due cicli che sfogliano gli elenchi (dove indenne si intende senza andare in loop).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/unionie_AB.png}
+\end{figure}
+\[
+    \varphi_{p''}(x)=
+    \begin{cases}
+        1 & x\in A\cup B\\
+        \bot & \text{altrimenti}
+    \end{cases}
+\]
+In questo caso invece devo controllare una pagina per volta su tutti e due gli elenchi.
+$$A\cup B=Dom_{\varphi_{P''}\in\mathcal{P}}$$
+
+Entrambe le funzioni sono ricorsivamente numerabili.
+
+\subsubsection{Il teorema di Rice}
+Potente strumento per mostrare che gli insiemi appartenenti a runa cerca classe non
+sono ricorsivi.
+
+Sia $\{\varphi_i\}$ un sistema di programmazione accettabile. Prendiamo un insieme di numeri
+$I\subseteq\mathbb{N}$ (i quali sono programmi in quanto numeri),
+esso rispetta le funzioni se e solo si verificano le seguenti condizioni
+$$a\in I\land\varphi_a=\varphi_b\implies b\in I$$
+se prendiamo un elemento di $a\in I$, esso può essere visto come un programma in quanto numero, poi
+prendiamo un altro elemento $b$, che non sappiamo se sta in $I$. Ma se quell'elemento
+ha la stessa semantica del programma $a$ allora $b\in I$.
+
+Fondamentalmente, dire che un insieme rispetta le funzioni vuol dire che se dentro quell'insieme
+c'è un programma che calcola una certa cosa, tutti quei programmi che calcolano quella cosa
+si trovano dentro quell'insieme.
+
+\paragraph{Esempio}\mbox{}\\
+$$I=\{x\in\mathbb{N}:\varphi_x(3)=5\}$$
+Tutti i programmi che su input 3 restituiscono 5. Essi rispettano le funzioni, questo
+perché le condizioni sono verificate:
+$$a\in I\land \varphi_a=\varphi_b$$
+Prendendo un programma $a$ che su input 3 restituisce 5, ora prendiamo un programma
+$b$ che ha la stessa semantica di $a$. Questo significa che su input 3 anch'esso restituisce
+5. Ma allora questo significa che $b$ soddisfa la condizione di appartenenza all'insieme di
+$I$, quindi appartiene ad $I$.
+
+Il teorema di Rice dice la stessa cosa. Sia $I\subseteq\mathbb{N}$ un insieme che
+rispetta le funzioni. Allora $I$ è ricorsivo solo se $I=\emptyset$ oppure $I=\mathbb{N}$.
+
+In pratica, il teorema di Rice dice che gli insiemi che rispettano le funzioni non sono mai ricorsivi, a meno che
+non lo sono banalmente essendo $\emptyset$ o $\mathbb{N}$. Notare che $\emptyset$ e $\mathbb{N}$
+ovviamente rispettano le funzioni e sono ricorsivi.
+
+\paragraph{Dimostrazione}\mbox{}\\
+Questa è una dimostrazione per assurdo, ovvero si deve negare il teorema di Rice.
+Prendo un insieme $I$ che rispetta le funzioni ed è un insieme che non è un insieme banale
+($\emptyset$ o $\mathbb{N}$). Per assurdo assumo che $I$ sia ricorsivo e andiamo a caccia
+della contraddizione.
+
+Essendo $I\neq\emptyset$, posso scegliere $a\in I$ (esiste un elemento
+non è l'insieme vuoto), poi siccome $I\neq\mathbb{N}$ vuol dire che c'è qualcosa che non
+sta all'interno dell'insieme $I$, lo chiamiamo $\overline{a}\notin I$.
+Allora definisco la funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ come:
+\[
+    t(n)=
+    \begin{cases}
+        \overline{a} & n\in I\\
+        a & n\notin I
+    \end{cases}
+\]
+In termini di calcolabilità possiamo dire che la funzione $t$ è programmabile,
+io sto partendo dall'assunto che $I$ sia ricorsivo, ovviamente posso scrivere un
+programma che calcola la funzione $t$, quindi $t\in\mathcal{T}$.
+\begin{figure}[H]
+   \centering
+   \includegraphics[scale=0.6]{images/appartenenza.png}
+    \caption{Programma della funzione $f$}
+\end{figure}
+pensando al \textbf{teorema di ricorsione} siamo d'accordo che abbiamo un elemento $d\in\mathbb{N}$
+tale per cui in un s.p.a. $\{\varphi_i\}$ tale per cui:
+$$\varphi_d=\varphi_{t(d)}$$
+per questo $d\in\mathbb{N}$ ho due possibilità:
+\begin{itemize}
+    \item $d\in I$: poiché $I$ rispetta le funzioni e $\varphi_d=varphi_{t(d)}$ allora deve
+    essere che $t(d)\in I$. Ma $t(d)=\overline{a}\notin I$. Questa è una contraddizione.
+
+    \item $d\notin I$: in tal caso $t(d)=a\in I$ ma siccome $I$ rispetta le funzioni
+    $\varphi_d=\varphi_{t(d)}$ allora deve essere $d\in I$. Questa è un altra contraddizione.
+\end{itemize}
+Il fatto di aver assunto che $I$ sia ricorsivo mi porta ad una contraddizione, e quindi il
+teorema di Rice vale.
+\subsubsection{Mostrare che un insieme non è ricorsivo}
+Esistono tre tappe per dimostrare che un insieme $A$ non sia ricorsivo, Rice ci dice di:
+\begin{enumerate}
+    \item Dimostrare che $A$ rispetta le funzioni.
+    \item Dimostrare che $A=\emptyset$ e $A=\mathbb{N}$, ovvero che non sia un insieme banale.
+    \item Se ottenuti i punti precedenti allora grazie al teorema di Rice si può concludere che
+    $A$ non è ricorsivo.
+\end{enumerate}
+
+\paragraph{Esempio di insieme non ricorsivo}\mbox{}\\
+$$A=\{x\in\mathbb{N}:\varphi_x(3)=5\}\text{ è ricorsivo?}$$
+
+\begin{enumerate}
+    \item L'insieme $A$ rispetta le funzioni (esempio già dimostrato).
+    $$a\in A\land \varphi_a=\varphi_b$$
+    $$\varphi_a(3)=5\;\;\varphi_b(3)=5\implies b\in A$$
+    \item Dimostrare che l'insieme è diverso dall'insieme vuoto e da $\mathbb{N}$.
+    $A\neq\emptyset$: il programma che stampa 5 su ogni input $\in A$.
+    $A\neq\mathbb{N}$: il programma che stampa 2 su ogni input $\notin A$.
+    \item Allora il teorema di Rice mi dice che $A$ non è ricorsivo.
+\end{enumerate}
+dal punto di vista informatico significa che non esiste uno strumento diagnostico
+che testa se i programmi su input 3 restituiscono 5. Questo è un risultato teorico
+che ha un impatto pratico.
+
+\subsubsection{Teorema di Rice e verifica automatica del SW}
+Il teorema di Rice dice che la correttezza dei programmi non può essere verificata
+automaticamente, ovvero attraverso dei programmi. Abbiamo un problema, solitamente
+vogliamo costruire un programma che risolve quel problema, quel problema solamente
+è dato attraverso le sue \textbf{specifiche}.
+
+Un programma è \textbf{corretto} se quel programma risponde a quelle specifiche.
+
+\paragraph{Problema}\mbox{}\\
+Sono in grado di costruire un programma $V$ che mi testa automaticamente se un
+programma è corretto o meno?
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/programma_V.png}
+\end{figure}
+Il teorema di Rice mi dice che una verifica automatica non può avvenire, non posso
+avere dei diagnostici che mi testano la correttezza dei programmi. Vediamo in un contesto
+pi formale.
+$$PC=\{P:P\text{ è corretto}\}$$
+Consideriamo $PC$ come l'insieme dei programmi corretti, questo insieme può essere riconosciuto
+da un programma $V$? Se questo comportamento significa che $PC$ è ricorsivo. Allora ci si chiede
+la domanda $PC$ è ricorsivo? Per il teorema di Rice so che questo insieme non può essere
+ricorsivo, perché $PC$ rispetta le funzioni.
+
+$$p\in PC \land \varphi_P = \varphi_{P'}$$
+Se prendiamo un programma $P$ corretto, ed un altro programma $P'$ che ha la stessa semantica
+di $P$, allora quest'ultimo sarà anch'esso un programma corretto.
+$$P'\in PC$$
+Quindi $PC$ non è ricorsivo per il teorema di Rice (non è possibile verificare automaticamente
+la correttezza dei programmi).
+
+\paragraph{}\mbox{}\\
+In realtà sono presenti delle specifiche che si possono verificare automaticamente
+la correttezza semantica dei corrispondenti programmi:
+\begin{itemize}
+    \item nel caso in cui nessun programma non mi va bene, $PC=\emptyset$
+    \item nel caso in cui tutti i programmi andranno bene, $PV=\mathbb{N}$
+\end{itemize}
+Non è possibile verificare automaticamente proprietà semantiche dei programmi, eccetto
+i casi banali (ovviamente, la correttezza sintattica è verificabile automaticamente,
+ciò è molto differente dal capire se una cosa è giusta o sbagliata, che per il
+teorema di Rice per cosa si intende un programma).
+
+
+
+
+
+
+
+\section{Teoria della complessità}
+
 
 \end{document}
