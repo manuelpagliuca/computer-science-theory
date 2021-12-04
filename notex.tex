@@ -4228,13 +4228,384 @@ i casi banali (ovviamente, la correttezza sintattica è verificabile automaticam
 ciò è molto differente dal capire se una cosa è giusta o sbagliata, che per il
 teorema di Rice per cosa si intende un programma).
 
-
-
-
-
-
-
 \section{Teoria della complessità}
+La teoria della calcolabilità risponde alla domanda: \textit{posso
+scrivere un programma per il problema $P$?}
+Invece la teoria della complessità risponde alla domanda: \textit{come
+funzionano i programmi per $P$?}
+O meglio \textit{quante risorse computazionali impieghiamo
+in un programma per la risoluzione
+del problema $P$?}
+
+Una risorsa computazionale è una qualsiasi cosa che venga consumata
+durante la risoluzione automatica dei problemi.
+\begin{itemize}
+    \item Elettricità.
+    \item Numero di processori in un sistema parallelo.
+    \item Features particolari di in un sistema quantistico.
+    \item $\dots$
+    \item In un sistema classico (mono processore, architettura di Von Neumann) sono presenti due
+    grandezze sempre presenti: il tempo di esecuzione e lo spazio.
+\end{itemize}
+La più importante è il tempo di esecuzione in qualsiasi sistema, la seconda
+importante è lo spazio ovvero quanta memoria occupa durante l'esecuzione di un programma.
+Anche la memoria è una risorsa molto importante e vogliamo che si consumi il meno possibile.
+
+La soluzione automatica dei problemi viene studiata dalla teoria della complessità
+da un punto di vista di consumo di risorse computazionali.
+
+\paragraph{Alcune domande nella teoria della complessità}\mbox{}\\
+\begin{itemize}
+    \item Dato un programma per il problema $P$, quanto tempo impiega
+    il programma nella soluzione? Quanto spazio in memoria occupa?
+
+    \item Dato un problema $P$, qual'è il minimo tempo per
+    un programma che risolve $P$? Quanto spazio in memoria
+    al minimo occuperanno i programmi per $P$?
+
+    \item In che modo posso dire che un problema è efficientemente
+    risolto in termini di tempo e/o spazio?
+
+    \item Quali problemi possono essere efficientemente risolti per
+    via automatica? (qui si vede la distanza con la teoria della
+    calcolabilità, nella quale si cercava di caratterizzare
+    quali problemi fossero risolubili, qua sto cercando di caratterizzare
+    quali problemi sono efficientemente risolubili per via automatica,
+    possiamo vedere come una versione "quantitativa" della tesi di
+    Church-Turing).
+\end{itemize}
+
+\subsection{Risorse computazionali}
+Punto iniziale fondamentale in teoria della complessità, abbiamo bisogno
+di una definizione rigorosa di calcolo e la loro misurazione.
+
+Alan M.Turing, 1936, in un articolo che ha fornito le basi dell'informatica.
+Esso è un modello teorico di calcolatore che consente la definizione
+rigorosa di nozioni intuitive (ma modellate in maniera matematicamente
+precisa):
+\begin{itemize}
+    \item Passo di computazione.
+    \item Computazione.
+    \item Tempo e spazio di calcolo dei programmi.
+\end{itemize}
+e quindi consente l'uso di strumenti matematici per:
+\begin{itemize}
+    \item Misurare il consumo di tempo e spazio di calcolo.
+    \item Definire il concetto di efficienza sia in termini di tempo
+    che di spazio.
+    \item Caratterizzare i problemi che hanno soluzione automaticamente
+    efficiente (Una variante della tesi di Church-Turing "ristretta").
+\end{itemize}
+Il nostro punto di partenza sarà l'introduzione di questo modello di calcolo
+che introduce tutto ciò che ci serve per la definizione di tutto ciò che
+ci serve per indagare nella teoria della complessità.
+
+\subsubsection{Richiami di teoria di linguaggi formali}
+\begin{itemize}
+    \item Alfabeto: un insieme finito di oggetti che si chiamano simboli.
+    $$\Sigma=\{\sigma_1,\dots,\sigma_k\}$$
+    $\Sigma=\{0\}$
+    \item Stringa su $\Sigma$: è una giusta apposizione di simboli $x_i\in\Sigma$.
+    L'$i$-esimo simbolo della stringa $x$ viene indicato con $x_i$, poiché composta:
+    $$x=x_1,\dots,x_n$$
+\item Lunghezza della stringa $|x|$
+\item Stringa nulla $\epsilon$ tale per cui $|\epsilon|=0$
+\item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^*$ (nella quale è compresa anche $\epsilon$).
+\item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^+$ (senza la stringa nulla).
+\item Linguaggio $L$ costruito su $\Sigma$: un insieme di stringhe che soddisfa una certa proprietà,
+quindi un linguaggio è un qualunque sottoinsieme delle stringhe costruibili sull'alfabeto:
+$$L\subseteq\Sigma^*$$
+esempio $L=\{x\in\Sigma^*:|x|\leq 5\}$, linguaggio composto da stringhe minori o uguali di 5.
+$$|L|=\sum_{i=0}^5|\Sigma|^i=\frac{{|\Sigma|}^6}{|\Sigma|-1}$$
+un altro esempio è il linguaggio dei numeri pari:
+$$L_{PARI}=\{0\} \cup \{x\in\{0,1\}^+ : x_i=1 \land x_{|x|}=0\} \implies\text{linguaggio infinito}$$
+\end{itemize}
+
+\subsection{Macchina di Turing (DTM)}
+Una macchina di Turing ha un hardware molto semplice composto da:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/DTM.png}
+    \caption{DTM - \textit{Deterministic Turing Machine}}
+\end{figure}
+
+\begin{itemize}
+    \item Un \textbf{nastro} per lettura e scrittura di lunghezza infinita il quale è costituito
+    da una sequenza infinita verso destra di celle, ogni cella può contenere un simbolo $x_n\in\Sigma$ ed
+    ha un proprio indirizzo definito da $n$. Le macchine di Turing servono a contenere gli input
+    che si danno in pasto alla macchina di turing, ma anche come memoria dove leggo/elaboro/scrivo
+    informazioni, le DTM elaborano stringhe, che vengono fornite in maniera ordinata
+    sul nastro (il simbolo di blank viene utilizzato per i simboli non presenti nella stringa).
+
+    \item \textbf{Testina di lettura/scrittura} che può muoversi avanti ed indietro di una posizione (two-way),
+    la quale è in grado di leggere o scrivere un carattere.
+    \item \textbf{Controllo a stati finiti} connesso alla testina, il quale è un dispositivo che può trovarsi
+    in un insieme finito di situazione che chiamo stati, i quali fanno parte di un insieme finito di simboli
+    detti simboli di stato.
+    $$Q=\{Q_0,\dots,Q_8\}$$
+\end{itemize}
+
+\subsubsection{Passo di computazione: mossa}
+Una mossa è una regola che soddisfatte le premesse:
+\begin{itemize}
+    \item se ti trovi in uno stato (unità di
+controllo a stati finiti).
+\item e se stai leggendo un
+certo simbolo (testina posizionata)
+\end{itemize}
+allora una mossa fornisce in output:
+\begin{itemize}
+    \item il prossimo stato del controllo a stati finiti.
+    \item simbolo da sostituire con quello dove la testina è attualmente posizionata.
+    \item movimento della testina (sx,dx o nullo): -1,+1,0
+\end{itemize}
+L'insieme di queste regole vengono chiamate \textbf{funzione di transizione} di una
+macchina di Turing, le quali definiscono le mosse.
+
+\subsubsection{Funzionamento di una DTM (informale)}
+Computazione di $M$ su input $x\in\Sigma^*$ (informalmente):
+\begin{enumerate}
+    \item Inizializzazione: la stringa $x$ viene depositata carattere per carattere nel
+    nastro della macchina di Turing, il resto del nastro contiene il simbolo di blank.
+    \item La testina viene posizionata sul primo carattere della cella data in input.
+    \item Il controllo a stati finiti è posto nello stato iniziale.
+\end{enumerate}
+La \textbf{computazione} è una serie di \textit{mosse} dettate dalla \textbf{funzioni di transizione}.
+La computazione quindi è una sequenza di mosse che come tutte le computazioni può andare
+in loop oppure arrestarsi, una macchina di Turing si arresta quando giunge ad uno
+stato dove non è presente una funzione di transizione (non ci sono più regole da seguire).
+
+L'esito della computazione di $M$ sulla stringa $x$ è duplice, $M$ può accettare quella
+stringa oppure la può rifiutare:
+\begin{itemize}
+    \item Accetta $x$ : la sequenza di mosse termina in uno \textbf{stato finale} (o accettante).
+    \item Rifiuta $x$ : Altrimenti.
+\end{itemize}
+Il linguaggio accettato dalla macchina di Turing $M$ è l'insieme delle stringhe $x$ che
+vengono accettate dalla mia macchina di Turing.
+$$L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$$
+Questa è la definizione informale di cosa vuol dire computazione in una DTM e di che
+cosa è il prodotto di una DTM, ovvero \textbf{riconoscere un linguaggio}.
+
+\subsubsection{Definizione formale di DTM}
+$$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
+Definita da una sestupla, dove:
+\begin{itemize}
+    \item $Q$ insieme finito di stati assumibili dal controllo a stati finiti.
+    \item $q_0\in Q$ stato iniziale da cui partono le computazioni di $M$.
+    \item $F\subseteq Q$ \textbf{stati finali} dove $M$ si arresta accettando l'input.
+    \item $\Sigma$ \textbf{alfabeto di input}
+    \item $\Gamma$ \textbf{alfabeto di lavoro}, tutti i possibili simboli che posso leggere
+    o scrivere sul nastro di lavoro. Sul nastro di lavoro non è detto che posso trovare
+    solo simboli di input, li posso elaborare e scriverne altri. Per questo $\Gamma$ estende
+    $\Sigma$, $\Gamma\supset\Sigma$ poiché contiene il simbolo speciale \textit{blank}.
+    \item $\delta:Q\times\Gamma\rightarrow Q\times(\Gamma\setminus\{blank\})\times\{-1,0,+1\}$
+    \textbf{funzione di transizione} che definisce le mosse. Una funzione che prende uno stato ed
+    un simbolo letto e restituisce uno stato, un simbolo sul nastro di lavoro (la nostra DTM non
+    puù "sbiancare" le celle, può solo leggere \textit{blank} e non scriverlo), quanto e come muovere la testina. Questa funzione di transizione
+    è parziale, non è definita per tutti i $Q$ e tutti i $\Gamma$, se noi arriviamo in un punto
+    in cui la funzione di transizione è definita, allora per convenzione diciamo che la macchina
+    si arresta.
+\end{itemize}
+
+\subsubsection{Funzionamento di una DTM (formale)}
+\paragraph{Inizializzazione}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/dtm_init.png}
+    \caption{Inizializzazione DTM}
+\end{figure}
+Tutti i caratteri dal primo all'ultimo della stringa vengono messi partire dalla cella 1
+sul nastro di lavoro. La testina di lettura/scrittura viene messa sulla prima cella
+del nastro, il controllo a stati finiti viene impostato sullo stato iniziale $q_0$.
+
+\paragraph{Computazione}\mbox{}\\
+Sequenza di mosse dettata dalla funzione di transizione $\delta$, consideriamo
+il seguente esempio con $\delta(q,\gamma)=(q',\gamma',-1)$. Supponiamo che il controllo
+degli stati finiti si trovi nello stato $q$ e che la testina si trovi in posizione $k$
+sul simbolo $\gamma$ (lettura).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{images/dtm_comp.png}
+\end{figure}
+
+La funzione di transizione mi dice che soddisfo le premesse del controllo a stati finiti
+e di lettura del simbolo, allora eseguendo la mossa dovrò spostarmi nello stato $q'$
+dopo aver scritto il simbolo $\gamma'$ spostandomi di una cella a sinistra.
+Ricordiamo che:
+\begin{itemize}
+    \item Nel caso in cui la funzione di transizione non sia definita per lo stato
+    finito in cui ci si trova, allora la macchina $M$ si arresta.
+    $$\delta(q,\gamma)=\bot\implies M\text{ arresta}$$
+    non vado mai in situazioni dove una mossa non è definita.
+    \item Se la funzione di transizione è sempre definita è presente un
+    rischio loop, poiché la computazione
+    di $M$ $\delta$ potrebbe essere definita e non giungere mai ad uno stato finale, potrebbe
+    andare in un loop continuando a considerare lo stesso insieme di celle).
+    \item $M$ accetta $x\in\Sigma^*$ se e solo se la computazione si arresta
+    in $q\in F$ (in uno stato finale/accettante).
+    \item $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$
+\end{itemize}
+
+\subsubsection{Configurazioni di DTM}
+Posso definire la computazione di $M$ su input $x$ come una sequenza di configurazioni
+che vengono indotte dalla computazione di $M$ su input $x$, dove computazione intendo
+uno snapshot della macchina di Turing in quel momento. \textit{Cosa dovrebbe comparire
+nello snapshot per definire uno stato generale della DTM?}
+\begin{itemize}
+    \item $q\in Q$ Stato del controllo a stati finiti.
+    \item $k\in\mathbb{N}^+$ posizione in quel momento della testina di lettura sul nastro.
+    \item $w\in\Gamma^*$ contenuto non-blank del nastro.
+\end{itemize}
+$$c=(q,k,w)$$
+\paragraph{Configurazione iniziale di $M$ su input $x\in\Sigma^*$}\mbox{}\\
+$$c_0=(q_0,1,x)$$
+
+\paragraph{Configurazione accettante}\mbox{}\\
+$$c=(q,k,w),q\in F$$
+
+\paragraph{Configurazione di arresto}\mbox{}\\
+$$c=(q,k,w),\delta(q,w_k)=\bot$$
+Ovvero qualsiasi snapshot da cui io non so evolvere.
+\paragraph{Computazione di $M$ su $x\in\Sigma^*$}\mbox{}\\
+$$c_0\overset{\delta}{\implies}c_1\overset{\delta}{\implies}\dots\overset{\delta}{\implies}
+c_i\overset{\delta}{\implies}c_{i+1}\overset{\delta}{\implies}\dots$$
+Una sequenza di configurazioni tale che: $c_0$ sia la configurazione iniziale e $\forall i$
+passo da una configurazione ad una altra grazie alla funzione di transizione.
+
+\paragraph{$M$ accetta $x\in\Sigma^*$ se solo se}\mbox{}\\
+$$c_0\overset{*}{\implies}c_f$$
+$M$ accetta $x$ se la mia configurazione iniziale fa un certo numero di passi $*$ ed
+arriva ad incocciare una configurazione $c_f$ dove mi arresto ed è una funzione accettante
+(stato finale).
+
+\paragraph{Linguaggio accettato da $M$}\mbox{}\\
+$$L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$$
+Insieme delle stringhe dove $M$ accetta $x$ (funzionalità principale delle DTM è quello
+di riconoscere un linguaggio).
+
+\subsubsection{Alcune considerazioni}
+L'attributo deterministico definisce il fatto che la funzione di transizione èp definita in un
+certo modo, ovvero che data una certa configurazione quella successiva è
+\textbf{univocamente determinata} da $\delta$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/dtm_def.png}
+    \caption{Se mi trovo in una certa configurazione $c$ esiste una unica configurazione
+    successiva $c_1$ (oppure non mi evolvo e mi arresto)}
+\end{figure}
+
+Le macchine di Turing non deterministiche (NTM), nelle macchine di Turing non deterministiche
+$\delta$ è tale per cui data una configurazione si possono giungere a molteplici configurazioni
+successive.
+\begin{figure}[H]
+    \centering
+    \caption{Non-Deterministic Turing Machine}
+    \includegraphics[scale=0.6]{images/NTM.png}
+\end{figure}
+Le macchine di Turing probabilistiche (PTM), sono delle particolari TM dove io posso evolvere
+in successive configurazioni in base ad una certa probabilità su cui si basa la funzione
+di transizione $\delta$.
+$p_i\in[0,1]$ probabilità della transizione $c\rightarrow c_i$ con $\sum_{i=1}^k p_i=1$
+\begin{figure}[H]
+    \centering
+    \caption{Probabilistic Turing Machine}
+    \includegraphics[scale=0.6]{images/PTM.png}
+\end{figure}
+Nelle macchine di Turing quantistiche invece delle probabilità ho le ampiezze che sono
+numeri complessi che soddisfano certe proprietà.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/QTM.png}
+    \caption{Quantum Turing Machine}
+\end{figure}
+
+Il modello originale è quello DTM, in base a differenti implementazioni di $\delta$ posso
+definire le altre macchine di Turing. Nel nostro caso considereremo le DTM dove la computazione
+è un cammino di configurazioni (nelle NTM è un albero).
+
+\subsubsection{Funzionalità di una DTM}
+Una macchina di Turing la cosa che sa fare meglio è quella di \textit{riconoscere i linguaggi},
+un linguaggio $L\subseteq\Sigma^*$ è riconoscibile da una DTM se so esibire una DTM $M$ per il
+quale il linguaggio accettato è esattamente $L$ (ovvero $L=L_M$).
+
+La capacità di riconoscere i linguaggi è cruciale perché una volta ottenuta ciò la DTM
+acquisisce ulteriori caratteristiche, come \textbf{riconoscere insiemi}.
+\paragraph{DTM per riconoscere insiemi}\mbox{}\\
+$A\subseteq\mathbb{N}$, come riconoscerlo per DTM? Basta che io imponga una codifica
+a gli elementi di questi insiemi.
+$$cod:\mathbb{N}\rightarrow\Sigma^*$$
+Se codifico i numeri naturali su una
+stringa proveniente da un particolare alfabeto (es. $\Sigma=\{0,1\}$), allora grazie a questa codifica
+posso associare ad $A$ il suo linguaggio che non è altro che la codifica degli elementi appartenenti ad $A$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/dtm_accept_a.png}
+\end{figure}
+Un insieme $A$ è riconoscibile su una DTM solo se esiste una DTM $M$ tale che $L_A=L_M$, ovvero
+se è in grado di accettare le codifiche appartenenti a quell'insieme.
+\paragraph{Attenzione}\mbox{}\\
+\textit{Come avviene il riconoscimento di una DTM su un insieme $A$?} Oppure,
+cosa vuol dire che una DTM riconosce l'insieme $A$?
+Vuol dire che accetta le stringhe appartenenti a $L_A$, vuol dire che la DTM sulla
+codifica dell'input in $A$ si arresta ed accetta, questo per gli elementi appartenenti ad $A$.
+Per gli elementi non appartenenti ad $A$ la DTM può arrestarsi rifiutando, oppure, andare in loop.
+Rifiutare una stringa per una DTM significa andare in loop. Da questo punto di vista una DTM
+viene vista come una procedura di riconoscimento di un linguaggio, ovvero un processo
+di calcolo che a volte non può terminare.
+
+\subsubsection{Potenza di riconoscimento degli insiemi su DTM}
+\paragraph{Teorema}\mbox{}\\
+La classe gli insiemi riconosciuti da DTM coincide con la classe degli insiemi
+\textbf{ricorsivamente numerabili}. Questo era lo scopo per cui sono state costruite
+le DTM, testare i limiti della calcolabilità e non tanto della complessità.
+
+\paragraph{Definizione}\mbox{}\\
+Un algoritmo deterministico per riconoscere un insieme $A\subseteq\mathbb{N}$ è una DTM $M$
+per riconoscere quell'insieme ma che si arresta su ogni input. Ovvero $M$ tale che
+$L_A=L_m$ e tale che $M$ si arresta su ogni input.
+
+\paragraph{Teorema}\mbox{}\\
+La classe degli insiemi riconosciuti da algoritmi deterministici, allora questa classe
+degli insiemi si chiama classe degli insiemi \textbf{ricorsivi}.
+
+\subsubsection{DTM per risolvere problemi di decisione}
+Altra funzionalità che ottengo dalla possibilità di riconoscere linguaggi è quella
+di risolvere problemi di decisione.
+Come possiamo adattare una DTM per risolvere un problema di decisione:
+$$\pi$$
+$$\text{Istanza: } x\in D$$
+$$\text{Domanda: }p(x)$$
+
+Imponiamo una codifica a tutti gli oggetti $x$ che possono essere dati in input alle DTM
+(coppia di Cantor), a questo problema di decisione posso associare il linguaggio delle istanze
+a riposta positiva, ovvero dove la mia macchina di Touring accetta tale stringa:
+$$\pi\rightarrow cod\rightarrow L_\pi=\{cod(x):x\in D\land p(x)\}$$
+La DTM risolve $\pi$ se $M$ è un algoritmo deterministico per il linguaggio $L_\pi$:
+\begin{itemize}
+    \item $M$ accetta le stringhe che soddisfano tale proprietà $p(x)$,
+    ovvero codifiche di istanze che soddisfano tale proprietà $cod(x)$.
+    \item $M$ non deve accettare sulle stringhe che non soddisfano la data proprietà,
+     $\lnot p(x)$.
+\end{itemize}
+\paragraph{Esempio}\mbox{}\\
+$$\text{Parità}$$
+$$\text{Istanza: }x\in\mathbb{N}$$
+$$\text{Domanda: }x\text{ è pari}$$
+Impongo la codifica binaria ai numeri naturali
+$$cod:\mathbb{N}\rightarrow\{0,1\}^*$$
+ed il linguaggio associato a questo problema di decisione non è nient'altro che il linguaggio
+dei numeri pari.
+$$L_\pi=L_{PARI}=\{x\in{0,1}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}$$
+se io sono in grado di esibire una DTM che su ogni stringa digitale si ferma e mi riesce a
+dire SI se la codifica è quella di un numero pari o NO altrimenti (fondamentalmente
+controlla se l'ultimo bit è 0), significa che ho costruito una DTM
+in tale che sia un algoritmo deterministico in grado
+di riconoscere il linguaggio $L_{PARI}$, allora ho risolto il problema di decisione.
+
+
+
 
 
 \end{document}
