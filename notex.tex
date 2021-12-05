@@ -4597,15 +4597,254 @@ Impongo la codifica binaria ai numeri naturali
 $$cod:\mathbb{N}\rightarrow\{0,1\}^*$$
 ed il linguaggio associato a questo problema di decisione non è nient'altro che il linguaggio
 dei numeri pari.
-$$L_\pi=L_{PARI}=\{x\in{0,1}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}$$
+$$L_\pi=L_{PARI}=\{x\in\{0,1\}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}$$
 se io sono in grado di esibire una DTM che su ogni stringa digitale si ferma e mi riesce a
 dire SI se la codifica è quella di un numero pari o NO altrimenti (fondamentalmente
 controlla se l'ultimo bit è 0), significa che ho costruito una DTM
 in tale che sia un algoritmo deterministico in grado
 di riconoscere il linguaggio $L_{PARI}$, allora ho risolto il problema di decisione.
 
+\subsubsection{Algoritmo deterministico per parità}
+$$L_\pi=L_{PARI}=\{x\in\{0,1\}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}=1\{0,1\}^*0\cup 0$$
+Sono presenti due approcci per il problema di parità il pià banale:
+cominciare dall'estremo sinistro (come sempre), ignorare quello che legge
+fino a giungere a fine dell'input e poi controllare se l'ultimo bit è 0,
+in tal caso entrare in uno state accettante, altrimenti in uno stato
+non accettante. Questa dinamica necessità di un metodo per la DTM
+per capire quando si trova nell'ultimo carattere della stringa,
+ma questo è possibile continuando a leggere carattere per carattere fino a
+giungere all'ultima stringa.
 
+Ma a dire il vero per riconoscere tale linguaggio basterebbe un automa a stati
+finiti per riconoscere questo linguaggio. Il secondo approccio considero
+ogni passo considerando come se fosse l'ultimo, procedo così fino a che non
+giungo al \textit{blank}, fin quando giungo al blank. Per ogni 0 e 1 ad ogni
+passo cambio il mio stato in finale se 0 o non finale se 1.
+$$M=(Q,\Sigma,\Gamma,\delta,p,F)$$
+\begin{itemize}
+    \item $Q=\{p,z1,\mu,z,r\}$
+    \item $\Sigma_1=\{0,1\}$
+    \item $\Gamma=\{0,1,blank\}$
+    \item $p=\text{stato iniziale}$
+    \item $F=\{z1,z\}$
+    \item $$\delta:Q\times\Gamma\rightarrow Q\times\Sigma\times\{-1,0,1\}$$
+    $$\delta(\;,\;)=\bot\implies HALT$$
+\end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/dtm_lpari.png}
+\end{figure}
 
+\begin{itemize}
+    \item stato iniziale $p$:
+    \begin{enumerate}
+        \item la stringa nulla non viene accettata, HALT.
+        \item se il primo carattere è 0, entra nello stato $z1$ sul
+        nastro di lavoro scrivi 0 (lo lasci come è), e si sposta a destra di 1.
+        \item se il primo carattere è 1, entra nello stato $\mu$, lascia scritto
+        il carattere 1 e avanza la testina verso destra.
+        \item $\dots$
+    \end{enumerate}
+    \item $\dots$
+\end{itemize}
+Questa DTM $M$ è in grado di accettare il linguaggio $L_{PARI}$, ma questo linguaggio
+non è altro che la riproposizione die numeri pari dai un punto di
+vista del linguaggio, vuol dire che questa DTM è in grado di riconoscere l'insieme
+dei numeri pari.
+
+La DTM è precisa, è però un fatto che programmare una DTM è un compito abbastanza
+scomodo, vuol dire progettare tutti gli stati, immaginarsi la funzione delta, $\dots$
+\textit{Cosa si fa per specificare una DTM in maniera non esattamente
+formale ma che sia più immediato?} Solitamente le DTM non vengono descritte
+in maniera esplicita ma attraverso uno pseudo codice.
+
+\subsubsection{Specificare DTM}
+Per semplificare il compito di descrivere una DTM si utilizza uno pseudo codice,
+il quale non è nient'altro che la DTM stessa. Non sono specificati gli stati,
+la $\delta$, ma solamente la dinamica che la DTM implementa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/pseudo_DTM.png}
+    \caption{Pseudo-codice DTM per riconoscere $L_{PARI}$}
+\end{figure}
+Prima di tutto ho pensato che i caratteri della stringa $x$ sul
+nastro di lavoro vengono prelevati come se fossero su un array con $x[i]$,
+con $i$ che è la testina della DTM. Mi preparo un flag $f$ booleano impostato
+a false, il quale fa le veci degli stati finali e non finali, se esso
+al termine del codice vale \textit{true} allora
+la stringa appartiene al linguaggio, altrimenti la stringa non appartiene
+a $L_{PARI}$.
+
+Nello switch controlliamo
+solamente il primo carattere vediamo che prende una decisione sul primo carattere fornito
+in ingresso , \textit{quanti caratteri
+possiamo leggere all'inizio?} Sono tre, notiamo che non è presente un
+\textbf{case} per il \textit{blank}, ma questo va benissimo perché andrebbe
+direttamente sul return e saremmo in uno stato non accettante.
+
+Se fosse uno 0 dobbiamo assicurarci che sia l'ultimo, e che non sia seguito
+da nessuno altro numero. Allora lo leggiamo, andiamo alla cella successiva,
+effettuo un confronto di uguaglianza tra il carattere letto e \textit{blank},
+allora perfetto termino. Nel caso in cui il primo carattere sia un 1, allora
+inizio un loop tale per cui continuo ad avanzare la testina finché non leggo
+blank, e continuando ad aggiornare il flag con il confronto tra l'attuale
+cella ed lo 0 (stato accettante se 0 e non accettante altrimenti).
+
+\paragraph{Note}\mbox{}\\
+In letteratura quando si vuole specificare una DTM si utilizza sempre uno
+pseudo codice che sia evocativo di quello che fa la macchina. In questo approccio
+non siamo inaccurati, sono presenti dei teoremi matematici importanti
+che dimostrano che da una DTM è possibile estrarre uno pseudo codice
+come quello appena visto.
+
+\subsubsection{Calcolare funzioni su una DTM}
+Una DTM può fare molto altro, è in grado di calcolare funzioni, e quindi
+sono in grado di generare problemi generali (ogni problema può essere
+rappresentato come la sua funzione soluzione, quella che data in istanza
+mi rispondo quale è la soluzione per quella istanza). Quindi non solo
+problemi di decisione.
+
+Data una funzione $f:\Sigma^*\rightarrow\Gamma^*$, la DTM $M$ calcola $f$ se
+e solo se:
+\begin{itemize}
+    \item $f(x)\downarrow$, ovvero se la funzione è definita sull'input $x$,
+    allora la computazione di $M$ su $x$ termina con $f(x)$ output rappresentato
+    sul nastro.
+
+    \item $f(x)\uparrow$, ovvero se la funzione non è definita sull'input $x$ ($\in\mathcal{P}$), allora $M$ va in un
+    loop infinito.
+\end{itemize}
+Ci si chiede \textit{quali sono le funzioni calcolabili da una DTM?} Le DTM
+sono in grado di calcolare tutte e sole le funzioni ricorsive parziali. Se
+una funzione è tale sono in grado di costruire una DTM che la calcola.
+Visto che abbiamo le DTMs che calcolano le funzioni parziali come era scritta
+originariamente.
+\paragraph{Tesi di Church-Turing}\mbox{}\\
+\textit{"Una funzione è intuitivamente calcolabile se e solo se è calcolata
+da una DTM."}
+
+Inoltre, si dimostra che le DTM sono delle s.p.a., questo dimostrando
+i seguenti punti:
+\begin{enumerate}
+    \item Si può dimostrare che le DTM calcolano tutte e sole le funzioni ricorsive
+    parziali.
+    \item Esiste una DTM universale, ovvero una in grado di simulare una qualsiasi
+    altra DTM fornita in ingresso.
+    \item Vale il teorema $S_n^m$, la possibilità di scrivere DTM più specifiche
+    a partire da DTM più generali.
+\end{enumerate}
+Le DTM sanno fare molte cose: accettano linguaggi, riconoscono insiemi,
+calcolano funzioni.
+
+\subsection{Tempo}
+Sia la DTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$, la DTM grazie alla sua semplicità
+ci permette di stabilire in maniera precisa che cosa è il tempo di calcolo
+della nostra macchina $M$ su un particolare input $x$. Abbiamo una definizione
+locale di tempo, ovvero definito su una stringa in input.
+
+\paragraph{Tempo di calcolo di $M$ su input $x\in\Sigma^*$}\mbox{}\\
+$$T(x)=\text{n° di mosse della computazione di }M\text{ su input }x\text{ anche }\infty$$
+Ogni computazione di $M$ è una sequenza di mosse (singole
+applicazioni di $\delta$), la lunghezza di questa
+sequenza di mosse è il $T(x)$
+
+\paragraph{Complessità in tempo di $M$ (worst case)}\mbox{}\\
+$$t:\mathbb{N}\rightarrow\mathbb{N}$$
+$$t(n)=max\{T(x):x\in\Sigma^*\land|x|=n$$
+Una funzione che non è localmente confinata su una stringa, tale per cui
+si consideri il peggiore tempo di calcolo sulle stringhe la cui dimensione
+è $n$. Il \textit{"worst case"} indica il fatto che $t(n)$ rappresenta il
+\textbf{tempo peggiore} di calcolo su tutti gli input di lunghezza $n$.
+\textit{Come mai si utilizza questa metrica?} Prima di tutto ci fornisce
+una visione abbastanza prudente di quello che è il tempo di calcolo
+di quella DTM. In secondo luogo è la più usata perché è la più
+"manovrabile" matematicamente.
+\paragraph{Esempio di calcolo della complessità in tempo}\mbox{}\\
+Consideriamo la seguente DTM, supponiamo che $x$ sia lungo $n$, quanto
+tempo impiega la computazione su quell'input ? Ovvero, \textit{quanto
+vale $T(n)$?}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{images/pseudo_DTM.png}
+\end{figure}
+Non fa altro che consumare tutti gli $n$ simboli compreso del simbolo blank,
+poiché legge pure quello, quindi effettua $n+1$ letture.
+$$t(n)=n+1$$
+\textit{Ma è sempre così?} Notiamo che su input di lunghezza $n$ a volte
+ci impiegano 2 passi, (entro nel primo case) ma siccome mi interessa
+solamente il caso peggiore do importanza a questo.
+
+\subsubsection{Linguaggi, insiemi e problemi di decisione}
+Il linguaggio $L\subseteq \Sigma^*$ è riconoscibile in tempo
+deterministico $f(n)$ se e solo se esiste una DTM $M$ tale che:
+\begin{enumerate}
+    \item $L=L_M$
+    \item $t(n)\leq f(n)$
+\end{enumerate}
+Allo stesso modo possiamo dire che:
+\begin{itemize}
+    \item L'insieme $A\subseteq\mathbb{N}$ è riconosciuto in tempo $f(n)$
+    se e solo se il corrispondente linguaggio è riconosciuto in tempo $f(n)$
+    $$L_A=\{cod(A):a\in A\}$$
+    \item Il problema di decisione $\pi$ è risolubile in tempo $f(n)$, se
+    il corrispondente linguaggio che è il linguaggio soluzione è riconosciuto
+    in tempo $f(n)$
+    $$L_\pi=\{cod(x):p(x)\}$$
+    \item In seguito vedremo anche il tempo di calcolo di funzioni.
+\end{itemize}
+Nel seguito, quando parleremo di linguaggi intenderemo equivalentemente insiemi
+o problemi di decisione.
+
+\paragraph{Esempio di complessità in tempo}\mbox{}\\
+Abbiamo mostrato che una DTM che riconosce il linguaggio $L_{PARI}=1\{0,1\}^*0\cup0$
+con complessità in tempo $t(n)=n+1$. Quindi, abbiamo:
+\begin{itemize}
+    \item Il linguaggio $L_{PARI}$ è riconoscibile in $n+1$.
+    \item L'insieme dei numeri pari è riconoscibile in tempo $n+1$.
+    \item Il problema di decisione dei numeri pari può essere risolto
+    in tempo $n+1$.
+\end{itemize}
+
+\paragraph{Un altro esempio: palindrom}\mbox{}\\
+Un altro problema molto famoso, una palindroma è una stringa che se letta
+da entrambe le direzioni si legge nella stessa maniera. Più formalmente,
+data $x=x_1 x_2\dots x_n\in\Sigma^*$, sia $x^R=x_n x_{n-1}\dots x_1$:
+$$L_{PAL}=\{x\in\Sigma^*:x=x^R\}$$
+\textit{Come è fatta una DTM che accetta questo linguaggio?} Dovrebbe
+controllare che i caratteri in posizione simmetrica rispetto al centro
+della stringa siano uguali.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/DTM_pal.png}
+    \caption{Pseudo-codice per una DTM che riconosce $L_{PAL}$}
+\end{figure}
+Finché $i<j$, e finché non hai trovato una discordanza, confronta i due caratteri
+se sono diversi metti $f$ a false, altrimenti se sono uguali incrementi $i$ e decrementi
+$j$. Se tutti questi confronti passano indenni il segnalino $f$ restituirà true,
+altrimenti false. \textit{Quanto è la complessità in tempo?} Chiaramente
+farò $\frac{n}{2}$ passi con un identificatore ed un altro, però nella valutazione
+della computazione dobbiamo essere \textit{"onesti"}, soprattutto verso il
+modello di calcolo che abbiamo sott'occhio e che implementa questa routine, perché
+nel momento in cui scriviamo $i$ e $j$ noi non abbiamo due testine, intuitivamente
+se avessimo un accesso diretto che costa 1 avrei un costo $t(n)=3$ (due
+posizionamenti più il confronto). Peccato che non sia così, la DTM ha una
+sola testina, la testina nel momento in cui si deve effettuare il confronto
+tra il carattere in posizione $i$ e quello in $j$, essa dovrà percorrere
+$j-i$ passi.
+
+$$t(n)\approx\sum_{k=0}^{n}k=\frac{n(n+1)}{2}\approx\frac{n^2}{2}+\frac{n}{2}$$
+Quindi, quando si deve confrontare il primo elemento con l'ultimo si dovranno
+effettuare $n$ passi, per il secondo con il penultimo $n-1$ passi, $\dots$
+finché non deve fare 0. Quindi se io devo calcolare il numero di passi che
+la DTM fa devo sommare il numero di passi per tutti i cammini compiuti
+dalla testina. Quindi una sommatoria da 0 a $n$ di $k$, dove $k$ solo il numero
+di passi dei vari cammini, quindi un tempo quadratico a discapito del lineare
+che inizialmente si aveva ipotizzato.
+
+Nelle nostre valutazioni della complessità in tempo, se utilizziamo il modello
+della DTM dobbiamo stare attenti a rispettare il modello della macchina
+che abbiamo sotto controllo.
 
 \end{document}
