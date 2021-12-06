@@ -4738,7 +4738,7 @@ i seguenti punti:
 Le DTM sanno fare molte cose: accettano linguaggi, riconoscono insiemi,
 calcolano funzioni.
 
-\subsection{Tempo}
+\subsection{Complessità in tempo}
 Sia la DTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$, la DTM grazie alla sua semplicità
 ci permette di stabilire in maniera precisa che cosa è il tempo di calcolo
 della nostra macchina $M$ su un particolare input $x$. Abbiamo una definizione
@@ -4807,7 +4807,7 @@ con complessità in tempo $t(n)=n+1$. Quindi, abbiamo:
     in tempo $n+1$.
 \end{itemize}
 
-\paragraph{Un altro esempio: palindrom}\mbox{}\\
+\paragraph{Un altro esempio: palindrome}\mbox{}\\
 Un altro problema molto famoso, una palindroma è una stringa che se letta
 da entrambe le direzioni si legge nella stessa maniera. Più formalmente,
 data $x=x_1 x_2\dots x_n\in\Sigma^*$, sia $x^R=x_n x_{n-1}\dots x_1$:
@@ -4846,5 +4846,232 @@ che inizialmente si aveva ipotizzato.
 Nelle nostre valutazioni della complessità in tempo, se utilizziamo il modello
 della DTM dobbiamo stare attenti a rispettare il modello della macchina
 che abbiamo sotto controllo.
+
+\subsubsection{Crescita aritmetica}
+Vogliamo misurare questa risorsa computazionale per capire se una DTM (che è un algoritmo)
+è più veloce di un altra. Supponiamo di avere due algoritmi tali per cui il primo ha
+complessità in tempo $t_1(n)=2n$, mentre il secondo ha $t_2(n)=\frac{1}{100}n^2+\frac{1}{2}n+1$.
+La domanda nasce spontanea: \textit{quale è l'algoritmo migliore?} Dove per migliore si intende
+il più veloce, poiché porta alla risposta nel numero minore di passi.
+\textit{il secondo algoritmo è sempre da preferire rispetto al secondo?} Questo dipende da $n$,
+se analizzo le due funzioni noto che la complessità $t_2$ pur essendo quadratica è più
+piccola di $t_1$ per $n\leq 149$.
+$$t_2(n)\leq t_1(n)\text{ se }n\leq 149$$
+$$t_2(n)\geq t_1(n)\text{ se }n>149$$
+Le complessità in tempo degli algoritmi non va valutata su dei valori piccoli, perché i valori
+piccoli sono dei valori inutili da considerare, i nostri algoritmi devono essere buoni su valori
+"ragionevolmente grandi". Quando dobbiamo valutare dobbiamo considerare la sua complessità
+in tempo per valori grandi (nessuno costruisce algoritmi veloci su istanze di dimensione $n=5$,
+ma piuttosto per $n=1000000$).
+
+Se guardassi le due complessità come funzioni ed analizzassi l'andamento di queste, i termini
+che sono importanti sono quelli di ordine superiore rispettivamente per $t_1$ e $t_2$,
+i termini dominanti sono $n$ e $n^2$, le costanti sono ininfluenti. Quando valuteremo
+queste complessità ci interessano questi termini per elaborare una valutazione \textbf{asintotica}.
+
+\subsubsection{Simboli di Landau}
+Sono degli strumenti matematici che ci parlano dell'andamento asintotico delle funzioni, il
+quale ci permette di confrontare le varie funzioni di complessità. Date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$,
+diremo $f(n)=O(g(n))$ se e solo se $\exists c>0$ e $n_0\in\mathbb{N}$ tale che $\forall n\geq n_0$
+vale che $f(n)\leq c\dot g(n)$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/ogrande.png}
+    \caption{$f(n)=O(g(n))$}
+\end{figure}
+Per esempio $f(n)=3n^2+4\sqrt{n}+\log n=O(n^2)$, ovvero esiste una costante $c$ che moltiplicata
+per $n^2$ domina $f(n)$ (per esempio $c=3.0001$). Un altro esempio è $n\log n=O(n^{1+\epsilon})$
+con $\epsilon>0$; oppure $\sin n = O(1)$, questo perché il seno oscilla tra -1 e 1,
+quindi dominato da una costante.
+
+Date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$, diremo $f(n)=\Omega(g(n))$ se e solo
+se $\exists c>0$ e $n_0\in\mathbb{N}$ tale che $\forall n\geq n_0$ vale $f(n)\geq c\cdot g(n)$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/omegagrande.png}
+    \caption{$f(n)=\Omega (g(n))$}
+\end{figure}
+Riconsiderando l'esempio precedente $f(n)=3n^2+4\sqrt{n}+\log n=\Omega(n^2)$, una possibile
+costante potrebbe essere anche $c=3$. Sappiamo che un qualsiasi algoritmo di ordinamento
+basato su confronti ha $\Omega (n\log n)$, non può fare meglio di $n\log n$. 
+
+Un ultimo simbolo, date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$, diciamo che
+$f(n)=\Theta(g(n))$ se e solo se $\exists c_1,c_2 >0$ e $n_0\in\mathbb{N}$ tale che
+$\forall n\geq n_0$ vale $c_1\cdot g(n)\leq f(n)\leq c_2\cdot g(n)$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/theta.png}
+    \caption{$f(n)=\Theta(g(n))$}
+\end{figure}
+
+Vuol dire che la $f(n)$ è confinata da una funzione che date due costanti diventa sia
+limite superiore che limite inferiore. Per esempio $3n^2+4\sqrt{n}+\log n=\Theta(n^2)$,
+oppure $t_{merge-sort}(n)=\Theta(n\cdot\log n)$, perché l'algoritmo di merge sort
+impiega $n\log n$ passi, ma è anche $\Omega(n\log n)$.
+
+\paragraph{Alcuni semplici fatti}\mbox{}\\
+$$f(n)=O(g(n))\Leftrightarrow g(n)=\Omega(f(n))$$
+$$f(n)=\Theta(g(n))\Leftrightarrow f(n)=O(g(n))\land f(n)=\Omega(g(n))$$
+
+Utilizzeremo $O,\Omega,\Theta$ per individuare i termini che sono più importanti sulla crescita
+delle funzioni di complessità, tralasciando i costi moltiplicativi, termini più lenti, $\dots$
+
+\subsubsection{Classificazioni di funzioni}
+Una funzione $f:\mathbb{N}\rightarrow\mathbb{N}$ si dice:
+\begin{itemize}
+    \item Logaritmica: $f(n)=O(\log n)$, per noi informatici esiste solamente $log_2$,
+    in realtà non importa la base del logaritmo, perché posso sempre cambiare la base
+    moltiplicando da una costante che però viene "mangiata" dal $O$.
+    \item Lineare: $f(n)=O(n)$
+    \item Quadratica: $f(n)=O(n^2)$
+    \item Polinomiale: $f(n)=O(n^k)$ per $k\in\mathbb{N}$ fissato.
+    \item Esponenziale: $f(n)$ non è polinomiale, per esempio $O(2^n),O(e^n),\dots$. In questa
+    categoria ricadono funzioni che non sono esponenziali ma in teoria della complessità
+    vengono considerati tali; per esempio $n^{\log n}$ è considerata esponenziale
+    perché non è polinomiale (sebbene in matematica del continuo essa non sia una funzione
+    esponenziale).
+\end{itemize}
+
+\subsubsection{Classi di complessità}
+Siamo in grado di raggruppare i problemi in base alle richieste di risorse di calcolo
+che servono per la loro risoluzione automatica. L'idea è quella di introdurre il concetto
+di \textbf{classe di complessità}: insieme di problemi risolti entro i medesimi vincoli
+su una o pià risorse computazionali.\mbox{}\newline
+
+$DTIME(f(n))$ (\textit{deterministic time}): la classe dei linguaggi
+(o problemi di decisione/insiemi) che vengono
+accettati da DTM in tempo deterministico $O(f(n))$. Tutti i linguaggi per cui sono in grado
+di costruire una DTM deterministica che accetta quel linguaggio con una complessità lineare.
+
+Le DTM le abbiamo definite come dispositivi che calcolano funzioni, possiamo definire
+anche classi di complessità non solo di linguaggi ma anche di funzioni. La complessità
+in tempo rimane uguale a quella del linguaggio. Consideriamo $f:\Sigma^*\rightarrow\Gamma^*$
+è calcolata con complessità in tempo $t(n)$ dalla DTM $M$ se e solo se ogni input $x$
+di lunghezza $n$ la computazione di $M$ su $x$ si arresta entro $t(n)$ passi avendo $f(x)$
+sul nastro. Quindi la complessità in tempo del calcolo delle funzioni misura sempre il caso peggiore
+del calcolo della funzione su input di lunghezza $n$. Quindi possiamo definire
+la classe delle complessità delle funzioni.\mbox{}\newline
+
+$FTIME(f(n))$: la classe delle funzioni che sono calcolate dalle DTM in tempo $O(f(n))$. Tutto
+questo ci porta a definire le due classi più importanti nella teoria della complessità.\mbox{}\newline
+$$P=\bigcup_{k\geq 0}DTIME(n^k)$$
+La classe dei linguaggi accettate da DTM in tempo \textbf{polinomiale}.
+$$FP=\bigcup_{k\geq 0}FTIME(n^k)$$
+La classe delle funzioni calcolate da DTM in tempo \textbf{polinomiale}.
+Esse sono considerate le classi più importanti poiché vengono considerate \textit{universalmente} come
+racchiudere quei problemi che vengono efficientemente risolti in tempo. Tutti quei problemi
+che vengono risolti in tempo polinomiale, quindi la teoria della complessità stabilisce
+questo sinonimo efficiente=polinomiale, ed un algoritmo è considerato efficiente
+se riesco a dimostrare che ha un tempo polinomiale.
+
+Lo scopo della teoria della calcolabilità era rispondere a \textit{che cosa è calcolabile?}
+$\mathcal{P}$. Nella teoria della complessità lo scopo è rispondere alla domanda
+\textit{che cosa è efficientemente calcolabile?} $P$ e $FP$.
+
+\subsubsection{Polinomiale sinonimo di efficiente in tempo}
+Da quando è nata la teoria della complessità tutti cercano di scrivere algoritmi
+polinomiali, sono presenti dei motivi pragmatici. Supponiamo di avere un calcolatore
+con un processore che va a $4Ghz$ (molto veloce, mai esistiti problemi di surriscaldamento).
+Tale per cui il tempo della singola operazione $\frac{1}{4\cdot 10^9}sec=\frac{1}{4}sec$ (4
+miliardi di operazioni al secondo).
+Facciamo girare su tale processore quattro algoritmi con complessità temporali differenti che lavorano su un
+input di dimensione $4.000$.
+\begin{center}
+    \begin{tabular}{c|c}
+        Complessità algoritmo $t(n)$ & Tempo \\
+        \midrule
+        $n$ & $1\mu s$\\
+        $n^2$ & $4ms$ \\
+        $2^n$ & $>1$ secolo \\
+        $3^n$ & $\tilde 2$ secoli e $\frac{1}{2}$
+    \end{tabular}
+\end{center}
+Notiamo che tempi esponenziali su delle istanze molto piccole (4000 caratteri sono mezza
+pagina), hanno dei tempi proibitivi. Per questo polinomiale si intende efficiente.
+
+Ma sono presenti anche motivi "composizionali", nel senso: se io ho un algoritmo efficiente
+quindi polinomiale, che richiama una sub routine che è anch'essa polinomiale, io
+globalmente ho ancora un algoritmo efficiente (polinomiale).
+
+I programmi efficienti che richiamano routine efficienti rimangono efficienti (continuano
+a girare in tempo polinomiale).
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/efficienti_esemp.png}
+\end{figure}
+Consideriamo un algoritmo $P$ che ad un certo punto richiama una routine $R$, questo algoritmo
+in maniera efficiente ricevendo un input $n$, con $p(n)$ passi riesce a produrre una
+stringa $y$ su quale richiama la routine $R$ che anch'essa è polinomiale ($q(n)$). La risposta a questo
+problema in uscita è $z$.
+
+\textit{Il tempo di sviluppo $P$ è ancora efficiente?} Iniziamo a rispondere alla domanda
+\textit{Quanto vale $t_P(n)$?} Prima di tutto spende un tempo $p(n)$  sommato al tempo
+di attivazione della routine $R$ su $y$ (non su $n$ ma sull'istanza di lunghezza $y$, $n$
+potrebbe essere stato modificato).
+$$t_P(n)=p(n)+t_R(|y|)$$
+Vorrei che tutto fosse espresso su $n$, sappiamo che la stringa potrà essere al massimo lunga
+un numero $p(n)$ di passi, per cui $|y|\leq p(n)$. Quindi, abbiamo che:
+$$t_P(n)=p(n)+t_R(|y|)\leq p(n)+q(p(n))=p(n)+h(n)=poly(n)$$
+
+Sono presenti anche altri motivi, ovvero quelli di "\textbf{robustezza}", le classi $P$ e $FP$ rimangono
+invariate a prescindere dai molti modelli di calcolo utilizzati per circoscrivere i problemi
+efficientemente risolti. Si potrebbero ridefinire le classi utilizzando le macchine RAM, WHILE,
+circuiti, $\dots$
+
+Qualunque modello di calcolo fin'ora introdotto per definire l'efficienza allora quel
+modello di calcolo ha lasciato invariato la definizione di $P$ e $FP$, che è robusta per
+specificare l'efficienza.\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/robustezza.png}
+    \caption{Aumento il numero di nastri su una DTM, diventando la generalizzazione
+    di quelle a singolo nastro.}
+\end{figure}
+Un nastro potrebbe essere riservato a mantenere la stringa in input utilizzando un numero
+costante di nastri, magari queste DTM ci danno più velocità, ma in realtà non è così. Se ho
+una DTM a più nastri e riesco a risolvere un problema in tempo $t(n)$, allora lo stesso
+problema può essere risolto da una DTM mono-nastro in tempo $O(t^2(n))$. Significa
+che rimane polinomiale, e che quindi chiaramente $P$ e $FP$ non cambiano da una macchina
+all'altra, i problemi rimangono polinomiali da una macchina all'altra (robustezza).
+
+\subsubsection{Tesi di Church-Turing estesa}
+La classe dei problemi \textbf{efficientemente risolubili} in tempo coincide con
+la classe dei problemi risolti in tempo polinomiale su DTM.
+
+\paragraph{Esempi di problemi risolti efficientemente in tempo}\mbox{}\\
+Problemi in $P$:
+\begin{itemize}
+    \item Test di primalità, 1994 $t(n)=n^6$.
+    \item Raggiungibilità sui grafi.
+    \item Vari problemi di parsing.
+\end{itemize}
+Problemi in $FP$:
+\begin{itemize}
+    \item Problemi di ordinamento.
+    \item Alberi minimi.
+    \item Cammini minimi.
+    \item Vari problemi di ottimizzazione.
+\end{itemize}
+Va detta una cosa, esistono anche tanti problemi che per il momento non siamo ancora
+riusciti a mettere in queste due classi. Ovvero ancora nessuno è riuscito a trovare algoritmi
+efficienti per la loro risoluzione, ma allo stesso tempo nessuno è riuscito a dimostrare
+che non esistono tali algoritmi.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
