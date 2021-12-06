@@ -4932,7 +4932,7 @@ Una funzione $f:\mathbb{N}\rightarrow\mathbb{N}$ si dice:
     esponenziale).
 \end{itemize}
 
-\subsubsection{Classi di complessità}
+\subsubsection{Classi di complessità in tempo}
 Siamo in grado di raggruppare i problemi in base alle richieste di risorse di calcolo
 che servono per la loro risoluzione automatica. L'idea è quella di introdurre il concetto
 di \textbf{classe di complessità}: insieme di problemi risolti entro i medesimi vincoli
@@ -4975,7 +4975,8 @@ con un processore che va a $4Ghz$ (molto veloce, mai esistiti problemi di surris
 Tale per cui il tempo della singola operazione $\frac{1}{4\cdot 10^9}sec=\frac{1}{4}sec$ (4
 miliardi di operazioni al secondo).
 Facciamo girare su tale processore quattro algoritmi con complessità temporali differenti che lavorano su un
-input di dimensione $4.000$.
+input di dimensione $4.000$. Abbiamo progettato 4 algoritmi con complessità diverse rispetto
+all'input $n$:
 \begin{center}
     \begin{tabular}{c|c}
         Complessità algoritmo $t(n)$ & Tempo \\
@@ -4986,6 +4987,9 @@ input di dimensione $4.000$.
         $3^n$ & $\tilde 2$ secoli e $\frac{1}{2}$
     \end{tabular}
 \end{center}
+
+
+
 Notiamo che tempi esponenziali su delle istanze molto piccole (4000 caratteri sono mezza
 pagina), hanno dei tempi proibitivi. Per questo polinomiale si intende efficiente.
 
@@ -5056,22 +5060,264 @@ riusciti a mettere in queste due classi. Ovvero ancora nessuno è riuscito a tro
 efficienti per la loro risoluzione, ma allo stesso tempo nessuno è riuscito a dimostrare
 che non esistono tali algoritmi.
 
+\subsubsection{Alcune riflessioni: Teoria vs Pratica}
+\begin{itemize}
+    \item Sebbene da un punto di vista teorico polinomiale in tempo vuol dire efficiente,
+    un algoritmo di complessità $n^{1000}$ non è praticabile (seppur polinomiale).
+    Questo polinomio è tanto impraticabile quanto un esponenziale, in pratica l'esponente non
+    deve superare 2. Qualunque tempo di esecuzione che superi il quadratico dal punto
+    di vista pratico diventa difficoltoso.
+    \begin{itemize}
+        \item Per esempio, pensando al test di primalità (se un numero è primo o meno); esiste
+        un algoritmo per testare la primalità che funziona in tempo $O(\log n^{6+6})$ ed
+        è esatto (1994), e polinomiale. L'algoritmo A.K.S. polinomiale proposto era un'algoritmo
+        che ha un esponente di 12. Con il passare del tempo è stato migliorato, trovare un
+        algoritmo polinomiale apre la possibilità di trovare miglioramenti, cosa che non è
+        altrettanto possibile con un esponenziale. Adesso la complessità è stata portata
+        ad $O(\log n^6)$, molto meglio ma non siamo ancora contenti, da un punto di vista
+        pratico questo algoritmo non si utilizza. Si utilizzano degli algoritmi molto veloci detti
+        \textbf{probabilistici}, ovvero riescono a dare una risposta in tempi assolutamente veloci ma con una
+        probabilità di errore. Questi algoritmi hanno anche la capacità di rendere questa probabilità
+        di errore piccola a piacere rimanendo veloce, praticamente quasi nulla. Accetto tali algoritmi
+        probabilistici perché sono estremamente efficienti (Miller-Rabin, $\dots$).
+    \end{itemize}
 
+    \item  Un algoritmo polinomiale molto probabilmente si riesce a migliorare, i primi algoritmi
+    efficienti dati per i problemi erano polinomiali con gradi molto alti, ma essendo polinomiali
+    il grado è sempre stato abbassato. Questa cosa non funzione mai con l'algoritmo esponenziale,
+    se lo si vuole migliorare l'algoritmo esponenziale va scartato.
 
+    \item La nostra analisi di complessità \textit{"worst case"} talora restituisce tempi troppo
+    pessimistici, anche perché a volte le istanze che danno il peggior tempo di calcolo non capitano
+    praticamente mai (a volte worst-case sovradimensiona il tempo di calcolo).
+\begin{itemize}
+    \item Per esempio: nei problemi di ottimizzazione lineare, ovvero funzioni in cui i vincoli
+    alla funzione obiettivo sono le funzioni lineari. Esiste un bellissimo algoritmo polinomiale
+    di Karmarkar. Esso è un algoritmo polinomiale che è lento, perché ha un grado del polinomio
+    che è molto alto, viene utilizzato poco. Si preferisce utilizzare l'algoritmo del simplesso,
+    un algoritmo molto semplice, il problema è che ha un tempo di esecuzione esponenziale, però
+    si è notato che l'esponente salta fuori su istanze che non capitano mai in natura.
+\end{itemize}
 
+    \item Per mitigare l'analisi worst case, si utilizza un altro tipo di complessità come nella
+    \textbf{average case}, ovvero studiare quanto impiega l'algoritmo nel caso medio. Ciò pone
+    però delle difficoltà di tipo matematico e necessita di distribuzioni di probabilità sui dati
+    d'ingresso che difficilmente sono a disposizione. Tutta via è molto studiata l'analisi
+    average case.
 
+    \item Attenzione alle costanti nascoste, le notazioni di Landau sono fatte apposta per
+    rimuovere le costanti moltiplicative, ma anche qui nella pratica le costanti moltiplicative
+    ed i termini di ordine inferiore contano! Un conto è dire che un algoritmo va come $5n^2$
+    che è diverso da $10n^2$.
+    \begin{itemize}
+        \item Questo è quello che succede proprio con gli algoritmi di ordinamento
+        basati su confronti (che ricordiamo sono tutti $\Theta (n\log n)$). Per
+        esempio l'algoritmo di ordinamento merge-sort ha tempo $O(n\log n)$ ed
+        è quindi ottimale. Spesso però si preferisce utilizzare il quick-sort, sebbene
+        quest'ultimo abbia un caso worst-case $O(n^2)$. Questo perché nella media
+        impiega $O(n\log n)$ ($90\%$ dei casi), e la costante moltiplicativa del quick-sort
+        è più piccola di quella del merge-sort.
+    \end{itemize}
 
+\end{itemize}
+La teoria ci deve guidare, se ci troviamo sulla strada giusta, mentre la pratica ci dice
+come aggiustare ulteriormente il tiro per fare funzionare molto meglio le cose.
 
+\subsection{Complessità in spazio}
+La risorsa spazio intesa come spazio di lavoro (memoria), le variabili che utilizziamo e vengono
+create devono essere memorizzate in strutture dati. Vogliamo che i nostri programmi utilizzino
+il minor numero di memoria possibile.
+$$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
+Consideriamo la nostra DTM $M$, allora definiamo lo spazio di calcolo di $M$ su input $x\in\Sigma^*$
+come $S(x)$, non è altro che il numero di celle del nastro occupate durante la computazione
+di $M$ su $x$. Come nel tempo noi vogliamo avere una visione globale di quanto spazio viene
+occupato dalla nostra DTM non so una particolare stringa. Allora definizione una funzione
+complessità in spazio della nostra DTM.
+$$s:\mathbb{N}\rightarrow\mathbb{N}$$
+$$s(n)=max\{S(x):x\in\Sigma^*\land|x|=n\}$$
+Andiamo a vedere la DTM nella quale vogliamo calcolare $s(x)$ su input di lunghezza $n$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/computazione_DTM.png}
+\end{figure}
+Notiamo che la complessità in spazio purtroppo deve essere almeno lineare, perché il numero
+di celle diverse occupate sarà sempre $n$, dato un input $n$. Quindi questa funzione $s(n)$
+deve essere quanto meno lineare (ne posso occupare di più volendo). Questo è un peccato
+perché vorrei che $s(n)$ mi misurasse solamente lo spazio di calcolo e non l'interferenza
+causata dall'input, l'input seppur memoria è un qualcosa di esterno, il mio programma
+non deve allocare spazio per mantenere l'input. Lo spazio di lavoro è la memoria che utilizza
+l'algoritmo. \textit{Come faccio a togliere l'interferenza causata dallo spazio
+dell'input?} Sarebbe bello arricchire la DTM con un nastro solo per l'input read-only letto
+da una testina ad-hoc, nel quale è deposto l'input. Quando la nostra DTM deve effettuare i conti
+essa lo farà su un nastro di lavoro, il quale è read/write.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/nastri_sep_input.png}
+    \caption{Architettura multi-nastro}
+\end{figure}
+Ci stiamo muovendo da un'architettura mono-nastro ad una multi-nastro. Lo spazio sarà contato
+solamente sul nastro di lavoro il quale è r/w, ed anch'esso scorso da una testina ad-hoc. In
+un architettura del genera la stringa di input viene racchiusa sul nastro da due caratteri
+di inizio e fine stringa, così da limitare i movimenti della sua testina.
+La definizione di una DTM di questo tipo è identica a quella di prima con delle piccole modifiche:
+$$M=(Q,\Sigma\cup\{\cancel{c},\cancel{\$} \},\Gamma,\delta,q_0,F)$$
+L'unica cosa che veramente cambia è la funzione di transizione $\delta$, che deve tenere
+conto di due cose, l'input ed il nastro di lavoro.
 
+$$\delta:Q\times(\Sigma\cup\{\cancel{c},\cancel{\$} \})\times\Gamma\rightarrow Q\times(\Gamma\setminus\{blank\})\times\{-1,0,+1\}\times \{-1,0,+1\}$$
+La mossa mi dice quale sarà il prossimo stato che cosa modificherai sul nastro di lavoro, e
+come muovere la testina dell'input e del nastro di lavoro.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/DTM_input_transition.png}
+    \caption{Esempio di una mossa della DTM con due nastri per diversificare input da
+    spazio di lavoro}
+\end{figure}
+Anche la configurazione cambia, prima avevamo come una possibile configurazione come
+$c=(q,k,w)$ dove $q$ è lo stato, $k$ è la posizione dell'unica testina e $w$ il contenuto non-blank
+del nastro. Adesso abbiamo una quadrupla $c=(q,i,j,w)$, aggiungiamo un campo che consideri
+la testina di input $i$, che sia diversa
+da quella del nastro di lavoro $j$, non ci interessa anche il contenuto del
+nastro di input, tanto quello non cambia mai. L'unico contenuto che può variare è $w$ (non-blank)
+ovvero il nastro di lavoro.
 
+Il fatto di utilizzare questa architettura non cambia le classi $P$ e $FP$, esse rimangono
+invariate a seconda del numero dei nastri (avevamo già discusso).
 
+\paragraph{Nozione fedele di spazio di calcolo}\mbox{}\\
+$S(x)$ è il numero di celle sul \textbf{nastro di lavoro} diverse occupate (visitate) durante la computazione
+di $M$ su $x$.
 
+\paragraph{Complessità in spazio di $M$ (worst-case)}\mbox{}\\
+$$s:\mathbb{N}\rightarrow\mathbb{N}$$
+$$s(n)=max\{S(x):x\in\Sigma^*\land|x|=n\}$$
 
+\subsubsection{Complessità in spazio di linguaggi}
+Il linguaggio $L\subseteq\Sigma^*$ è riconosciuto in spazio deterministico $f(n)$ se riesco
+ad esibire una DTM $M$ tale che:
+\begin{itemize}
+    \item $L=L_M$ (che riconosce tale linguaggio).
+    \item $s(n)\leq f(n)$ (e che la sua complessità in spazio sia dominata da $f(n)$).
+\end{itemize}
+Riconoscere un linguaggio vuol anche dire riconoscere un insieme o risolvere un problema di
+decisione.
 
+\subsubsection{Spazio di calcolo delle funzioni}
+Le DTM servono anche per calcolare delle funzioni, abbiamo anche definito della classe
+di funzioni. Vogliamo usare le DTM per calcolare la complessità in spazio di calcolare una funzione.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/DTM_func.png}
+\end{figure}
+Quando io uso una DTM per calcolare una funzione e voglio esaminare in particolare lo spazio
+di calcolo di quella funzione, mi preparo un nastro di input ma anche un nastro di output, sul
+quale metterò la $f(x)$ su input $x$. In questa maniera riuscirò a misurare lo spazio di lavoro
+effettivo del mio modello, la complessità verrà misurata solamente sul nastro di lavoro senza
+tenere conto dello spazio per memorizzare il risultato e quello dell'elemento fornito in ingresso.
 
+\paragraph{Definizione}\mbox{}\\
+Più formalmente, la funzione $f:\Sigma^*\rightarrow\Gamma^*$ è calcolabile dalla DTM $M$ se e solo se:
+\begin{itemize}
+    \item $f(x)\downarrow$, se la funzione termina, ponendo la stringa $x$ sul nastro di input la computazione
+    termina e sul nastro di output troverò $f(x)$.
+    \item $f(x)\uparrow$, se la funzione non termina, la computazione di $M$ su $x$ va in loop.
+\end{itemize}
 
+\paragraph{Definizione}\mbox{}\\
+La funzione $f:\Sigma^*\rightarrow\Gamma^*$ viene calcolata con complessità in spazio $s(n)$
+dalla DTM $M$ se e solo se su ogni input $x$ di lunghezza $n$ la computazione di $M$ su $x$ occupa
+non più di $s(n)$ celle del nastro di lavoro (classica definizione worst-case).
 
+Ricapitolando questo modello ha i seguenti pregi:
+\begin{itemize}
+    \item Nastro input che permette di non fare inficiare lo spazio di input con lo spazio di lavoro.
+    \item Nastro output che permette non fare inficiare lo spazio di output con lo spazio di lavoro.
+\end{itemize}
 
+\subsubsection{Classi di complessità in spazio}
+$DSPACE(f(n))$, la classe dei linguaggi che vengono riconosciute da DTM in spazio $O(f(n))$.
+$FSPACE(f(n))$, la classe di funzioni calcolate e risolte da DTM in spazio $O(f(n))$.
+Nota, le classi $DSPACE$ e $FSPACE$ non cambiano se aggiungiamo alle nostre DTM un numero
+costante di nastri di lavoro.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/dtm_nastrilavoro.png}
+    \caption{DTM con un numero costante di nastri di lavoro.}
+\end{figure}
+Per questo modello di calcolo che è più comodo le classi di complessità appena definite
+valgono lo stesso. Il problema verrà risolto con la stessa complessità in spazio (ed
+in tempo), anche aumentando la quantità di nastri di lavoro.
 
+\paragraph{Esempio di calcolo di complessità in spazio}\mbox{}\\
+Riprendiamo ancora il linguaggio dei numeri pari $L_{PARI}$, con il medesimo
+algoritmo che avevamo proposto.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/prog_pari.png}
+\end{figure}
+Questo algoritmo occupava in tempo $n+1$ passi, quindi usando la definizione delle
+classi di complessità possiamo dire che $L_{PARI}\in DTIME(n)$. In termini di spazio,
+riconoscere tale linguaggio ha un costo costante di 1, in realtà neanche 1 perché
+il flag $f$ potrebbe essere mantenuto negli stati. Questo linguaggio viene riconosciuto
+in spazio 0, la posizione della testina $i$ non ha bisogno di essere memorizzata,
+al massimo posso memorizzare $f$ sul nastro di lavoro, ma a dire il vero posso
+esprimere la stessa intenzione utilizzando gli stati finali o non accettanti. Infatti
+in questo linguaggio non serve spazio di lavoro, perché è un linguaggio regolare
+riconosciuto su un automa a stati finiti. Un automa a stati finiti è una DTM
+con nastro di input ed output ma senza nastro di lavoro.
+
+Il fatto che non usi il nastro di lavoro della DTM non è un caso, questo accade
+perché il linguaggio in questione è un \textbf{linguaggio regolare}, i linguaggi regolari sono
+linguaggi che possono essere riconosciuti da DTM che non occupano spazio di lavoro. Si può
+dimostrare che i linguaggi regolari sono i linguaggi riconosciuti da una DTM con
+un numero costante di celle.
+$$REG=DSPACE(1)$$
+\paragraph{Altro esempio: palindrome}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/DTM_pal.png}
+\end{figure}
+$$t(n)=n^2$$
+Per quanto riguarda la complessità in spazio, il costo del riconoscimento di tale
+linguaggio ha un costo che dipende dalla posizioni di $i$ e $j$, le quali vanno
+mantenute. Lo spazio di lavoro è rappresentato proprio dalle due variabili
+che guidano il pescaggio dei caratteri da confrontare sul nastro di input.
+$$s(n)=\text{spazio per mantenere i puntatori di posizione }i,j$$
+$$i\in\{1,\dots,\frac{n}{2}\}\;j\in\{\frac{n}{2},\dots,n\}$$
+Se devo mantenere dei numeri che arrivano fino ad $n$, ed uso una notazione binaria
+per rappresentarli allora ho bisogni di $O(\log n)$ bit.
+$$s(n)=O(\log n)$$
+$$L_{PAL}\in DTIME(n^2)\text{ e }L_{PAL}\in DSPACE(\log n)$$
+
+\noindent\textit{Posso essere più veloce?} (DTM multi-nastro)
+\begin{enumerate}
+    \item Copia la stringa di input sul nastro di lavoro.
+    \item Sposta la testina di input in prima posizione (la stringa di input rimane
+    sul nastro di input, la testina in prima posizione sul nastro in input, e la testina
+    sul nastro di lavoro in ultima posizione).
+    \item Confronta i due consecutivi caratteri avanzando le testine sul nastro in input
+    e retrocedendo quella sul nastro di lavoro.
+    \item Accetta se tutti i confronti tornano, altrimenti rifiuta.
+\end{enumerate}
+Complessità passi dell'algoritmo:
+\begin{center}
+    \begin{tabular}{c c c}
+        Passo&Tempo & Spazio\\
+        \midrule
+        1&n & n (copia sul nastro di lavoro)\\
+        2&n&-\\
+        3&n&-\\
+        4&n&-\\
+        \midrule
+        Tot:&$t(n)=O(n)$&$s(n)=O(n)$
+\end{tabular}
+\end{center}
+Spesso la risorsa tempo e la risorsa spazio sono antagoniste, se posso sprecare "spazio"
+posso essere pià veloce in tempo.
+
+$L_{PAL}$ è uno dei pochi linguaggi per cui si ha un lower bound concreto sul
+tempo e lo spazio di riconoscimento. Si può dimostrare che un qualsiasi algoritmo
+che riconosce le palindrome deve soddisfare la
+seguente condizione: $s(n)\cdot t(n)=\Omega(n^2)$ (almeno $n^2$).
 
 \end{document}
