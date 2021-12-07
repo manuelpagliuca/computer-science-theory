@@ -5572,43 +5572,297 @@ del tempo che è almeno $t(n)=2^n$ (tutti gli assegnamenti di verità).
     \includegraphics[scale=0.5]{images/cnf.png}
     \caption{Miglior algoritmo proposto per l'attuale CNF-SAT}
 \end{figure}
-$$t(n)=2^n\cdot \text{tempo per verificare }\phi(x)==1 = O(n\cdot 2^n)$$
+$$t(n)=2^n\cdot \{\text{tempo per verificare }\phi(x)==1\} = O(n\cdot 2^n)$$
 ed ecco la \textit{facile verifica} (tempo per verificare $\phi (x)==1$), se data una formula ed un assegnamento particolare
 è facile verificare se quell'assegnamento funziona, ha complessità $O(n)$. Il problema
 è che questa "facile verifica" viene ripetuta un numero esponenziale di volte. Il problema
 è globalmente inefficiente ma nasconde una fase di facile verifica (come tutti i problemi
 della zona grigia).
 
+\subsubsection{Circuiti Hamiltoniani}
+\begin{itemize}
+    \item Consideriamo un grafo non orientati $G=(V,E)$.
+    \item Un cammino in $G$ è una sequenza di archi.
+    \item Un circuito che parte e termina nello stesso vertice.
+\end{itemize}
+Un circuito Hamiltoniano (scoperto da Hamilton, che ha scoperto anche i quaternioni) è un cammino chiuso dove tutti i nodi del grafo compaiono
+tutti una ed una sola volta.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/hamiltonian_circuit.png}
+    \caption{Circuito Hamiltoniano, i nodi compaiono una ed una sola volta.}
+\end{figure}
+Un controesempio:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/non_hamiltonian.png}
+    \caption{Questo grafo non contiene un circuito Hamiltoniano, dovrà passare per il centro
+    almeno due volte.}
+\end{figure}
+$$HC$$
+$$\text{Istanza: }G=(\{v_1,\dots,v_n\},E)$$
+$$\text{Domanda: }G \text{ contiene un }HC?$$
+
+Questo è un problema che per il momento non possiamo trovare un algoritmo efficiente
+che ci porti ad una soluzione, l'unica soluzione attuale è molto simile alla risoluzione
+delle CNF, si provano tutti i possibili HC (Hamiltonian Circuit).
+
+Nota: ad ogni HC corrisponde una permutazione dei nodi di $G$, se mi segnassi tutti i nodi
+attraversati da questo HC essi comparirebbe una ed una sola volta, quindi se li mettessi
+in fila otterrei una \textit{permutazione} dei vertici di partenza (è chiaro
+che non vale il viceversa, una permutazione dei nodi non è al 100\% un HC). Allora
+vado a considerare il seguente algoritmo:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/algo_HC.png}
+    \caption{Algoritmo per trovare un circuito Hamiltoniano.}
+\end{figure}
+Posso partire dal grafo di partenza e generare tutte le possibili permutazioni dei nodi
+$\pi$,e successivamente $\forall\pi$ vado a verificare che quella permutazione corrisponde ad un circuito,
+quindi se esistono gli archi che uniscono tale permutazione.
+In questa maniera provo tutte le possibilità, non tutti i circuiti, questo mi evita di controllare
+circuiti che non sono permutazioni dei vertici, ma rimane tutta via un algoritmo che itera
+su tutte le permutazioni degli oggetti. Le possibili permutazioni degli oggetti sono $n!$,
+quindi il tempo di complessità sarà $t(n)=n!$ la verifica che una certa permutazione sia un
+cammino. Anche qui la "facile verifica" di HC consiste che se viene fornito un insieme $\pi$
+di archi io riesco a controllare che esso sia un circuito in $G$ ($t(n)=O(n^2)$).
+
+Se qualcuno mi da un pezzo dell'informazione allora quell'informazione può essere facilmente
+verificata.
+
+\paragraph{Piccola digressione}\mbox{}\\
+A volte cambiando leggermente le condizioni di un problema si può cambiare dal giorno
+alla notte la complessità del problema. Abbiamo un problema simile a questo ma è
+molto diverso invece, è il problema dei \textbf{circuiti Euleriani}.
+
+Un circuito Euleriano in $G$ è un circuito in cui tutti gli archi di $G$ compaiono una e una
+sola volta (Problema dei sette ponti di Königsberg, 1736).
+\paragraph{Teorema di Eulero}\mbox{}\\
+$G$ contiene un circuito Euleriano se e solo se ogni vertice in $G$ ha grado pari.
+
+\begin{itemize}
+    \item Basta andare a vedere nella matrice di adiacenza il grado di ogni nodo è
+    molto semplice, questo ha un costo $t(n)=O(n^2)$.
+    \item Purtroppo non abbiamo una simile caratterizzazione dei circuiti Hamiltoniani.
+    \item Problemi simili, complessità molto diverse$\dots$
+\end{itemize}
+
+\subsection{Algoritmi non deterministici}
+Per questi problemi "difficili" ma di "facile verifica" sarebbe bello avere un paradigma di
+calcolo che funzioni come segue:
+$$\pi$$
+$$\text{Istanza: }x\in D$$
+$$\text{Domanda: }p(x)?$$
 
 
+\begin{enumerate}
+    \item Mi piacerebbe avere un algoritmo che su input $x$ \textbf{generi una congettura}, in parole
+        povere venga generata una struttura che dipende dal problema (numero, permutazione, $\dots$)
+        che mi viene fornita.
 
+    \item Successivamente occorrerà una \textbf{fase di verifica} su queste strutture per decidere se
+    vale $p(x)$.
+\end{enumerate}
+Questa dinamica dell'algoritmo non è più lineare come quella deterministica vista
+con le DTM, non è più presente un cammino di configurazioni. Nella attuale situazione
+dove ho un multi-verso di mondi in ognuno dei quali viene generata una istruzione
+all'inizio, la dinamica globale dell'algoritmo è una dinamica ad albero.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/dinamica_albero.png}
+    \caption{Nella fase congetturale (rosa) viene generata una struttura per ogni "mondo".
+    Nella fase di verifica (rosso), la quale è una fase assolutamente deterministica,
+    gioverà sia dell'input che della congettura generata.}
+\end{figure}
+Al termine di ogni fase di verifica di ciascun mondo (DTM) avrò una risposta numerica
+1 se la proprietà è presente per quel dato insieme $(x,S_1)$, altrimenti 0.
 
+\paragraph{Algoritmo non deterministico}\mbox{}\\
+Un algoritmo non deterministico funziona proprio con queste due fasi:
+\begin{itemize}
+    \item Apertura di un multi-verso, dove vengono preparate tante strutture
+    da testare in parallelo senza costi aggiuntivi in maniera da utilizzare
+    solo il costo in tempo della verifica (fase congetturale).
+    \item Fase di verifica.
+\end{itemize}
+Quindi il costo della computazione non è univoca ma scinde in tante computazioni che
+giovano di un pezzo dell'informazione generato automaticamente. Una volta finita la fase
+di congettura ciascun mondo è un mondo deterministico (una routine DTM).
 
+\textit{In che senso un algoritmo non deterministico risolve un problema
+di decisione $\pi$?} Ovvero la verifica della proprietà $p(x)$.
+In questo senso:
+\begin{enumerate}
+    \item Su ogni $x$ che ammette $p(x)$ (vera) esiste
+    almeno una computazione (struttura generata magicamente) che porta ad una
+    soluzione accettando $(x,s_k)$ (nonostante alcune verifiche potrebbero
+    essere anche rifiutate).
 
+    \item Su ogni $x$ che non ammette $p(x)$ (falsa) non esiste alcuna
+    computazione che accetti $(x,s_k)$ per ogni $s_k$.
+\end{enumerate}
 
+Abbiamo a disposizione un algoritmo che esplora moltissime possibilità e se in qualcuna
+di queste esplorazioni dice "SI", allora si riconosce l'opzione come appartenente
+al linguaggio.
 
+\paragraph{Esempio Alg.Non-Det. per CNF-SAT}\mbox{}\\
+Semplicemente mi faccio generare un assegnamento e lo verifico.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/CNFndet.png}
+    \caption{Algoritmo non deterministico per $CNF$.}
+\end{figure}
 
+\paragraph{Esempio Alg.Non-Det. per HC}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/HCndet.png}
+    \caption{Algoritmo non deterministico per $HC$.}
+\end{figure}
 
+\subsection{Tempo d
+i calcolo algoritmo non deterministico}
+Il tempo di calcolo in un algoritmo non deterministico, abbiamo una fase congetturale
+che essendo "magica" ha costo zero. L'unico tempo che valutiamo è quello che viene
+dalla fase di verifica, il quale corrisponde al numero di passi della computazione che più
+velocemente porta all'accettazione.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/tempondet.png}
+\end{figure}
+Quindi confrontando tutti i mondo che mi accettano la proprietà scelgo quello con il numero
+minore di passi che mi portano a verificare la proprietà $p(x)$. Non solamente questo algoritmo
+sgrava da qualsiasi problema di generazione, ma il tempo di esecuzione in questi mondi
+che sono reali viene calcolato sul mondo migliore.
 
+Tutto ciò è un modello teorico, non esiste un generatore che riesce a prepararmi le congetture
+corrette in tale maniera. Rimane vero comunque che i problemi nella zona grigia hanno un tempo
+di verifica efficiente che purtroppo va ripetuto un numero di volte
+tipicamente esponenziale.
 
+\subsection{Macchina di Turing non deterministica}
+Per formalizzare questo tipo di algoritmo dobbiamo introdurre la macchina di Turing
+non deterministica (NDTM).
+$$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/ndtm.png}
+    \caption{NDTM}
+\end{figure}
+Una NDTM ha tante possibili definizioni, si può vedere nel caso degli automi a stati finiti
+esistono degli automi deterministici e non deterministici. Gli ultimi possono evolvere da uno
+stato a più stati possibili, una NDTM la $\delta$ fornisce un insieme di possibili mondi
+successivi. Vogliamo un'altra definizione di NDTM che sia più attinente alla fase
+congetturale e quella di verifica.
 
+Possiamo vederla come una classica DTM, dove come novità è presente:
+\begin{itemize}
+    \item \textbf{Natro bi-infinito}: un nastro che è infinito sia a destra
+    che a sinistra. A destra viene messo l'input, nella parte sinistra viene
+    generata la congettura.
+    \item \textbf{Modulo congetturale}: un modulo adibito alla creazione
+    della congettura sulla parte sinistra della nastro bi-infinito.
+    \item \textbf{Modulo di verifica DTM}: un modulo che lavora sia sull'input $x$
+    che sulla struttura $\gamma$ generata dall'altro modulo.
+\end{itemize}
+Quindi saranno integrate le due fasi degli algoritmi non deterministici:
+\begin{enumerate}
+    \item Fase congetturale: $M$ modulo congetturale che scrive $\gamma\in\Gamma^*$ sulla
+    parte sinistra del nastro (non determinismo).
+    \item Fase di verifica: una classica DTM che lavora su $(\gamma,x)$, ha infinite
+    fasi di verifica perché ho infinite $\gamma\in\Gamma^*$.
+\end{enumerate}
+In questo caso $M$ accetta $x\in\Sigma^*$ se e solo se $\exists\gamma\in\Gamma^*$ tale
+che $(\gamma,x)$ viene deterministicamente accettata.
+Questo perchè una NDTM a differenza di una DTM ha un range di computazioni, quindi
+il riconoscimento è diverso.
+Ed il linguaggio accettato da $M$ viene definito come $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$.
 
+\subsubsection{NDTM per riconoscere linguaggi e risolvere problemi di decisione}
+Le NDTM come le DTM hanno come loro prima funzione quella di riconoscere linguaggi.
+\paragraph{Definizione}\mbox{}\\
+Un linguaggio $L\subseteq\Sigma^*$ è accettato da un algoritmo non deterministico
+se e solo se $\exists$ NDTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$ tale che $L=L_M$ (il
+linguaggio accettato sia il linguaggio di partenza).
 
+$$\pi$$
+$$\text{Istanza: }x\in D$$
+$$\text{Domanda: }p(x)?$$
+Si trasformano gli oggetto su cui ci interroghiamo in stringhe, così che associato a questo
+problema di decisione possiamo associare un linguaggio che è la codifica delle istanze
+a risposta positiva (le stringhe accettate dal mio dispositivo di calcolo).
+$$cod:D\rightarrow\Sigma^*\implies L_{\pi}=\{cod(x):x\in D\land p(x)\}$$
 
+\paragraph{Definizione}\mbox{}\\
+Un algoritmo non deterministico per la soluzione di $\pi$ è una NDTM $M$ tale che $L_\pi=L_M$.
+Ovviamente, mediante opportuna codifica, possiamo definire NDTM che accettano insiemi:
+\paragraph{Complessità in tempo non deterministica}\mbox{}\\
+Una NDTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$ ha complessità in tempo  $t:\mathbb{N}\rightarrow\mathbb{N}$
+se e solo se per ogni input $x\in L_M$ con $|x|=n$ esiste una computazione accettante di $M$
+che impiega $t(n)$ passi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/ndtmcomplex.png}
+    \caption{Fase di congettura costo 0, $t(n)$ per la verifica.}
+\end{figure}
 
+\paragraph{Definizione}\mbox{}\\
+Un linguaggio è accettato con complessità in tempo non deterministica $t(n)$ se e solo se
+$\exists$ NDTM con complessità in tempo $t(n)$ che lo accetta.
 
+\subsubsection{Classi di complessità non deterministiche}
+Queste sono classi di complessità in tempo, non ci interessa nello spazio (in questo
+corso).
+$NTIME(f(n))$, la classe dei linguaggi accettati con complessità non deterministica
+$O(f(n))$. Alcuni esempi sono $CNF-SAT\in NTIME(n);HC\in NTIME(n^2)$, la fase
+di verifica ha costo lineare su una formula booleana, la fase di verifica ha un costo
+quadratico per verificare che una matrice di adiacenza sia un circuito Hamiltoniano.
 
+\begin{itemize}
+    \item Sappiamo \textbf{efficiente risolubilità} significa
+    $$P=\bigcup_{k\geq 0}DTIME(n^k)$$
+    \item Allora adesso abbiamo a disposizioni le classi non deterministiche, possiamo
+    definire il termine \textbf{efficiente verificabilità}, ovvero risolti da NDTM
+    efficienti
+    $$NP=\bigcup_{k\geq 0}NTIME(n^k)$$
+    ovvero l'unione dei problemi risolti in tempo polinomiale grazie ad algoritmi non
+    deterministici ($P$ sta per polinomiale), ovvero la loro fase di verifica è polinomiale.
+\end{itemize}
+\textit{Quale relazione esiste tra le classi $P$ e $NP$?} Questa è veramente una domanda
+da un milione di dollari (Clay Math. Inst.), risulta il più grande quesito matematico
+attualmente aperto.
 
+\subsubsection{Relazione tra $P$ e $NP$}
+\paragraph{Dimostrazione $P\subseteq NP$}\mbox{}\\
+È facile notare che $DTIME(f(n))\subseteq NTIME(f(n))$, per le seguenti ragioni:
+partiamo da un linguaggio appartenente a $P$, $L\in DTIME(f(n))$, dato questo linguaggio
+esiste una DTM $M$ che lo riconosce in $t(n)=O(f(n))$.
 
+\textit{Come posso dimostrare che questo problema viene riconosciuto in
+tempo non deterministico $f(n)$?} Molto semplice chiaramente, $M$ può
+essere vista come una NDTM che ignora il modulo congetturale, io sono già in grado
+senza questo per risolvere il problema. La NDTM ignorerà il suggerimento e su ogni
+multi-verso replicherà la stessa computazione, e quindi ovviamente accetterà il linguaggio
+$L$. Il tempo è chiaramente il tempo di sviluppo di $M$ che è $O(f(n))$, quindi
+abbiamo provato l'esistenza di una NDTM (che ignora il non
+determinismo) per $L$ che opera in tempo $t(n)=O(f(n))\implies L\in NTIME(f(n))$.
 
+Quindi abbiamo dimostrato:
+$$P=\bigcup_{k\geq 0}DTIME(n^k)\subseteq \bigcup_{k\geq 0}NTIME(n^k)=NP$$
+$$P\subseteq NP$$
+Questa è la cosa banale che possiamo dimostrare, il problema vero è quello che possiamo dire
+della relazione inversa. \textit{Possiamo dire che $NP\subseteq P$?} Questo ci porterebbe
+a dire che $P=NP$.
 
-
-
-
-
-
-
+In altre parole la domanda chiede: \textit{un algoritmo di facile verifica può
+essere trasformato in un efficiente algoritmo di soluzione?} O, \textit{da un algoritmo
+non deterministico efficiente è possibile ottenere un algoritmo
+reale efficiente?}
+$$NTIME(f(n))\subseteq DTIME(?)$$
+\textit{Quanto costa togliere la "magia" degli algoritmi
+non deterministici?} (i quali sono un costrutto teorico ma non realizzabile concretamente).
 
 
 
