@@ -5320,4 +5320,298 @@ tempo e lo spazio di riconoscimento. Si può dimostrare che un qualsiasi algorit
 che riconosce le palindrome deve soddisfare la
 seguente condizione: $s(n)\cdot t(n)=\Omega(n^2)$ (almeno $n^2$).
 
+\subsubsection{Efficienza in termini di spazio}
+L'efficienza in termine di spazio si concretizza con spazio logaritmico (e non polinomiale
+come nel tempo). Le classi dei problemi risolti efficientemente in termini di spazio sono $L$
+e $FL$.
+$L=DSPACE(\log n)$: la classe dei linguaggi accettati e risolti in spazio deterministico $O(\log n)$.
+$FL=FSPACE(\log n)$: la classe delle funzioni (o problemi) calcolate/risolte in spazio deterministico
+$O(\log n)$.
+Le classi $L$ e $FL$ sono universalmente considerati i problemi risolti efficientemente in termini
+di spazio. Abbiamo dunque stabilito due sinonimi:
+\begin{itemize}
+    \item Efficiente in tempo = \textit{polinomiale} in tempo.
+    \item Efficiente in spazio = \textit{logaritmico} in spazio.
+\end{itemize}
+
+\paragraph{Perché logaritmico è efficiente in termini di spazio?}\mbox{}\\
+
+Da un punto di vista \textbf{pratico} di gestione dei dati noi sappiamo che i dati sono sempre più grandi. Allora
+sono talmente grandi che tipicamente non possono essere caricate in memoria centrale, la quale
+è molto limitata. A noi piacerebbe caricare i file direttamente in memoria centrale in quanto
+dispositivo ad accesso veloce, \textit{soluzione?} Dobbiamo riuscire a gestire una grande
+mole di dati con uno spazio estremamente limitato, per esempio introducendo delle tecniche che ci
+permettono di copiare una parte del dato in memoria centrale, o individuare determinati puntatori.
+Delle tecniche che ci permettono di avere una visione parziale sul dato in ingresso. Su un input
+di lunghezza $n$ uno spazio di dimensione $O(\log n)$ ci permette di implementare queste tecniche,
+come fissare una posizione rappresentata in $\log n$ bit, oppure di contare certe occorrenze.
+
+Utilizzare uno spazio logaritmico che cresce molto lentamente rispetto ad uno lineare vuol dire che
+stiamo progettando degli algoritmi che usano molta poca memoria, abbiamo guadagnato una conoscenza
+molto profonda del problema, possiamo puntare solamente a certi punti limitati dell'input.
+
+Come si può gestire il riconoscimento delle palindrome? Si prende la stringa in input e la si copia
+sul nastro di lavoro, ma con questo approccio stiamo sprecando molto spazio (spazio lineare, copia
+diretta). Questa stringa potrebbe essere molto lunga ed in una situazione con $n$ molto grandi
+abbiamo dei problemi, allora introduciamo un algoritmo più sofisticato che introduce
+le posizioni da confrontare utilizzando "due puntatori" per indicizzare gli elementi di una stringa.
+
+Prima o poi i dati diventano molto grandi, così tanto che non possono stare in memoria centrale,
+prima o poi sarà necessario effettuare una riduzione e questo è possibile utilizzando uno spazio
+logaritmico (quindi ristretto) che permette di utilizzare efficientemente la memoria centrale.
+
+Sono presenti anche motivi \textbf{composizionali}: se io ho un programma che lavora efficientemente
+in termini di spazio e richiama una routine che anch'essa lavora in spazio logaritmico, globalmente
+ottengo un programma che è ancora efficiente in termini di spazio (come nel tempo).
+
+Per motivi di \textbf{robustezza}: le classi $L$ e $FL$ rimangono invariate a prescindere dai molti modelli
+di calcolo utilizzati per caratterizzare i problemi efficientemente risolubili in termini di spazio.
+
+\subsubsection{Tesi di Church-Turing estesa per lo spazio}
+La classe dei problemi efficientemente risolubili in termini di spazio coincide con la classe dei problemi
+risolti in spazio logaritmico da DTM.
+
+\subsubsection{Esempi di problemi efficienti in spazio}
+Problemi in $L$:
+\begin{itemize}
+    \item Testare la raggiungibilità tra due nodi in un grafo non diretto.
+    \item Parsing dei linguaggi regolari.
+    \item Parsing dei linguaggi context-free?
+\end{itemize}
+Problemi in $FL$:
+\begin{itemize}
+    \item Operazioni aritmetiche.
+    \item Permanenti di funzioni di matrice booleane.
+    \item Aritmetica modulare.
+\end{itemize}
+
+Se un problem è in $L$ o $FL$ è anche efficientemente parallelizzabile. Al momento non esistono compilatori
+perfettamente parallelizzabili.
+
+\subsection{Tempo vs Spazio}
+Considerando l'esempio delle palindrome, spesso queste due risorse computazionali sono in controtendenza,
+se spreco una utilizzo di meno l'altra è viceversa (trade-off). Domanda: \textit{se io ho
+un algoritmo che ha un certo limite in tempo allora questo limite riesce comunque a darmi
+in maniera automatica un limite in termini di spazio? Viceversa?}
+Posso rispondere a queste domande confrontando le classi complessità in tempo ed in spazio per
+carpirne una relazione.
+
+\paragraph{Teorema I}\mbox{}\\
+Studiamo la relazione tra $DTIME(f(n))$ e $DSPACE(f(n))$, sono due insiemi di problemi, quindi
+possiamo porre una relazione insiemistica fra queste due classi. Se io ho un linguaggio
+che viene riconosciuto con $f(n)$ passi al massimo può sprecare $f(n)$ celle.
+
+Dimostrazione formale: $L\in DTIME(f(n))$, ovvero esiste una DTM che riconosce quel linguaggio in
+$O(f(n))$. Come si comporta tele DTM su un input un input $x$ di lunghezza $n$?
+Vuol dire che la DTM $M$ compie $O(f(n))$ passi,
+\textit{quanto spazio di lavoro può sprecare durante questi $O(f(n))$ passi?} Nel caso peggiore
+può sprecare una cella per ogni passo.
+
+$$DTIME(f(n))\subseteq DSPACE(f(n))$$
+Un efficienza in termini di tempo (polinomiale), non vuol dire per forza un efficienza in termini
+di spazio. Un algoritmo polinomiale vuol dire che occupa uno spazio polinomiale, ma questo
+non è efficiente in termini di spazio.
+
+\paragraph{Teorema II}\mbox{}\\
+Di conseguenza riusciamo a carpire:
+$$FTIME(f(n))\subseteq FSPACE(f(n))$$
+
+\paragraph{È vero anche il contrario?}\mbox{}\\
+$$DSPACE(f(n))\subseteq DTIME(f(n))?$$
+Significa: un limite in spazio di un algoritmo può implicare un limite in tempo? Su uno spazio
+di una sola cella è possibile effettuare un comportamento infinito, mandando avanti e indietro
+la testina della DTM. Quindi in uno spazio atomico possono avviare un comportamento infinito (loop).
+
+Dimostrazione: Prendiamo un linguaggio $L\in DSPACE(f(n))$, quindi esiste una DTM $M$ che riconosce
+questo linguaggio in spazio che è $O(f(n))\leq\alpha\cdot f(n)$ per una opportuna costante in
+$\alpha >0$ e per ogni $n\geq n_0$. Vediamo la computazione di $M$ su input $x\in\Sigma^*$ con $|x|=n$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/comput_DTM_c.png}
+\end{figure}
+
+Sappiamo che la computazione $M$ su input $x$ è una sequenza di configurazioni $c$ del tipo: $c=(q,i,j,w)$ (stato,
+testina nastro input, testina nastro lavoro, contenuto nastro lavoro).
+$$c_0\overset{\delta}{\rightarrow}c_1\overset{\delta}{\rightarrow}\dots c_i\overset{\delta}{\rightarrow}c_{i+1}\dots$$
+
+La domanda che
+ci si pone è la seguente: \textit{Quanto può essere lunga una computazione di questo tipo?}
+Può essere lunga tanto quante configurazioni diverse esistono di $M$ con un input $x$ di lunghezza $n$.
+\textit{Perché questo è il limite?} Perché se vado a vanti un passo in più, per il \textbf{principio
+della piccionaia}, vuol dire che rivedo una computazione che ho fatto prima, quindi la DTM sarebbe
+in un loop che non servirebbe per accettare o rifiutare $x$.
+
+Quindi il numero di passi di una computazione di una macchina non può essere più lunga di quante
+configurazioni diverse su input di lunghezza $n$ esistono, se è più lunga vuol dire che qualche
+computazione è ricomparsa, ma siccome è una DTM vuol dire che sono entrato in un loop. Questo
+vuol dire che se $M$ deve decidere se accettare o meno l'input $x$ lo deve fare in un numero di passi
+che è pari al numero di configurazioni diverse su input di lunghezza $n$.
+
+Il problema quindi è il seguente, visto che riesco a mettere questo limite sulla lunghezza della computazione
+allora mi chiedo \textit{quante sono le configurazioni diverse di $M$ su input di lunghezza $n$?}
+Questo numero se lo trovo è un time-out a $t(n)$ di $M$, dove oltre quello è inutile andare
+perché la risposta l'ho già ottenuta prima e quindi mi troverei in un loop.
+
+\textit{Quante configurazioni di $M$ su input di lunghezza $n$ diverse esistono?} (quante
+quadruple diverse esistono?) Questo significa:
+\begin{itemize}
+    \item Quante possibilità per $q$? $|Q|$.
+    \item Quante possibilità per $i$? $n+2$ (considerando i due marker).
+    \item Quante possibilità per $j$? $s(n)+1$ (il nastro di lavoro non può
+    essere arbitrariamente coperto, la porzione massima su input di lunghezza $n$
+    per definizione della complessità in spazio è $s(n)+1$ perché possiamo stare
+    al di là di una posizione. ricordiamo che $s(n)\leq\alpha f(n)$).
+    \item Quante possibilità per $w$? $\Gamma^{s(n)}$, sappiamo che $w$ può essere
+    lunga al massimo $\Gamma^*$ (dove $s(n)\leq\alpha f(n)$).
+\end{itemize}
+Le diverse possibili configurazioni di $M$ su input $n$ sono date dalla moltiplicazione di questi
+differenti elementi.
+$$\leq |Q|\cdot(n+2)\cdot(\alpha f(n)+1)\cdot|\Gamma|^{\alpha f(n)}\leq$$
+
+$$|Q|\cdot(n+2)\cdot|\Gamma^{\alpha f(n)+1}\cdot|\Gamma|^{\alpha f(n)}\leq$$
+$$|Q|\cdot|\Gamma|\cdot(n+2)\cdot|\Gamma|^{2\alpha f(n)}=|Q|\cdot|\Gamma|\cdot(n+2)\cdot2^{2\alpha f(n)\cdot\log |\Gamma|}=$$
+$$O(n\cdot 2^{O(f(n))})$$
+Utilizzo la notazione O-grande per semplificare la lettura rimuovendo le costanti. Questo numero è
+il tempo in cui deve accettare o rifiutare la stringa $x\in\Sigma^n$ (time-out sulla computazione di $M$).
+
+Allora come è fatta una DTM che accetta quel linguaggio con un limite di tempo? Data DTM $M$ che accetta
+$L$ con $s(n)\leq\alpha\cdot f(n)$, posso costruire una DTM $M'$ che su input $x\in\Sigma^*$ con $|x|=n$.
+\begin{enumerate}
+    \item Scrive in unario una su un nastro il time-out $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
+    \item Simula $M$ e ad ogni mossa cancella un simbolo dal nastro time-out (in
+    sostanza implemento un count-down, lo scala di 1).
+    \item Se $M$ accetta o rifiuta prima del time-out allora $M'$ accetta o rifiuta.
+    \item Se allo scadere del time-out $M$ non ho ancora preso una decisione allora $M'$ rifiuta (loop),
+    perchè non siamo in uno stato accettante.
+\end{enumerate}
+Quindi ho una DTM $M'$ che replicando $M$ accetta sicuramente $L$ ed il tempo è
+dato da $t(n)=O(n\cdot 2^{O(f(n))})$.
+
+Questo significa che:
+$$DSPACE(f(n))\subseteq DTIME(n\cdot 2^{O(f(n))})$$
+Una limitazione in spazio significa una limitazione in tempo. In generale, un limite sullo spazio porta
+ad un limite esponenziale sul tempo.
+
+\subsubsection{Conseguenza importante: Eff.Spazio vs Eff.Tempo}
+\paragraph{Teoremi/Proprietà}\mbox{}\\
+\begin{enumerate}
+    \item $DSPACE(f(n))\subseteq DTIME(n\cdot 2^{O(f(n))})$
+    \item $FSPACE(f(n))\subseteq FTIME(n\cdot 2^{O(f(n))})$
+\end{enumerate}
+Essere efficienti in termini di spazio vuol dire essere all'interno delle classi
+$L=DSPACE(\log n)$ e $FL=FSPACE(\log n)$ che
+rappresentano i problemi risolti efficientemente in termini di spazio.
+Questi risultati ci dicono che se sono efficiente in termini di spazio sono automaticamente
+efficiente in termini di tempo, allora:
+\paragraph{Teorema}\mbox{}\\
+$$L\subseteq P\text{ e }FL\subseteq FP$$
+La prima inclusione è data perché
+$$L=DSPACE(\log n)\subseteq DTIME(n\cdot 2^{O(\log n)})=DTIME(n^s)\subseteq \bigcup_{k\geq 0}DTIME(n^k)=P$$
+applico la proprietà 1 usando $f(n)=\log n$. Consideriamo una costante $s$ non definito,
+poiché non è 2. Ovviamente appartiene all'unione delle classi di complessità in tempo polinomiali
+e quindi è incluso in $P$. Allo stesso modo, con la proprietà 2 ottengo che $FL\subseteq FP$.
+Questa è una conseguenza profonda, se produco degli algoritmi efficienti in termini di spazio
+quegli stessi algoritmi con la tecnica di time-out possono essere trasformati in algoritmi efficienti
+in termini di tempo.
+Alcune riflessioni su queste due inclusioni:
+\begin{itemize}
+    \item Prima di tutto non si sa se queste inclusioni siano proprie o meno.
+    \item Quindi, \textit{in teoria}, algoritmi efficienti in spazio portando immediati
+    algoritmi efficienti in tempo (il viceversa non è vero).
+    \item \textit{In pratica}, il grado del polinomio ottenuto da un algoritmo efficiente
+    in spazio è molto alto, quindi gli algoritmi efficienti in tempo vanno progettati
+    direttamente con una buona efficienza in tempo.
+\end{itemize}
+
+\subsection{Zona grigia e non determinismo}
+Esiste una zona grigia di problemi che è in relazione con il \textbf{non determinismo}. Le macchine
+di Turing non deterministiche, NTM servono a caratterizzare una zona grigia di problemi.
+La zona grigia di problemi è un insieme di problemi di decisione importanti e hanno un sacco di applicazioni
+per i quali però purtroppo non abbiamo in mano nessun algoritmo efficiente. Però nessuno ha dimostrato
+che sia presente un algoritmo efficiente per questi problemi. Il meglio che abbiamo per la risoluzione
+di questi problemi sono una complessità in tempo esponenziale, ma rimangono aperti.
+
+Sono problemi che per il momento non abbiamo soluzioni efficienti, ma allo stesso tempo sono algoritmi
+\textbf{efficientemente verificabili}, ovvero se mi date un istanza di questo problema e mi date un
+pezzo di informazione io sono in grado di verificare velocemente quell'informazione dicendo SI o NO.
+
+Quindi visti nella loro generalità purtroppo hanno algoritmi esponenziali ma diventerebbero facili se
+qualcuno mi desse un pezzo dell'informazione, perché mi permetterebbe di dare una risposta immediata.
+Il problema che ottenere questa informazione costa, il non determinismo serve proprio a catturare questi
+problemi che per il momento hanno soluzioni inefficienti ma sono facilmente verificabili.
+
+\subsubsection{Problema della soddisfacibilità booleana}
+\begin{itemize}
+    \item Formula booleana, formata da variabili booleane connesse da connettivi logici che legano
+    tali variabili.
+    $$\phi(x,y,z)=x\implies(y\land \overline{z})$$
+    \item Una formula booleana è \textbf{soddisfacibile} se e solo se riesco a creare un assegnamento
+    di verità di tali variabili in maniera che la formula venga resa vera. Se una formula non è
+    mai soddisfacibile si chiama \textbf{contraddizione}, tuttavia a noi interessano quelle
+    soddisfacibili.
+    \item Una formula booleana si dice in \textbf{CNF}, se è espressa come congiunzione di disgiunzioni
+    ovvero come AND di gruppi di OR, dove i gruppi di OR si chiamano clausole.
+    $$\phi(x,y,z)=x\implies(y\land\overline{z})=\overline{x}\lor (y\land\overline{z})=$$
+    $$(\overline{x}\land y)\land(\overline{x}\land\overline{z})\leftarrow CNF$$
+    Si applicano le proprietà dei connettivi logici sulla formula booleana in maniera da ottenere
+    la CNF. In questo caso le operazioni svolte: riscrittura dell implicazione, proprietà distributiva
+    dell'OR. Questa formula CNF è logicamente equivalente alla formula booleana binaria.
+\end{itemize}
+Il nostro problema parla di formule booleane in CNF e si chiede se sono soddisfacibili o meno.
+$$CNF-SAT$$
+$$\text{Istanza: Formula booleana }\phi (x_1,\dots,x_n)\text{ in CNF}$$
+$$\text{Domanda: }\phi (x_1,\dots,x_n)\text{ è soddisfacibile?}$$
+Purtroppo questo problema importantissimo non è ancora risolto (utilizzato ampliamente in A.I.),
+il meglio che possiamo fare è un algoritmo esaustivo (brute-force), si provano tutti i possibili
+assegnamenti delle variabili per trovare quello che porta la verità. Questo algoritmo ha lo svantaggio
+del tempo che è almeno $t(n)=2^n$ (tutti gli assegnamenti di verità).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/cnf.png}
+    \caption{Miglior algoritmo proposto per l'attuale CNF-SAT}
+\end{figure}
+$$t(n)=2^n\cdot \text{tempo per verificare }\phi(x)==1 = O(n\cdot 2^n)$$
+ed ecco la \textit{facile verifica} (tempo per verificare $\phi (x)==1$), se data una formula ed un assegnamento particolare
+è facile verificare se quell'assegnamento funziona, ha complessità $O(n)$. Il problema
+è che questa "facile verifica" viene ripetuta un numero esponenziale di volte. Il problema
+è globalmente inefficiente ma nasconde una fase di facile verifica (come tutti i problemi
+della zona grigia).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
