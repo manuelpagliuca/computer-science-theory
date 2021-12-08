@@ -263,3 +263,27 @@
 \contentsline {subsubsection}{\numberline {5.9.2}Classi di complessità non deterministiche}{163}{subsubsection.5.9.2}%
 \contentsline {subsubsection}{\numberline {5.9.3}Relazione tra $P$ e $NP$}{163}{subsubsection.5.9.3}%
 \contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{163}{section*.146}%
+\contentsline {subsubsection}{\numberline {5.9.4}$NTIME(f(n))\subseteq DTIME(?)$}{164}{subsubsection.5.9.4}%
+\contentsline {paragraph}{Tornando alla questione $NP\subseteq P$ p $P=NP$?}{166}{section*.147}%
+\contentsline {paragraph}{Attenzione sulla notezione}{166}{section*.148}%
+\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{166}{subsubsection.5.9.5}%
+\contentsline {subsubsection}{\numberline {5.9.6}Definizione formale $\pi _1\leq \pi _2$}{167}{subsubsection.5.9.6}%
+\contentsline {paragraph}{Definizione}{167}{section*.149}%
+\contentsline {paragraph}{Teorema}{167}{section*.150}%
+\contentsline {subsubsection}{\numberline {5.9.7}Problemi $NP-Completi$}{169}{subsubsection.5.9.7}%
+\contentsline {paragraph}{Teorema fondamentale}{169}{section*.151}%
+\contentsline {paragraph}{Dimostrazione}{169}{section*.152}%
+\contentsline {paragraph}{CNF}{169}{section*.153}%
+\contentsline {paragraph}{HC}{169}{section*.154}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in NP-C$}{170}{section*.155}%
+\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{170}{subsubsection.5.9.8}%
+\contentsline {paragraph}{Riduzione in spazio logaritmico}{171}{section*.156}%
+\contentsline {paragraph}{Teorema}{171}{section*.157}%
+\contentsline {paragraph}{Dimostrazione del teorema}{171}{section*.158}%
+\contentsline {subsubsection}{\numberline {5.9.9}Problemi $P-completi$}{172}{subsubsection.5.9.9}%
+\contentsline {paragraph}{Teorema}{172}{section*.159}%
+\contentsline {paragraph}{Dimostrazione}{172}{section*.160}%
+\contentsline {paragraph}{Esempi di problemi P-completi}{173}{section*.161}%
+\contentsline {paragraph}{Nota interessante}{173}{section*.162}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{173}{section*.163}%
+\contentsline {subsection}{\numberline {5.10}Classi di complessità}{174}{subsection.5.10}%

@@ -5865,6 +5865,405 @@ $$NTIME(f(n))\subseteq DTIME(?)$$
 non deterministici?} (i quali sono un costrutto teorico ma non realizzabile concretamente).
 
 
+\subsubsection{$NTIME(f(n))\subseteq DTIME(?)$}
+$L\in NTIME(f(n))\implies\exists NDTM M$ tale che $M$ accetta $L$ con $t(n)=O(f(n))$
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/ndtmfunct.png}
+    \caption{Funzionamento $M$ su input $x\in\Sigma^*,|x|=n$}
+\end{figure}
+\textit{Come posso simulare questa dinamica con una DTM $\tilde{M}$?}
+\begin{enumerate}
+    \item Comincio a generare tutte le possibili strutture che sono delle stringhe $\gamma\in\Gamma^*$ (non ho
+la "magia").
+
+\item Per ognuna di queste strutture faccio partire una fase di verifica, quindi si
+calcola deterministicamente se $(\gamma,x)$ viene accettata con $\tilde{M}$.
+
+\item Una volta passate tutte le strutture, controllo se almeno in una di queste
+la stringa viene accettata, allora in base all'esisto posso dire che tale stringa $x$ viene accettata
+da $\tilde{M}$ altrimenti è rifiutata.
+
+\end{enumerate}
+Questo algoritmo deterministico mi risolve il mio problema, la generazione delle stringhe
+è possibile attraverso un ciclo for che mi generi tutte le possibili stringhe. Le restanti
+fase sono già deterministiche, quindi abbiamo un nostro algoritmo deterministico.
+Però, c'è un grosso problema nel nostro algoritmo deterministico, i multi-versi generati
+al primo passo sono infiniti, quindi la parte di generazione delle strutture è infinita.
+
+Quindi è chiaro che il problema è $\gamma\in\Gamma^*$ ne esistono infinite. Quindi la
+successiva domanda che ci si chiede è \textit{dobbiamo proprio generarle tutte?}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/pseudtoDTM_tilde.png}
+    \caption{Pseudo-codice di $\tilde{M}$}
+\end{figure}
+\textit{Ho un modo per interrompere la scansione dei $\gamma\in\Gamma^*$?} Questi $\gamma$
+hanno una certa lunghezza (stiamo considerando stringhe), \textit{potrei limitarmi ad
+una certa lunghezza (finita) di stringhe?} Se nella fase di verifica $M$ compie $O(f(n))$
+passi per eventualmente accettare, è inutile generare $\gamma\in\Gamma^*$ con $|\gamma|>O(f(n))$
+perché non avrei nemmeno $M$ tempo di leggerle completamente.
+
+Dobbiamo porre delle restrizioni sul loop:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/pseudtoDTM_tilde_corretto.png}
+    \caption{Pseudo-codice di $\tilde{M}$ limitato da $f(n)$ nella generazione di $\gamma\in\Gamma^*$}
+\end{figure}
+Adesso abbiamo un algoritmo deterministico che si ferma sempre ($\in DTIME$), ora il mio
+obiettivo è valutare la complessità in tempo di questo algoritmo (ovvero il costo
+di togliere il non determinismo). Ad ogni iterazione io spendo il costo per la verifica,
+il numero di iterazioni è dato dal numero di stringhe di lunghezza al massimo $O\left(f(n)\right)$.
+$$t(n)=|\Gamma|^{O(f(n))}\cdot O\left(f(n)\right)=$$
+$$=O\left(f(n)\cdot 2^{O\left(f(n)\right)}\right)$$
+$$NTIME \left(f(n)\right)\subseteq DTIME\left(f(n)\cdot 2^{O(f(n))}\right)$$
+Quindi abbiamo dimostrato che l'inclusione dice che togliere la "magia" cosa molto caro,
+risultando in un tempo esponenziale rispetto a quello di verifica.
+
+\paragraph{Tornando alla questione $NP\subseteq P$ p $P=NP$?}
+Rendere reale una macchina NDTM ci porta via un tempo esponenziale, siccome stiamo
+parlando di dove si trova $NP$ rispetto a $P$ l'unica cosa che abbiamo ottenuto è:
+$$NTIME(f(n))\subseteq DTIME(f(n)\cdot 2^{O(f(N))})$$
+Quindi, come ci si poteva aspettare, rendere deterministico un algoritmo non-deterministico
+comporta un costo esponenziale nel tempo.
+$$NP\subseteq DTIME(2^{n^{O(1)}})=EXPTIME$$
+Possiamo dire che con certezza $NP$ si trova nella classe dei problemi risolti in
+tempo esponenziale $EXPTIME$ (ma questa è una cosa ovvia). Quello che vuol dire che comunque ammettono
+esistenza di algoritmi reali in tempo esponenziale, ma non nega che non ammettano algoritmi
+reali in tempo polinomiale.
+
+\paragraph{Attenzione sulla notezione}\mbox{}\\
+La classe $NP$ non sta per "non polinomiale" (e consecutivamente esponenziale). $NP$
+sta per "non deterministico polinomiale". Dire che $NP$ contiene problemi con algoritmi
+di soluzione esponenziali è falso.
+
+\subsubsection{Rimane il problema aperto $P=NP$ o $NP\subseteq P$}
+Per mostrare che $NP\subseteq P$ potrei prendere oni problema in $NP$ e trovare
+un algoritmo si soluzione polinomiale. Questo è impossibile perchè il numero
+di problemi in $NP$ è infinito e di composizione eterogenea, quindi non posso effettuare
+questo tipo di indagine.
+
+Un primo passo potrebbe essere quello di ristringere la mia ricerca su un insieme ristretto
+di problemi in $NP$, \textit{esiste una metodologia teorica per effettuare questo?} Si,
+l'idea:
+\begin{enumerate}
+    \item Stabilire una \textbf{relazione di difficoltà} tra problemi in $NP$, tale
+    per cui due problemi $\pi_1,\pi_2$, dove $\pi_1\leq\pi_2$, ovvero che $\pi_1$ è
+    più facile di $\pi_2$, se trovare un algoritmo efficiente per $\pi_2$ significa
+    automaticamente aver trovato un algoritmo efficiente per $\pi_1$.
+
+    \item Trovare i problemi pià difficili in $NP$, tale per cui $\pi\in NP$
+    dove qualunque altro problema ha una difficoltà minore: se $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq\pi$
+
+    \item Restringendo la ricerca di algoritmi efficienti solamente a questi problemi, se sono
+    in grado di dominare la complessità di questi problemi difficili allora sicuramente
+    sarò in grado di dominare la complessità di tutti gli altri problemi pià facili.
+\end{enumerate}
+
+\subsubsection{Definizione formale $\pi_1\leq\pi_2$}
+Per definire formalmente questo concetto di difficoltà tra problemi è necessario introdurre
+un altro concetto di \textbf{riduzione polinomiale} tra problemi.
+\paragraph{Definizione}\mbox{}\\
+Dati due linguaggi (o problemi di decisione) $L_1,L_2\subseteq\Sigma^*$. Si dice che
+$L_1$ si riduce polinomialmente in tempo a $L_2$, indicato con $L_1\leq_{p} L_2$,
+se e solo se esiste una funzione $f:\Sigma^*\rightarrow\Sigma^*$ tale per cui:
+\begin{enumerate}
+    \item $f$ è calcolabile su DTM in tempo polinomiale ($f\in FP$).
+    \item $\forall x\in\Sigma^*:x\in L_1\Leftrightarrow f(x)\in L_2$ (il mapping della
+    stringa nell'altro linguaggio).
+\end{enumerate}
+Essenzialmente questa funzione $f$ mantiene la proprietà di appartenenza tra un linguaggio
+e l'altro. Se parto da una stringa nel primo linguaggio e la trasformo in un altra stringa,
+allora quella stringa starà nel secondo linguaggio.
+
+\paragraph{Teorema}\mbox{}\\
+Siano dati due linguaggi $A,B\subseteq\Sigma^*$ tale che $A\leq_p B$, allora
+$B\subseteq P\implies A\subseteq P$. Quindi se riesco a trovare un algoritmo polinomiale
+per un linguaggio che è in grado di essere ridotto polinomialmente in un altro linguaggio,
+allora troverò anche un algoritmo polinomiale in $B$.
+
+Proviamo a trovare un algoritmo efficiente per $A$ (che è riducibile polinomialmente in $B$)
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/algo_det_daf.png}
+    \label{alg:1}
+    \caption{Algoritmo polinomiale per $A$}
+\end{figure}
+
+\begin{enumerate}
+    \item Per prima cosa esegue la riduzione polinomiale, quindi mi sposto nel dominio $B$.
+    \item Mi chiedo se $y$ appartiene al dominio $B$, rispondo con un booleano.
+\end{enumerate}
+
+\begin{itemize}
+    \item L'algoritmo in questione è deterministico perché tutti i passi sono deterministici.
+    \item Questo è un algoritmo che riconosce $A$, perché se $x$ appartiene ad $A$ allora
+    anche $f(x)$ ovvero $y$ appartiene ad $A$, e risponderà 1.
+    \item Complessità in tempo con $|x|=n$:
+    $$t(n)=t_f(n)+ t_{b\in B}(|y|)$$
+    la complessità in tempo è data dal tempo speso per calcolare la prima funzione (indicata
+    dal pallino singolo in \ref{alg:1}), e poi si spende del tempo per testare l'appartenenza della
+    stringa a $B$ (due pallini consecutivi in \ref{alg:1}). Non si può dare con certezza
+    la lunghezza di $y$ in quanto trasformata.
+\end{itemize}
+
+Cerchiamo di valutare in meglio la complessità in tempo:
+$$t(n)=t_f(n)+t_{b\in B}(|y|)=$$
+il tempo di calcolo di $f$ è polinomiale in quanto $f\in FP$ essendo una riduzione polinomiale,
+quindi il primo termine è un polinomio $p(n)$. Il secondo termine è altrettanto un polinomio
+che però è espresso in lunghezza di $y$ chiamato $q$.
+$$=p(n)+q(|y|)$$
+la complessità però dovrebbe essere espressa in $n$ e non altrimenti, \textit{esiste
+in qualche modo la possibilità di limitare la lunghezza di $y$?} Sappiamo che questa
+$y$ esce da una computazione di massimo $p(n)$ passi, questo significa che $|y|\leq p(n)$.
+$$t(n)\leq p(n)+q(p(n))=poly(n)$$
+Quindi questa piccola osservazione mi permette di maggiorare questo termine con $q(p(n))$,
+a questo punto siamo arrivati alla fine, la somma di polinomi è ancora un polinomio.
+
+Quindi in sostanza ho dimostrato che se io riesco a ridurre polinomialmente un linguaggio
+in un altro linguaggio, e sono efficiente nel primo, allora sarà presente un algoritmo
+deterministico polinomiale anche per il secondo linguaggio.
+$$A\leq_p B\land B\in P\implies A\in P$$
+Questo vuol dire che $A\leq_p B$ implica che $A$ non è più difficile di $B$, se sono efficiente
+su $B$ lo sarò automaticamente anche su $A$, non è possibile che in $A$ non sia in grado
+di trovare un algoritmo buono quando ne ho già trovato uno per $B$.
+
+\subsubsection{Problemi $NP-Completi$}
+Un problema di decisione $\pi$ è $NP-completo$ se e solo se:
+\begin{enumerate}
+    \item $\pi\in NP$.
+    \item $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq_p\pi$.
+\end{enumerate}
+Prima di tutto deve appartenere a $NP$, in secondo luogo se alcun altro problema appartenente
+a $NP$ si riduce polinomialmente ad esso.
+Essi sono i problemi pià difficili in $NP$, in essi racchiudono completamente la difficoltà
+di $NP$.
+
+Se io fossi in grado di risolvere in tempo efficiente anche uno solo di questi problemi
+$NP-completi$ allora riesco a dimostrare che $NP\subseteq P$ ($P=NP$).
+
+\paragraph{Teorema fondamentale}\mbox{}\\
+Sia $\pi\in NP-C$, e sono in grado di dimostrare che $\pi\in P$, allora $NP\subseteq P$ ($P=NP$).
+
+\paragraph{Dimostrazione}\mbox{}\\
+Poiché $\pi\in NP-C$, la proprietà (2) abbiamo che per ogni problema $\tilde{\pi}\in NP$
+vale che $\tilde{\pi}\leq_p\pi$. Ma assumendo che $\pi\in P$ e considerando il teorema
+$A\leq_p B\land B\in P\implies A\in P$, otteniamo che per ogni problema $\tilde{\pi}$
+vale $\tilde{\pi}\in P$ quindi possiamo concludere che $NP\subseteq P$ e quindi $P=NP$.
+
+\textit{Esistono problemi $NP-completi$?} Si \textit{Sono state trovate soluzioi
+efficienti per almeno un problema $NP-completo$?} Ancora no.
+
+\paragraph{CNF}\mbox{}\\
+Il primo problema $NP-completo$ è stato il $CNF-SAT$. Mostrarne l'appartenenza in $NP$
+è banale. La $NP-$completezza è nota sotto il nome di Teorema di Cook-Levin (1970).
+Ovviamente non sono ancora stati trovati algoritmi efficienti per questo problema,
+allora si è pensato di studiare delle varianti significative di questo problema
+per vedere il loro comportamento.
+
+È stato studiato il problema $K-CNF-SAT$, in cui è presente un limite $k$ alla cardinalità
+delle variabili per ogni clausola. Quindi stiamo ponendo una restrizione al problema
+generale, l'idea è che magari pre-fissando la taglia di ogni clausola riesco ad avere
+degli algoritmi efficienti. Purtroppo il problema continua ad essere $NP-Completo$ a meno
+che $k\leq 2$, se ogni clausola è ristretta ad avere al più due letterali allora si abbiamo
+degli algoritmi efficienti, altrimenti il problema torna ad essere $NP-C$.
+
+Se le clausole in $CNF-SAT$ sono di Horn, allora il problema torna ad essere efficientemente
+risolubile.
+
+\paragraph{HC}\mbox{}\\
+Il problema $HC$ è un problema $NP-Completo$. Migliaia di problemi sui grafi sono
+$NP-Completi$, purtroppo tutti i problemi utili che verranno in mente molto probabilmente
+sono in $NP-C$.
+
+La comunità scientifica pensa che $NP\neq P$, se riesco a dimostrare che un problema
+$NP-C$ questa è una sentenza finale, si accetta il fatto che il problema non sia presente
+un algoritmo efficiente (questo è il lato pessimistico).
+
+Tuttavia il problema rimane, una volta che si individua il problema $NP-C$, allora cerchiamo
+delle varianti significative del problema oppure cerchiamo altri paradigmi che mi possono
+permettere di risolvere efficientemente quel problema anche se non in maniera così completa.
+Magari utilizzando degli algoritmi probabilistici, che sono veloci nonostante una probabilità
+di errore che si può rendere piccola a piacere, o magari utilizzando delle euristiche.
+
+Il problema rimane e comunque va risolto, cercando di fare il meglio che si può fare.
+
+\paragraph{Un ottima tecnica per mostrare che $\pi\in NP-C$}\mbox{}\\
+Un ottimo percorso per dimostrare che un problema $\pi$ sia $NP-C$ è il seguente (
+    assumendo che il problema su cui stia lavorando sia reputato difficile.)
+\begin{enumerate}
+    \item Dimostriamo che $\pi\in NP$.
+    \item Scelgo un problema che già so essere $x\in NP-C$.
+    \item Se riesco a dimostrare che $x\leq_P \pi$.
+    \item Per la transitività do $\leq_P$ si ottiene che $\pi\in NP-C$ (ovvero
+    per il teorema $A\leq_P B\land B\leq_P C\implies A\leq_P C$).
+\end{enumerate}
+Infatti:
+\begin{itemize}
+    \item $\pi\in NP$ per il passo (1).
+    \item $\forall\tilde{\pi}\in NP$ abbiamo che
+    $\tilde{\pi}\overset{(2)}{\leq_P}\overset{(3)}{\leq_P}\pi$. Per la transitività
+    di $\leq_P$ al punto (4) abbiamo che $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq_P\pi$.
+\end{itemize}
+Quindi possiamo concludere che $\pi$ è $NP-completo$.
+
+\subsubsection{$P\subseteq L?$}
+$$L=DSPACE(\log n),\text{ classe dei problemi risolubili efficientemente in spazio.}$$
+$$P=\bigcup_{k\geq 0}DTIME(n^k),\text{ classe dei problemi risolubili efficientemente in tempo.}$$
+Abbiamo dimostrato che $L\subseteq P$, il problema che ci si pone è:\textit{ l'inclusione
+è propria?} Oppure $P\subseteq L$, possiamo procedere su $P\subseteq L$ come abbiamo
+fatto con $NP\subseteq P$:
+\begin{enumerate}
+    \item Stabilire una relazione di difficoltà tra problemi $\pi_1$ e $\pi_2$, che in questo
+    caso $\pi_1\leq\pi_2$ (di difficoltà minore o uguale) se e soltanto se si ha una
+    soluzione efficiente in \textit{spazio} per $\pi_2$, allora automaticamente ne si ha
+    una efficiente in spazio per $\pi_1$-
+
+    \item Trovo i problemi massimali in $P$ secondo questa relazione $\leq$.
+
+    \item Restringi la tua ricerca di algoritmi efficienti in spazio a questi problemi
+    massimali. Se avrai successo su un problema massimale allora $P\subseteq L$.
+\end{enumerate}
+
+\paragraph{Riduzione in spazio logaritmico}\mbox{}\\
+Chiaramente devo formalizzare bene una riduzione tra problemi che mi tenga conto dello spazio.
+Dati due linguaggi $L_1,L_2\subseteq\Sigma^*$ (o problema di decisione), diciamo che
+$L_1$ si \textbf{log-space riduce} a $L_2$, indicato con $L_1\subseteq_{\ell}L_2$ se e solo se
+esiste una funzione $f:\Sigma^*\rightarrow\Sigma^*$ tale che:
+\begin{enumerate}
+    \item Sia calcolabile su una DTM in spazio logaritmico, $f\in FL$.
+    \item $\forall x\in\Sigma^*:x\in L_1\Leftrightarrow f(x)\in L_2$
+\end{enumerate}
+\paragraph{Teorema}\mbox{}\\
+Siano due linguaggi $A,B\in\Sigma^*$ tale che $A\subseteq_{\ell}B$, allora $B\in L\implies A\in L$.
+\paragraph{Dimostrazione del teorema}\mbox{}\\
+La dimostrazione è identica alla simile riduzione polinomiale. Siccome $A\leq_{\ell}B$, sia
+$f\in FL$ la log-space riduzione. Consideriamo il seguente algoritmo:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/algo_det_daf.png}
+\end{figure}
+\begin{enumerate}
+    \item Questo è sicuramente un algoritmo deterministico perché tutti i passi
+    sono deterministici.
+    \item Per la proprietà (2), l'algoritmo riconosce $A$.
+    \item La complessità in spazio, con $|x|=n$: 
+    $$s(n)=s_f(n)+s_{y\in B}(|y|)$$
+\end{enumerate}
+Analizzando più in dettaglio la complessità in spazio, notiamo che si divide in due
+complessità lo spazio per calcolare $f$ (1 pallino), e lo spazio per verificare
+l'appartenenza in $B$ (2 pallini).
+$$s(n)=s_f(n)+s_{y\in B}(|y|)=O(\log n)+O(\log |y|)$$
+Lo spazio per calcolare $f\in FL$ è logaritmico, perché qui stiamo parlando di una riduzione logaritmica
+in spazio, se noi assumiamo che $B\in L$, allora anche lo spazio per calcolare l'appartenenza
+è logaritmico però rispetto alla lunghezza di $y$. Noi vogliamo calcolare la complessità
+in funzione solamente alla variabile $n$.
+
+Ancora una volta abbiamo che la lunghezza di questo $|y|$ è limitata da un polinomio $p(n)$, in
+quanto output di una procedura che impiega spazio logaritmico e quindi un numero polinomiale di
+passi (infatti $FL\subseteq FP$).
+$$s(n)=O(\log n)+O(\log p(n))=O(\log n)$$
+In conclusione, l'algoritmo deterministico proposto riconosce $A$ in spazio logaritmico.
+Dunque: $A\leq_{\ell}B\land B\in L\implies A\in L$
+Quindi abbiamo dimostrato una relazione tra problemi che mi dice che se sono efficiente in spazio
+nel problema $B$ sarò automaticamente efficiente su un algoritmo $A$. Più formalmente, se
+$A\leq_{\ell}B$ e $B$ ammette un riconoscimento efficiente in spazio, allora anche $A$ ammette un
+riconoscimento efficiente in spazio.
+
+\subsubsection{Problemi $P-completi$}
+Un problema di decisione $\pi$ è $P-completo$ se e solo se:
+\begin{enumerate}
+    \item $\pi\in P$
+    \item $\forall\tilde{\pi}\in P:\tilde{\pi}\leq_{\ell}\pi$
+\end{enumerate}
+Sia $P-C$ la sottoclasse di $P$ dei problemi $P-completi$, la quale i problemi appartenenti
+sono quei problemi difficili in termine di spazio.
+
+\paragraph{Teorema}\mbox{}\\
+Sia $\pi\in P-C$ e $\pi\in L$, allora per riduzione sarò in grado di dimostrare
+tutti gli altri problemi più semplici, allora $P\subseteq L$.
+
+\paragraph{Dimostrazione}\mbox{}\\
+Poiché $\pi\in P-C$, per (2) abbiamo che per ogni problema $\tilde{\pi}\in P$ vale
+$\tilde{\pi}\leq_{\ell}\pi$. Ma assumendo che $\pi\in L$ e conseguentemente il teorema
+$A\leq_{\ell}B\land B\in L\implies A\in L$, otteniamo che per ogni problema $\tilde{\pi}\in P$
+vale $\tilde{\pi}\in P$ vale $\tilde{\pi}\in L$, e quindi possiamo concludere che $P\subseteq L$
+e $P=L$.
+
+\begin{itemize}
+    \item Esistono problemi $P-Completi$.
+    \item Per nessuno di essi è ancora stato trovato un algoritmo efficiente in termini
+    di spazio.
+\end{itemize}
+
+\paragraph{Esempi di problemi P-completi}\mbox{}\\
+$$CONTEXT-FREE\;MEMBERSHIP$$
+$$\text{Istanza: Grammatica context-free }G,\text{ stringa}x$$
+$$\text{Domanda: }x\in L(G)?$$
+Ovvero, questa stringa $x$ viene generata da questa grammatica $G$? Questo è un problema
+che si risolve in tempo quadratico, quindi appartiene a $P$, purtroppo però non esistono
+algoritmi efficienti in termini di spazio che risolvono questo problema.
+
+$$CIRCUIT\;VALUE$$
+$$\text{Istanza: Circ.Bool. }G(x_1,\dots,x_n),\text{ valori in input }a_1,\dots,a_n\in \{0,1\}$$
+$$\text{Domanda: }G(a_1,\dots,a_n)=1?$$
+Abbiamo in ingresso una rete di porte logiche (un DAG dove i nodi sono porte logiche), questo
+circuito booleano a in ingresso dei valori di verità, ci si chiede se tale combinazione sia
+vera.
+
+Quindi l'importanza della nozione di $P-Completo$, quando giungiamo a tale sentenza, da un punto
+di vista pessimistico non riusciremo mai a risolvere efficientemente tale problema in termini di spazio.
+In realtà però anche qui, si cercano dei nuovi paradigmi di calcolo, magari introducendo:
+algoritmi probabilistici, quantistici, euristici, $\dots$
+
+\paragraph{Nota interessante}\mbox{}\\
+Si dimostra anche che i problemi $P-completi$ quasi certamente non possono ammettere
+algoritmi paralleli efficienti (si crede molto fermamente).
+
+
+\paragraph{Un ottima tecnica per mostrare che $\pi\in$ P-C}\mbox{}\\
+\begin{enumerate}
+    \item Dimostrare che $\pi\in P$.
+    \item Scegliamo un problema $x$ notoriamente $P-completo$.
+    \item Dimostra che $x\leq_{\ell}\pi$.
+    \item Per la transitività di $\leq_{\ell}$ ($A\leq_{\ell}B\land B\leq_{\ell} C\implies A\leq_{\ell}C$),
+    ottieni che qualunque problema in $P$ si log-space riduce al problema $\pi$.
+    \item Per (1) e (4) si conclude che $\pi\in P-C$.
+\end{enumerate}
+
+\subsection{Classi di complessità}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.65]{images/classi_complessità.png}
+    \caption{Situazione attuale delle classi di complessità affrontate durante il corso.}
+\end{figure}
+
+Quello che abbiamo dimostrato è che la classe dei problemi risolubili efficientemente in termini
+di spazio $L$ risiede nella classe dei problemi risolubili efficientemente in termini di tempo $P$
+(non si sa nulla se l'inclusione sia propria o meno). Abbiamo anche scoperto la classe
+dei problemi $P-C$ che sono all'interno della classe dei problemi $P$, attenzione, non possono
+avere una intersezione con $L$ perché se avessero tale intersezione avrei dei problemi $P-C$
+che si risolvono in $L$ e quindi $P=L$ (perché $P\subseteq L$). Questo perché si pensa che
+$L\subset P$.
+
+Nella classe $NP$ abbiamo individuato la classe dei problemi $NP-C$, che simmetricamente
+non ha (o si pensa abbia) una intersezione con la classe dei problemi $P$, altrimenti $P=NP$.
+
+Ogni problema in $NP$ ha sicuramente un algoritmo esponenziale deterministico, quindi è incluso
+sicuramente nella classe $EXPTIME$. Attualmente si pensa che tutte queste inclusioni siano proprie,
+tutta via ancora nessuno ha dimostrato la proprietà di queste inclusioni.
+
+L'unica inclusione dimostrata come propria è che $P\subsetneq EXPTIME$, questo per motivi di gerarchia.
+
+
+
+
+
+
+
+
 
 
 
