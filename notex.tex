@@ -106,7 +106,7 @@ Dove $\mathbb{N}$ è l'insieme dei numberi naturali ${0,1,2,3,...}$, e per utili
 \newline
 Ora vediamo la specifica della funzione $f$
 $$f(n)=\lfloor \sqrtsign{n}\rfloor$$
-Considerando $n=5$ l'immagine di quest'ultima sarà $f(5)=\rfloor\sqrt{5}\lfloor=2$.
+Considerando $n=5$ l'immagine di quest'ultima sarà $f(5)=\lfloor\sqrt{5}\rfloor=2$.
 \newline
 Quindi possiamo dedurre che per più elementi del dominio una \textbf{funzione} effettua un mapping ad uno ed un solo valore del codominio (nel caso in cui un valore del dominio venga mappato a più valori del codominio allora si parla di relazione, ma non più di funzione).
 \subsection{Classi di funzioni}
@@ -116,7 +116,7 @@ Una funzione è \textbf{iniettiva} se e solo se elementi diversi del dominio ven
 $$f:A\rightarrow B\text{ è iniettiva sse } \forall a_1,a_2\in A \text{ dove } a_1\neq a_2 \implies f(a_1)\neq f(a_2)$$
 \newline
 \textit{Esempio 1}
-$$f(n)=\lfloor\sqrt(n)\rfloor$$
+$$f(n)=\left\lfloor\sqrt(n)\right\rfloor$$
 Abbiamo visto precedentemente che questa funzione non è iniettiva, perché avviene un mapping per più elementi del dominio ad un unico elemento del codominio.
 \newline
 \newline
@@ -212,7 +212,7 @@ Ovvero, che per un elemento $a$ non esiste immagine nell'insieme $B$ tramite la 
 
 Consideriamo il seguente esempio:
 $$f:\mathbb{N}\rightarrow\mathbb{N}$$
-$$f(n)=\lfloor\frac{1}{n}\rfloor \text{ non è definita su } n=0\implies f(0)\uparrow \forall n\in\mathbb{N}\setminus{0}, f(n)\downarrow$$
+$$f(n)=\left\lfloor\frac{1}{n}\right\rfloor \text{ non è definita su } n=0\implies f(0)\uparrow \forall n\in\mathbb{N}\setminus{0}, f(n)\downarrow$$
 
 Una funzione viene definita \textbf{parziale} se a \textit{qualche} elemento di $A$ si associa un elemento di $B$. Si amplia un nuovo concetto che è quello del \textbf{dominio} (o campo di esistenza) della funzione,
 ovvero quell'insieme costituito da tutti gli elementi di $A$ tali per cui è definita una immagine appartenente a $B$.
@@ -225,7 +225,7 @@ $$Dom_f\equiv A\implies f \text{ totale}$$
 Alcuni esempi:
 $$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\right\}$$
 $$f(n)=\lfloor\log{n}\rfloor\implies Dom_f=\mathbb{N}\setminus\{0\}$$
-$$f(n)=\lfloor\sqrt{-n} \implies Dom_f=\{0\}$$
+$$f(n)=\lfloor\sqrt{-n}\rfloor \implies Dom_f=\{0\}$$
 \subsubsection{Totalizzazione di una funzione parziale}
 Teniamo conto di una cosa, possiamo convenzionalmente rendere totale una funzione parziale, basta estendere
 il codominio con un \textbf{simbolo convenzionale} $\bot$ che buttiamo fuori tutte le volte che la funzione non è definita.
@@ -3728,7 +3728,8 @@ modo di dire si o no soffre del problema che il libro è infinito, se è present
 potrà mettere molto ma prima o poi lo si troverà.
 
 \subsubsection{Caratteristiche insiemi ricorsivamente numerabili}
-Teorema: le seguenti definizioni sono equivalenti
+\paragraph{Teorema}\mbox{}\\
+Le seguenti definizioni sono equivalenti:
 \begin{enumerate}
     \item $A$ è ricorsivamente numerabile ($A=Im_{f\in\mathcal{T}}$).
     \item $A=Dom_f$ con $f\in\mathcal{P}$, dimostrando che è il dominio di una funzione ricorsiva parziale.
@@ -5722,8 +5723,7 @@ Semplicemente mi faccio generare un assegnamento e lo verifico.
     \caption{Algoritmo non deterministico per $HC$.}
 \end{figure}
 
-\subsection{Tempo d
-i calcolo algoritmo non deterministico}
+\subsection{Tempo di calcolo algoritmo non deterministico}
 Il tempo di calcolo in un algoritmo non deterministico, abbiamo una fase congetturale
 che essendo "magica" ha costo zero. L'unico tempo che valutiamo è quello che viene
 dalla fase di verifica, il quale corrisponde al numero di passi della computazione che più
