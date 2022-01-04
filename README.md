@@ -1,4 +1,4 @@
-# Computer Science Theory Notex (LaTeX) - [Italian]
+# Computer Science Theory Notes (LaTeX) - [Italian]
 
 ![Status](https://img.shields.io/badge/notes-completed-brightgreen)
 ![Lang](https://img.shields.io/badge/lang-LaTeX%20-blue)
