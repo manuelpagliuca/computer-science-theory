@@ -54,7 +54,7 @@
     Università degli Studi di Milano\\
     Laurea Magistrale in Informatica, A.A. 2020/2021}
 
-\author{Manuel Pagliuca}
+\author{Appunti di Manuel Pagliuca}
 
 \begin{document}
 \maketitle
@@ -148,7 +148,7 @@ $f(n)=\lfloor\sqrt{n}\rfloor$ è suriettiva, questo perchè $\forall m\in \mathb
 $f(n)=[n]_2$ non è una funzione suriettiva, questo perchè per esempio $3$ non è immagine di niente rispetto a $f$ (il codominio è tutto $\mathbb{n}$).
 
 \subsection{Insieme immagine di una funzione}
-$$Im_f={b\in B:\exists a,f(a)=b}={f(a):a\in A}$$
+$$Im_f={b\in B:\exists a,f(a)=b}:a\in A$$
 
 Data $f$ definitiamo l'\textbf{insieme immagine di $f$} come gli elementi del codominio $\in B$ che sono immagine di un elemento del dominio $A$.
 \newline
@@ -220,19 +220,20 @@ $$f(n)=\left\lfloor\frac{1}{n}\right\rfloor \text{ non è definita su } n=0\impl
 
 Una funzione viene definita \textbf{parziale} se a \textit{qualche} elemento di $A$ si associa un elemento di $B$. Si amplia un nuovo concetto che è quello del \textbf{dominio} (o campo di esistenza) della funzione,
 ovvero quell'insieme costituito da tutti gli elementi di $A$ tali per cui è definita una immagine appartenente a $B$.
-$$Dom_f=\left\{a\in A : f(a)\downarrow \right\}\subseteq A$$
+$$Dom_f=\left\{\forall a\in A : f(a)\downarrow \right\}\subseteq A$$
 
 Allora vale precisare le due seguenti regole:
 $$Dom_f\nsubseteq A\implies f\text{ parziale}$$
 $$Dom_f\equiv A\implies f \text{ totale}$$
 
 Alcuni esempi:
-$$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\right\}$$
+$$f(n)=\left\{\frac{1}{n}+\frac{1}{(n-1)(n-2)}\implies Dom_f=\mathbb{N}\setminus\{0,1,2\}\right\}$$
 $$f(n)=\lfloor\log{n}\rfloor\implies Dom_f=\mathbb{N}\setminus\{0\}$$
 $$f(n)=\lfloor\sqrt{-n}\rfloor \implies Dom_f=\{0\}$$
 \subsubsection{Totalizzazione di una funzione parziale}
 Teniamo conto di una cosa, possiamo convenzionalmente rendere totale una funzione parziale, basta estendere
-il codominio con un \textbf{simbolo convenzionale} $\bot$ che buttiamo fuori tutte le volte che la funzione non è definita.
+il codominio con un \textbf{simbolo convenzionale} $\bot$ che utilizziamo
+tutte le volte che la funzione non è definita.
 $$f:A\rightarrow B\text{ parziale } \implies \widetilde{f}:A\rightarrow B\cap\{\bot\}$$
 La totalizzazione di $f$ viene raggiunta con l'aggiunta di questo simbolo.
 \[
@@ -256,7 +257,7 @@ Ovviamente l'unico caso dove un prodotto cartesiano è commutativo è quando $A\
 Il prodotto cartesiano può essere esteso al prodotto di ennuple di più insiemi cartesiani,
 dove questa volta il risultato è costituito da un insieme ordinato (non più di coppie) delle ennuple
 rispettive agli insiemi di provenienza:
-$$A_1\times A_2 \times ... \times A_n=\{(a_1,a_2,...,a_n):a_i\in A_i$$
+$$A_1\times A_2 \times ... \times A_n=\{(a_1,a_2,...,a_n):a_i\in A_i\}$$
 
 Associato alla definizione di prodotto cartesiano abbiamo anche quella di \textbf{proiettore i'esimo},
 essa è una funzione che agisce su un prodotto cartesiano. Ha come dominio l'insieme i-esimo di questo prodotto data una tupla del prodotto cartesiano non fa altro che estrapolare la componente i-esima di quella tupla (\textit{destruttura la tupla}).
@@ -264,7 +265,7 @@ $$\pi_i:A_1\times ...\times A_n\rightarrow A_i$$
 $$\pi_i(a_1,...,a_n)=a_i$$
 Utilizzeremo la seguente notazione esponenziale per calcolare il prodotto cartesiano di un insieme cartesiano
 con se stesso:
-$$A_1\times A_2\times A_3 ... \times A_n = A^n$$
+$$A_1\times A_2\times A_3 \times ... \times A_n = A^n$$
 
 Alcuni esempi:
 
@@ -324,7 +325,7 @@ che prende un input e lo trasforma in un output (o in un loop).
 Essenzialmente un programma è la definizione di una funzione scritta a mano, esso
 realizza una funzione che parte dai dati in input ed ottiene i dati in output.
 
-$$P\in DATI_{\bot}^DATI\text{ è una funzione in un linguaggio di programmazione.}$$
+$$P\in DATI_{\bot}^{DATI}\text{ è una funzione in un linguaggio di programmazione.}$$
 
 Quindi, ribadendo per l'ennesima volta un programma è la realizzazione di una
 funzione, che va da un insieme di dati ad un altro.
@@ -344,8 +345,7 @@ Per esempio, consideriamo il seguente programma:
         return $x$;
     }
     {
-        \lWhile{$1<2$}{}
-        return $1$;
+        \lWhile{$1<2$}{return $1$;}
     }
 
     \caption{Semantica di $P$}
@@ -370,15 +370,15 @@ La \textbf{semantica} è la seguente :
 \subsubsection{Potenza computazionale}
 I sistemi di calcolo servono per calcolare le funzioni, ogni programma che immetto
 nel mio sistema di calcolo mi viene calcolato. Indico con potenza computazionale
-del mio sistema di calcolo è \textit{tutto quello che sa fare} il mio sistema di calcolo, o meglio,
-tutte quelle funzioni che il mio sistema di calcolo può calcolare.
+del mio sistema di calcolo come "\textit{tutto quello che sa fare}" il mio sistema di
+calcolo, o meglio, tutte quelle funzioni che il mio sistema di calcolo può calcolare.
 
 Tutte le funzioni che può calcolare il mio sistema di calcolo è un sottoinsieme
 di tutte le funzioni immaginabili che possono andare da dati in dati. I programmi
 in generale sono delle funzioni da dati in dati, quindi il mio sistema di calcolo
-è ovvio che calcoli questo tipo di funzioni, è un sottoinsieme perchè non so quali
+è ovvio che calcoli questo tipo di funzioni, è un sottoinsieme perché non so quali
 funzioni è in grado di risolvere il mio sistema di calcolo (e questa è la domanda
-a \textit{cosa} a cui risponde l'informatica teorica).
+a \textit{cosa} a cui deve rispondere l'informatica teorica).
 
 $$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
 
@@ -500,9 +500,9 @@ Si dimostra facilmente che :
 \begin{itemize}
     \item Non esistono classi di equivalenza vuote, questo per via della proprietà
           \textit{riflessiva} delle relazioni di equivalenza.
-    \item Se prendo due elementi diversi del dominio le classi di equivalenza relative
-          o sono disgiunti o sono la stessa classe di equivalenza: $a,b\in A$ vale che
-          $[a]_R\cap[b]_R=\emptyset$ o $[a]_r = [b]_R$.
+    \item Se prendo due elementi diversi del dominio, le classi di equivalenza relative
+          possono essere disgiunte oppure sono la stessa classe di equivalenza: $a,b\in A$ vale che
+          $[a]_R\cap[b]_R=\emptyset$ o $[a]_R = [b]_R$.
     \item $\bigcup\limits_{a\in A}[a]_R=A$
 \end{itemize}
 
@@ -584,12 +584,11 @@ Quindi spezzettando l'insieme $\mathcal{U}$ in classi di equivalenza
 in questa classe di equivalenza ci sono tutti gli insiemi
 che sono equi numerosi (seppur diversi).
 
-Questo concetto permette di parlare in maniera molto precisa anche di
+Questo concetto mi permetterà anche di parlare in maniera molto precisa anche di
 insiemi di cardinalità infinita.
-Questi insiemi possono avere lo stesso numero
 \newline
 \newline
-Per esempio, consideriamo $n\in\mathbb{N}^+$, si consideri l'insieme $J_n=\{1,2,,...,n\}$. Per questo
+Per esempio, consideriamo $n\in\mathbb{N}^+$, si consideri l'insieme $J_n=\{1,2,...,n\}$. Per questo
 insieme è ovvio quale sia il concetto di cardinalità perchè è finito.
 
 Allora diciamo che un insieme $A$ ha cardinalità \textbf{finita} se è equi
@@ -675,10 +674,10 @@ Siccome sto ipotizzando che sia elencabile, allora creo una lista di tutti gli e
 all'interno di questo numero seguono il formato "$0.$", quindi:
 \[
     \begin{array}{ccccc}
-        \underline{0.a_{11}} & 0.a_{12}             & 0.a_{13}             & 0.a_{14}             & ... \\
-        0.a_{21}             & \underline{0.a_{22}} & 0.a_{23}             & 0.a_{24}             & ... \\
-        0.a_{31}             & 0.a_{32}             & \underline{0.a_{33}} & 0.a_{34}             & ... \\
-        0.a_{41}             & 0.a_{42}             & 0.a_{43}             & \underline{0.a_{44}} & ... \\
+        \underline{0.a_{11}} & a_{12}             & a_{13}             & a_{14}             & ... \\
+        0.a_{21}             & \underline{a_{22}} & a_{23}             & a_{24}             & ... \\
+        0.a_{31}             & a_{32}             & \underline{a_{33}} & a_{34}             & ... \\
+        0.a_{41}             & a_{42}             & a_{43}             & \underline{a_{44}} & ... \\
         ...                  & ...                  & ...                  & ...                  & ... \\
     \end{array}
 \]
@@ -750,10 +749,10 @@ rispetto all'insieme dei numeri naturali, allora posso elencare in maniera esaus
 di $\mathbb{N}$, questo elencandone i vettori caratteristici.
 \[
     \begin{array}{ccccc}
-        \underline{0.b_{11}} & 0.b_{12}             & 0.b_{13}             & 0.b_{14}             & ... \\
-        0.b_{21}             & \underline{0.b_{22}} & 0.b_{23}             & 0.b_{24}             & ... \\
-        0.b_{31}             & 0.b_{32}             & \underline{0.b_{33}} & 0.b_{34}             & ... \\
-        0.b_{41}             & 0.b_{42}             & 0.b_{43}             & \underline{0.b_{44}} & ... \\
+        \underline{b_{11}} & b_{12}             & b_{13}             & b_{14}             & ... \\
+        b_{21}             & \underline{0.b_{22}} & b_{23}             & b_{24}             & ... \\
+        b_{31}             & b_{32}             & \underline{0.b_{33}} & b_{34}             & ... \\
+        b_{41}             & b_{42}             & b_{43}             & \underline{b_{44}} & ... \\
         ...                  & ...                  & ...                  & ...                  & ... \\
     \end{array}
 \]
@@ -762,7 +761,7 @@ allora l'insieme delle parti non è un insieme numerabile poiché non è equi-nu
 è possibile procedendo per \textit{diagonalizzazione}, per esempio se considerassi il seguente vettore negato:
 \[
     \begin{array}{ccccc}
-        \overline{b_{01}} & \overline{b_{12}} & \overline{b_{23}} & \overline{b_{34}} & ... \\
+        \overline{b_{11}} & \overline{b_{22}} & \overline{b_{33}} & \overline{b_{44}} & ... \\
     \end{array}
 \]
 riesco a constatare che esso non appartiene alla lista nonostante sia un sottoinsieme di $\mathbb{N}$
@@ -771,10 +770,11 @@ in quanto composto solo da valori booleani.
 $$\mathcal{P}(\mathbb{N})\nsim\mathbb{N}$$
 
 \subsubsection{Insieme $\mathbb{N}^{\mathbb{N}}$}
-Consideriamo l'insieme di tutte le funzioni possibili funzioni che vanno da $\mathbb{N}$ in $\mathbb{N}$.
+Consideriamo l'insieme di tutte le funzioni possibili che vanno da $\mathbb{N}$ in $\mathbb{N}$.
 $$\mathbb{N}^{\mathbb{N}}=\{f:\mathbb{N}\rightarrow\mathbb{N}\}$$
 
-Ipotizzando che $\mathbb{N}^{\mathbb{N}}\sim\mathbb{n}$, consideriamo la seguente tabella dove nella prima
+Ipotizzando che $\mathbb{N}^{\mathbb{N}}$ sia numerabile ($\mathbb{N}^{\mathbb{N}}\sim\mathbb{N}$),
+consideriamo la seguente tabella dove nella prima
 colonna si trova l'elenco esaustivo di tutte le funzioni $\in\mathbb{N}$, e nelle colonne successive tutto
 il dominio completo di $\mathbb{N}$. Significa che per ogni riga sara presente l'insieme dei valori che
 fornisce il grafico di una funzione $f_i$.
@@ -896,7 +896,7 @@ consideriamo la \textbf{forma analitica} di $\langle ,\rangle $.
 Notiamo che per il valore che voglio valutare attraverso la funzione di Cantor passa una diagonale,
 questa diagonale parte dalla colonna $0$ e dalla riga $x+y$ (il punto $\langle x+y,0\rangle $). La funzione
 coppia nell'origine della diagonale assumerà un certo valore, e visto che i numeri sulla
-diagonali incrementano in maniera crescente di una sola unità, allora potrò raggiungere $\langle x,y\rangle $
+diagonale incrementano in maniera crescente di una sola unità, allora potrò raggiungere $\langle x,y\rangle $
 sommando $y$.\\A questo punto il mio problema si riduce a trovare delle coppie particolari ovvero,
 la cui seconda coordinata è $0$, le chiamiamo $\langle z,0\rangle$. Notiamo nella prima colonna
 c'è una correlazione con gli elementi di $x$, e vediamo che l'elemento $i$-esimo della prima
@@ -925,7 +925,7 @@ le coordinate dell'origine della diagonale che passa per $n$, ovvero $\langle\ga
 Considerando la dimostrazione precedente possiamo dire che $y = n-\langle\gamma ,0\rangle$, ovvero
 procedo a ritroso sulla diagonale partendo da $n$ ed andando verso $\langle\gamma ,0\rangle$.\\Allora,
 sapendo che $\gamma=x+y$ posso trovare facilmente le parti destre e sinistre.\\ Il problema principale
-ora è trovare $\gamma$, questo non è altro che l'intero più grande valore tale per cui l'origine
+ora è trovare $\gamma$, questo non è altro che l'intero più grande tale per cui l'origine
 della diagonale sia minore di $n$.
 $$\gamma = \max\{z\in\mathbb{N}:\langle z,0\rangle\leq n\}$$
 Quindi dobbiamo risolvere la disuguaglianza la quale ci darà un range su $n$, all'interno di questo
@@ -945,8 +945,8 @@ $$\text{Andata : }\mathbb{N}^2 \longrightarrow\mathbb{N}^+$$
 
 $$\langle 10,20\rangle = \frac{30\cdot31}{2}+20+1=15\cdot31+21=485+21=486$$
 
-$$\text{Ritorno : }\mathbb{N}^+\longrightarrow\mathbb{N}^2$$
-$$\gamma = \left\lfloor \frac{-1 + \sqrt{8 \cdot 436-7}}{2} \right\rfloor = \lfloor 30.6448\rfloor = 30$$
+$$\text{Ritorno : }\mathbb{N}^+\longrightarrow\mathbb{N}^2$$F
+$$\gamma = \left\lfloor \frac{-1 + \sqrt{8 \cdot 486-7}}{2} \right\rfloor = \lfloor 30.6448\rfloor = 30$$
 $$y=486- \langle 30,0\rangle = 486- \left(\frac{30\cdot31}{2}+1\right)=486-466=20=des(486)$$
 $$x=30-20=10=sin(486)$$
 Adesso noi abbiamo dimostrato che $\mathbb{N}^2\sim\mathbb{N}^+$.
@@ -973,8 +973,14 @@ $$\langle x_1,x_2,...,x_n\rangle = \langle x_1,\langle x_2,\langle ...\langle x_
 $$\textit{codifica }1,2,5\rightarrow\langle 1,2,5\rangle=\langle 1,\langle 2,\langle 5,0\rangle\rangle\rangle=$$
 $$\langle 1,\langle2,16\rangle\rangle=\langle 1,188\rangle=$$
 $$=18144$$
-Per l'operazione di decodifica quello che facciamo è di considerare la codifica della mia lista $M$ (mon il
-risultato ma la lista di coppie incapsulate) come un albero binario. Allora dato questo albero il figlio
+Per l'operazione di decodifica quello che facciamo è di considerare la codifica della mia lista $M$ (non il
+risultato ma la lista di coppie incapsulate) come un albero binario.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/bin.png}
+\end{figure}
+
+Allora dato questo albero il figlio
 sinistro è l'elemento sinistro (la testa della lista) ed il figlio destro è la parte restante della lista,
 allora continuando a considerare il figlio sinistro come una struttura dati lineare ottengo
 la lista codificata, questo attraversamento dell'albero in pre-ordine terminerà quando incontrerà un
@@ -1030,10 +1036,10 @@ int proj(int $t$, int $n$){
 \[incr(t,n)=
     \begin{cases}
         -1                                    & \text{se }t>length(n)\text{ o }t==0                                            \\
-        \langle x_1, ...,x_t+1,...,x_n\rangle & \text{se } 1\leq t\leq length(n)\text{ e }n=\langle x_1,...,x_t,...,x_n\rangle
+        \langle x_1, ...,x_t+1,...,x_n\rangle & \text{se } 1\leq t\leq length(n)\text{ e }n=\langle x_1,...,x_t,...,x_m\rangle
     \end{cases}
 \]
-$decr(t,n)=\text{ come sopra ma con }\langle x_1,...,x_t-1,...,x_m$
+$decr(t,n)=\text{ come sopra ma con }\langle x_1,...,x_t-1,...,x_m\rangle$
 
 \paragraph{Corrispondente numerico : $DATI\sim\mathbb{N}$}\mbox{}\\
 Adesso sappiamo codificare liste di interi, questo ci da un idea del fatto che i dati siano
@@ -1089,9 +1095,9 @@ quindi possiamo codificare la lista o la matrice.
 Abbiamo mostrato effettivamente che grazie alla
 corrispondenza effettiva di $DATI\sim\mathbb{N}$ che i dati possono essere "scartati" e tenuti solamente i
 numeri, questo perché ogni dato può essere rappresentato con un numero naturale, questo
-grazie a delle leggi matematica effettive ed implementabili, che mi
+grazie a delle leggi matematiche effettive ed implementabili, che mi
 permettono di codificare e decodificare il dato.\\Quindi la nostra funzione $f:DATI\rightarrow DATI_{\bot}$
-che rappresenta un qualsiasi problema può essere sostituita da una funzione $f:\mathbb{N}\rightarrow\mathbb{N}_\bot$,
+che rappresenta un qualsiasi problema, può essere sostituita da una funzione $f:\mathbb{N}\rightarrow\mathbb{N}_\bot$,
 ed è questo quello che i nostri calcolatori calcoleranno, quindi possiamo dire che il nostro universo
 dei problemi $DATI^{DATI}_\bot$ non è altro che $\mathbb{N}^{\mathbb{N}}_\bot$
 
@@ -1109,12 +1115,12 @@ Il linguaggio RAM è un \textit{assembly} molto semplificato, per questo motivo 
 calcolabilità è altamente criticabile, poiché il modello potrebbe fare scappare qualcosa
 per via della banalità.
 
-Si introduce un altro modello molto più sofisticato la macchina \textit{while(JVM)}, quello
+Si introduce un altro modello molto più sofisticato la macchina WHILE (\textit{Java Virtual Machine}), quello
 che è calcolabile è effettivamente calcolabile da questo.
 
-Metteremo poi a confronto il modello formale $F(RAM)$ con quello sofisticato $F(while)$. Se
-quest due idee di calcolabilità risultassero diverse allora la cosa è un po'
-pericolosa, perchè l'dea di calcolabilità dipenderebbe dal periodo storico.
+Metteremo poi a confronto il modello formale $F(RAM)$ con quello sofisticato $F(WHILE)$. Se
+queste due idee di calcolabilità risultassero diverse allora la cosa è un po'
+pericolosa, perchè l'idea di calcolabilità dipenderebbe dal periodo storico.
 Se invece due idee così diametralmente opposte risultassero uguali, ovvero che calcolano
 lo stesso insieme di funzioni, allora incomincio a capire che l'idea di calcolabilità è intrinseca
 ai problemi. Ed è questo che ci porterà alla \textbf{tesi di Church} (spoiler).
@@ -1129,7 +1135,7 @@ L'hardware della macchina RAM:
           i numeri naturali arbitrariamente grandi (non hanno una capienza).
           Il registro $R1$ è il registro di input; $R0$ registro di output.
 
-    \item Il \textbf{program counter} $L$, un registro contenente l'indirizzo dell prossima
+    \item Il \textbf{program counter} $L$, un registro contenente l'indirizzo della prossima
           istruzione da eseguire.
 
     \item Un \textbf{programma} $P$, costituito da una  sequenza di istruzioni, un istruzione RAM può essere:
@@ -1149,7 +1155,7 @@ L'hardware della macchina RAM:
 \paragraph{Esecuzione su una macchina RAM}
 \begin{enumerate}
     \item Fase di inizializzazione del programma $P$.
-    \item Si carica il dato $m$ nel registro di output $R_1$.
+    \item Si carica il dato $n$ nel registro di input $R_1$.
     \item Si comincia ad eseguire l'istruzione al posto $1$, e man mano
           il PC continua ad incrementare così da poi eseguire l'istruzione successiva
           (eccetto nel caso in cui non si incontri un istruzione di salto).
@@ -1219,15 +1225,15 @@ Dove $\bot$ mi indica una sequenza infinita di stati in loop.
 \paragraph{Ingredienti della definizione formale della semantica}\mbox{}\\
 \begin{itemize}
     \item \textbf{Stato} di una macchina RAM, è lo stato dei registri di quella macchina.
-          Matematicamente modella to come una funzione che mi restituisce il contenuto
-          del risultato quando la macchine è nello stato $S$
-          $$S:\{L, R_i\}\implies\mathbb{N}$$
+          Matematicamente modellato come una funzione che mi restituisce il contenuto
+          del risultato quando la macchina è nello stato $S$
+          $$S:\{L, R_i\}\rightarrow\mathbb{N}$$
           $$STATI=\mathbb{N}^{\{L,R_i\}}=\{\text{insieme di tutti i possibili stati della macchina}\}$$
           $$S(R_j) = \textit{contenuto di } R_j\text{ durante lo stato } S$$
 
     \item \textbf{Stato finale} della macchina RAM, uno stato tale per cui:$$S(L)=0\implies HALT$$
     \item \textbf{Dato}, rappresentato da $\mathbb{N}$, questo perchè sappiamo che $\mathbb{N}\sim DATI$.
-    \item \textbf{Inizializzazione}, dato il dato $n$ prepara la macchina nell ostato iniziale
+    \item \textbf{Inizializzazione}, dato il dato $n$ prepara la macchina nello stato iniziale
           con input $n$. Quindi sarà una funzione $in$ questa creerà uno stato $S_{init}$ a partire
           da un input $n$:
           $$in:DATI\rightarrow STATI \text{ t.c. } in(n)=S_{init}$$
@@ -1247,7 +1253,7 @@ Dove $\bot$ mi indica una sequenza infinita di stati in loop.
           singolo programma $P\in PROG$, tale per cui la sua cardinalità indica
           il numero di istruzioni contenute $|P| = \#istr$.
     \item \textbf{Esecuzione}, essa mi specifica la dinamica del programma che mi fa
-          passare da uno stato al successivo. Questo è possibile con utilizzando la \textit{funzione
+          passare da uno stato al successivo. Questo è possibile con la \textit{funzione
               stato prossimo} $\delta$. Tale funzione mi permette di spostarmi dallo stato attuale
           $S$ a quello successivo $S'$.
           $$\delta:STATI\times PROG \rightarrow STATI_\bot$$
@@ -1297,14 +1303,14 @@ else
           \[
               \varphi_P(n)=
               \begin{cases}
-                  y    & \parbox[t]{.6\textwidth}{se la computazione del programma termina in con  S(L)=0
+                  y    & \parbox[t]{.6\textwidth}{se la computazione del programma termina in con $S(L)=0$
                   ed il contenuto di $S_m(R_0)=y$}                                                        \\
                   \bot & \text{ se la computazione del programma va in loop}
               \end{cases}
           \]
 \end{itemize}
 Ora posso definire formalmente la potenza computazionale del sistema RAM:
-$$F(RAM)=\{f\in\mathbb{N}^{\mathbb{N}}:\exists P\in PROG,\varphi_P = f\}=\{\varphi_P : P\in PROG\}\nsubseteq\mathbb{N}^{\mathbb{N}}_{\bot}$$
+$$F(RAM)=\{f\in\mathbb{N}^{\mathbb{N}}:\exists P\in PROG,\varphi_P = f\}=\{\varphi_P : P\in PROG\}\subsetneq\mathbb{N}^{\mathbb{N}}_{\bot}$$
 Ovvero tutte le funzioni per cui esiste un programma $P$ tale per cui $\varphi_P = f$ (o $\varphi_P$ al variare di $P$).
 
 \paragraph{Alcuni programmi RAM e le loro funzioni che vengono calcolate}\mbox{}
@@ -1335,7 +1341,7 @@ la potenza computazionale di una macchina RAM, non lasciando nulla al caso.
 \paragraph{Alcune considerazioni}
 \begin{itemize}
     \item $F(RAM)$ \textit{conterrà funzioni più complesse o solo quelle banali?} In realtà
-          si posso fare delle funzioni più complesse, questo comunque è un primo
+          si possono eseguire delle funzioni più complesse, questo comunque è un primo
           tentativo di fare qualcosa di ragionevole che mi permette la completa formalizzazione.
     \item Indubbiamente la semplicità di questo sistema di calcolo ci permette l'estrema
           formalizzazione, tale che vedremo che sarà possibile dimostrare $PROG\sim\mathbb{N}$
@@ -1372,7 +1378,7 @@ Nel caso di un programma RAM significa aritmetizzare tre tipi di istruzioni.
 $$Ar(R_n\leftarrow R_n+1)=3k$$
 $$Ar(R_n\leftarrow R_n-1)=3k+1$$
 $$Ar(\text{If }R_k=0\text{ then goto }m)=3\langle k,m\rangle-1$$
-
+In questa maniera posso sapere da che registro proviene l'istruzione.
 Come è fatta $Ar^{-1}$? La funzione di decodifica è biunivoca ? La funzione
 risulta sia iniettiva che suriettiva, l'applicazione di questa funzione è permessa
 attraverso l'operatore di modulo per $3$.
@@ -1425,7 +1431,7 @@ $$\varphi_{50556496}(n)=0$$
 \paragraph{Sorgente RAM da un numero}\mbox{}\\
 Il numero è il 311, ha come parte sinistra 14 e come parte destra 10. Facendo il modulo 3
 del figlio sinistro otteniamo otteniamo 2, quindi si tratta di un istruzione condizionale,
-in questo caso troviamo che il valore dell coppia di Cantor $\langle k,m\rangle = 5$. Quindi
+in questo caso troviamo che il valore della coppia di Cantor $\langle k,m\rangle = 5$. Quindi
 dobbiamo trovare il figlio sinistro e destri di $5$, che sono entrambi $1$. Quindi
 la prima istruzione sarà:
 $$\text{If }R_1=0\text{ then goto }1$$
@@ -1454,13 +1460,13 @@ altrimenti parto dalla terza istruzione.
           RAM, adesso la posso scrivere come $F(RAM)=\{\varphi_i\}_{i\in\mathbb{N}}$ questo mostra ina maniera inequivocabile che la potenza
           computazionale della macchina RAM è enumerabile.
 
-    \item Per il sistema RAM si ha rigorosamente che $F(RAM)\sim\mathbb{N}\nsim\mathbb{N}^{\mathbb{N}^\mathbb{N}}$,
+    \item Per il sistema RAM si ha rigorosamente che $F(RAM)\sim\mathbb{N}\nsim\mathbb{N}^{\mathbb{N}}$,
 
     \item Questa è una prima idea di calcolabilità, esploriamo un sistema di calcolo $\mathcal{C}$ più complesso
           e vediamo la sua potenza computazionale di questo, e vediamo se è più complessa. Questo va fatto è onestamente
           dire che ciò che è calcolabile sia $F(RAM)$ è troppo restrittivo.
 
-    \item Possiamo avere che questo sistema di clacolo più avanzato ampli l'insieme $F(RAM)$.
+    \item Possiamo avere che questo sistema di calcolo più avanzato ampli l'insieme $F(RAM)$.
 \end{itemize}
 
 \subsubsection{Il sistema di calcolo While}
@@ -1483,7 +1489,10 @@ di variabili.\\Il linguaggio while ha una sintassi induttiva (dove i costrutti d
 sono definiti su delle basi semplici, i mattoni, e man mano costruisco istruzioni più
 complesse):
 \begin{itemize}
-    \item Comando di \textbf{assegnamento}: $x_k:=0 x_k:=x_j+1 x_k:=x_j-1$
+    \item Comando di \textbf{assegnamento}:
+    $$x_k:=0$$
+    $$x_k:=x_j+1$$
+    $$x_k:=x_j-1$$
     \item Comando \textbf{while}: $\text{while }x_k\neq 0\text{ do } G$, dove $G$
           ovvero il corpo del loop, può essere un comando di assegnamento, while o composto.
     \item Comando \textbf{composto}: $\underline{\text{begin }}C_1; C_2; ...;C_m;
@@ -1491,7 +1500,7 @@ complesse):
           di assegnamento, while o composto.
 \end{itemize}
 Come si può vedere sono strutture che sono in grado di nascondere altre strutture, di per sè
-un programma while è un comando composto.\\Indicheremo com $W-PROG=\{\text{programmi WHILE}\}$
+un programma WHILE è un comando composto.\\Indicheremo com $W-PROG=\{\text{programmi WHILE}\}$
 come l'insieme dei programmi WHILE, dove ciascuno è un programma costruito induttivamente.
 
 \paragraph{Esempio di programma WHILE}\mbox{}\\
@@ -1619,11 +1628,11 @@ di un programma WHILE (introducendo anche qui il concetto di stato).
     \item \textbf{Dati}, sono l'insieme dei numeri naturali.
     \item \textbf{Inizializzazione}, sta volta la funzione può essere modellata su 21 elementi, la funzione prende un
           numero e restituisce uno stato
-          $$w-in:\mathbb{N}\rightarrow\mathbb{N}^{21}\text{ con }w-in(n)=(0,n,0,...,0)$$
+          $$W-in:\mathbb{N}\rightarrow\mathbb{N}^{21}\text{ con }W-in(n)=(0,n,0,...,0)$$
     \item \textbf{Semantica operazionale}
-          $$[]():w-com\times w-stati\rightarrow w-stati_\bot$$
+          $$[]():W-COM\times W-STATI\rightarrow W-STATI_\bot$$
           Dato un comando while $C$ e uno stato $\underline{x}$, allora
-          $$[c](\underline{x})=\underline{y}$$
+          $$[C](\underline{x})=\underline{y}$$
           sarà la funzione stato prossimo dove $\underline{y}$ è lo stato prossimo di $\underline{x}$ a seguito
           dall'esecuzione del comando $C$.
           Ovviamente possiamo definire induttivamente $[C](\underline{x})$ sulla struttura induttiva
@@ -1634,7 +1643,7 @@ di un programma WHILE (introducendo anche qui il concetto di stato).
 \begin{itemize}
     \item Base: gli \textbf{assegnamenti}
           \[
-              [x_k=0](\underline{x})=\underline{y}\text{ con }y_i=
+              [x_k:=0](\underline{x})=\underline{y}\text{ con }y_i=
               \begin{cases}
                   x_i & \text{se }i\neq k \\
                   0   & \text{se }i=k
@@ -1642,14 +1651,13 @@ di un programma WHILE (introducendo anche qui il concetto di stato).
           \]
 
           \[
-              [x_k:=x:j \pm 1](\underline{x})=\underline{y}\text{ con }y_i=
+              [x_k:=x_j \pm 1](\underline{x})=\underline{y}\text{ con }y_i=
               \begin{cases}
                   x_i       & \text{se } i\neq k \\
                   x_j \pm 1 & \text{se } i=k
               \end{cases}
           \]
-
-
+Queste sempre considerando l'operatore di $\dot{-}$.
     \item Passo:
           \begin{itemize}
               \item Comando \textbf{composto}
@@ -1657,40 +1665,42 @@ di un programma WHILE (introducendo anche qui il concetto di stato).
                     induttivamente conosco la semantica di ciascuno di questi programmi, come essi agiscono.
                     Allora posso definire la semantica di questo comando come:
 
-                    $$[C_m](\dots([C_2]([C_1](\underline{x})))\dots)=\underline{y}=[C_1]$$
+                    $$[C_m](\dots([C_2]([C_1](\underline{x})))\dots)=\underline{y}=[C_1]\circ \dots\circ [C_m](\underline{x})$$
                     Quindi l'applicazione del primo comando (che provoca cambiamento di stato)
-                    sullo stato iniziale, seguita iterativamente dall'applicazione degli $m$ comandi
+                    sullo stato iniziale, seguita iterativamente dall'applicazione di $m$ comandi
                     sugli stati risultanti.
 
               \item Comando \textbf{while}
-                    $$[\text{while }x_k\neq 0 \text{ do }C](\underline{x})$$, anche qui conosco
-                    per ipotesi induttiva la semantica del comando $C$.
+                    $$[\text{while }x_k\neq 0 \text{ do }C](\underline{x})$$
+                    anche qui conosco per ipotesi induttiva la semantica del comando $C$.
 
-                    $$[C](\dots([C]([C](\underline{x})))\dots)=\underline{y}=[C_1]\text{ e }...\text{ e }[C_m](\underline{x})$$
+                    $$[C](\dots([C]([C](\underline{x})))\dots)=\underline{y}=[C_1]\circ\dots\circ[C_m](\underline{x})$$
                     Il numero di volte che applicherò il comando $C$ quante volte serve per azzerare il contenuto di $x_k$
                     \[
-                        =\begin{cases}
-                            [C]^e(\underline{x}) & \text{con }\mu t \text{ k-esima componente di }[C]^{(t)}(\underline{k})=0 \\
+                        =
+                        \begin{cases}
+                            [C]^e(\underline{x}) & \text{con }e=\mu t :\text{la}\;k\text{-esima componente di }[C]^{(t)}(\underline{k})=0 \\
                             \bot                 & \text{altrimenti}
                         \end{cases}
                     \]
-                    Ovvero il più piccolo numero di volte che mi serve per azzerare la componente $k$-esima, altrimenti
-                    vado in un loop interminabile.
+                    Ovvero il più piccolo numero di volte (la più piccola $t$, dove $t$ è l'iterazione) che mi serve
+                    per azzerare la componente $k$-esima, altrimenti vado in un loop interminabile.
           \end{itemize}
-
-    \item Semantica di $W$ e $W-PROG$: a questo punto so definire in maniera formale la semantica
-          di un programma while, prendiamo il programma while $w$ (il quale è un comando composto).
-
-          Quindi è la semantica del comando composto che rappresenta $w$, quindi non è altro che preparare
-          la macchina su input $x$.
-
-          $$\Psi_w(x)=Pro(0,[w](w-in(x)))$$
-          Ovvero la proiezione 0-esima dell'esecuzione del comando composto di $w$ dato uno stato finale $x$ (avviato
-          da uno stato iniziale),
-          significa che se il programma termina devo pescare il contenuto di $x_0$ (la proiezione di uno stato finale
-          di un programma $w$).
-          Nel caso in cui non avvenisse l'HALT allora avrò una semantica indefinita $\bot$.
 \end{itemize}
+
+\paragraph{Semantica di $W$ e $W-PROG$}\mbox{}\\
+A questo punto so definire in maniera formale la semantica
+di un programma while, prendiamo il programma WHILE $w$ (il quale è un comando composto).
+
+Quindi è la semantica del comando composto che rappresenta $w$, quindi non è altro che preparare
+la macchina su input $x$.
+
+$$\Psi_w(x)=Pro(0,[w](W-in(x)))$$
+Ovvero la proiezione $0$-esima dell'esecuzione del comando composto di $w$ dato uno stato finale $x$ (avviato
+da uno stato iniziale),
+significa che se il programma termina devo pescare il contenuto di $x_0$ (la proiezione di uno stato finale
+di un programma $w$).
+Nel caso in cui non avvenisse l'HALT allora avrò una semantica indefinita $\bot$.
 
 \paragraph{Esempio di semantica di un piccolo programma while}\mbox{}\\
 \begin{figure}[H]
@@ -1705,16 +1715,17 @@ di un programma WHILE (introducendo anche qui il concetto di stato).
     \caption{Deduzione della semantica $\Psi_w$}
 \end{figure}
 
-\paragraph{Potenza computazionale del sistema while}\mbox{}\\
-$$F(WHILE)=\{f\in\mathbb{N}_\bot^\mathbb{N} : \exists w\in w-PROG, f=\Psi_w\}=\{\Psi_w : w\in w-PROG\}$$
+\paragraph{Potenza computazionale del sistema WHILE}\mbox{}\\
+$$F(WHILE)=\{f\in\mathbb{N}_\bot^\mathbb{N} : \exists w\in W-PROG, f=\Psi_w\}=\{\Psi_w : w\in W-PROG\}$$
 Definiamo la potenza computazionale di
-una macchina while come l'insieme di tutte le funzioni per cui
-esiste un programma while per cui si può calcolare quella funzione.Naturalmente la domanda è: \textit{che relazione esiste tra $F(RAM)$ e -$F(WHILE)$?}, quindi
+una macchina WHILE come l'insieme di tutte le funzioni per cui
+esiste un programma WHILE per cui si può calcolare quella funzione.
+Naturalmente la domanda è: \textit{che relazione esiste tra $F(RAM)$ e -$F(WHILE)$?}, quindi
 che cosa è calcolabile di questi due sistemi? $\{\varphi_P:P\in PROG\}$?
 Magari la macchina WHILE mi fornisce più potenza della macchina RAM? L'unico modo di scoprirlo
 è confrontando le due idee. Quali situazioni si possono verificare:
 \begin{enumerate}
-    \item Una situazione dove $F(RAM)\nsubseteq F(WHILE)$ (inclusione propria) ovvero, che ci sono funzioni
+    \item Una situazione dove $F(RAM)\subsetneq F(WHILE)$ (inclusione propria) ovvero, che ci sono funzioni
           calcolabili con i programmi WHILE che non sono calcolabili sulle macchine RAM.
 
     \item Le due idee di calcolabilità non sono confrontabili, ovvero un intersezione tra i due insiemi
@@ -1722,12 +1733,12 @@ Magari la macchina WHILE mi fornisce più potenza della macchina RAM? L'unico mo
           totalmente disgiunti. In entrambi i casi siamo preoccupati, perché l'idea di calcolabilità è dipendente
           dal modello di calcolo adottato.
 
-    \item Una situazione dove $F(WHILE)\nsubseteq F(RAM)$ questo sarebbe sorprendente, la macchina
+    \item Una situazione dove $F(WHILE)\subsetneq F(RAM)$ questo sarebbe sorprendente, la macchina
           sofisticata non riesce a calcolare delle funzioni più semplici.
 
     \item Una situazione dove $F(WHILE)=F(RAM)$, ovvero due cose filosoficamente diverse eppure entrambe
           riescono a calcolare la stessa classe di funzioni, questo sarebbe molto interessante, perché allora
-          vuol dire che calcolabile non dipende dalla tecnologia-
+          vuol dire che calcolabile non dipende dalla tecnologia.
 \end{enumerate}
 Adesso dobbiamo cercare di capire quali tra i seguenti punti è quello veritiero.
 
@@ -1735,17 +1746,19 @@ Adesso dobbiamo cercare di capire quali tra i seguenti punti è quello veritiero
 Iniziamo con il confrontare $F(RAM)$ e $F(WHILE)$ introducendo due sistemi di calcolo $\mathcal{C}_1$ e $\mathcal{C}_2$
 con i loro relativi linguaggi di programmazione. Attraverso i quali riusciamo a scrivere l'insieme dei
 programmi scritti con i relativi linguaggi $\mathcal{C}_1-PROG$ e $\mathcal{C}_2-PROG$. Le relative
-potenze computazioneli
+potenze computazionali:
 
-$$F(\mathcal{C}_1)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\Psi_{P_1}\text{ per qualche }P_1\in\mathcal{C}_1-PROG\}=\{\Psi_{P_1}:P_1\in\mathcal{C}_1-PROG\}$$
-$$F(\mathcal{C}_2)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\Psi_{P_2}\text{ per qualche }P_2\in\mathcal{C}_2-PROG\}=\{\Psi_{P_2}:P_2\in\mathcal{C}_2-PROG\}$$
+$$F(\mathcal{C}_1)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\Psi_{P_1}\text{ per qualche }P_1\in\mathcal{C}_1-PROG\}=$$
+$$=\{\Psi_{P_1}:P_1\in\mathcal{C}_1-PROG\}$$
+$$F(\mathcal{C}_2)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\varphi_{P_2}\text{ per qualche }P_2\in\mathcal{C}_2-PROG\}=$$
+$$=\{\varphi_{P_2}:P_2\in\mathcal{C}_2-PROG\}$$
 Cominciamo a cercare degli strumenti per confrontare le potenze computazionali. Come faccio a dimostrare
-$F(\mathcal{C}_2)\subseteq F(\mathcal{C}_2)$
+$F(\mathcal{C}_1)\subseteq F(\mathcal{C}_2)$
 Per dimostrare che tale inclusione sia vera, mi basta dimostrare che un elemento di un insieme appartenga
 all'altro, in linguaggio matematico:
 $$\forall f\in F(\mathcal{C}_1)\implies f\in F(\mathcal{C}_2)$$
 Quando stiamo compilando un programma quello che stiamo dimostrando è che il linguaggio utilizzato
-come sorgente è potente uguale al linguaggio macchina/oggetto.
+come sorgente è potente uguale al linguaggio macchina (o oggetto).
 $$\exists P_1\in\mathcal{C}_1-PROG : f=\Psi_{P_1}\implies\exists P_2\in\mathcal{C}_2-PROG:f=\varphi_{P_2}$$
 Ovvero vuol dire che esiste un programma $P_1$ tale per cui ne esiste uno equivalente nel secondo
 sistema (allora ho dimostrato che tutto ciò che è fattibile in $\mathcal{C}_1$ è fattibile in $\mathcal{C}_2$,
@@ -3778,14 +3791,14 @@ infatti:
 
 \begin{itemize}
     \item $A\subseteq B: x\in A=Dom_{\varphi_P}\implies$ il programma $P$
-    su input $x$ termina, e se termina terminerà in un certo numero $y$ di passi.
-    Quindi $(x,y)\in R_P \implies$ ho dimostrato che $x\in B$.
+          su input $x$ termina, e se termina terminerà in un certo numero $y$ di passi.
+          Quindi $(x,y)\in R_P \implies$ ho dimostrato che $x\in B$.
 
     \item $B\subseteq A: x\in B\implies (x,y)\in R_P$, deve esistere un certo $y$ per cui
-    sia in relazione con $x$ per $R_P$, ma questo vuol dire che il programma $P$
-    su input $x$ termina in $y$ passi. Quindi, $\varphi_P(x)\downarrow\implies x\in Dom_{\varphi_P}\implies x\in A$,
-    la semantica su input $x$ è definita e quindi $x$ appartiene al dominio della semantica del programma (quindi
-    $x\in A$).
+          sia in relazione con $x$ per $R_P$, ma questo vuol dire che il programma $P$
+          su input $x$ termina in $y$ passi. Quindi, $\varphi_P(x)\downarrow\implies x\in Dom_{\varphi_P}\implies x\in A$,
+          la semantica su input $x$ è definita e quindi $x$ appartiene al dominio della semantica del programma (quindi
+          $x\in A$).
 \end{itemize}
 In conclusione abbiamo dimostrato che $A=B=\{x|\exists y(x,y)\in R_P\}$ con $R_P$ relazione ricorsiva.
 
@@ -3798,8 +3811,8 @@ Assumiamo che $A\neq\emptyset$ e scegliamo $a\in A$. Definiamo la funzione $t:\m
 \[
     t(n)=
     \begin{cases}
-        sin(n) & (sin(n), des(n))\in R\\
-        a & \text{altrimenti}
+        sin(n) & (sin(n), des(n))\in R \\
+        a      & \text{altrimenti}
     \end{cases}
 \]
 questa funzione considera $n$ come una codifica di una coppia di Cantor. Se la parte sinistra e destra di $n$
@@ -3816,10 +3829,10 @@ Voglio dimostrare che l'immagine di questa funzione sia $A$:
 \begin{itemize}
     \item $A\subseteq Im_t:x\in A\implies (x,y)\in R\implies t(\langle x,y\rangle)=x\implies x\in Im_t$
     \item $Im_t\subseteq A: x\in Im_t\implies x=a\in A$ oppure $x=sin(n)$ con $n=\langle x,y\rangle$
-    per qualche $y$ t.c. $(x,y)\in R\implies x\in A$.
-    significa che che nel caso in cui $x$ non appartenga all'immagine di $t$, allora $x$ sarà la parte sinistra di qualche cosa, dove $n$ è la condensazione di una coppia di numeri,
-    vuol dire che esiste un $y$ che sta in relazione $R$ con $x$, che è in grado di fare tornare la proprietà
-    base di $A$, e quindi $x\in A$.
+          per qualche $y$ t.c. $(x,y)\in R\implies x\in A$.
+          significa che che nel caso in cui $x$ non appartenga all'immagine di $t$, allora $x$ sarà la parte sinistra di qualche cosa, dove $n$ è la condensazione di una coppia di numeri,
+          vuol dire che esiste un $y$ che sta in relazione $R$ con $x$, che è in grado di fare tornare la proprietà
+          base di $A$, e quindi $x\in A$.
 \end{itemize}
 in conclusione $A=Im_{t\in\mathcal{T}}$
 
@@ -3830,14 +3843,14 @@ di una funzione ricorsiva parziale. \textit{Perché} basta utilizzare questa seq
 \begin{enumerate}
     \item Scrivere un programma che lo riconosce parzialmente (che da 1 o $\bot$ se $X\in A$).
     \item Il dominio di questa funzione è esattamente $A$, e siccome questa funzione è implementata
-    da un programma essa è ricorsiva parziale.
-    \[
-        \varphi_P(x)=
-        \begin{cases}
-            1 & x\in A\\
-            \bot & x\notin A
-        \end{cases}
-    \]
+          da un programma essa è ricorsiva parziale.
+          \[
+              \varphi_P(x)=
+              \begin{cases}
+                  1    & x\in A    \\
+                  \bot & x\notin A
+              \end{cases}
+          \]
     \item Chiaramente $\varphi_P\in\mathcal{P}$ e $A=Dom_{\varphi_P}$
     \item $A$ è ricorsivamente numerabile per 2.
 \end{enumerate}
@@ -3859,7 +3872,7 @@ La semantica sarà:
 \[
     \varphi_P(x)=
     \begin{cases}
-        1 & \varphi_U(x,x)=\varphi_x(x)\downarrow\\
+        1 & \varphi_U(x,x)=\varphi_x(x)\downarrow \\
         0 & \text{altrimenti}
     \end{cases}
 \]
@@ -3880,8 +3893,8 @@ abbiamo anche dimostrato che questa relazione è ricorsiva, e quindi potrei anch
 \subsubsection{Ricorsivi vs Ricorsivi enumerabili}
 Abbiamo introdotto due grandi classi di insiemi, abbiamo da una parte gli insiemi ricorsivi e dall'altra
 quella dei ricorsivi enumerabili. Vogliamo capire la relazione fra queste due classi, \textit{gli
-insiemi ricorsivi sono totalmente disgiunti da gli insiemi ricorsivamente enumerabili o hanno
-qualche intersezione?}
+    insiemi ricorsivi sono totalmente disgiunti da gli insiemi ricorsivamente enumerabili o hanno
+    qualche intersezione?}
 
 Ogni insieme ricorsivo è anche un insieme ricorsivamente numerabile.
 \paragraph{Teorema}\mbox{}\\
@@ -3900,8 +3913,8 @@ il significa di questo programma è il seguente:
 \[
     \varphi_P(x)=
     \begin{cases}
-        1 & x\in A\\
-        \bot &x\notin A
+        1    & x\in A    \\
+        \bot & x\notin A
     \end{cases}
 \]
 
@@ -3912,18 +3925,18 @@ classe degli insiemi ricorsivamente numerabili.
     \includegraphics[scale=0.6]{images/ric_ricenum.png}
 \end{figure}
 \textit{Ma questa è un inclusione
-propria o meno?}
+    propria o meno?}
 $$A=\{x\in\mathbb{N}:\varphi_x(x)\downarrow\}$$
 Ho dimostrato che è ricorsivamente numerabili ma non è ricorsivo, quindi i ricorsivi
 sono inclusi propriamente nei ricorsivi numerabili.
 $$Ricorsivi \subset Ricorsivi\;Numerabili$$
 
 Per completare la classificazione degli insiemi ci si domanda: \textit{è presente
-qualcosa al di fuori di questo mondo?} Ovvero degli insiemi talmente difficili
+    qualcosa al di fuori di questo mondo?} Ovvero degli insiemi talmente difficili
 che non riesco a realizzare degli algoritmi di parziale decisione?
 $$A^c=\{x\in\mathbb{N}:\varphi_x(x)\uparrow\}?$$
 Prendo il complemento di questo insieme, tale per cui il programma non termina, \textit{dove
-potrei posizionarlo questo insieme complemento?}
+    potrei posizionarlo questo insieme complemento?}
 
 Si può dimostrare il seguente \textbf{teorema}: la classe degli insiemi ricorsivi è un Algebra di Boole,
 vuol dire che è una classe chiusa per le operazioni di complemento, intersezione e unione. Quindi
@@ -3971,7 +3984,7 @@ Ma $(A^c)^c=A$, ma $A$ sappiamo che non è ricorsivo e questo mi porta ad un ass
 Ho dimostrato che $A$ è ricorsivamente numerabile, ma non è ricorsivo:
 $$A=\{x:\varphi_x(x)\downarrow\}$$
 e che il suo complemento non è ricorsivo. \textit{Potrebbe essere ricorsivamente
-numerabili?}
+    numerabili?}
 $$A^c=\{x:\varphi_x(x)\uparrow\}$$
 Ho perfettamente caratterizzato $A$ però siccome $A$ è ricorsivamente numerabili,
 magari il suo complemento potrebbe esserlo.
@@ -3991,19 +4004,19 @@ un elenco telefonico, dove ogni pagina ha presente un elemento dell'insieme.
 Il teorema dice che $A$ è ricorsivo numerabile, e lo stesso per $A^c$. Quindi abbiamo
 due elenchi telefonici. Io devo gestire questi due elenchi in maniera da decidere
 se uno di questi due elementi appartiene o meno ad $A$. \textit{Come sfogliare
-questi due libri per decidere l'appartenenza ad $A$?} Se io controllo ogni elemento
+    questi due libri per decidere l'appartenenza ad $A$?} Se io controllo ogni elemento
 di $x$ per verificare l'appartenenza all'insieme rischio di andare in loop, devo
 adoperare una tecnica che mi permetta di fermarmi. Come soluzione basterebbe sfogliare
 un numero finito di pagine \textbf{per volta} in tutti e due gli elenchi.
 \begin{enumerate}
     \item Apri di due libri alla prima pagina.
     \item Se $x$ compare sul libro di $A$ stampa 1. Se $x$ compare sul libro di $A^c$
-    stampa 0. Se $x$ non compare su alcuno dei due libri volta la pagina di ogni libro
-    e ripeti il passo 2.
+          stampa 0. Se $x$ non compare su alcuno dei due libri volta la pagina di ogni libro
+          e ripeti il passo 2.
 \end{enumerate}
 Quindi sfogliare gli elementi non in maniera esclusiva, così da evitare di andare
 in loop su un solo elenco. \textit{Perché sono sicuro che questo algoritmo non
-andrà in loop?} Questo perchè un elemento appartiene ad $A$ o ad $A^c$, quindi
+    andrà in loop?} Questo perchè un elemento appartiene ad $A$ o ad $A^c$, quindi
 è ovvio che se ho un elemento in input esso comparirà in uno dei due elenchi (l'unione
 genera l'intero universo delle possibilità).
 Quindi ho un algoritmo che sfruttando questi due libri mi permette di riconoscere
@@ -4030,9 +4043,9 @@ di riconoscimento ha quell'insieme $A$:
 \begin{itemize}
     \item Se $A$ non è ricorsivo, potrebbe essere ricorsivamente numerabile.
     \item Se non riesco a mostrarlo, prova a studiare $A^c$, magari il suo complemento
-    è più gestibile e riesco a dimostrare che è ricorsivamente numerabile.
+          è più gestibile e riesco a dimostrare che è ricorsivamente numerabile.
     \item Se $A^c$ è ricorsivamente numerabile allora per il teorema possiamo concludere che
-    $A$ non è ricorsivamente numerabile.
+          $A$ non è ricorsivamente numerabile.
 \end{itemize}
 Con questo approccio si ottiene che $A^c\{x:\varphi_x(x)\uparrow\}$ non è ricorsivamente
 numerabile.
@@ -4069,10 +4082,10 @@ per la semantica:
 \[
     \varphi_{P'}(x)=
     \begin{cases}
-        1 & x\in A\cup B\\
-        \bot &\text{altrimenti}
+        1    & x\in A\cup B      \\
+        \bot & \text{altrimenti}
     \end{cases}
-    \]
+\]
 $$A\cap B = Dom_{\varphi_{P'}\in\mathcal{P}}$$
 Inizio a sfogliare il primo libro, se non esco da quel libro vuol dire che quell'elemento
 non appartiene ad $A$, e quindi non è presente intersezione. Quindi deve uscire "indenne"
@@ -4085,7 +4098,7 @@ da questi due cicli che sfogliano gli elenchi (dove indenne si intende senza and
 \[
     \varphi_{p''}(x)=
     \begin{cases}
-        1 & x\in A\cup B\\
+        1    & x\in A\cup B      \\
         \bot & \text{altrimenti}
     \end{cases}
 \]
@@ -4140,16 +4153,16 @@ Allora definisco la funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ come:
 \[
     t(n)=
     \begin{cases}
-        \overline{a} & n\in I\\
-        a & n\notin I
+        \overline{a} & n\in I    \\
+        a            & n\notin I
     \end{cases}
 \]
 In termini di calcolabilità possiamo dire che la funzione $t$ è programmabile,
 io sto partendo dall'assunto che $I$ sia ricorsivo, ovviamente posso scrivere un
 programma che calcola la funzione $t$, quindi $t\in\mathcal{T}$.
 \begin{figure}[H]
-   \centering
-   \includegraphics[scale=0.6]{images/appartenenza.png}
+    \centering
+    \includegraphics[scale=0.6]{images/appartenenza.png}
     \caption{Programma della funzione $f$}
 \end{figure}
 pensando al \textbf{teorema di ricorsione} siamo d'accordo che abbiamo un elemento $d\in\mathbb{N}$
@@ -4158,10 +4171,10 @@ $$\varphi_d=\varphi_{t(d)}$$
 per questo $d\in\mathbb{N}$ ho due possibilità:
 \begin{itemize}
     \item $d\in I$: poiché $I$ rispetta le funzioni e $\varphi_d=varphi_{t(d)}$ allora deve
-    essere che $t(d)\in I$. Ma $t(d)=\overline{a}\notin I$. Questa è una contraddizione.
+          essere che $t(d)\in I$. Ma $t(d)=\overline{a}\notin I$. Questa è una contraddizione.
 
     \item $d\notin I$: in tal caso $t(d)=a\in I$ ma siccome $I$ rispetta le funzioni
-    $\varphi_d=\varphi_{t(d)}$ allora deve essere $d\in I$. Questa è un altra contraddizione.
+          $\varphi_d=\varphi_{t(d)}$ allora deve essere $d\in I$. Questa è un altra contraddizione.
 \end{itemize}
 Il fatto di aver assunto che $I$ sia ricorsivo mi porta ad una contraddizione, e quindi il
 teorema di Rice vale.
@@ -4171,7 +4184,7 @@ Esistono tre tappe per dimostrare che un insieme $A$ non sia ricorsivo, Rice ci 
     \item Dimostrare che $A$ rispetta le funzioni.
     \item Dimostrare che $A=\emptyset$ e $A=\mathbb{N}$, ovvero che non sia un insieme banale.
     \item Se ottenuti i punti precedenti allora grazie al teorema di Rice si può concludere che
-    $A$ non è ricorsivo.
+          $A$ non è ricorsivo.
 \end{enumerate}
 
 \paragraph{Esempio di insieme non ricorsivo}\mbox{}\\
@@ -4179,11 +4192,11 @@ $$A=\{x\in\mathbb{N}:\varphi_x(3)=5\}\text{ è ricorsivo?}$$
 
 \begin{enumerate}
     \item L'insieme $A$ rispetta le funzioni (esempio già dimostrato).
-    $$a\in A\land \varphi_a=\varphi_b$$
-    $$\varphi_a(3)=5\;\;\varphi_b(3)=5\implies b\in A$$
+          $$a\in A\land \varphi_a=\varphi_b$$
+          $$\varphi_a(3)=5\;\;\varphi_b(3)=5\implies b\in A$$
     \item Dimostrare che l'insieme è diverso dall'insieme vuoto e da $\mathbb{N}$.
-    $A\neq\emptyset$: il programma che stampa 5 su ogni input $\in A$.
-    $A\neq\mathbb{N}$: il programma che stampa 2 su ogni input $\notin A$.
+          $A\neq\emptyset$: il programma che stampa 5 su ogni input $\in A$.
+          $A\neq\mathbb{N}$: il programma che stampa 2 su ogni input $\notin A$.
     \item Allora il teorema di Rice mi dice che $A$ non è ricorsivo.
 \end{enumerate}
 dal punto di vista informatico significa che non esiste uno strumento diagnostico
@@ -4235,12 +4248,12 @@ teorema di Rice per cosa si intende un programma).
 
 \section{Teoria della complessità}
 La teoria della calcolabilità risponde alla domanda: \textit{posso
-scrivere un programma per il problema $P$?}
+    scrivere un programma per il problema $P$?}
 Invece la teoria della complessità risponde alla domanda: \textit{come
-funzionano i programmi per $P$?}
+    funzionano i programmi per $P$?}
 O meglio \textit{quante risorse computazionali impieghiamo
-in un programma per la risoluzione
-del problema $P$?}
+    in un programma per la risoluzione
+    del problema $P$?}
 
 Una risorsa computazionale è una qualsiasi cosa che venga consumata
 durante la risoluzione automatica dei problemi.
@@ -4250,7 +4263,7 @@ durante la risoluzione automatica dei problemi.
     \item Features particolari di in un sistema quantistico.
     \item $\dots$
     \item In un sistema classico (mono processore, architettura di Von Neumann) sono presenti due
-    grandezze sempre presenti: il tempo di esecuzione e lo spazio.
+          grandezze sempre presenti: il tempo di esecuzione e lo spazio.
 \end{itemize}
 La più importante è il tempo di esecuzione in qualsiasi sistema, la seconda
 importante è lo spazio ovvero quanta memoria occupa durante l'esecuzione di un programma.
@@ -4262,22 +4275,22 @@ da un punto di vista di consumo di risorse computazionali.
 \paragraph{Alcune domande nella teoria della complessità}\mbox{}\\
 \begin{itemize}
     \item Dato un programma per il problema $P$, quanto tempo impiega
-    il programma nella soluzione? Quanto spazio in memoria occupa?
+          il programma nella soluzione? Quanto spazio in memoria occupa?
 
     \item Dato un problema $P$, qual'è il minimo tempo per
-    un programma che risolve $P$? Quanto spazio in memoria
-    al minimo occuperanno i programmi per $P$?
+          un programma che risolve $P$? Quanto spazio in memoria
+          al minimo occuperanno i programmi per $P$?
 
     \item In che modo posso dire che un problema è efficientemente
-    risolto in termini di tempo e/o spazio?
+          risolto in termini di tempo e/o spazio?
 
     \item Quali problemi possono essere efficientemente risolti per
-    via automatica? (qui si vede la distanza con la teoria della
-    calcolabilità, nella quale si cercava di caratterizzare
-    quali problemi fossero risolubili, qua sto cercando di caratterizzare
-    quali problemi sono efficientemente risolubili per via automatica,
-    possiamo vedere come una versione "quantitativa" della tesi di
-    Church-Turing).
+          via automatica? (qui si vede la distanza con la teoria della
+          calcolabilità, nella quale si cercava di caratterizzare
+          quali problemi fossero risolubili, qua sto cercando di caratterizzare
+          quali problemi sono efficientemente risolubili per via automatica,
+          possiamo vedere come una versione "quantitativa" della tesi di
+          Church-Turing).
 \end{itemize}
 
 \subsection{Risorse computazionali}
@@ -4297,9 +4310,9 @@ e quindi consente l'uso di strumenti matematici per:
 \begin{itemize}
     \item Misurare il consumo di tempo e spazio di calcolo.
     \item Definire il concetto di efficienza sia in termini di tempo
-    che di spazio.
+          che di spazio.
     \item Caratterizzare i problemi che hanno soluzione automaticamente
-    efficiente (Una variante della tesi di Church-Turing "ristretta").
+          efficiente (Una variante della tesi di Church-Turing "ristretta").
 \end{itemize}
 Il nostro punto di partenza sarà l'introduzione di questo modello di calcolo
 che introduce tutto ciò che ci serve per la definizione di tutto ciò che
@@ -4308,22 +4321,22 @@ ci serve per indagare nella teoria della complessità.
 \subsubsection{Richiami di teoria di linguaggi formali}
 \begin{itemize}
     \item Alfabeto: un insieme finito di oggetti che si chiamano simboli.
-    $$\Sigma=\{\sigma_1,\dots,\sigma_k\}$$
-    $\Sigma=\{0\}$
+          $$\Sigma=\{\sigma_1,\dots,\sigma_k\}$$
+          $\Sigma=\{0\}$
     \item Stringa su $\Sigma$: è una giusta apposizione di simboli $x_i\in\Sigma$.
-    L'$i$-esimo simbolo della stringa $x$ viene indicato con $x_i$, poiché composta:
-    $$x=x_1,\dots,x_n$$
-\item Lunghezza della stringa $|x|$
-\item Stringa nulla $\epsilon$ tale per cui $|\epsilon|=0$
-\item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^*$ (nella quale è compresa anche $\epsilon$).
-\item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^+$ (senza la stringa nulla).
-\item Linguaggio $L$ costruito su $\Sigma$: un insieme di stringhe che soddisfa una certa proprietà,
-quindi un linguaggio è un qualunque sottoinsieme delle stringhe costruibili sull'alfabeto:
-$$L\subseteq\Sigma^*$$
-esempio $L=\{x\in\Sigma^*:|x|\leq 5\}$, linguaggio composto da stringhe minori o uguali di 5.
-$$|L|=\sum_{i=0}^5|\Sigma|^i=\frac{{|\Sigma|}^6}{|\Sigma|-1}$$
-un altro esempio è il linguaggio dei numeri pari:
-$$L_{PARI}=\{0\} \cup \{x\in\{0,1\}^+ : x_i=1 \land x_{|x|}=0\} \implies\text{linguaggio infinito}$$
+          L'$i$-esimo simbolo della stringa $x$ viene indicato con $x_i$, poiché composta:
+          $$x=x_1,\dots,x_n$$
+    \item Lunghezza della stringa $|x|$
+    \item Stringa nulla $\epsilon$ tale per cui $|\epsilon|=0$
+    \item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^*$ (nella quale è compresa anche $\epsilon$).
+    \item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^+$ (senza la stringa nulla).
+    \item Linguaggio $L$ costruito su $\Sigma$: un insieme di stringhe che soddisfa una certa proprietà,
+          quindi un linguaggio è un qualunque sottoinsieme delle stringhe costruibili sull'alfabeto:
+          $$L\subseteq\Sigma^*$$
+          esempio $L=\{x\in\Sigma^*:|x|\leq 5\}$, linguaggio composto da stringhe minori o uguali di 5.
+          $$|L|=\sum_{i=0}^5|\Sigma|^i=\frac{{|\Sigma|}^6}{|\Sigma|-1}$$
+          un altro esempio è il linguaggio dei numeri pari:
+          $$L_{PARI}=\{0\} \cup \{x\in\{0,1\}^+ : x_i=1 \land x_{|x|}=0\} \implies\text{linguaggio infinito}$$
 \end{itemize}
 
 \subsection{Macchina di Turing (DTM)}
@@ -4336,27 +4349,27 @@ Una macchina di Turing ha un hardware molto semplice composto da:
 
 \begin{itemize}
     \item Un \textbf{nastro} per lettura e scrittura di lunghezza infinita il quale è costituito
-    da una sequenza infinita verso destra di celle, ogni cella può contenere un simbolo $x_n\in\Sigma$ ed
-    ha un proprio indirizzo definito da $n$. Le macchine di Turing servono a contenere gli input
-    che si danno in pasto alla macchina di turing, ma anche come memoria dove leggo/elaboro/scrivo
-    informazioni, le DTM elaborano stringhe, che vengono fornite in maniera ordinata
-    sul nastro (il simbolo di blank viene utilizzato per i simboli non presenti nella stringa).
+          da una sequenza infinita verso destra di celle, ogni cella può contenere un simbolo $x_n\in\Sigma$ ed
+          ha un proprio indirizzo definito da $n$. Le macchine di Turing servono a contenere gli input
+          che si danno in pasto alla macchina di turing, ma anche come memoria dove leggo/elaboro/scrivo
+          informazioni, le DTM elaborano stringhe, che vengono fornite in maniera ordinata
+          sul nastro (il simbolo di blank viene utilizzato per i simboli non presenti nella stringa).
 
     \item \textbf{Testina di lettura/scrittura} che può muoversi avanti ed indietro di una posizione (two-way),
-    la quale è in grado di leggere o scrivere un carattere.
+          la quale è in grado di leggere o scrivere un carattere.
     \item \textbf{Controllo a stati finiti} connesso alla testina, il quale è un dispositivo che può trovarsi
-    in un insieme finito di situazione che chiamo stati, i quali fanno parte di un insieme finito di simboli
-    detti simboli di stato.
-    $$Q=\{Q_0,\dots,Q_8\}$$
+          in un insieme finito di situazione che chiamo stati, i quali fanno parte di un insieme finito di simboli
+          detti simboli di stato.
+          $$Q=\{Q_0,\dots,Q_8\}$$
 \end{itemize}
 
 \subsubsection{Passo di computazione: mossa}
 Una mossa è una regola che soddisfatte le premesse:
 \begin{itemize}
     \item se ti trovi in uno stato (unità di
-controllo a stati finiti).
-\item e se stai leggendo un
-certo simbolo (testina posizionata)
+          controllo a stati finiti).
+    \item e se stai leggendo un
+          certo simbolo (testina posizionata)
 \end{itemize}
 allora una mossa fornisce in output:
 \begin{itemize}
@@ -4371,7 +4384,7 @@ macchina di Turing, le quali definiscono le mosse.
 Computazione di $M$ su input $x\in\Sigma^*$ (informalmente):
 \begin{enumerate}
     \item Inizializzazione: la stringa $x$ viene depositata carattere per carattere nel
-    nastro della macchina di Turing, il resto del nastro contiene il simbolo di blank.
+          nastro della macchina di Turing, il resto del nastro contiene il simbolo di blank.
     \item La testina viene posizionata sul primo carattere della cella data in input.
     \item Il controllo a stati finiti è posto nello stato iniziale.
 \end{enumerate}
@@ -4401,16 +4414,16 @@ Definita da una sestupla, dove:
     \item $F\subseteq Q$ \textbf{stati finali} dove $M$ si arresta accettando l'input.
     \item $\Sigma$ \textbf{alfabeto di input}
     \item $\Gamma$ \textbf{alfabeto di lavoro}, tutti i possibili simboli che posso leggere
-    o scrivere sul nastro di lavoro. Sul nastro di lavoro non è detto che posso trovare
-    solo simboli di input, li posso elaborare e scriverne altri. Per questo $\Gamma$ estende
-    $\Sigma$, $\Gamma\supset\Sigma$ poiché contiene il simbolo speciale \textit{blank}.
+          o scrivere sul nastro di lavoro. Sul nastro di lavoro non è detto che posso trovare
+          solo simboli di input, li posso elaborare e scriverne altri. Per questo $\Gamma$ estende
+          $\Sigma$, $\Gamma\supset\Sigma$ poiché contiene il simbolo speciale \textit{blank}.
     \item $\delta:Q\times\Gamma\rightarrow Q\times(\Gamma\setminus\{blank\})\times\{-1,0,+1\}$
-    \textbf{funzione di transizione} che definisce le mosse. Una funzione che prende uno stato ed
-    un simbolo letto e restituisce uno stato, un simbolo sul nastro di lavoro (la nostra DTM non
-    puù "sbiancare" le celle, può solo leggere \textit{blank} e non scriverlo), quanto e come muovere la testina. Questa funzione di transizione
-    è parziale, non è definita per tutti i $Q$ e tutti i $\Gamma$, se noi arriviamo in un punto
-    in cui la funzione di transizione è definita, allora per convenzione diciamo che la macchina
-    si arresta.
+          \textbf{funzione di transizione} che definisce le mosse. Una funzione che prende uno stato ed
+          un simbolo letto e restituisce uno stato, un simbolo sul nastro di lavoro (la nostra DTM non
+          puù "sbiancare" le celle, può solo leggere \textit{blank} e non scriverlo), quanto e come muovere la testina. Questa funzione di transizione
+          è parziale, non è definita per tutti i $Q$ e tutti i $\Gamma$, se noi arriviamo in un punto
+          in cui la funzione di transizione è definita, allora per convenzione diciamo che la macchina
+          si arresta.
 \end{itemize}
 
 \subsubsection{Funzionamento di una DTM (formale)}
@@ -4441,15 +4454,15 @@ dopo aver scritto il simbolo $\gamma'$ spostandomi di una cella a sinistra.
 Ricordiamo che:
 \begin{itemize}
     \item Nel caso in cui la funzione di transizione non sia definita per lo stato
-    finito in cui ci si trova, allora la macchina $M$ si arresta.
-    $$\delta(q,\gamma)=\bot\implies M\text{ arresta}$$
-    non vado mai in situazioni dove una mossa non è definita.
+          finito in cui ci si trova, allora la macchina $M$ si arresta.
+          $$\delta(q,\gamma)=\bot\implies M\text{ arresta}$$
+          non vado mai in situazioni dove una mossa non è definita.
     \item Se la funzione di transizione è sempre definita è presente un
-    rischio loop, poiché la computazione
-    di $M$ $\delta$ potrebbe essere definita e non giungere mai ad uno stato finale, potrebbe
-    andare in un loop continuando a considerare lo stesso insieme di celle).
+          rischio loop, poiché la computazione
+          di $M$ $\delta$ potrebbe essere definita e non giungere mai ad uno stato finale, potrebbe
+          andare in un loop continuando a considerare lo stesso insieme di celle).
     \item $M$ accetta $x\in\Sigma^*$ se e solo se la computazione si arresta
-    in $q\in F$ (in uno stato finale/accettante).
+          in $q\in F$ (in uno stato finale/accettante).
     \item $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$
 \end{itemize}
 
@@ -4457,7 +4470,7 @@ Ricordiamo che:
 Posso definire la computazione di $M$ su input $x$ come una sequenza di configurazioni
 che vengono indotte dalla computazione di $M$ su input $x$, dove computazione intendo
 uno snapshot della macchina di Turing in quel momento. \textit{Cosa dovrebbe comparire
-nello snapshot per definire uno stato generale della DTM?}
+    nello snapshot per definire uno stato generale della DTM?}
 \begin{itemize}
     \item $q\in Q$ Stato del controllo a stati finiti.
     \item $k\in\mathbb{N}^+$ posizione in quel momento della testina di lettura sul nastro.
@@ -4475,7 +4488,7 @@ $$c=(q,k,w),\delta(q,w_k)=\bot$$
 Ovvero qualsiasi snapshot da cui io non so evolvere.
 \paragraph{Computazione di $M$ su $x\in\Sigma^*$}\mbox{}\\
 $$c_0\overset{\delta}{\implies}c_1\overset{\delta}{\implies}\dots\overset{\delta}{\implies}
-c_i\overset{\delta}{\implies}c_{i+1}\overset{\delta}{\implies}\dots$$
+    c_i\overset{\delta}{\implies}c_{i+1}\overset{\delta}{\implies}\dots$$
 Una sequenza di configurazioni tale che: $c_0$ sia la configurazione iniziale e $\forall i$
 passo da una configurazione ad una altra grazie alla funzione di transizione.
 
@@ -4498,7 +4511,7 @@ certo modo, ovvero che data una certa configurazione quella successiva è
     \centering
     \includegraphics[scale=0.6]{images/dtm_def.png}
     \caption{Se mi trovo in una certa configurazione $c$ esiste una unica configurazione
-    successiva $c_1$ (oppure non mi evolvo e mi arresto)}
+        successiva $c_1$ (oppure non mi evolvo e mi arresto)}
 \end{figure}
 
 Le macchine di Turing non deterministiche (NTM), nelle macchine di Turing non deterministiche
@@ -4590,9 +4603,9 @@ $$\pi\rightarrow cod\rightarrow L_\pi=\{cod(x):x\in D\land p(x)\}$$
 La DTM risolve $\pi$ se $M$ è un algoritmo deterministico per il linguaggio $L_\pi$:
 \begin{itemize}
     \item $M$ accetta le stringhe che soddisfano tale proprietà $p(x)$,
-    ovvero codifiche di istanze che soddisfano tale proprietà $cod(x)$.
+          ovvero codifiche di istanze che soddisfano tale proprietà $cod(x)$.
     \item $M$ non deve accettare sulle stringhe che non soddisfano la data proprietà,
-     $\lnot p(x)$.
+          $\lnot p(x)$.
 \end{itemize}
 \paragraph{Esempio}\mbox{}\\
 $$\text{Parità}$$
@@ -4633,7 +4646,7 @@ $$M=(Q,\Sigma,\Gamma,\delta,p,F)$$
     \item $p=\text{stato iniziale}$
     \item $F=\{z1,z\}$
     \item $$\delta:Q\times\Gamma\rightarrow Q\times\Sigma\times\{-1,0,1\}$$
-    $$\delta(\;,\;)=\bot\implies HALT$$
+          $$\delta(\;,\;)=\bot\implies HALT$$
 \end{itemize}
 
 \begin{figure}[H]
@@ -4643,14 +4656,14 @@ $$M=(Q,\Sigma,\Gamma,\delta,p,F)$$
 
 \begin{itemize}
     \item stato iniziale $p$:
-    \begin{enumerate}
-        \item la stringa nulla non viene accettata, HALT.
-        \item se il primo carattere è 0, entra nello stato $z1$ sul
-        nastro di lavoro scrivi 0 (lo lasci come è), e si sposta a destra di 1.
-        \item se il primo carattere è 1, entra nello stato $\mu$, lascia scritto
-        il carattere 1 e avanza la testina verso destra.
-        \item $\dots$
-    \end{enumerate}
+          \begin{enumerate}
+              \item la stringa nulla non viene accettata, HALT.
+              \item se il primo carattere è 0, entra nello stato $z1$ sul
+                    nastro di lavoro scrivi 0 (lo lasci come è), e si sposta a destra di 1.
+              \item se il primo carattere è 1, entra nello stato $\mu$, lascia scritto
+                    il carattere 1 e avanza la testina verso destra.
+              \item $\dots$
+          \end{enumerate}
     \item $\dots$
 \end{itemize}
 Questa DTM $M$ è in grado di accettare il linguaggio $L_{PARI}$, ma questo linguaggio
@@ -4661,7 +4674,7 @@ dei numeri pari.
 La DTM è precisa, è però un fatto che programmare una DTM è un compito abbastanza
 scomodo, vuol dire progettare tutti gli stati, immaginarsi la funzione delta, $\dots$
 \textit{Cosa si fa per specificare una DTM in maniera non esattamente
-formale ma che sia più immediato?} Solitamente le DTM non vengono descritte
+    formale ma che sia più immediato?} Solitamente le DTM non vengono descritte
 in maniera esplicita ma attraverso uno pseudo codice.
 
 \subsubsection{Specificare DTM}
@@ -4685,7 +4698,7 @@ a $L_{PARI}$.
 Nello switch controlliamo
 solamente il primo carattere vediamo che prende una decisione sul primo carattere fornito
 in ingresso , \textit{quanti caratteri
-possiamo leggere all'inizio?} Sono tre, notiamo che non è presente un
+    possiamo leggere all'inizio?} Sono tre, notiamo che non è presente un
 \textbf{case} per il \textit{blank}, ma questo va benissimo perché andrebbe
 direttamente sul return e saremmo in uno stato non accettante.
 
@@ -4715,11 +4728,11 @@ Data una funzione $f:\Sigma^*\rightarrow\Gamma^*$, la DTM $M$ calcola $f$ se
 e solo se:
 \begin{itemize}
     \item $f(x)\downarrow$, ovvero se la funzione è definita sull'input $x$,
-    allora la computazione di $M$ su $x$ termina con $f(x)$ output rappresentato
-    sul nastro.
+          allora la computazione di $M$ su $x$ termina con $f(x)$ output rappresentato
+          sul nastro.
 
     \item $f(x)\uparrow$, ovvero se la funzione non è definita sull'input $x$ ($\in\mathcal{P}$), allora $M$ va in un
-    loop infinito.
+          loop infinito.
 \end{itemize}
 Ci si chiede \textit{quali sono le funzioni calcolabili da una DTM?} Le DTM
 sono in grado di calcolare tutte e sole le funzioni ricorsive parziali. Se
@@ -4728,17 +4741,17 @@ Visto che abbiamo le DTMs che calcolano le funzioni parziali come era scritta
 originariamente.
 \paragraph{Tesi di Church-Turing}\mbox{}\\
 \textit{"Una funzione è intuitivamente calcolabile se e solo se è calcolata
-da una DTM."}
+    da una DTM."}
 
 Inoltre, si dimostra che le DTM sono delle s.p.a., questo dimostrando
 i seguenti punti:
 \begin{enumerate}
     \item Si può dimostrare che le DTM calcolano tutte e sole le funzioni ricorsive
-    parziali.
+          parziali.
     \item Esiste una DTM universale, ovvero una in grado di simulare una qualsiasi
-    altra DTM fornita in ingresso.
+          altra DTM fornita in ingresso.
     \item Vale il teorema $S_n^m$, la possibilità di scrivere DTM più specifiche
-    a partire da DTM più generali.
+          a partire da DTM più generali.
 \end{enumerate}
 Le DTM sanno fare molte cose: accettano linguaggi, riconoscono insiemi,
 calcolano funzioni.
@@ -4769,7 +4782,7 @@ di quella DTM. In secondo luogo è la più usata perché è la più
 \paragraph{Esempio di calcolo della complessità in tempo}\mbox{}\\
 Consideriamo la seguente DTM, supponiamo che $x$ sia lungo $n$, quanto
 tempo impiega la computazione su quell'input ? Ovvero, \textit{quanto
-vale $T(n)$?}
+    vale $T(n)$?}
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{images/pseudo_DTM.png}
@@ -4791,12 +4804,12 @@ deterministico $f(n)$ se e solo se esiste una DTM $M$ tale che:
 Allo stesso modo possiamo dire che:
 \begin{itemize}
     \item L'insieme $A\subseteq\mathbb{N}$ è riconosciuto in tempo $f(n)$
-    se e solo se il corrispondente linguaggio è riconosciuto in tempo $f(n)$
-    $$L_A=\{cod(A):a\in A\}$$
+          se e solo se il corrispondente linguaggio è riconosciuto in tempo $f(n)$
+          $$L_A=\{cod(A):a\in A\}$$
     \item Il problema di decisione $\pi$ è risolubile in tempo $f(n)$, se
-    il corrispondente linguaggio che è il linguaggio soluzione è riconosciuto
-    in tempo $f(n)$
-    $$L_\pi=\{cod(x):p(x)\}$$
+          il corrispondente linguaggio che è il linguaggio soluzione è riconosciuto
+          in tempo $f(n)$
+          $$L_\pi=\{cod(x):p(x)\}$$
     \item In seguito vedremo anche il tempo di calcolo di funzioni.
 \end{itemize}
 Nel seguito, quando parleremo di linguaggi intenderemo equivalentemente insiemi
@@ -4809,7 +4822,7 @@ con complessità in tempo $t(n)=n+1$. Quindi, abbiamo:
     \item Il linguaggio $L_{PARI}$ è riconoscibile in $n+1$.
     \item L'insieme dei numeri pari è riconoscibile in tempo $n+1$.
     \item Il problema di decisione dei numeri pari può essere risolto
-    in tempo $n+1$.
+          in tempo $n+1$.
 \end{itemize}
 
 \paragraph{Un altro esempio: palindrome}\mbox{}\\
@@ -4898,7 +4911,7 @@ se $\exists c>0$ e $n_0\in\mathbb{N}$ tale che $\forall n\geq n_0$ vale $f(n)\ge
 \end{figure}
 Riconsiderando l'esempio precedente $f(n)=3n^2+4\sqrt{n}+\log n=\Omega(n^2)$, una possibile
 costante potrebbe essere anche $c=3$. Sappiamo che un qualsiasi algoritmo di ordinamento
-basato su confronti ha $\Omega (n\log n)$, non può fare meglio di $n\log n$. 
+basato su confronti ha $\Omega (n\log n)$, non può fare meglio di $n\log n$.
 
 Un ultimo simbolo, date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$, diciamo che
 $f(n)=\Theta(g(n))$ se e solo se $\exists c_1,c_2 >0$ e $n_0\in\mathbb{N}$ tale che
@@ -4925,16 +4938,16 @@ delle funzioni di complessità, tralasciando i costi moltiplicativi, termini pi�
 Una funzione $f:\mathbb{N}\rightarrow\mathbb{N}$ si dice:
 \begin{itemize}
     \item Logaritmica: $f(n)=O(\log n)$, per noi informatici esiste solamente $log_2$,
-    in realtà non importa la base del logaritmo, perché posso sempre cambiare la base
-    moltiplicando da una costante che però viene "mangiata" dal $O$.
+          in realtà non importa la base del logaritmo, perché posso sempre cambiare la base
+          moltiplicando da una costante che però viene "mangiata" dal $O$.
     \item Lineare: $f(n)=O(n)$
     \item Quadratica: $f(n)=O(n^2)$
     \item Polinomiale: $f(n)=O(n^k)$ per $k\in\mathbb{N}$ fissato.
     \item Esponenziale: $f(n)$ non è polinomiale, per esempio $O(2^n),O(e^n),\dots$. In questa
-    categoria ricadono funzioni che non sono esponenziali ma in teoria della complessità
-    vengono considerati tali; per esempio $n^{\log n}$ è considerata esponenziale
-    perché non è polinomiale (sebbene in matematica del continuo essa non sia una funzione
-    esponenziale).
+          categoria ricadono funzioni che non sono esponenziali ma in teoria della complessità
+          vengono considerati tali; per esempio $n^{\log n}$ è considerata esponenziale
+          perché non è polinomiale (sebbene in matematica del continuo essa non sia una funzione
+          esponenziale).
 \end{itemize}
 
 \subsubsection{Classi di complessità in tempo}
@@ -4984,12 +4997,12 @@ input di dimensione $4.000$. Abbiamo progettato 4 algoritmi con complessità div
 all'input $n$:
 \begin{center}
     \begin{tabular}{c|c}
-        Complessità algoritmo $t(n)$ & Tempo \\
+        Complessità algoritmo $t(n)$ & Tempo                             \\
         \midrule
-        $n$ & $1\mu s$\\
-        $n^2$ & $4ms$ \\
-        $2^n$ & $>1$ secolo \\
-        $3^n$ & $\tilde 2$ secoli e $\frac{1}{2}$
+        $n$                          & $1\mu s$                          \\
+        $n^2$                        & $4ms$                             \\
+        $2^n$                        & $>1$ secolo                       \\
+        $3^n$                        & $\tilde 2$ secoli e $\frac{1}{2}$
     \end{tabular}
 \end{center}
 
@@ -5033,7 +5046,7 @@ specificare l'efficienza.\begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/robustezza.png}
     \caption{Aumento il numero di nastri su una DTM, diventando la generalizzazione
-    di quelle a singolo nastro.}
+        di quelle a singolo nastro.}
 \end{figure}
 Un nastro potrebbe essere riservato a mantenere la stringa in input utilizzando un numero
 costante di nastri, magari queste DTM ci danno più velocità, ma in realtà non è così. Se ho
@@ -5068,61 +5081,61 @@ che non esistono tali algoritmi.
 \subsubsection{Alcune riflessioni: Teoria vs Pratica}
 \begin{itemize}
     \item Sebbene da un punto di vista teorico polinomiale in tempo vuol dire efficiente,
-    un algoritmo di complessità $n^{1000}$ non è praticabile (seppur polinomiale).
-    Questo polinomio è tanto impraticabile quanto un esponenziale, in pratica l'esponente non
-    deve superare 2. Qualunque tempo di esecuzione che superi il quadratico dal punto
-    di vista pratico diventa difficoltoso.
-    \begin{itemize}
-        \item Per esempio, pensando al test di primalità (se un numero è primo o meno); esiste
-        un algoritmo per testare la primalità che funziona in tempo $O(\log n^{6+6})$ ed
-        è esatto (1994), e polinomiale. L'algoritmo A.K.S. polinomiale proposto era un'algoritmo
-        che ha un esponente di 12. Con il passare del tempo è stato migliorato, trovare un
-        algoritmo polinomiale apre la possibilità di trovare miglioramenti, cosa che non è
-        altrettanto possibile con un esponenziale. Adesso la complessità è stata portata
-        ad $O(\log n^6)$, molto meglio ma non siamo ancora contenti, da un punto di vista
-        pratico questo algoritmo non si utilizza. Si utilizzano degli algoritmi molto veloci detti
-        \textbf{probabilistici}, ovvero riescono a dare una risposta in tempi assolutamente veloci ma con una
-        probabilità di errore. Questi algoritmi hanno anche la capacità di rendere questa probabilità
-        di errore piccola a piacere rimanendo veloce, praticamente quasi nulla. Accetto tali algoritmi
-        probabilistici perché sono estremamente efficienti (Miller-Rabin, $\dots$).
-    \end{itemize}
+          un algoritmo di complessità $n^{1000}$ non è praticabile (seppur polinomiale).
+          Questo polinomio è tanto impraticabile quanto un esponenziale, in pratica l'esponente non
+          deve superare 2. Qualunque tempo di esecuzione che superi il quadratico dal punto
+          di vista pratico diventa difficoltoso.
+          \begin{itemize}
+              \item Per esempio, pensando al test di primalità (se un numero è primo o meno); esiste
+                    un algoritmo per testare la primalità che funziona in tempo $O(\log n^{6+6})$ ed
+                    è esatto (1994), e polinomiale. L'algoritmo A.K.S. polinomiale proposto era un'algoritmo
+                    che ha un esponente di 12. Con il passare del tempo è stato migliorato, trovare un
+                    algoritmo polinomiale apre la possibilità di trovare miglioramenti, cosa che non è
+                    altrettanto possibile con un esponenziale. Adesso la complessità è stata portata
+                    ad $O(\log n^6)$, molto meglio ma non siamo ancora contenti, da un punto di vista
+                    pratico questo algoritmo non si utilizza. Si utilizzano degli algoritmi molto veloci detti
+                    \textbf{probabilistici}, ovvero riescono a dare una risposta in tempi assolutamente veloci ma con una
+                    probabilità di errore. Questi algoritmi hanno anche la capacità di rendere questa probabilità
+                    di errore piccola a piacere rimanendo veloce, praticamente quasi nulla. Accetto tali algoritmi
+                    probabilistici perché sono estremamente efficienti (Miller-Rabin, $\dots$).
+          \end{itemize}
 
     \item  Un algoritmo polinomiale molto probabilmente si riesce a migliorare, i primi algoritmi
-    efficienti dati per i problemi erano polinomiali con gradi molto alti, ma essendo polinomiali
-    il grado è sempre stato abbassato. Questa cosa non funzione mai con l'algoritmo esponenziale,
-    se lo si vuole migliorare l'algoritmo esponenziale va scartato.
+          efficienti dati per i problemi erano polinomiali con gradi molto alti, ma essendo polinomiali
+          il grado è sempre stato abbassato. Questa cosa non funzione mai con l'algoritmo esponenziale,
+          se lo si vuole migliorare l'algoritmo esponenziale va scartato.
 
     \item La nostra analisi di complessità \textit{"worst case"} talora restituisce tempi troppo
-    pessimistici, anche perché a volte le istanze che danno il peggior tempo di calcolo non capitano
-    praticamente mai (a volte worst-case sovradimensiona il tempo di calcolo).
-\begin{itemize}
-    \item Per esempio: nei problemi di ottimizzazione lineare, ovvero funzioni in cui i vincoli
-    alla funzione obiettivo sono le funzioni lineari. Esiste un bellissimo algoritmo polinomiale
-    di Karmarkar. Esso è un algoritmo polinomiale che è lento, perché ha un grado del polinomio
-    che è molto alto, viene utilizzato poco. Si preferisce utilizzare l'algoritmo del simplesso,
-    un algoritmo molto semplice, il problema è che ha un tempo di esecuzione esponenziale, però
-    si è notato che l'esponente salta fuori su istanze che non capitano mai in natura.
-\end{itemize}
+          pessimistici, anche perché a volte le istanze che danno il peggior tempo di calcolo non capitano
+          praticamente mai (a volte worst-case sovradimensiona il tempo di calcolo).
+          \begin{itemize}
+              \item Per esempio: nei problemi di ottimizzazione lineare, ovvero funzioni in cui i vincoli
+                    alla funzione obiettivo sono le funzioni lineari. Esiste un bellissimo algoritmo polinomiale
+                    di Karmarkar. Esso è un algoritmo polinomiale che è lento, perché ha un grado del polinomio
+                    che è molto alto, viene utilizzato poco. Si preferisce utilizzare l'algoritmo del simplesso,
+                    un algoritmo molto semplice, il problema è che ha un tempo di esecuzione esponenziale, però
+                    si è notato che l'esponente salta fuori su istanze che non capitano mai in natura.
+          \end{itemize}
 
     \item Per mitigare l'analisi worst case, si utilizza un altro tipo di complessità come nella
-    \textbf{average case}, ovvero studiare quanto impiega l'algoritmo nel caso medio. Ciò pone
-    però delle difficoltà di tipo matematico e necessita di distribuzioni di probabilità sui dati
-    d'ingresso che difficilmente sono a disposizione. Tutta via è molto studiata l'analisi
-    average case.
+          \textbf{average case}, ovvero studiare quanto impiega l'algoritmo nel caso medio. Ciò pone
+          però delle difficoltà di tipo matematico e necessita di distribuzioni di probabilità sui dati
+          d'ingresso che difficilmente sono a disposizione. Tutta via è molto studiata l'analisi
+          average case.
 
     \item Attenzione alle costanti nascoste, le notazioni di Landau sono fatte apposta per
-    rimuovere le costanti moltiplicative, ma anche qui nella pratica le costanti moltiplicative
-    ed i termini di ordine inferiore contano! Un conto è dire che un algoritmo va come $5n^2$
-    che è diverso da $10n^2$.
-    \begin{itemize}
-        \item Questo è quello che succede proprio con gli algoritmi di ordinamento
-        basati su confronti (che ricordiamo sono tutti $\Theta (n\log n)$). Per
-        esempio l'algoritmo di ordinamento merge-sort ha tempo $O(n\log n)$ ed
-        è quindi ottimale. Spesso però si preferisce utilizzare il quick-sort, sebbene
-        quest'ultimo abbia un caso worst-case $O(n^2)$. Questo perché nella media
-        impiega $O(n\log n)$ ($90\%$ dei casi), e la costante moltiplicativa del quick-sort
-        è più piccola di quella del merge-sort.
-    \end{itemize}
+          rimuovere le costanti moltiplicative, ma anche qui nella pratica le costanti moltiplicative
+          ed i termini di ordine inferiore contano! Un conto è dire che un algoritmo va come $5n^2$
+          che è diverso da $10n^2$.
+          \begin{itemize}
+              \item Questo è quello che succede proprio con gli algoritmi di ordinamento
+                    basati su confronti (che ricordiamo sono tutti $\Theta (n\log n)$). Per
+                    esempio l'algoritmo di ordinamento merge-sort ha tempo $O(n\log n)$ ed
+                    è quindi ottimale. Spesso però si preferisce utilizzare il quick-sort, sebbene
+                    quest'ultimo abbia un caso worst-case $O(n^2)$. Questo perché nella media
+                    impiega $O(n\log n)$ ($90\%$ dei casi), e la costante moltiplicativa del quick-sort
+                    è più piccola di quella del merge-sort.
+          \end{itemize}
 
 \end{itemize}
 La teoria ci deve guidare, se ci troviamo sulla strada giusta, mentre la pratica ci dice
@@ -5152,7 +5165,7 @@ perché vorrei che $s(n)$ mi misurasse solamente lo spazio di calcolo e non l'in
 causata dall'input, l'input seppur memoria è un qualcosa di esterno, il mio programma
 non deve allocare spazio per mantenere l'input. Lo spazio di lavoro è la memoria che utilizza
 l'algoritmo. \textit{Come faccio a togliere l'interferenza causata dallo spazio
-dell'input?} Sarebbe bello arricchire la DTM con un nastro solo per l'input read-only letto
+    dell'input?} Sarebbe bello arricchire la DTM con un nastro solo per l'input read-only letto
 da una testina ad-hoc, nel quale è deposto l'input. Quando la nostra DTM deve effettuare i conti
 essa lo farà su un nastro di lavoro, il quale è read/write.
 \begin{figure}[H]
@@ -5176,7 +5189,7 @@ come muovere la testina dell'input e del nastro di lavoro.
     \centering
     \includegraphics[scale=0.5]{images/DTM_input_transition.png}
     \caption{Esempio di una mossa della DTM con due nastri per diversificare input da
-    spazio di lavoro}
+        spazio di lavoro}
 \end{figure}
 Anche la configurazione cambia, prima avevamo come una possibile configurazione come
 $c=(q,k,w)$ dove $q$ è lo stato, $k$ è la posizione dell'unica testina e $w$ il contenuto non-blank
@@ -5224,7 +5237,7 @@ tenere conto dello spazio per memorizzare il risultato e quello dell'elemento fo
 Più formalmente, la funzione $f:\Sigma^*\rightarrow\Gamma^*$ è calcolabile dalla DTM $M$ se e solo se:
 \begin{itemize}
     \item $f(x)\downarrow$, se la funzione termina, ponendo la stringa $x$ sul nastro di input la computazione
-    termina e sul nastro di output troverò $f(x)$.
+          termina e sul nastro di output troverò $f(x)$.
     \item $f(x)\uparrow$, se la funzione non termina, la computazione di $M$ su $x$ va in loop.
 \end{itemize}
 
@@ -5298,24 +5311,24 @@ $$L_{PAL}\in DTIME(n^2)\text{ e }L_{PAL}\in DSPACE(\log n)$$
 \begin{enumerate}
     \item Copia la stringa di input sul nastro di lavoro.
     \item Sposta la testina di input in prima posizione (la stringa di input rimane
-    sul nastro di input, la testina in prima posizione sul nastro in input, e la testina
-    sul nastro di lavoro in ultima posizione).
+          sul nastro di input, la testina in prima posizione sul nastro in input, e la testina
+          sul nastro di lavoro in ultima posizione).
     \item Confronta i due consecutivi caratteri avanzando le testine sul nastro in input
-    e retrocedendo quella sul nastro di lavoro.
+          e retrocedendo quella sul nastro di lavoro.
     \item Accetta se tutti i confronti tornano, altrimenti rifiuta.
 \end{enumerate}
 Complessità passi dell'algoritmo:
 \begin{center}
     \begin{tabular}{c c c}
-        Passo&Tempo & Spazio\\
+        Passo & Tempo       & Spazio                         \\
         \midrule
-        1&n & n (copia sul nastro di lavoro)\\
-        2&n&-\\
-        3&n&-\\
-        4&n&-\\
+        1     & n           & n (copia sul nastro di lavoro) \\
+        2     & n           & -                              \\
+        3     & n           & -                              \\
+        4     & n           & -                              \\
         \midrule
-        Tot:&$t(n)=O(n)$&$s(n)=O(n)$
-\end{tabular}
+        Tot:  & $t(n)=O(n)$ & $s(n)=O(n)$
+    \end{tabular}
 \end{center}
 Spesso la risorsa tempo e la risorsa spazio sono antagoniste, se posso sprecare "spazio"
 posso essere pià veloce in tempo.
@@ -5396,8 +5409,8 @@ perfettamente parallelizzabili.
 \subsection{Tempo vs Spazio}
 Considerando l'esempio delle palindrome, spesso queste due risorse computazionali sono in controtendenza,
 se spreco una utilizzo di meno l'altra è viceversa (trade-off). Domanda: \textit{se io ho
-un algoritmo che ha un certo limite in tempo allora questo limite riesce comunque a darmi
-in maniera automatica un limite in termini di spazio? Viceversa?}
+    un algoritmo che ha un certo limite in tempo allora questo limite riesce comunque a darmi
+    in maniera automatica un limite in termini di spazio? Viceversa?}
 Posso rispondere a queste domande confrontando le classi complessità in tempo ed in spazio per
 carpirne una relazione.
 
@@ -5444,7 +5457,7 @@ La domanda che
 ci si pone è la seguente: \textit{Quanto può essere lunga una computazione di questo tipo?}
 Può essere lunga tanto quante configurazioni diverse esistono di $M$ con un input $x$ di lunghezza $n$.
 \textit{Perché questo è il limite?} Perché se vado a vanti un passo in più, per il \textbf{principio
-della piccionaia}, vuol dire che rivedo una computazione che ho fatto prima, quindi la DTM sarebbe
+    della piccionaia}, vuol dire che rivedo una computazione che ho fatto prima, quindi la DTM sarebbe
 in un loop che non servirebbe per accettare o rifiutare $x$.
 
 Quindi il numero di passi di una computazione di una macchina non può essere più lunga di quante
@@ -5464,11 +5477,11 @@ quadruple diverse esistono?) Questo significa:
     \item Quante possibilità per $q$? $|Q|$.
     \item Quante possibilità per $i$? $n+2$ (considerando i due marker).
     \item Quante possibilità per $j$? $s(n)+1$ (il nastro di lavoro non può
-    essere arbitrariamente coperto, la porzione massima su input di lunghezza $n$
-    per definizione della complessità in spazio è $s(n)+1$ perché possiamo stare
-    al di là di una posizione. ricordiamo che $s(n)\leq\alpha f(n)$).
+          essere arbitrariamente coperto, la porzione massima su input di lunghezza $n$
+          per definizione della complessità in spazio è $s(n)+1$ perché possiamo stare
+          al di là di una posizione. ricordiamo che $s(n)\leq\alpha f(n)$).
     \item Quante possibilità per $w$? $\Gamma^{s(n)}$, sappiamo che $w$ può essere
-    lunga al massimo $\Gamma^*$ (dove $s(n)\leq\alpha f(n)$).
+          lunga al massimo $\Gamma^*$ (dove $s(n)\leq\alpha f(n)$).
 \end{itemize}
 Le diverse possibili configurazioni di $M$ su input $n$ sono date dalla moltiplicazione di questi
 differenti elementi.
@@ -5485,10 +5498,10 @@ $L$ con $s(n)\leq\alpha\cdot f(n)$, posso costruire una DTM $M'$ che su input $x
 \begin{enumerate}
     \item Scrive in unario una su un nastro il time-out $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
     \item Simula $M$ e ad ogni mossa cancella un simbolo dal nastro time-out (in
-    sostanza implemento un count-down, lo scala di 1).
+          sostanza implemento un count-down, lo scala di 1).
     \item Se $M$ accetta o rifiuta prima del time-out allora $M'$ accetta o rifiuta.
     \item Se allo scadere del time-out $M$ non ho ancora preso una decisione allora $M'$ rifiuta (loop),
-    perchè non siamo in uno stato accettante.
+          perchè non siamo in uno stato accettante.
 \end{enumerate}
 Quindi ho una DTM $M'$ che replicando $M$ accetta sicuramente $L$ ed il tempo è
 dato da $t(n)=O(n\cdot 2^{O(f(n))})$.
@@ -5523,10 +5536,10 @@ Alcune riflessioni su queste due inclusioni:
 \begin{itemize}
     \item Prima di tutto non si sa se queste inclusioni siano proprie o meno.
     \item Quindi, \textit{in teoria}, algoritmi efficienti in spazio portando immediati
-    algoritmi efficienti in tempo (il viceversa non è vero).
+          algoritmi efficienti in tempo (il viceversa non è vero).
     \item \textit{In pratica}, il grado del polinomio ottenuto da un algoritmo efficiente
-    in spazio è molto alto, quindi gli algoritmi efficienti in tempo vanno progettati
-    direttamente con una buona efficienza in tempo.
+          in spazio è molto alto, quindi gli algoritmi efficienti in tempo vanno progettati
+          direttamente con una buona efficienza in tempo.
 \end{itemize}
 
 \subsection{Zona grigia e non determinismo}
@@ -5549,19 +5562,19 @@ problemi che per il momento hanno soluzioni inefficienti ma sono facilmente veri
 \subsubsection{Problema della soddisfacibilità booleana}
 \begin{itemize}
     \item Formula booleana, formata da variabili booleane connesse da connettivi logici che legano
-    tali variabili.
-    $$\phi(x,y,z)=x\implies(y\land \overline{z})$$
+          tali variabili.
+          $$\phi(x,y,z)=x\implies(y\land \overline{z})$$
     \item Una formula booleana è \textbf{soddisfacibile} se e solo se riesco a creare un assegnamento
-    di verità di tali variabili in maniera che la formula venga resa vera. Se una formula non è
-    mai soddisfacibile si chiama \textbf{contraddizione}, tuttavia a noi interessano quelle
-    soddisfacibili.
+          di verità di tali variabili in maniera che la formula venga resa vera. Se una formula non è
+          mai soddisfacibile si chiama \textbf{contraddizione}, tuttavia a noi interessano quelle
+          soddisfacibili.
     \item Una formula booleana si dice in \textbf{CNF}, se è espressa come congiunzione di disgiunzioni
-    ovvero come AND di gruppi di OR, dove i gruppi di OR si chiamano clausole.
-    $$\phi(x,y,z)=x\implies(y\land\overline{z})=\overline{x}\lor (y\land\overline{z})=$$
-    $$(\overline{x}\land y)\land(\overline{x}\land\overline{z})\leftarrow CNF$$
-    Si applicano le proprietà dei connettivi logici sulla formula booleana in maniera da ottenere
-    la CNF. In questo caso le operazioni svolte: riscrittura dell implicazione, proprietà distributiva
-    dell'OR. Questa formula CNF è logicamente equivalente alla formula booleana binaria.
+          ovvero come AND di gruppi di OR, dove i gruppi di OR si chiamano clausole.
+          $$\phi(x,y,z)=x\implies(y\land\overline{z})=\overline{x}\lor (y\land\overline{z})=$$
+          $$(\overline{x}\land y)\land(\overline{x}\land\overline{z})\leftarrow CNF$$
+          Si applicano le proprietà dei connettivi logici sulla formula booleana in maniera da ottenere
+          la CNF. In questo caso le operazioni svolte: riscrittura dell'implicazione, proprietà distributiva
+          dell'OR. Questa formula CNF è logicamente equivalente alla formula booleana binaria.
 \end{itemize}
 Il nostro problema parla di formule booleane in CNF e si chiede se sono soddisfacibili o meno.
 $$CNF-SAT$$
@@ -5602,7 +5615,7 @@ Un controesempio:
     \centering
     \includegraphics[scale=0.6]{images/non_hamiltonian.png}
     \caption{Questo grafo non contiene un circuito Hamiltoniano, dovrà passare per il centro
-    almeno due volte.}
+        almeno due volte.}
 \end{figure}
 $$HC$$
 $$\text{Istanza: }G=(\{v_1,\dots,v_n\},E)$$
@@ -5647,7 +5660,7 @@ $G$ contiene un circuito Euleriano se e solo se ogni vertice in $G$ ha grado par
 
 \begin{itemize}
     \item Basta andare a vedere nella matrice di adiacenza il grado di ogni nodo è
-    molto semplice, questo ha un costo $t(n)=O(n^2)$.
+          molto semplice, questo ha un costo $t(n)=O(n^2)$.
     \item Purtroppo non abbiamo una simile caratterizzazione dei circuiti Hamiltoniani.
     \item Problemi simili, complessità molto diverse$\dots$
 \end{itemize}
@@ -5662,11 +5675,11 @@ $$\text{Domanda: }p(x)?$$
 
 \begin{enumerate}
     \item Mi piacerebbe avere un algoritmo che su input $x$ \textbf{generi una congettura}, in parole
-        povere venga generata una struttura che dipende dal problema (numero, permutazione, $\dots$)
-        che mi viene fornita.
+          povere venga generata una struttura che dipende dal problema (numero, permutazione, $\dots$)
+          che mi viene fornita.
 
     \item Successivamente occorrerà una \textbf{fase di verifica} su queste strutture per decidere se
-    vale $p(x)$.
+          vale $p(x)$.
 \end{enumerate}
 Questa dinamica dell'algoritmo non è più lineare come quella deterministica vista
 con le DTM, non è più presente un cammino di configurazioni. Nella attuale situazione
@@ -5677,8 +5690,8 @@ all'inizio, la dinamica globale dell'algoritmo è una dinamica ad albero.
     \centering
     \includegraphics[scale=0.6]{images/dinamica_albero.png}
     \caption{Nella fase congetturale (rosa) viene generata una struttura per ogni "mondo".
-    Nella fase di verifica (rosso), la quale è una fase assolutamente deterministica,
-    gioverà sia dell'input che della congettura generata.}
+        Nella fase di verifica (rosso), la quale è una fase assolutamente deterministica,
+        gioverà sia dell'input che della congettura generata.}
 \end{figure}
 Al termine di ogni fase di verifica di ciascun mondo (DTM) avrò una risposta numerica
 1 se la proprietà è presente per quel dato insieme $(x,S_1)$, altrimenti 0.
@@ -5687,8 +5700,8 @@ Al termine di ogni fase di verifica di ciascun mondo (DTM) avrò una risposta nu
 Un algoritmo non deterministico funziona proprio con queste due fasi:
 \begin{itemize}
     \item Apertura di un multi-verso, dove vengono preparate tante strutture
-    da testare in parallelo senza costi aggiuntivi in maniera da utilizzare
-    solo il costo in tempo della verifica (fase congetturale).
+          da testare in parallelo senza costi aggiuntivi in maniera da utilizzare
+          solo il costo in tempo della verifica (fase congetturale).
     \item Fase di verifica.
 \end{itemize}
 Quindi il costo della computazione non è univoca ma scinde in tante computazioni che
@@ -5696,16 +5709,16 @@ giovano di un pezzo dell'informazione generato automaticamente. Una volta finita
 di congettura ciascun mondo è un mondo deterministico (una routine DTM).
 
 \textit{In che senso un algoritmo non deterministico risolve un problema
-di decisione $\pi$?} Ovvero la verifica della proprietà $p(x)$.
+    di decisione $\pi$?} Ovvero la verifica della proprietà $p(x)$.
 In questo senso:
 \begin{enumerate}
     \item Su ogni $x$ che ammette $p(x)$ (vera) esiste
-    almeno una computazione (struttura generata magicamente) che porta ad una
-    soluzione accettando $(x,s_k)$ (nonostante alcune verifiche potrebbero
-    essere anche rifiutate).
+          almeno una computazione (struttura generata magicamente) che porta ad una
+          soluzione accettando $(x,s_k)$ (nonostante alcune verifiche potrebbero
+          essere anche rifiutate).
 
     \item Su ogni $x$ che non ammette $p(x)$ (falsa) non esiste alcuna
-    computazione che accetti $(x,s_k)$ per ogni $s_k$.
+          computazione che accetti $(x,s_k)$ per ogni $s_k$.
 \end{enumerate}
 
 Abbiamo a disposizione un algoritmo che esplora moltissime possibilità e se in qualcuna
@@ -5764,19 +5777,19 @@ congetturale e quella di verifica.
 Possiamo vederla come una classica DTM, dove come novità è presente:
 \begin{itemize}
     \item \textbf{Natro bi-infinito}: un nastro che è infinito sia a destra
-    che a sinistra. A destra viene messo l'input, nella parte sinistra viene
-    generata la congettura.
+          che a sinistra. A destra viene messo l'input, nella parte sinistra viene
+          generata la congettura.
     \item \textbf{Modulo congetturale}: un modulo adibito alla creazione
-    della congettura sulla parte sinistra della nastro bi-infinito.
+          della congettura sulla parte sinistra della nastro bi-infinito.
     \item \textbf{Modulo di verifica DTM}: un modulo che lavora sia sull'input $x$
-    che sulla struttura $\gamma$ generata dall'altro modulo.
+          che sulla struttura $\gamma$ generata dall'altro modulo.
 \end{itemize}
 Quindi saranno integrate le due fasi degli algoritmi non deterministici:
 \begin{enumerate}
     \item Fase congetturale: $M$ modulo congetturale che scrive $\gamma\in\Gamma^*$ sulla
-    parte sinistra del nastro (non determinismo).
+          parte sinistra del nastro (non determinismo).
     \item Fase di verifica: una classica DTM che lavora su $(\gamma,x)$, ha infinite
-    fasi di verifica perché ho infinite $\gamma\in\Gamma^*$.
+          fasi di verifica perché ho infinite $\gamma\in\Gamma^*$.
 \end{enumerate}
 In questo caso $M$ accetta $x\in\Sigma^*$ se e solo se $\exists\gamma\in\Gamma^*$ tale
 che $(\gamma,x)$ viene deterministicamente accettata.
@@ -5826,13 +5839,13 @@ quadratico per verificare che una matrice di adiacenza sia un circuito Hamiltoni
 
 \begin{itemize}
     \item Sappiamo \textbf{efficiente risolubilità} significa
-    $$P=\bigcup_{k\geq 0}DTIME(n^k)$$
+          $$P=\bigcup_{k\geq 0}DTIME(n^k)$$
     \item Allora adesso abbiamo a disposizioni le classi non deterministiche, possiamo
-    definire il termine \textbf{efficiente verificabilità}, ovvero risolti da NDTM
-    efficienti
-    $$NP=\bigcup_{k\geq 0}NTIME(n^k)$$
-    ovvero l'unione dei problemi risolti in tempo polinomiale grazie ad algoritmi non
-    deterministici ($P$ sta per polinomiale), ovvero la loro fase di verifica è polinomiale.
+          definire il termine \textbf{efficiente verificabilità}, ovvero risolti da NDTM
+          efficienti
+          $$NP=\bigcup_{k\geq 0}NTIME(n^k)$$
+          ovvero l'unione dei problemi risolti in tempo polinomiale grazie ad algoritmi non
+          deterministici ($P$ sta per polinomiale), ovvero la loro fase di verifica è polinomiale.
 \end{itemize}
 \textit{Quale relazione esiste tra le classi $P$ e $NP$?} Questa è veramente una domanda
 da un milione di dollari (Clay Math. Inst.), risulta il più grande quesito matematico
@@ -5845,7 +5858,7 @@ partiamo da un linguaggio appartenente a $P$, $L\in DTIME(f(n))$, dato questo li
 esiste una DTM $M$ che lo riconosce in $t(n)=O(f(n))$.
 
 \textit{Come posso dimostrare che questo problema viene riconosciuto in
-tempo non deterministico $f(n)$?} Molto semplice chiaramente, $M$ può
+    tempo non deterministico $f(n)$?} Molto semplice chiaramente, $M$ può
 essere vista come una NDTM che ignora il modulo congetturale, io sono già in grado
 senza questo per risolvere il problema. La NDTM ignorerà il suggerimento e su ogni
 multi-verso replicherà la stessa computazione, e quindi ovviamente accetterà il linguaggio
@@ -5861,12 +5874,12 @@ della relazione inversa. \textit{Possiamo dire che $NP\subseteq P$?} Questo ci p
 a dire che $P=NP$.
 
 In altre parole la domanda chiede: \textit{un algoritmo di facile verifica può
-essere trasformato in un efficiente algoritmo di soluzione?} O, \textit{da un algoritmo
-non deterministico efficiente è possibile ottenere un algoritmo
-reale efficiente?}
+    essere trasformato in un efficiente algoritmo di soluzione?} O, \textit{da un algoritmo
+    non deterministico efficiente è possibile ottenere un algoritmo
+    reale efficiente?}
 $$NTIME(f(n))\subseteq DTIME(?)$$
 \textit{Quanto costa togliere la "magia" degli algoritmi
-non deterministici?} (i quali sono un costrutto teorico ma non realizzabile concretamente).
+    non deterministici?} (i quali sono un costrutto teorico ma non realizzabile concretamente).
 
 
 \subsubsection{$NTIME(f(n))\subseteq DTIME(?)$}
@@ -5879,14 +5892,14 @@ $L\in NTIME(f(n))\implies\exists NDTM M$ tale che $M$ accetta $L$ con $t(n)=O(f(
 \textit{Come posso simulare questa dinamica con una DTM $\tilde{M}$?}
 \begin{enumerate}
     \item Comincio a generare tutte le possibili strutture che sono delle stringhe $\gamma\in\Gamma^*$ (non ho
-la "magia").
+          la "magia").
 
-\item Per ognuna di queste strutture faccio partire una fase di verifica, quindi si
-calcola deterministicamente se $(\gamma,x)$ viene accettata con $\tilde{M}$.
+    \item Per ognuna di queste strutture faccio partire una fase di verifica, quindi si
+          calcola deterministicamente se $(\gamma,x)$ viene accettata con $\tilde{M}$.
 
-\item Una volta passate tutte le strutture, controllo se almeno in una di queste
-la stringa viene accettata, allora in base all'esisto posso dire che tale stringa $x$ viene accettata
-da $\tilde{M}$ altrimenti è rifiutata.
+    \item Una volta passate tutte le strutture, controllo se almeno in una di queste
+          la stringa viene accettata, allora in base all'esisto posso dire che tale stringa $x$ viene accettata
+          da $\tilde{M}$ altrimenti è rifiutata.
 
 \end{enumerate}
 Questo algoritmo deterministico mi risolve il mio problema, la generazione delle stringhe
@@ -5905,7 +5918,7 @@ successiva domanda che ci si chiede è \textit{dobbiamo proprio generarle tutte?
 \end{figure}
 \textit{Ho un modo per interrompere la scansione dei $\gamma\in\Gamma^*$?} Questi $\gamma$
 hanno una certa lunghezza (stiamo considerando stringhe), \textit{potrei limitarmi ad
-una certa lunghezza (finita) di stringhe?} Se nella fase di verifica $M$ compie $O(f(n))$
+    una certa lunghezza (finita) di stringhe?} Se nella fase di verifica $M$ compie $O(f(n))$
 passi per eventualmente accettare, è inutile generare $\gamma\in\Gamma^*$ con $|\gamma|>O(f(n))$
 perché non avrei nemmeno $M$ tempo di leggerle completamente.
 
@@ -5954,16 +5967,16 @@ di problemi in $NP$, \textit{esiste una metodologia teorica per effettuare quest
 l'idea:
 \begin{enumerate}
     \item Stabilire una \textbf{relazione di difficoltà} tra problemi in $NP$, tale
-    per cui due problemi $\pi_1,\pi_2$, dove $\pi_1\leq\pi_2$, ovvero che $\pi_1$ è
-    più facile di $\pi_2$, se trovare un algoritmo efficiente per $\pi_2$ significa
-    automaticamente aver trovato un algoritmo efficiente per $\pi_1$.
+          per cui due problemi $\pi_1,\pi_2$, dove $\pi_1\leq\pi_2$, ovvero che $\pi_1$ è
+          più facile di $\pi_2$, se trovare un algoritmo efficiente per $\pi_2$ significa
+          automaticamente aver trovato un algoritmo efficiente per $\pi_1$.
 
     \item Trovare i problemi pià difficili in $NP$, tale per cui $\pi\in NP$
-    dove qualunque altro problema ha una difficoltà minore: se $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq\pi$
+          dove qualunque altro problema ha una difficoltà minore: se $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq\pi$
 
     \item Restringendo la ricerca di algoritmi efficienti solamente a questi problemi, se sono
-    in grado di dominare la complessità di questi problemi difficili allora sicuramente
-    sarò in grado di dominare la complessità di tutti gli altri problemi pià facili.
+          in grado di dominare la complessità di questi problemi difficili allora sicuramente
+          sarò in grado di dominare la complessità di tutti gli altri problemi pià facili.
 \end{enumerate}
 
 \subsubsection{Definizione formale $\pi_1\leq\pi_2$}
@@ -5976,7 +5989,7 @@ se e solo se esiste una funzione $f:\Sigma^*\rightarrow\Sigma^*$ tale per cui:
 \begin{enumerate}
     \item $f$ è calcolabile su DTM in tempo polinomiale ($f\in FP$).
     \item $\forall x\in\Sigma^*:x\in L_1\Leftrightarrow f(x)\in L_2$ (il mapping della
-    stringa nell'altro linguaggio).
+          stringa nell'altro linguaggio).
 \end{enumerate}
 Essenzialmente questa funzione $f$ mantiene la proprietà di appartenenza tra un linguaggio
 e l'altro. Se parto da una stringa nel primo linguaggio e la trasformo in un altra stringa,
@@ -6004,13 +6017,13 @@ Proviamo a trovare un algoritmo efficiente per $A$ (che è riducibile polinomial
 \begin{itemize}
     \item L'algoritmo in questione è deterministico perché tutti i passi sono deterministici.
     \item Questo è un algoritmo che riconosce $A$, perché se $x$ appartiene ad $A$ allora
-    anche $f(x)$ ovvero $y$ appartiene ad $A$, e risponderà 1.
+          anche $f(x)$ ovvero $y$ appartiene ad $A$, e risponderà 1.
     \item Complessità in tempo con $|x|=n$:
-    $$t(n)=t_f(n)+ t_{b\in B}(|y|)$$
-    la complessità in tempo è data dal tempo speso per calcolare la prima funzione (indicata
-    dal pallino singolo in \ref{alg:1}), e poi si spende del tempo per testare l'appartenenza della
-    stringa a $B$ (due pallini consecutivi in \ref{alg:1}). Non si può dare con certezza
-    la lunghezza di $y$ in quanto trasformata.
+          $$t(n)=t_f(n)+ t_{b\in B}(|y|)$$
+          la complessità in tempo è data dal tempo speso per calcolare la prima funzione (indicata
+          dal pallino singolo in \ref{alg:1}), e poi si spende del tempo per testare l'appartenenza della
+          stringa a $B$ (due pallini consecutivi in \ref{alg:1}). Non si può dare con certezza
+          la lunghezza di $y$ in quanto trasformata.
 \end{itemize}
 
 Cerchiamo di valutare in meglio la complessità in tempo:
@@ -6020,7 +6033,7 @@ quindi il primo termine è un polinomio $p(n)$. Il secondo termine è altrettant
 che però è espresso in lunghezza di $y$ chiamato $q$.
 $$=p(n)+q(|y|)$$
 la complessità però dovrebbe essere espressa in $n$ e non altrimenti, \textit{esiste
-in qualche modo la possibilità di limitare la lunghezza di $y$?} Sappiamo che questa
+    in qualche modo la possibilità di limitare la lunghezza di $y$?} Sappiamo che questa
 $y$ esce da una computazione di massimo $p(n)$ passi, questo significa che $|y|\leq p(n)$.
 $$t(n)\leq p(n)+q(p(n))=poly(n)$$
 Quindi questa piccola osservazione mi permette di maggiorare questo termine con $q(p(n))$,
@@ -6058,7 +6071,7 @@ $A\leq_p B\land B\in P\implies A\in P$, otteniamo che per ogni problema $\tilde{
 vale $\tilde{\pi}\in P$ quindi possiamo concludere che $NP\subseteq P$ e quindi $P=NP$.
 
 \textit{Esistono problemi $NP-completi$?} Si \textit{Sono state trovate soluzioi
-efficienti per almeno un problema $NP-completo$?} Ancora no.
+    efficienti per almeno un problema $NP-completo$?} Ancora no.
 
 \paragraph{CNF}\mbox{}\\
 Il primo problema $NP-completo$ è stato il $CNF-SAT$. Mostrarne l'appartenenza in $NP$
@@ -6096,20 +6109,20 @@ Il problema rimane e comunque va risolto, cercando di fare il meglio che si può
 
 \paragraph{Un ottima tecnica per mostrare che $\pi\in NP-C$}\mbox{}\\
 Un ottimo percorso per dimostrare che un problema $\pi$ sia $NP-C$ è il seguente (
-    assumendo che il problema su cui stia lavorando sia reputato difficile.)
+assumendo che il problema su cui stia lavorando sia reputato difficile.)
 \begin{enumerate}
     \item Dimostriamo che $\pi\in NP$.
     \item Scelgo un problema che già so essere $x\in NP-C$.
     \item Se riesco a dimostrare che $x\leq_P \pi$.
     \item Per la transitività do $\leq_P$ si ottiene che $\pi\in NP-C$ (ovvero
-    per il teorema $A\leq_P B\land B\leq_P C\implies A\leq_P C$).
+          per il teorema $A\leq_P B\land B\leq_P C\implies A\leq_P C$).
 \end{enumerate}
 Infatti:
 \begin{itemize}
     \item $\pi\in NP$ per il passo (1).
     \item $\forall\tilde{\pi}\in NP$ abbiamo che
-    $\tilde{\pi}\overset{(2)}{\leq_P}\overset{(3)}{\leq_P}\pi$. Per la transitività
-    di $\leq_P$ al punto (4) abbiamo che $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq_P\pi$.
+          $\tilde{\pi}\overset{(2)}{\leq_P}\overset{(3)}{\leq_P}\pi$. Per la transitività
+          di $\leq_P$ al punto (4) abbiamo che $\forall\tilde{\pi}\in NP:\tilde{\pi}\leq_P\pi$.
 \end{itemize}
 Quindi possiamo concludere che $\pi$ è $NP-completo$.
 
@@ -6117,18 +6130,18 @@ Quindi possiamo concludere che $\pi$ è $NP-completo$.
 $$L=DSPACE(\log n),\text{ classe dei problemi risolubili efficientemente in spazio.}$$
 $$P=\bigcup_{k\geq 0}DTIME(n^k),\text{ classe dei problemi risolubili efficientemente in tempo.}$$
 Abbiamo dimostrato che $L\subseteq P$, il problema che ci si pone è:\textit{ l'inclusione
-è propria?} Oppure $P\subseteq L$, possiamo procedere su $P\subseteq L$ come abbiamo
+    è propria?} Oppure $P\subseteq L$, possiamo procedere su $P\subseteq L$ come abbiamo
 fatto con $NP\subseteq P$:
 \begin{enumerate}
     \item Stabilire una relazione di difficoltà tra problemi $\pi_1$ e $\pi_2$, che in questo
-    caso $\pi_1\leq\pi_2$ (di difficoltà minore o uguale) se e soltanto se si ha una
-    soluzione efficiente in \textit{spazio} per $\pi_2$, allora automaticamente ne si ha
-    una efficiente in spazio per $\pi_1$-
+          caso $\pi_1\leq\pi_2$ (di difficoltà minore o uguale) se e soltanto se si ha una
+          soluzione efficiente in \textit{spazio} per $\pi_2$, allora automaticamente ne si ha
+          una efficiente in spazio per $\pi_1$-
 
     \item Trovo i problemi massimali in $P$ secondo questa relazione $\leq$.
 
     \item Restringi la tua ricerca di algoritmi efficienti in spazio a questi problemi
-    massimali. Se avrai successo su un problema massimale allora $P\subseteq L$.
+          massimali. Se avrai successo su un problema massimale allora $P\subseteq L$.
 \end{enumerate}
 
 \paragraph{Riduzione in spazio logaritmico}\mbox{}\\
@@ -6151,10 +6164,10 @@ $f\in FL$ la log-space riduzione. Consideriamo il seguente algoritmo:
 \end{figure}
 \begin{enumerate}
     \item Questo è sicuramente un algoritmo deterministico perché tutti i passi
-    sono deterministici.
+          sono deterministici.
     \item Per la proprietà (2), l'algoritmo riconosce $A$.
-    \item La complessità in spazio, con $|x|=n$: 
-    $$s(n)=s_f(n)+s_{y\in B}(|y|)$$
+    \item La complessità in spazio, con $|x|=n$:
+          $$s(n)=s_f(n)+s_{y\in B}(|y|)$$
 \end{enumerate}
 Analizzando più in dettaglio la complessità in spazio, notiamo che si divide in due
 complessità lo spazio per calcolare $f$ (1 pallino), e lo spazio per verificare
@@ -6199,7 +6212,7 @@ e $P=L$.
 \begin{itemize}
     \item Esistono problemi $P-Completi$.
     \item Per nessuno di essi è ancora stato trovato un algoritmo efficiente in termini
-    di spazio.
+          di spazio.
 \end{itemize}
 
 \paragraph{Esempi di problemi P-completi}\mbox{}\\
@@ -6233,7 +6246,7 @@ algoritmi paralleli efficienti (si crede molto fermamente).
     \item Scegliamo un problema $x$ notoriamente $P-completo$.
     \item Dimostra che $x\leq_{\ell}\pi$.
     \item Per la transitività di $\leq_{\ell}$ ($A\leq_{\ell}B\land B\leq_{\ell} C\implies A\leq_{\ell}C$),
-    ottieni che qualunque problema in $P$ si log-space riduce al problema $\pi$.
+          ottieni che qualunque problema in $P$ si log-space riduce al problema $\pi$.
     \item Per (1) e (4) si conclude che $\pi\in P-C$.
 \end{enumerate}
 
