@@ -1790,8 +1790,8 @@ $f\in F(\mathcal{C}_2)$.
 
 Sostanzialmente, ipotizzo l'esistenza di una funzione che rientri nella potenza computazionale
 del primo linguaggio $\mathcal{C}_1$,
-esiste un programma $p$ scritto in questo linguaggio che è in grado di calcolare $f$.
-Siccome esiste la traduzione, prendo $p$ e lo compilo, e questo funziona perché la traduzione è completa.
+esiste un programma $P$ scritto in questo linguaggio che è in grado di calcolare $f$.
+Siccome esiste la traduzione, prendo $P$ e lo compilo, e questo funziona perché la traduzione è completa.
 
 \subsubsection{Dimostrazine $F(WHILE)\subseteq F(RAM)$}
 Da un punto di vista immediato sembrerebbe la cosa più difficile da dimostrare, ma se ci si pensa
@@ -1837,18 +1837,18 @@ che il numero di registri è infinito).
 \paragraph{Base: assegnamenti}\mbox{}\\
 Vogliamo considerare i seguenti frammenti RAM per eseguire gli assegnamenti base dei programmi WHILE:
 \begin{itemize}
-    \item $Comp(x_k:=0)=$
+    \item $Comp(x_k:=0)$
           \begin{figure}[H]
               \centering
               \includegraphics[scale=0.4]{images/assegnamento_ram.png}
           \end{figure}
           controllo se un registro è azzerato, nel caso non fosse azzerato allora lo decremento
-          e ripeto il controllo ($R_21$ non sarà mai azzerato). Ad un certo punto uscirò dal ciclo,
+          e ripeto il controllo ($R_{21}$ non sarà mai azzerato). Ad un certo punto uscirò dal ciclo,
           l'ultima operazione è praticamente nulla perché non danneggia l'operato precedente (è già zero).
-          Tutti i registri da $R_21$ in poi sono tutti azzerati, perché non vengono utilizzati dal programma
+          Tutti i registri da $R_{21}$ in poi sono tutti azzerati, perché non vengono utilizzati dal programma
           WHILE, quindi possiamo utilizzarli come meglio crediamo.
 
-    \item $Comp(x_k:=x_j\pm 1)=$
+    \item $Comp(x_k:=x_j\pm 1)$
 
           notiamo che c'è un caso dove la compilazione è immediata, in un caso di quest'istruzione
           troviamo subito l'istruzione RAM che fa la stessa cosa. Il caso particolare accade quando
@@ -1857,16 +1857,17 @@ Vogliamo considerare i seguenti frammenti RAM per eseguire gli assegnamenti base
 
           \begin{figure}[H]
               \centering
-              \includegraphics[scale=0.5]{images/assegnamento_ram2.png}
+              \includegraphics[scale=0.4]{images/assegnamento_ram2.png}
           \end{figure}
           \begin{enumerate}
-              \item Salvo $x_j$ in $R_{22}$
-              \item Azzero $x_k$, ovvero $R_k$
-              \item Rigenero $x_j$ e $x_k$ da $R_{22}$
-              \item Sommo/sottraggo 1 da $x_k$
+              \item Salvo $x_j$ in $R_{22}$, questo attraverso le prime quattro istruzioni che seguono
+              dall'etichetta $LP$.
+              \item Azzero $x_k$, ovvero $R_k$ (etichetta $EX1$).
+              \item Rigenero $x_j$ e $x_k$ da $R_{22}$ (etichetta $EX2$).
+              \item Sommo/sottraggo 1 da $x_k$ (etichetta $EX3$).
           \end{enumerate}
 
-          \paragraph{Passo induttivo}
+          \paragraph{Passo induttivo}\mbox{}\\
           Consideriamo il comando composto $\underline{\text{begin}}\;C_1;...;C_m;\;\underline{\text{end}}$,
           considerando che esiste l'ipotesi induttiva, quindi assumo noti $Comp(C_1),\dots ,Comp(C_m)$
           mostro che la compilazione $Comp(\underline{\text{begin}}\;C_1;\dots;C_m\;\underline{\text{end}})$
@@ -1897,15 +1898,15 @@ Vogliamo considerare i seguenti frammenti RAM per eseguire gli assegnamenti base
 \end{itemize}
 
 \subsubsection{Dimostrazione $F(RAM)\subseteq F(WHILE)$}
-Il problema in questo caso è dato dal fatto che di deve gestire il "go to", che non
+Il problema in questo caso è dato dal fatto che si deve gestire l'operazione di "go to", che non
 è presente nel linguaggio WHILE (ed è proprio per questo motivo che utilizzare
-goto nei linguaggi strutturati è solo un problema). Dimostreremo come è possibile evitare l'utilizzo
+"go to" nei linguaggi strutturati è un problema). Dimostreremo come è possibile evitare l'utilizzo
 delle istruzioni "go to" nella programmazione strutturata.
 
 Introduciamo il concetto di \textbf{interprete}, per quasi tutti i linguaggi di programmazione
 ormai c'è la possibilità di avere la versione compilata che interpretata
 (con differenze prestazionali).
-La compilazione produce un programma equivalente che sta in piedi da solo
+La compilazione produce un programma equivalente che sta in piedi da solo (\textit{stand-alone})
 che può essere eseguito direttamente dalla macchina, l'interpretazione simula l'esecuzione
 di un programma attraverso un interprete.
 
@@ -1919,8 +1920,8 @@ Esso prenderà in ingresso un programma scritto in RAM ed un input, e produrrà 
 non un codice oggetto ma la semantica del programma $P$ sul dato $x$. Notiamo che in ingresso
 viene dato un programma $P$ che è listato, ma sappiamo che i nostri programmi WHILE non lavorano
 sulle stringhe. Un programma WHILE ha una sola variabile di input $x_1$ che può solo contenere
-numeri.\textit{Come facciamo a fornire il listato di $P$ al programma WHILE?} Il mio $I_W$
-prenderà in ingresso la codifica del programma $p$ che sarà fornito sotto forma di numero.
+numeri. \textit{Come facciamo a fornire il listato di $P$ al programma WHILE?} Il mio $I_W$
+prenderà in ingresso la codifica del programma $P$ che sarà fornita sotto forma di numero.
 
 \textit{Ma il nostro programma può veramente prendere due dati in questa maniera?} Notiamo bene
 che nel linguaggio WHILE $x_1$ non può prendere una coppia di numeri distinti, ma allora
@@ -1944,7 +1945,7 @@ Per esempio:
 \end{figure}
 
 Come vediamo queste non sono istruzioni di WHILE puro, dovremmo scrivere molte più istruzioni
-per ottenere ciò. Si ha anche la possibilità di rappresentare la coppia di cantor di due numeri,
+per ottenere ciò. Si ha anche la possibilità di rappresentare la coppia di Cantor di due numeri,
 visto che si ottengono con somme/sottrazioni, ed anche la possibilità di rappresentare la
 lista di Cantor.
 
@@ -1968,7 +1969,7 @@ Questo interprete scritto in WHILE si trova davanti ad un problema iniziale, si 
 numero di registri \textit{infinito} sulla macchina RAM (mi servono quindi un
 numero infinito di variabili, ma purtroppo sono solo 21). Però sappiamo che il
 nostro programma $P$ ha come codifica il numero $n$, allora sicuramente non userà
-mai un registro il cui registro sarà mai superiore di $n$, sicuramente $R_j<n$. Significa
+mai un registro il cui numero sarà superiore ad $n$, quindi $R_j<n$. Significa
 che posso limitarmi a maneggiare un numero di registri che va da $R_0,\dots,R_{n+2}$,
 quindi potrò sviluppare questa dinamica in una lista.
 
@@ -1984,7 +1985,7 @@ Utilizzo delle variabili da parte dell'interprete:
           program counter deve eseguire (gioca il ruolo del registro di istruzione
           corrente \textit{instruction register}, IR).
 \end{itemize}
-è opportuno ricordare che inizialmente $I_W$ troverà il suo input nella variabile
+è opportuno ricordare che inizialmente $I_w$ troverà il suo input nella variabile
 $x_1$, ovvero $\langle x,n\rangle$, nella variabile input $x_1$:
 \begin{figure}[H]
     \centering
@@ -2045,10 +2046,10 @@ ad 1, in maniera che punti alla prima istruzione del programma.
     \item Si carica nella variabile di output $x_0$ l'output del programma simulato che è
           il primo registro del programma (quindi il figlio sinistro della coppia di Cantor).
 \end{itemize}
-\paragraph{Conseguenze di $I_W$}
+\paragraph{Conseguenze di $I_W$}\mbox{}\\
 Una volta che ho l'interprete io posso creare un compilatore da programmi WHILE a programmi RAM.
-$$\Psi_{I_W}\left(\langle x,n\rangle\right)=\varphi_W(x)=\varphi_P(x)$$
-$$Comp:Prog\rightarrow W-PROG$$
+$$\Psi_{I_W}\left(\langle x,n\rangle\right)=\varphi_n(x)=\varphi_P(x)$$
+$$Comp:PROG\rightarrow W-PROG$$
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/compi_Iw.png}
@@ -2103,7 +2104,7 @@ ma in entrambi i casi ho catturato la stessa cosa ($\mathbb{N}$). \textit{Riesco
 
 \paragraph{Conseguenza 2: interprete universale}\mbox{}\\
 Un altra conseguenza importante derivata dal compilatore e dall'interprete, sappiamo
-anche che il nostro interprete $I_W$ è un programma RAM. Se io do in pasto questo
+anche che il nostro interprete $I_W$ è un programma WHILE. Se io do in pasto questo
 interprete al compilatore di programmi WHILE, quello che ottengo è un programma
 RAM $U$.
 $$U=Comp(I_W)\in PROG$$
@@ -2130,8 +2131,8 @@ dallo strumento di calcolo utilizzato). Ne verremo a conoscenza con il formalism
 introdotto da S. Kleene.
 
 \subsection{Concetto di calcolabilità}
-Iniziamo a sospettare che questa idea di calcolabilità sorga dai problemi (
-\textit{come caratteristica intrinseca dei problemi}) più che dal
+Iniziamo a sospettare che questa idea di calcolabilità sorga dai problemi
+(\textit{come caratteristica intrinseca dei problemi}) più che dal
 tipo di tecnologia che stiamo utilizzando. Quindi si cerca di astrarre il concetto che
 si vuole trattare, ovvero quello di \textbf{calcolabilità}.
 Quello che vogliamo fare è definire il concetto in modo matematico e assiomatico, in modo
@@ -2142,7 +2143,7 @@ Dobbiamo ripassare degli strumenti matematici e fissare un linguaggio comune:
 \subsubsection{Strumenti matematici (chiusure di insiemi)}
 Dato un insieme $U$, si definisce \textbf{operazione} su $U$ una qualunque
 funzione
-$$op:U\times\dots\times\implies U$$
+$$op:U\times\dots\times U\rightarrow U$$
 che va da $k$-volte il cartesiano di $U$ ad $U$. Il numero $k$ di operazioni cartesiane
 non è altro che il numero di argomenti, detto anche \textbf{arietà}.
 
@@ -2150,16 +2151,16 @@ non è altro che il numero di argomenti, detto anche \textbf{arietà}.
 L'insieme universo è l'insieme dei numeri naturali, per esempio l'operazione somma è un
 esempio di operazione binaria, la somma è una funzione definita su $\mathbb{N}^2$, poiché
 prende in ingresso due numeri e ne restituisce uno.
-$$+:\mathbb{N}\times\mathbb{N}\implies\mathbb{N}\text{ (operazione binaria)}$$
-Anche la radice è un operazione (unaria)
-$$\lfloor\sqrt\rfloor:\mathbb{N}\implies\mathbb{N}\text{ (operazione unaria)}$$
+$$+:\mathbb{N}\times\mathbb{N}\rightarrow\mathbb{N}\text{ (operazione binaria)}$$
+Anche la radice è un operazione (unaria):
+$$\left\lfloor \sqrt{} \right\rfloor:\mathbb{N}\rightarrow\mathbb{N}\text{ (operazione unaria)}$$
 Un esempio di operazione $n$-aria è quella del proiettore su di $t$, non
 fa altro che restituirà la componente $t$-esima.
-$$Pro_t^n:\mathbb{N}\times\dots\times\mathbb{N}\implies\mathbb{N}\text{ (operazione n-aria)}$$
+$$Pro_t^n:\mathbb{N}\times\dots\times\mathbb{N}\rightarrow\mathbb{N}\text{ (operazione n-aria)}$$
 
 Tornando al nostro discorso, definiamo con \textbf{chiusura} di un insieme $A\subseteq U$
-rispetto ad un operazione $op:U^k\implies U$, quando il risultato dell'operazione è ancora
-interno all'insieme $A$.
+rispetto ad un operazione $op:U^k\rightarrow U$, quando il risultato dell'operazione è ancora
+un elemento appartenente all'insieme $A$.
 $$\forall a_1,\dots,a_k\in A:op(a_1,\dots,a_k)\in A$$
 
 \paragraph{Esempio}\mbox{}\\
@@ -2173,10 +2174,15 @@ $$\Omega=\{+,*\}$$
 L'insieme dei numeri pari è chiuso rispetto ad $\Omega$ (2*4=8 e 2+4=6). Mentre l'insieme
 dei numeri dispari non è chiuso rispetto ad $\Omega$ poiché non è chiuso rispetto alla somma.
 
-Consideriamo il seguente problema, sia $A\subseteq U$ e $op:U^k\implies U$. Quale è il più
+Consideriamo il seguente problema, sia $A\subseteq U$ e $op:U^k\rightarrow U$. Quale è il più
 piccolo sottoinsieme di $U$ che contiene $A$, che sia chiuso rispetto all'operazione $op$?
 (Notare che sono tre condizioni e non due). Voglio allargare $A$ il meno possibile in maniera
 che contenga $A$ ma garantisca la chiusura rispetto ad $op$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/insieme_piu_piccolo.png}
+
+\end{figure}
 
 Alcune risposte ovvie:
 \begin{itemize}
@@ -2185,7 +2191,7 @@ Alcune risposte ovvie:
           essere il più piccolo (non è detto che sia il più piccolo).
 \end{itemize}
 Consideriamo il seguente esempio: sia $A=\{2,3\}\subseteq\mathbb{N}$ come operazione
-abbiamo la somma $+:\mathbb{N}^2\implies\mathbb{N}$, banalmente vediamo che $A$ è un insieme
+abbiamo la somma $+:\mathbb{N}^2\rightarrow\mathbb{N}$, banalmente vediamo che $A$ è un insieme
 che non può essere chiuso rispetto alla somma. Quale è il più piccolo sottoinsieme di $\mathbb{N}$
 che contiene $A$ ed è chiuso rispetto a $+$?
 Sappiamo che sicuramente $\mathbb{N}$:
@@ -2195,16 +2201,17 @@ Sappiamo che sicuramente $\mathbb{N}$:
     \item non è il più piccolo che soddisfa le precedenti due condizioni (1 e 2).
 \end{enumerate}
 Il problema è dato dal fatto che il risultato dell'operazione da un risultato che sarà
-al di fuori di $A$, ma se io stessi costruendo questo questo insieme man mano che eseguo
-l'operazione ed aggiungo il nuovo numero al sottoinsieme, al termine delle operazioni quello
-che avrò è il più piccolo sottoinsieme (approccio euristico costruttivo).
+al di fuori di $A$, ma costruendo questo insieme man mano che eseguo
+l'operazione e poi aggiungo il nuovo numero al sottoinsieme, allora al termine delle operazioni quello
+che avrò sarà il più piccolo sottoinsieme (approccio euristico costruttivo) chiuso rispetto all'operazione.
 
-Teorema: Sia $A\subseteq U$ e $op:U^k\implies U$. Il più piccolo sottoinsieme di $U$
-contenente $A$ e chiuso rispetto ad $op$ si ottiene calcolando la \textbf{chiusura di $A$
-    rispetto a $op$}, i ciò è, l'insieme $A^{op}$ definito induttivamente come:
+\paragraph{Teorema}\mbox{}\\
+Sia $A\subseteq U$ e $op:U^k\rightarrow U$. Sia Il più piccolo sottoinsieme di $U$
+contenente $A$ e chiuso rispetto ad $op$, il quale si ottiene calcolando la \textbf{chiusura di $A$
+    rispetto a $op$}, l'insieme $A^{op}$ definito induttivamente come:
 \begin{enumerate}
     \item $\forall a\in A\implies a\in A^{op}$
-    \item $\forall a_1,\dots,a_k\in A^{op}\implies op(a_1,\dots,a_k)\in A^{op}$
+    \item $\forall a_1,\dots,a_k\in A^{op}\rightarrow op(a_1,\dots,a_k)\in A^{op}$
     \item Nient'altro sta in $A^{op}$
 \end{enumerate}
 La definizione induttiva dice che nella base dell'induzione sono presenti tutti gli elementi
@@ -2222,7 +2229,7 @@ operativa" di $A^{op}$:
 
 \paragraph{Esempi di chiusure}\mbox{}\\
 Voglio il più piccolo sottoinsieme di $\mathbb{N}$ contenente $A=\{2,3\}$ e chiuso rispetto
-a $+\implies A^+$, come ottenerlo "operativamente"?
+a $+\rightarrow A^+$, come ottenerlo "operativamente"?
 \begin{enumerate}
     \item $A^+\leftarrow A$
     \item $(2+3)=5 \notin A^+ \rightarrow A^+ =\{2,3,5\}$
@@ -2300,9 +2307,8 @@ con gli strumenti matematici (che saranno sempre quelli per l'eternità).
 L'insieme delle funzioni elementari (intuitivamente calcolabili) è composto da tre funzioni.
 $$ELEM=\{$$
 $$\textit{successore: }s(x)=x+1, x\in\mathbb{N},$$
-$$\textit{zero: }0^n(x_1,\dots,x_n)=x_k, x_i\in\mathbb{N}$$
+$$\textit{zero: }0^n(x_1,\dots,x_n)=0, x_i\in\mathbb{N},$$
 $$\textit{proiettori: }pro_k^n(x_1,\dots,x_n)=x_k,x_i\in\mathbb{N}\}$$
-
 
 \begin{itemize}
     \item La funzione successore è in grado di effettuare una somma atomica ad una certa quantità.
@@ -2310,9 +2316,9 @@ $$\textit{proiettori: }pro_k^n(x_1,\dots,x_n)=x_k,x_i\in\mathbb{N}\}$$
     \item La funzione proiezione è in grado di restituire un $k$ fissato da una $n$-upla.
 \end{itemize}
 La nostra idea di calcolabilità si origina da qui poiché sono funzioni
-banalmente calcolabili (un programma while è banalmente scrivibile). Questa classe delle funzioni
+banalmente calcolabili (un programma WHILE è banalmente scrivibile). Questa classe delle funzioni
 elementari deve essere un punto da cui partire, poiché sono presenti delle funzioni che
-sono estremamente semplici da calcolare ma non presenti nel nucleo iniziale (es. predecessore, una funzione
+sono estremamente semplici da calcolare ma non presenti nel nucleo iniziale (es., predecessore, una funzione
 che sommi 2 anziché 1 \dots).
 
 \textit{Quindi cosa devo fare?} Devo ampliare la classe delle funzioni elementari. Quindi
@@ -2323,13 +2329,12 @@ la composizione di due funzioni passata come argomento. Quella che vogliamo impl
 composizione su più funzioni non solo 2.
 
 \paragraph{L'operatore di composizione di funzioni}\mbox{}\\
-Sia $h:\mathbb{N}^k\rightarrow\mathbb{N}$ e $g_1,\dots,g_k:\mathbb{N}^n\rightarrow\mathbb{N}$;
+Sia $h:\mathbb{N}^k\rightarrow\mathbb{N}$ e $g_1,\dots,g_k:\mathbb{N}^n\rightarrow\mathbb{N}$,
 denoteremo $\underline{x}\in\mathbb{N}^n$.
 Definisco la composizione degli argomenti come $COMP(h,g_1,\dots,g_k):\mathbb{N}^n\rightarrow\mathbb{N}$
 definito come
 $$COMP(h,g_1,\dots,g_n)(\underline{x})=h(g_1(\underline{x}),\dots,g_k(\underline{x}))$$
-
-Si parte dalla ennupla $\underline{x}$ la si da in pasto alla prima fino alla $k$-esima,
+Si parte dalla ennupla $\underline{x}$ la si da in pasto alla prima fino alla $k$-esima funzione,
 il risultato di ogni funzione viene dato in pasto alla funzione $h$ per ottenere la composizione.
 Notiamo che il caso di una composizione con due funzioni è un caso particolare di questo che è
 quello generale.
@@ -2371,7 +2376,7 @@ operatore necessito di due funzioni argomento $g,h$ (una con una singola ennupla
 argomenti, l'altra con una ennupla più altri due argomenti).
 $$g:\mathbb{N}^n\rightarrow\mathbb{N}$$
 $$h:\mathbb{N}^{n+2}\rightarrow\mathbb{N}$$
-rispettivamente $g(x)$ e $h(z,y,\underline{x})$ con $\underline{x}\in\mathbb{N}^n$
+rispettivamente $g(\underline{x})$ e $h(z,y,\underline{x})$ con $\underline{x}\in\mathbb{N}^n$.
 L'operatore di ricorsione primitiva prende in ingresso due funzioni e restituisce
 una terza funzione ottenuta per \textbf{ricorsione} delle altre due. La ricorsione
 primitiva applicata ad $h$ e $g$ restituisce una nuova funzione $f$ che dipende da
@@ -2380,7 +2385,7 @@ una sola ennupla $\underline{x}$ e da un solo parametro $y$ che è definita
     RP(h,g)=f(\underline{x},y)=
     \begin{cases}
         g(\underline{x})                          & y=0 \\
-        h(f(\underline{x},y-1),y-1,\underline{x}) & y=0
+        h(f(\underline{x},y-1),y-1,\underline{x}) & y>0
     \end{cases}
 \]
 Notiamo che nel caso in cui il parametro $y$ sia 0, la funzione $g(x)$ non è altro che
@@ -2412,8 +2417,8 @@ riutilizzando la somma (e via via anche l'esponenziale).
 \[
     prodotto(x,y)=
     \begin{cases}
-        O=O^2(x,y)                & y=0 \\
-        Somma(x, prodotto(x,y-1)) & y>0
+        0=0^2(x,y)                & y=0 \\
+        somma(x, prodotto(x,y-1)) & y>0
     \end{cases}
 \]
 possiamo definire l'operazione di $\dot{-}$ definendo a priori l'operatore di predecessore
@@ -2481,8 +2486,8 @@ dell'insieme $WHILE$.
                     Consideriamo delle funzioni $h,g_1,\dots,g_k$ per ipotesi induttiva assumo
                     che siano $WHILE$-programmabili ($\in F(WHILE)$). Ovvero che per ciascuna funzione
                     esisti un rispettivo programma $H,G_1,\dots,G_k\in W-PROG$ che le calcola. Ovvero
-                    la cui semantica sia corrisponda esattamente alle funzioni originali.
-                    $$\Psi_H=h, \Psi_{G_1},\dots\Psi_{G_k}=g_k$$
+                    la cui semantica corrisponda esattamente alle funzioni originali.
+                    $$\Psi_H=h, \Psi_{G_1}=g_1,\dots,\Psi_{G_k}=g_k$$
                     allora devo mostrarti un programma WHILE che calcoli la loro composizione.
                     $$COMP(h,g_1,\dots,g_k)=h(g_1(\underline{x}),\dots,g_k(\underline{x}))$$
                     \begin{figure}[H]
@@ -2504,7 +2509,7 @@ dell'insieme $WHILE$.
           assumo che le due rispettive funzioni $g,h$ siano $WHILE$-programmabili.
           Che quindi esistano $G,H\in W-PROG$ con $\Psi_G=g$ e $\Psi_h=h$.
           Allora riesco a
-          a scrivere un programma $WHILE$ che riesce a calcolare l'opreazione di ricorsione primitivaù
+          a scrivere un programma $WHILE$ che riesce a calcolare l'operazione di ricorsione primitiva.
           \begin{figure}[H]
               \centering
               \includegraphics[scale=0.5]{images/while-rico.png}
@@ -2524,31 +2529,34 @@ da dimostrare, tutte le $RICPRIM$ sono funzioni totali:
 \end{itemize}
 Chiaramente $F(WHILE)$ contiene anche funzioni \textbf{parziali} (che non terminano),
 questo grazie ad i loop che possono non far terminare i programmi.
-$$RICPRIM\nsubseteq F(WHILE)$$
+$$RICPRIM\subsetneq F(WHILE)$$
 Significa che devo ampliare ulteriormente $RICPRIM$ per raggiungere $F(WHILE)$
 
 \paragraph{Ulteriori considerazioni su $RICPRIM$}\mbox{}\\
-Consideriamo questo while, notiamo che è possibile riscrivere la stessa cosa
-con una sintassi semplificata quella del for.
+Consideriamo il \textit{while loop} del linguaggio WHILE, notiamo che è possibile riscrivere la stessa cosa
+con una sintassi semplificata quella del FOR.
 Le $RICPRIM$ caratterizzano la potenza computazionale con un linguaggio più semplice
-di quello WHILE, ovvero il $FOR$ language, però come un for del PASCAL dove è presente
+di quello WHILE, ovvero il $FOR$ language, questo come un \textit{for loop} del PASCAL dove è presente
 una variabile di controllo che scandisce le iterazioni, che parte da un certo valore
 e termina in un altro valore e che non può essere toccata nel FOR.
+
 Prendiamo tale $FOR$-language, e vediamo che le $RICPRIM$ sono esattamente la classe delle funzioni
 calcolate da questo linguaggio che ha un numero di iterazioni che è fissato e non
 potrà mai andare all'infinito (non stiamo considerando for loop del C/Java ma quello del PASCAL).
-$$RICPRIM=F(FOR)\nsubseteq F(WHILE)$$
+$$RICPRIM=F(FOR)\subsetneq F(WHILE)$$
 Questa è una inclusione propria.
 
-Ora effettuiamo un ulteriore considerazione, ipotizziamo di usare un linguaggio while
+\paragraph{Funzioni di Ackermann}\mbox{}\\
+Ora effettuiamo un ulteriore considerazione, ipotizziamo di usare un linguaggio WHILE
 che non possa andare in loop, quindi mi restringo ad una classe $\tilde{F}(WHILE)$
-di funzioni while che non possono andare in loop. \textit{Adesso come sarà il
+di funzioni WHILE che non possono andare in loop. \textit{Adesso come sarà il
     confronto tra il $FOR$ language ed il $WHILE$ indebolito?} L'inclusione è propria?
 
 Le $RICPRIM$ sono incluse propriamente nella classe delle funzioni $\tilde{F}(WHILE)$,
 questo è dimostrabile sia per diagonalizzazione che utilizzando la funzione di Ackermann.
-Una funzione di Ackermnann (1928) è una funzione che non è ricorsiva primitiva ma
-può essere calcolata in un programma $WHILE$ da un programma che termina.
+Una funzione di Ackermann (1928) è una funzione che non è ricorsiva primitiva ma
+può essere calcolata da un programma $WHILE$ che termina.
+
 Questa funzione sfrutta una doppia induzione, perché lo schema ricorsivo della funzione
 di Ackermann non è lo stesso di quello delle $RICPRIM$.
 
@@ -2556,13 +2564,15 @@ di Ackermann non è lo stesso di quello delle $RICPRIM$.
     \mathcal{A}(m,n)=
     \begin{cases}
         n+1                                 & m=0      \\
-        \mathcal{A}(m+1,1)                  & m>0, n=0 \\
-        \mathcal{A}(m-1,\mathcal{A}(m,m-1)) & m,n>0
+        \mathcal{A}(m-1,1)                  & m>0, n=0 \\
+        \mathcal{A}(m-1,\mathcal{A}(m,n-1)) & m,n>0
     \end{cases}
 \]
+$$\mathcal{A}\notin RICPRIM\implies\mathcal{A}\in\tilde{F}(WHILE)$$
 Se usiamo solamente la composizione di $RICPRIM$ non siamo in grado di esprimere tale
 classe di funzioni. L'idea è che le $RICPRIM$ hanno un determinato tasso di crescita
 che è nettamente inferiore rispetto alle funzioni di Ackermann.
+
 N.B.: Già nel 1927 Sudau aveva proposto una funzione con le stesse caratteristiche
 di quella di Ackermann\dots
 Occorre ampliare $RICPRIM$\dots
@@ -2572,7 +2582,7 @@ Occorre ampliare $RICPRIM$\dots
 \end{figure}
 
 \paragraph{Operatore di minimalizzazione di funzioni}\mbox{}\\
-Vogliamo ampliare ancora di più l'attuale classe di funzioni, introduciano il nuovo operatore
+Vogliamo ampliare ancora di più l'attuale classe di funzioni, introduciamo il nuovo operatore
 di minimalizzazione.
 Sia $f:\mathbb{N}^{n+1}\rightarrow\mathbb{N}$, $f(\underline{x},y)$ con
 $\underline{x}\in\mathbb{N}^n$. La minimalizzazione di una funzione ad $n+1$ genera una
@@ -2669,21 +2679,22 @@ tale per cui la funzione si azzeri.
     \caption{Programma WHILE che implementa la minimalizzazione di una funzione}
 \end{figure}
 Sia tale che questa dicitura è legale, poiché $F$ è un programma $WHILE$, se però
-$y$ dovesse mancare questo programma andrà in loop (semantica indeterminata,. $\bot$). Si introduce
+$y$ dovesse mancare questo programma andrà in loop (semantica indeterminata, $\bot$). Si introduce
 la possibilità di programmi che vanno in loop.
 
 Per induzione strutturale abbiamo mostrato che $\mathcal{P}\subseteq F(WHILE)$. Sorge una
 domanda, \textit{la nostra "idea teorica" di calcolabilità $\mathcal{P}$ raggiungerà
-    quella "pratica" di $F(WHILE)$? Può valore $F(WHILE)\subseteq\mathcal{P}$?}
+    quella "pratica" di $F(WHILE)$? Può valere $F(WHILE)\subseteq\mathcal{P}$?}
 
 Nel caso in cui si possa dimostrare tale inclusione (e quindi poi dimostrare che $F(WHILE)=\mathcal{P}$).
 
 \subsubsection{Dimostrazione $F(WHILE)\subseteq\mathcal{P}$}
-Vogliamo dimostrare $F(WHILE)=\{\Psi_W : W\in W-PROG\}\subseteq\mathcal{P}=ELEM^{COMP,RP,MIN}$
+Vogliamo dimostrare
+$$F(WHILE)=\{\Psi_w : w\in W-PROG\}\subseteq\mathcal{P}=ELEM^{COMP,RP,MIN}$$
 le funzioni $WHILE$ programmabili sono anche delle ricorsive parziali.
-$$\Psi_W\in F(WHILE)\implies\Psi_W\in\mathcal{P}=ELEM^{COMP,RP,MIN}$$
+$$\Psi_w\in F(WHILE)\implies\Psi_W\in\mathcal{P}=ELEM^{COMP,RP,MIN}$$
 Quindi prendiamo una funzione tale e dimostriamo che essa sia ricorsiva parziale, ma questo
-per definizione vuol dire dimostrare che $\Psi_W$ può essere ottenuta come composizione,
+per definizione vuol dire dimostrare che $\Psi_w$ può essere ottenuta come composizione,
 ricorsione primitiva e minimalizzazione a partire da funzioni in $ELEM$.
 
 Se riesco a dimostrare questo allora ho dimostrato che la semantica di un qualsiasi programma
@@ -2692,15 +2703,17 @@ $WHILE$ è ricorsiva parziale.
 Ricordiamo come è definita la semantica di un programma $WHILE$ si definisce a partire
 dall'input $x$ inserito in una funzione che inizializza la macchina (delle 21 variabili
 disponibili $x_1=x$ ed il resto impostate a 0). Dopo di che si fa agire la semantica nel
-programma $W$, la quale è la funzione stato prossimo, ci restituisce lo stato successivo.
+programma $w$, la quale è la funzione stato prossimo, ci restituisce lo stato successivo.
 L'output è lo stato finale che viene salvato sul registro/variabile 0 delle 21 disponibili,
 questo significa effettuare la proiezione.
-$$\Psi_W(x)=Pro_0^{21}([W](W-in(x)))$$
+$$\Psi_w(x)=Pro_0^{21}([w](W-in(x)))$$
 (la funzione stato prossimo $[C](\underline{x})=\underline{y}$ calcola lo stato
 $\underline{y}\in\mathbb{N}^{21}$ a seguito dall'esecuzione del comando $WHILE$ $C$
-partendo dallo stato $\underline{x}\in\mathbb{N}^{21}$).
+partendo dallo stato $\underline{x}\in\mathbb{N}^{21}$). In pratica la semantica
+WHILE mi preleva l'output (proiezione) dopo l'esecuzione del programma $w$ (funzione
+stato prossimo) inizializzato (funzione di inizializzazione).
 
-Quindi vogliamo dimostrare che $\Psi_W(x)=Pro_0^{21}([W](W-in(x)))$ faccia parte delle
+Quindi vogliamo dimostrare che $\Psi_w(x)=Pro_0^{21}([w](W-in(x)))$ faccia parte delle
 ricorsive parziali, noto che la semantica di un programma $WHILE$ si ottiene effettuando
 la composizione di una funzione elementare (la proiezione) con la funzione stato prossimo.
 Allora questo significa che posso rappresentare con le ricorsive parziali la funzione
@@ -2710,7 +2723,7 @@ stato prossimo, vediamo perché:
     \item $\mathcal{P}$ è chiuso rispetto alla composizione
     \item Questo dimostra che $[C](\underline{x})=y\in\mathcal{P}$ allora $\Psi_W\in\mathcal{P}$. Qui
           però c'è da aggiungere un dettagli tecnico, la funzione stato prossimo è definita come $[]():\mathbb{N}^{21}\rightarrow\mathbb{N}^{21}$
-          ha come codominio $\mathbb{N}^21$ (funzione che va da stati in stati). Mentre $\mathcal{P}$ per come le abbiamo
+          ha come codominio $\mathbb{N}^{21}$ (funzione che va da stati in stati). Mentre $\mathcal{P}$ per come le abbiamo
           definite hanno come codominio $\mathbb{N}$. \textit{Questo è un problema?} a dire il vero no, sappiamo che possiamo
           esprimere ciò con una codifica di 21 elementi utilizzando la lista di Cantor.
 \end{enumerate}
@@ -2719,7 +2732,6 @@ alle funzioni ricorsive ($[C](\underline{x})=\underline{y}\in\mathcal{P}$ con $\
 Quanto $f_C(x)=y\in\mathcal{P}$ con $x=[\underline{x}]$ e $y=[\underline{y}]$, ovvero la funzione
 correlata con gli stati che non sono visti come vettori ma la codifica di array di 21 elementi (ovvero
 gli stati contenuti nelle 21 variabili) secondo Cantor.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/ric-parz.png}
