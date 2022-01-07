@@ -2692,7 +2692,7 @@ Nel caso in cui si possa dimostrare tale inclusione (e quindi poi dimostrare che
 Vogliamo dimostrare
 $$F(WHILE)=\{\Psi_w : w\in W-PROG\}\subseteq\mathcal{P}=ELEM^{COMP,RP,MIN}$$
 le funzioni $WHILE$ programmabili sono anche delle ricorsive parziali.
-$$\Psi_w\in F(WHILE)\implies\Psi_W\in\mathcal{P}=ELEM^{COMP,RP,MIN}$$
+$$\Psi_w\in F(WHILE)\implies\Psi_w\in\mathcal{P}=ELEM^{COMP,RP,MIN}$$
 Quindi prendiamo una funzione tale e dimostriamo che essa sia ricorsiva parziale, ma questo
 per definizione vuol dire dimostrare che $\Psi_w$ può essere ottenuta come composizione,
 ricorsione primitiva e minimalizzazione a partire da funzioni in $ELEM$.
@@ -2721,7 +2721,7 @@ stato prossimo, vediamo perché:
 \begin{enumerate}
     \item $Pro_0^{21}\in ELEM\implies Pro_0^{21}\in\mathcal{P}$
     \item $\mathcal{P}$ è chiuso rispetto alla composizione
-    \item Questo dimostra che $[C](\underline{x})=y\in\mathcal{P}$ allora $\Psi_W\in\mathcal{P}$. Qui
+    \item Questo dimostra che $[C](\underline{x})=y\in\mathcal{P}$ allora $\Psi_w\in\mathcal{P}$. Qui
           però c'è da aggiungere un dettagli tecnico, la funzione stato prossimo è definita come $[]():\mathbb{N}^{21}\rightarrow\mathbb{N}^{21}$
           ha come codominio $\mathbb{N}^{21}$ (funzione che va da stati in stati). Mentre $\mathcal{P}$ per come le abbiamo
           definite hanno come codominio $\mathbb{N}$. \textit{Questo è un problema?} a dire il vero no, sappiamo che possiamo
@@ -2774,11 +2774,11 @@ adesso vediamo la funzione stato prossimo per i comandi composti
     \item $C'\equiv\text{while }\;x_k\neq 0\text{ do }C$, consideriamo sempre per ipotesi
           induttiva che la funzione composta faccia parte delle ricorsive parziali $f_c\in\mathcal{P}$
 
-          $$f_{c'}(x)=f_c^{e(x)}(x)\text{ con }e(x)=\mu y(Pro(k,f_e^y(x))=0)$$
+          $$f_{c'}(x)=f_c^{e(x)}(x)\text{ con }e(x)=\mu y(Pro(k,f_c^y(x))=0)$$
           ovvero applichiamo il comando $C$ nello stato $x$ un numero $e$ di volte, tale per cui
           questo numero sia il più piccolo numero di volte che serve per azzerare la variabile $k$.
 
-          Inizio a notare qualcosa chem i piace, ci sono operazioni di minimizzazione e proiezione,
+          Inizio a notare qualcosa che m i piace, ci sono operazioni di minimizzazione e proiezione,
           questi sono costrutti ricorsivi parziali.
 
           Siamo attualmente tentati da dire che la semantica del $WHILE$ sia ricorsiva parziale, ma
@@ -2889,7 +2889,7 @@ quali siano le proprietà più auspicabili, consideriamo il sistema RAM:
           funzioni ricorsive parziali", visto che vogliamo un sistema ragionevole vogliamo aderire con
           questa classe di funzioni (non vogliamo nulla di più o di meno).
     \item \textbf{Interprete universale}, ovvero un programma $u\in\mathbb{N}$ tale che
-          $\forall x,n\in\mathbb{N}:\varphi(\langle x,n\rangle)=\varphi_n(x)$, ovvero in grade di
+          $\forall x,n\in\mathbb{N}:\varphi(\langle x,n\rangle)=\varphi_n(x)$, ovvero in grado di
           simulare un qualsiasi altro programma scritto in RAM (esso stesso è scritto in RAM). Possiamo
           rivedere i passi con cui abbiamo dimostrato l'esistenza di questo programma universale:
           La presenza di un interprete universale è molto interessante, vogliamo trattare sistemi di programmazione
@@ -2961,7 +2961,7 @@ quali siano le proprietà più auspicabili, consideriamo il sistema RAM:
           $m+n$ variabili, dove si fissano gli ultimi $n$ input e si lasciano variare i primi $m$.
           Formalmente, dato $\{\varphi_i\}$ RAM, esiste una funzione $S_n^m\in\mathcal{T}$ tale che per
           ogni programma $k\in\mathbb{N},\underline{x}\in\mathbb{N}^m$ e ogni $\underline{y}\in\mathbb{N}^n$ vale:
-          $$\varphi_k\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_m^n(k,\underline{y})}\left(\rangle\underline{x}\langle\right)$$
+          $$\varphi_k\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_n^m(k,\underline{y})}\left(\langle\underline{x}\rangle\right)$$
           La dimostrazione è una semplice generalizzazione di quella fornita per il teorema $S_1^1$.
 \end{enumerate}
 
@@ -2983,8 +2983,7 @@ Dati due linguaggi, una cosa interessante da verificare è: \textit{sono in grad
 accettabili). Dal punto di vista pratico dipende dai linguaggi che vengono forniti, quello che possiamo
 dimostrare però è che qualunque sia la coppia dei linguaggi scelti è che \textbf{sicuramente
     esiste un compilatore tra di essi}.
-
-Dati due sistemi di programmazione accettabili $\{\varphi_i\}$ e $\Psi_i$ un compilatore è un modo
+Dati due sistemi di programmazione accettabili $\{\varphi_i\}$ e $\{\Psi_i\}$ un compilatore è un modo
 per trasformare un programma in un altro in maniera che mantenga la semantica. Per noi i
 programmi sono numeri, quindi un compilatore è una funzione $t:\mathbb{N}\rightarrow\mathbb{N}$
 tale che abbia le seguenti caratteristiche:
@@ -3012,12 +3011,12 @@ che sia ricorsiva totale e che sia corretta (solamente utilizzando questi tre as
           posso dire che esiste un programma $u$ per cui posso simulare il programma
           $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)$$
     \item Noto che tutto ciò che è calcolato nel sistema $\{\varphi_i\}$, questo grazie
-          alla tesi di Church-Turing, e lo stesso vale per $\Psi_i$. Allora esiste un programma $e$
+          alla tesi di Church-Turing, e lo stesso vale per $\{\Psi_i\}$. Allora esiste un programma $e$
           in grado di calcolare il programma $u$, ovvero che ha la sua stessa semantica.
           $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)=\Psi_e\left(\langle x,i\rangle\right)$$
     \item Il terzo assioma mi dice che è possibile rubare una delle variabili in input grazie al
           teorema $S_1^1$.
-          $$\varphi_i(x)=\varphi_u\left(\langle x,i\rangle\right)=\Psi_e\left(\langle x,i\rangle\right)=\Psi_{S_1^1(e,i)}(x)$$
+          $$\varphi_i(x)\overset{(2)}{=}\varphi_u\left(\langle x,i\rangle\right)\overset{(1)}{=}\Psi_e\left(\langle x,i\rangle\right)\overset{(3)}{=}\Psi_{S_1^1(e,i)}(x)$$
 \end{itemize}
 Il compilatore cercato è la funzione $t(i)=S_1^1(e,i)$ per ogni $i\in\mathbb{N}$, quindi
 questa funzione $t(i)$ è effettivamente un compilatore tra i due sistemi di programmazione
@@ -3085,7 +3084,7 @@ visti come numeri:
     \item in grado di compilare un qualsiasi programma automaticamente, questo rappresentato
           dalla funzione $t\in\mathcal{T}$.
     \item la semantica del sorgente deve essere uguale alla semantica dell'oggetto
-          $$\forall i\in\mathcal{N}:\varphi_i=\Psi_{t(i)}$$
+          $$\forall i\in\mathbb{N}:\varphi_i=\Psi_{t(i)}$$
 \end{enumerate}
 Un compilatore che è completamente errato è una funzione $t:\mathbb{N}\rightarrow\mathbb{N}$ t.c.
 \begin{enumerate}
@@ -3110,14 +3109,14 @@ dopo la dimostrazione):
 \begin{itemize}
     \item Nel 1° quesito: \textit{esistono Quine negli s.p.a.?} Consideriamo il seguente
           programma $P$
-          \begin{figure}
+          \begin{figure}[H]
               \centering
               \includegraphics[scale=0.5]{images/P_teoremaric.png}
           \end{figure}
           Notiamo che è un programma che se ne frega, \textit{quale è la semantica di questo
               programma?} (in $RAM$: $\exists j\in\mathbb{N}:\varphi_j(x)=j?$) Notiamo che il programma mette $j$ nel registro, quindi è $j$.
           In poche parole la codifica di questo programma è la lista di Cantor $\langle0,0,\dots, 0\rangle$
-          ovvero una funzione $Z_{(j)\in\mathcal{T}}$ che mette $j$ volte lo 0 in lista di Cantor. Ovviamente
+          ovvero una funzione $Z(j)\in\mathcal{T}$ che mette $j$ volte lo 0 in lista di Cantor. Ovviamente
           questa è una funzione ricorsiva totale sempre definita su $j$.
           Quindi la semantica del programma è $\varphi_{Z(j)}(x)=j$.
           Ora posso introdurre il teorema di ricorsione visto che ho una funzione ricorsiva totale (lui
@@ -3128,16 +3127,16 @@ dopo la dimostrazione):
     \item Nel 2° quesito: \textit{dati due s.p.a. $\{\varphi_i\},\{\Psi_i\}$ esistono compilatori completamente errati?}
           ($t\in\mathcal{T}:\forall i \varphi_i\neq\Psi_{t(i)}$) Supponiamo di avere in mano un modo
           per "maltrattare i programmi" $t\in\mathcal{T}$ che prende in ingresso un programma $i$ del sistema $\varphi_i$
-          e restituisca un programma fallato nel linguaggio del s.p.a. $\Psi_i$.
+          e restituisca un programma fallato nel linguaggio del s.p.a. $\Psi_i$, $t(i)$.
           Consideriamo la semantica del programma maltrattato, descriviamola utilizzando
           i tre assiomi fondamentali (enumerati per applicazione nell'equazione):
-          $$\Psi_{t(i)}(x)=^{(2)}\Psi_u(x,t(i))=^{(1)}\varphi_e(x,t(i))=^{(3)}\varphi_{S_1^1(e,t(i))}(x)$$
+          $$\Psi_{t(i)}(x)\overset{(2)}{=}\Psi_u(x,t(i))\overset{(1)}{=}\varphi_e(x,t(i))\overset{(3)}{=}\varphi_{S_1^1(e,t(i))}(x)$$
           La funzione $S_1^1$ dipende solamente da una variabile, perché la $e$ è fissata, in più è
           una funzione ricorsiva totale questo perchè anche $t(i)\in\mathcal{T}$ (e la stessa $S_1^1$ è per
           il terzo assioma). Quindi in realtà lei è una funzione
           $$g(i)=S_1^1(e,t(i))$$ è la composizione di $t,S_1^1\in\mathcal{T}$, e quindi $g\in\mathcal{T}$
           questo significa che posso applicare il teorema di ricorsione:
-          $$\exists i\in\mathcal{N}:\varphi_i=\varphi_{g(i)}$$
+          $$\exists i\in\mathbb{N}:\varphi_i=\varphi_{g(i)}$$
           e quindi concatenandolo alla prima serie di equazioni otteniamo:
           $$\exists i\in\mathbb{N}:\Psi_{t(i)}=\varphi_i,\text{ per ogni }t\in\mathcal{T}$$
           il mio modo di maltrattare i programmi non è andato a buon fine, questo perché esiste
@@ -3160,29 +3159,29 @@ Ricordiamo che un s.p.a. soddisfa:
 \end{enumerate}
 D'ora in avanti, per semplicità, scriveremo $\varphi_n(x,y)$ per $\varphi_n(\langle x,y\rangle)$.
 
-$$\varphi_{\varphi_i(i)}(x)=^{(2)}\varphi_{\varphi_u (i,i)}(x)=^{(2)}\varphi_u(x,\varphi_u(i,i))=\text{(composizione di funzioni )}\mathcal{P}=f(x,i)\in\mathcal{P}$$
+$$\varphi_{\varphi_i(i)}(x)\overset{(2)}{=}\varphi_{\varphi_u(i,i)}(x)\overset{(2)}{=}\varphi_u(x,\varphi_u(i,i))=\text{(composizione di funzioni )}=f(x,i)\in\mathcal{P}$$
 Semantica dell'$i$-esimo programma dell'$i$-esimo input su $x$. Grazie all'interprete
-universale può essere visto come l'interprete universale attivato sulla coppia $i,i$,
+universale può essere visto come l'interprete universale attivato sulla coppia $(i,i)$,
 successivamente si fa agire ancora l'interprete universale su l'intero programma esterno,
 semplificando ulteriormente. Notiamo la semantica di questo programma consiste nel calcolare
-una funzione di due valori, e questa è la composizione di due funzioni ricorsive parziali (
-quindi è una ricorsiva parziale).
+una funzione di due valori, e questa è la composizione di due funzioni ricorsive parziali
+(quindi è una ricorsiva parziale).
 
-$$=^{(1)}\varphi_e(x,i)=^{(3)}\varphi_{S_1^1(e.i)}(x)$$
+$$\overset{(1)}{=}\varphi_e(x,i)\overset{(3)}{=}\varphi_{S_1^1(e,i)}(x)$$
 posso fare un altro passo, e rubare grazie all'assioma 3 un argomento da dare in pasto alla funzione
 $S_1^1(e,i)$, quindi partendo da questa scrittura perfettamente legale dal nostro s.p.a. ed
 usando solamente gli assiomi che definiscono un s.p.a. abbiamo potuto porre la seguente uguaglianza
-$$\varphi_{\varphi_i(i)}(x)=\varphi_{S_1^1(e.i)}(x)$$
+$$\varphi_{\varphi_i(i)}(x)=\varphi_{S_1^1(e,i)}(x)$$
 Ora facciamo un altro passo, consideriamo la funzione $t(S_1^1(e,i))$: è una funzione
 che è composizione di due funzioni ricorsive totali, ed essa dipende solamente da una variabile
 $i$ ($e$ è fissato). Come tale classe di funzione essa risulta \textbf{programmabile}, quindi
 esiste un programma $m$ che la può calcolare.
-$$t,S_1^1\in\mathcal{T}\implies\exists m\in\mathcal{N}:\varphi_m(i)=t(S_1^1(e,i))$$
+$$t,S_1^1\in\mathcal{T}\implies\exists m\in\mathbb{N}:\varphi_m(i)=t(S_1^1(e,i))$$
 Ed ecco che $n=S_1^1(e,m)$, il quale è un $n$ tale per cui $\varphi_n=\varphi_{t(n)}$ il
 che prova il teorema di ricorsione.
 
 Vediamo se è vero
-$$\varphi_n(x)=\varphi_{S_1^1(e,m)}=\varphi_{\varphi_m(m)}(x)$$
+$$\varphi_n(x)=\varphi_{S_1^1(e,m)}(x)=\varphi_{\varphi_m(m)}(x)$$
 $$\varphi_{t(n)}(x)=\varphi_{t(S_1^1(e,m))}(x)=\varphi_{\varphi_m(m)}(x)$$
 Ma entrambe sono la stessa cosa, allora $\varphi_n=\varphi_{t(n)}$
 
@@ -3207,11 +3206,17 @@ Strategia:
     \item Il quesito iniziale è diventato $\exists n\in\mathbb{N}:\varphi_n(x)=\varphi_{S_1^1 (e,n)}(x)$
           con $S_1^1(e,n)\in\mathcal{T}$
     \item La risposta è si per il teorema di ricorsione.
+    $$\varphi_n(x)=\varphi_{S_1^1(e,n)}(x)=\varphi_x(n+\varphi_{\varphi_u(0,n)}(x))$$
 \end{enumerate}
 
 \paragraph{Esempio 1}\mbox{}\\
-
-\paragraph{Esempio 2}\mbox{}\\
+Dato un s.p.a $\{\varphi_i\},\exists n\in\mathbb{N}$ tale che $\varphi_n(x)=\varphi_x(x)+\sqrt{\varphi_{\varphi_x(n)}(x)}?$
+$$\varphi_n(x)=\varphi_n(x)+\sqrt{\varphi_{\varphi_x(n)}(x)}\overset{(2)}{=}$$
+$$\varphi_u(x,n)+\sqrt{\varphi_{\varphi_u(n,x)}(x)}\overset{(2)}{=}$$
+$$\varphi_u(x,n)+\sqrt(\varphi_u(x,\varphi_u(n,x)))=f(x,n)\in\mathcal{P}\overset{(1)}{=}$$
+$$\varphi_e(x,n)\overset{(3)}{=}\varphi_{S_1^1(e,n)(x)}$$
+Siccome $s_1^1(e,n)\in\mathbb{N}^\mathbb{N}$ è ricorsiva totale, il teorema di ricorsione implica l'esistenza di un
+$n\in\mathbb{N}$ che soddisfa l'equazione iniziale.
 
 \subsection{Problemi di decisione}
 Essenzialmente è semplicemente una domanda che ci viene posta che possiamo rispondere con SI o NO. In termini
