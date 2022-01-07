@@ -48,13 +48,20 @@
 
 %Algorithm
 \usepackage[]{algorithm2e}
+\RestyleAlgo{ruled}
+%% This is needed if you want to add comments in
+%% your algorithm with \Comment
+\SetKwComment{Comment}{/* }{ */}
+\SetKwRepeat{Do}{do}{while}
+
 \title{%
   \textbf{Informatica Teorica}\\
   \large Prof. Mereghetti Carlo\\
     Università degli Studi di Milano\\
     Laurea Magistrale in Informatica, A.A. 2020/2021}
 
-\author{Appunti di Manuel Pagliuca}
+
+    \author{Appunti di Manuel Pagliuca}
 
 \begin{document}
 \maketitle
@@ -3096,15 +3103,15 @@ Partendo dall'assunzione che non è possibile carpire la semantica di un program
 Per rispondere a questo quesito dobbiamo introdurre un teorema detto "Teorema di ricorsione".
 
 \paragraph{Teorema di ricorsione}\mbox{}\\
-Data una s.p.a. e prendiamo una qualsiasi funzione ricorsiva totale $t:\mathbb{N}\rightarrow\mathbb{N}$,
-sappiamo che tutti i programmi possono essere definiti come un intero, quindi è giusto
-pensar alla funzione definita da programma a programma.
-
+Una risposta precisa ai due precedenti quesiti è data dal \textit{teorema di ricorsione} (Kleene).
+Dato una s.p.a. $\{\varphi_i\}$, prendiamo una qualsiasi funzione ricorsiva totale $t:\mathbb{N}\rightarrow\mathbb{N}$,
+ definita da programma a programma, allora vale che:
 $$\exists n\in\mathbb{N}:\varphi_n=\varphi_{t(n)}$$
-ovvero, esisterà un programma il cui significato non subirà la trasformazione. Prendiamo $t$ (la
-funzione trasformazione dei programmi), qualsiasi sia la trasformazione esisterà un programma
-che non sarà intaccato da questa trasformazione (qualsiasi trasformazione essa sia). Grazie
-al teorema di ricorsione riusciamo a rispondere ai precedenti due requisiti (vedremo
+ovvero, esisterà un programma la cui semantica non subirà alcuna trasformazione applicata dalla funzione
+$t$. Prendiamo $t$ (la funzione trasformazione dei programmi), qualsiasi sia la trasformazione esisterà
+almeno un programma che non sarà intaccato da questa trasformazione (qualsiasi trasformazione essa sia).
+
+Grazie al teorema di ricorsione riusciamo a rispondere ai precedenti due requisiti (vedremo
 dopo la dimostrazione):
 \begin{itemize}
     \item Nel 1° quesito: \textit{esistono Quine negli s.p.a.?} Consideriamo il seguente
@@ -3165,29 +3172,34 @@ universale può essere visto come l'interprete universale attivato sulla coppia 
 successivamente si fa agire ancora l'interprete universale su l'intero programma esterno,
 semplificando ulteriormente. Notiamo la semantica di questo programma consiste nel calcolare
 una funzione di due valori, e questa è la composizione di due funzioni ricorsive parziali
-(quindi è una ricorsiva parziale).
+la quale è una ricorsiva parziale nelle variabili $(x,i)$.
 
+Allora esiste un programma $e$, tale per cui $\varphi_e(x,i)$, applicando il teorema $S_1^1$,
+concludiamo che:
 $$\overset{(1)}{=}\varphi_e(x,i)\overset{(3)}{=}\varphi_{S_1^1(e,i)}(x)$$
-posso fare un altro passo, e rubare grazie all'assioma 3 un argomento da dare in pasto alla funzione
-$S_1^1(e,i)$, quindi partendo da questa scrittura perfettamente legale dal nostro s.p.a. ed
+quindi partendo da questa scrittura perfettamente legale dal nostro s.p.a. ed
 usando solamente gli assiomi che definiscono un s.p.a. abbiamo potuto porre la seguente uguaglianza
 $$\varphi_{\varphi_i(i)}(x)=\varphi_{S_1^1(e,i)}(x)$$
-Ora facciamo un altro passo, consideriamo la funzione $t(S_1^1(e,i))$: è una funzione
-che è composizione di due funzioni ricorsive totali, ed essa dipende solamente da una variabile
-$i$ ($e$ è fissato). Come tale classe di funzione essa risulta \textbf{programmabile}, quindi
+Ora facciamo un altro passo, poiché la funzione $S_1^1(e,i)$ e $t(i)$ sono
+funzioni ricorsive totali (per ipotesi di $t$ e per definizione di $S_1^1$),
+allora la loro composizione $t(S_1^1(e,i))$ è una funzione ricorsiva totale (ed essa dipende solamente da una variabile
+$i$, $e$ è fissato).
+
+Come tale classe di funzione essa risulta \textbf{programmabile}, quindi
 esiste un programma $m$ che la può calcolare.
 $$t,S_1^1\in\mathcal{T}\implies\exists m\in\mathbb{N}:\varphi_m(i)=t(S_1^1(e,i))$$
-Ed ecco che $n=S_1^1(e,m)$, il quale è un $n$ tale per cui $\varphi_n=\varphi_{t(n)}$ il
-che prova il teorema di ricorsione.
+Allora sia $n=S_1^1(e,m)$, ed $n$ esiste poiché $S_1^1\in\mathcal{T}$, allora
+vale $\varphi_n=\varphi_{t(n)}$ il che prova il teorema di ricorsione.
 
-Vediamo se è vero
+Infatti:
 $$\varphi_n(x)=\varphi_{S_1^1(e,m)}(x)=\varphi_{\varphi_m(m)}(x)$$
 $$\varphi_{t(n)}(x)=\varphi_{t(S_1^1(e,m))}(x)=\varphi_{\varphi_m(m)}(x)$$
 Ma entrambe sono la stessa cosa, allora $\varphi_n=\varphi_{t(n)}$
 
 \paragraph{Conseguenze}\mbox{}\\
 Esistono sempre dei Quine negli s.p.a. e non è possibile progettare compilatori completamente
-errati.
+errati. Ovvero, almeno in un caso su tutti i programmi possibili il programma viene compilato
+correttamente.
 
 \subsubsection{Equazioni su s.p.a.}
 Il teorema di ricorsione è un ottimo strumento per risolvere equazioni su s.p.a.
@@ -3316,7 +3328,7 @@ ovvero una funzione che è programmabile da programmi che terminano sempre.
 $$\pi\text{ è decidibile se e solo se }\Phi_\pi\in\mathcal{T}$$
 Quindi le due definizioni si equivalgono, il programma $P_\pi$ calcola $\Phi_\pi$, implica
 che $\Phi_\pi\in\mathcal{T}$. E se esiste una $\Phi_\pi\in\mathcal{T}$ allora esiste un
-programma che calcola $\Phi_pi$ e che ha il comportamento di $P_\pi$.
+programma che calcola $\Phi_\pi$ e che ha il comportamento di $P_\pi$.
 
 Quindi abbiamo un problema decidibile perchè siamo in gradi di esibire un programma, o perché
 la sua funzione soluzione è una ricorsiva totale. Riassumendo, dato il problema di decisione
@@ -3349,13 +3361,13 @@ $$\Phi_{ED}(a,b,c)=1\dot{-}(c\mod\text{mcd}(a,b))\in\mathcal{T}$$
 
 \paragraph{Fermat}\mbox{}\\
 Grazie a Wyle possiamo scrivere la funzione soluzione
-$$\Phi_{PR}(n)=1\dot{-}(n\dot{-}2)\in\mathcal{T}$$
+$$\Phi_{FE}(n)=1\dot{-}(n\dot{-}2)\in\mathcal{T}$$
 
 \paragraph{Raggiungibilità}\mbox{}\\
 Esistono tonnellate di algoritmi che risolvono questo problema, per vedere se esiste
 un cammino tra una coppia di nodi su un grafo. Questo usando una visita
 in ampiezza o profondità di $G$, algoritmi per cammini minimi,\dots oppure:
-$$\Phi_{RG}(G)=(M_G^n)_{1,n}\in\mathcal{T}$$
+$$\Phi_{RG}(G)=\left(\bigvee^n_{k=0} M_G^n\right)_{1,n}\in\mathcal{T}$$
 dove $M_G$ è la matrice di adiacenza di $G$, che è $n\times n$ di booleani, dove
 all'elemento che si trova all'incrocio tra la riga $i$ e la colonna $j$ è presente
 1 se è presente un arco fra i due vertici.
@@ -3431,8 +3443,8 @@ indecidibile:
     \centering
     \includegraphics[scale=0.5]{images/programma_P_hat.png}
 \end{figure}
-esso prende in ingresso $x$ e poi chiama come sub-routine l'interprete universale (
-ovvero quel programma che prende in ingresso $x$ e $n$ e restituisce il risultato
+esso prende in ingresso $x$ e poi chiama come sub-routine l'interprete universale
+(ovvero quel programma che prende in ingresso $(x,x)$ e restituisce il risultato
 del funzionamento del programma $n$ su $x$). La semantica di $\hat{P}$ rispetto
 ad $x$:
 $$\varphi_{\hat{P}}(x)=\varphi_U(x,x)=\varphi_x(x)$$
@@ -3448,7 +3460,7 @@ questo problema di decisione è \textbf{indecidibile}.
 
 \paragraph{Dimostrazione per assurdo}\mbox{}\\
 Quindi assumiamo che $AR_{\hat{P}}$ sia un problema decidibile, quindi esiste un programma
-che su input $x$ si ferma sempre e mi da 1 se il programma $x$ su se stesso termina e 0 altrimenti.
+che su input $x$ si ferma sempre e restituisce 1 (se il programma $x$ su se stesso termina) o altrimenti 0.
 \[
     \Phi_{AR_{\hat{P}}}(x)=
     \begin{cases}
@@ -3489,8 +3501,13 @@ stesso:
     \end{cases}
 \]
 purtroppo però una funzione di questo tipo non può esistere nella realtà matematica,
-poiché il suo risultato è uguale al suo risultato più 1, questa è una \textbf{contraddizione}.
-
+sono presenti due contraddizioni:
+\begin{itemize}
+    \item $\varphi_\alpha(\alpha)=0$ se $\varphi_\alpha(\alpha)\uparrow$, ma questo non è possibile
+proprio perché il programma termina ma è presente la $\uparrow$.
+\item $\varphi_\alpha(\alpha)=\varphi_\alpha(\alpha)+1$ se $\varphi_\alpha(\alpha)\downarrow$, ma per
+nessun numero naturale può valere ciò.
+\end{itemize}
 Fondamentalmente abbiamo ottenuto che assumere la decidibilità di questo problema ci porta
 a definire una costruzione matematica assurda, la funzione matematica $\varphi_\alpha(\alpha)$
 è una contraddizione, questo significa che sono partito da un assunzione sbagliata ovvero
@@ -3509,7 +3526,7 @@ ma questa è informatica teorica e vogliamo dimostrare formalmente che il proble
 
 \paragraph{Dimostrazione per assurdo}\mbox{}\\
 Assumiamo per assurdo che questo problema sia decidibile, questo significa che esiste
-un programma che lo risolve tale che $P_{AR}(x,y)$ restituisce 1 se $\varphi_{P}(x)\downarrow$,
+un programma che lo risolve tale che $P_{AR}(x,y)$ restituisce 1 se $\varphi_{y}(x)\downarrow$,
 altrimenti 0.
 \begin{figure}[H]
     \centering
@@ -3540,7 +3557,7 @@ degli insiemi per cui non esiste un riconoscimento automatico.
 Un insieme $A\subseteq\mathbb{N}$ viene definito come ricorsivo se è riconoscibile per via automatica, quindi
 esiste un programma $P_A$ che riesce a catalogare gli elementi $x\in\mathbb{N}$
 come appartenenti ad $A$. Posso dare una definizione leggermente più formale utilizzando
-la sua funzione caratteristica
+la sua \textbf{funzione caratteristica}
 $$\chi_A:\mathbb{N}\rightarrow\{0,1\}\text{ t.c. }\chi_A(x)=1\text{ se }x\in A;\text{ altrimenti }0$$
 $$\chi_A\in\mathcal{T}$$
 Le due definizioni sono equivalenti:
@@ -3621,7 +3638,7 @@ allora prendiamo il corrispondente insieme $A$ delle istanze a risposta positiva
 $$A=\{x\in\mathbb{N}:\varphi_x(x)\downarrow\}$$
 ovvero codifiche di programmi che eseguiti su se stessi sono in grado di terminare.
 
-L'insieme $A$ non può essere riconosciuto da nessun programma, se io avesse un programma
+L'insieme $A$ non può essere riconosciuto da nessun programma, se io avessi un programma
 che preso in ingresso $x$ mi da 1 se appartiene al suo insieme e 0 se non appartiene,
 allora io uso tranquillamente questo programma per decidere questo problema di decisione.
 \begin{figure}[H]
@@ -3635,16 +3652,14 @@ ricorsivo.
 Come vedete non è facile inventarsi degli elementi non ricorsivi. La nozione di insieme
 ricorsivo è ben posta perché sono presenti insiemi ricorsivi ed insiemi non ricorsivi.
 
-\subsubsection{Relazioni ricorsivi}
-Il concetto di ricorsività può anche essere esteso a costrutti più sofistica degli
+\subsubsection{Relazioni ricorsive}
+Il concetto di ricorsività può anche essere esteso a costrutti più sofisticati degli
 insiemi a quello delle relazioni. Se noi prendiamo una relazione binaria $R\subseteq\mathbb{N}\times\mathbb{N}$
-essa è una \textbf{relazione ricorsiva} se e solo se vista come un insieme (prodotto cartesiano) è un insieme ricorsivo.
-
+essa è una \textbf{relazione ricorsiva} se e solo se vista come un insieme (prodotto cartesiano) ricorsivo.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/rel_ricors.png}
 \end{figure}
-
 Equivalentemente se ho un programma $P_R$ che implementa quella relazione, e mi restituisce
 1 se quei due numeri stanno in relazione altrimenti 0.
 \paragraph{Esempio}\mbox{}\\
@@ -3679,7 +3694,6 @@ in aggiunta è presente un controllo che il clock abbia raggiunto $y$ oppure no.
     \caption{Esplicitazione di $\tilde{U}$ come programma}
 \end{figure}
 Questo è un programma che implementa la relazione, ed è una relazione ricorsiva.
-
 
 \paragraph{Ancora sull'insime dell'arresto $A$}\mbox{}\\
 $$AR_{\hat{P}}$$
@@ -3798,12 +3812,12 @@ ricorsiva totale di cui $A$ è il dominio, $\varphi_P\in\mathcal{P}$.
 
 \paragraph{$2\implies 3$}\mbox{}\\
 $A=Dom_{f\in\mathcal{P}}\implies\exists R\subseteq\mathbb{N}^2$ è una funzione ricorsiva tale che:
-$$A=\{x|\}$$
-in altre parole $f\in\mathcal{P}$ è la semantica di un programma $P$ tale che $f=\varphi_P$.
+$$A=\{x|\exists y((x,y)\in R)\}$$
+in altre parole se $f\in\mathcal{P}$ è la semantica di un programma $P$ tale che $f=\varphi_P$.
 Allora posso costruire questa relazione ricorsiva introducendo la relazione $R_P$
 $$R_P=\{(x,y)\in\mathbb{N}^2:P\text{ su input }x\text{ termina in }y\text{ passi}\}$$
 Notare che $P$ è il programma che esiste per ipotesi che implementa la funzione $f$. Allora
-definiamo l'insieme $B?\{x|\exists y(x,y)\in R_P\}$, quello che si può dimostrare è che $A=B$,
+definiamo l'insieme $B=\{x|\exists y(x,y)\in R_P\}$, quello che si può dimostrare è che $A=B$,
 infatti:
 
 \begin{itemize}
@@ -4003,7 +4017,7 @@ $$A=\{x:\varphi_x(x)\downarrow\}$$
 e che il suo complemento non è ricorsivo. \textit{Potrebbe essere ricorsivamente
     numerabili?}
 $$A^c=\{x:\varphi_x(x)\uparrow\}$$
-Ho perfettamente caratterizzato $A$ però siccome $A$ è ricorsivamente numerabili,
+Ho perfettamente caratterizzato $A$ però siccome $A$ è ricorsivamente numerabile,
 magari il suo complemento potrebbe esserlo.
 
 \paragraph{Teorema}\mbox{}\\
@@ -4125,7 +4139,7 @@ $$A\cup B=Dom_{\varphi_{P''}\in\mathcal{P}}$$
 Entrambe le funzioni sono ricorsivamente numerabili.
 
 \subsubsection{Il teorema di Rice}
-Potente strumento per mostrare che gli insiemi appartenenti a runa cerca classe non
+Potente strumento per mostrare che gli insiemi appartenenti ad una certa classe non
 sono ricorsivi.
 
 Sia $\{\varphi_i\}$ un sistema di programmazione accettabile. Prendiamo un insieme di numeri
@@ -4318,6 +4332,7 @@ Alan M.Turing, 1936, in un articolo che ha fornito le basi dell'informatica.
 Esso è un modello teorico di calcolatore che consente la definizione
 rigorosa di nozioni intuitive (ma modellate in maniera matematicamente
 precisa):
+
 \begin{itemize}
     \item Passo di computazione.
     \item Computazione.
@@ -4332,28 +4347,27 @@ e quindi consente l'uso di strumenti matematici per:
           efficiente (Una variante della tesi di Church-Turing "ristretta").
 \end{itemize}
 Il nostro punto di partenza sarà l'introduzione di questo modello di calcolo
-che introduce tutto ciò che ci serve per la definizione di tutto ciò che
-ci serve per indagare nella teoria della complessità.
+che introduce tutto ciò che ci serve per indagare i programmi nella teoria della complessità.
 
 \subsubsection{Richiami di teoria di linguaggi formali}
 \begin{itemize}
     \item Alfabeto: un insieme finito di oggetti che si chiamano simboli.
           $$\Sigma=\{\sigma_1,\dots,\sigma_k\}$$
           $\Sigma=\{0\}$
-    \item Stringa su $\Sigma$: è una giusta apposizione di simboli $x_i\in\Sigma$.
+    \item Stringa su $\Sigma$ (\textbf{input}): è una giusta apposizione di simboli $x_i\in\Sigma$.
           L'$i$-esimo simbolo della stringa $x$ viene indicato con $x_i$, poiché composta:
           $$x=x_1,\dots,x_n$$
     \item Lunghezza della stringa $|x|$
-    \item Stringa nulla $\epsilon$ tale per cui $|\epsilon|=0$
+    \item Stringa \textbf{nulla} $\epsilon$ tale per cui $|\epsilon|=0$
     \item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^*$ (nella quale è compresa anche $\epsilon$).
     \item Insieme delle stringhe che posso costruire con l'alfabeto $\Sigma^+$ (senza la stringa nulla).
     \item Linguaggio $L$ costruito su $\Sigma$: un insieme di stringhe che soddisfa una certa proprietà,
           quindi un linguaggio è un qualunque sottoinsieme delle stringhe costruibili sull'alfabeto:
           $$L\subseteq\Sigma^*$$
           esempio $L=\{x\in\Sigma^*:|x|\leq 5\}$, linguaggio composto da stringhe minori o uguali di 5.
-          $$|L|=\sum_{i=0}^5|\Sigma|^i=\frac{{|\Sigma|}^6}{|\Sigma|-1}$$
+          $$|L|=\sum_{i=0}^5|\Sigma|^i=\frac{{|\Sigma|}^6-1}{|\Sigma|-1}\implies\textbf{linguaggio finito}$$
           un altro esempio è il linguaggio dei numeri pari:
-          $$L_{PARI}=\{0\} \cup \{x\in\{0,1\}^+ : x_i=1 \land x_{|x|}=0\} \implies\text{linguaggio infinito}$$
+          $$L_{PARI}=\{0\} \cup \{x\in\{0,1\}^+ : x_i=1 \land x_{|x|}=0\} \implies\textbf{linguaggio infinito}$$
 \end{itemize}
 
 \subsection{Macchina di Turing (DTM)}
@@ -4367,131 +4381,149 @@ Una macchina di Turing ha un hardware molto semplice composto da:
 \begin{itemize}
     \item Un \textbf{nastro} per lettura e scrittura di lunghezza infinita il quale è costituito
           da una sequenza infinita verso destra di celle, ogni cella può contenere un simbolo $x_n\in\Sigma$ ed
-          ha un proprio indirizzo definito da $n$. Le macchine di Turing servono a contenere gli input
-          che si danno in pasto alla macchina di turing, ma anche come memoria dove leggo/elaboro/scrivo
-          informazioni, le DTM elaborano stringhe, che vengono fornite in maniera ordinata
-          sul nastro (il simbolo di blank viene utilizzato per i simboli non presenti nella stringa).
+          ha un proprio indirizzo definito da $n$.
+
+          Il nastro delle DTM serve a contenere gli input ($x\in\Sigma^*$)
+          che forniti in ingresso, e non solo, ma anche come memoria per leggere/elaborare/scrivere
+          informazioni.
+
+          Le DTM elaborano stringhe, che vengono fornite in maniera ordinata
+          sul nastro (viene utilizzato un apposito simbolo detto "\textbf{blank}"
+          i caratteri del nastro che non costituiscono la stringa in input).
 
     \item \textbf{Testina di lettura/scrittura} che può muoversi avanti ed indietro di una posizione (two-way),
           la quale è in grado di leggere o scrivere un carattere.
+
     \item \textbf{Controllo a stati finiti} connesso alla testina, il quale è un dispositivo che può trovarsi
-          in un insieme finito di situazione che chiamo stati, i quali fanno parte di un insieme finito di simboli
-          detti simboli di stato.
+          in un insieme finito di situazioni dette \textbf{stati}, i quali fanno parte di un insieme finito di
+          simboli, \textbf{insieme dei simboli di stato}.
           $$Q=\{Q_0,\dots,Q_8\}$$
 \end{itemize}
 
 \subsubsection{Passo di computazione: mossa}
-Una mossa è una regola che soddisfatte le premesse:
+Una \textbf{mossa} è una regola che se soddisfatte le seguenti premesse:
 \begin{itemize}
-    \item se ti trovi in uno stato (unità di
-          controllo a stati finiti).
-    \item e se stai leggendo un
-          certo simbolo (testina posizionata)
+    \item trovarsi in uno stato (di quelli dell'unità di controllo a stati finiti).
+    \item stai leggendo un determinato simbolo (la testina posizionata).
 \end{itemize}
-allora una mossa fornisce in output:
-\begin{itemize}
+allora fornisce in output:
+\begin{enumerate}
     \item il prossimo stato del controllo a stati finiti.
     \item simbolo da sostituire con quello dove la testina è attualmente posizionata.
-    \item movimento della testina (sx,dx o nullo): -1,+1,0
-\end{itemize}
-L'insieme di queste regole vengono chiamate \textbf{funzione di transizione} di una
-macchina di Turing, le quali definiscono le mosse.
+    \item spostamento della testina (sinistra,destra o nullo): -1,+1,0
+\end{enumerate}
+L'insieme di tutte queste regole costituiscono la \textbf{funzione di transizione} di una
+DTM, le quali definiscono le mosse.
 
 \subsubsection{Funzionamento di una DTM (informale)}
-Computazione di $M$ su input $x\in\Sigma^*$ (informalmente):
+La computazione di una DTM $M$ su un dato input $x\in\Sigma^*$, avviene
+informalmente nella seguente maniera:
 \begin{enumerate}
-    \item Inizializzazione: la stringa $x$ viene depositata carattere per carattere nel
-          nastro della macchina di Turing, il resto del nastro contiene il simbolo di blank.
-    \item La testina viene posizionata sul primo carattere della cella data in input.
+    \item \textbf{Fase di inizializzazione}, dove la stringa $x$ viene depositata carattere
+            per carattere nel nastro della DTM, il resto del nastro contiene il simbolo di \textbf{blank}.
+    \item Posizionamento della testina sul primo simbolo del nastro contenente la stringa in input.
     \item Il controllo a stati finiti è posto nello stato iniziale.
 \end{enumerate}
 La \textbf{computazione} è una serie di \textit{mosse} dettate dalla \textbf{funzioni di transizione}.
+
 La computazione quindi è una sequenza di mosse che come tutte le computazioni può andare
-in loop oppure arrestarsi, una macchina di Turing si arresta quando giunge ad uno
+in loop oppure arrestarsi, una DTM si arresta quando giunge ad uno
 stato dove non è presente una funzione di transizione (non ci sono più regole da seguire).
 
 L'esito della computazione di $M$ sulla stringa $x$ è duplice, $M$ può accettare quella
 stringa oppure la può rifiutare:
 \begin{itemize}
-    \item Accetta $x$ : la sequenza di mosse termina in uno \textbf{stato finale} (o accettante).
-    \item Rifiuta $x$ : Altrimenti.
+    \item \textbf{Accetta $x$}, se la sequenza di mosse termina in uno \textbf{stato finale} (o accettante).
+    \item \textbf{Rifiuta $x$}, se la sequenza di mosse non termina in uno stato finale.
 \end{itemize}
-Il linguaggio accettato dalla macchina di Turing $M$ è l'insieme delle stringhe $x$ che
-vengono accettate dalla mia macchina di Turing.
+Il \textbf{linguaggio accettato} dalla DTM $M$ è l'insieme delle stringhe $x$ che
+vengono accettate dalla DTM stessa.
 $$L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$$
 Questa è la definizione informale di cosa vuol dire computazione in una DTM e di che
-cosa è il prodotto di una DTM, ovvero \textbf{riconoscere un linguaggio}.
+cosa è il prodotto di una DTM, ovvero il \textbf{riconoscimento di un linguaggio}.
 
 \subsubsection{Definizione formale di DTM}
 $$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
 Definita da una sestupla, dove:
 \begin{itemize}
-    \item $Q$ insieme finito di stati assumibili dal controllo a stati finiti.
-    \item $q_0\in Q$ stato iniziale da cui partono le computazioni di $M$.
+    \item $Q$ \textbf{insieme finito degli stati assumibili} dal controllo a stati finiti.
+    \item $q_0\in Q$ \textbf{stato iniziale} da cui partono le computazioni di $M$.
     \item $F\subseteq Q$ \textbf{stati finali} dove $M$ si arresta accettando l'input.
-    \item $\Sigma$ \textbf{alfabeto di input}
+    \item $\Sigma$ \textbf{alfabeto di input}, alfabeto col quale vengono definite le stringhe
+    in input (non è presente il carattere di \textbf{blank}).
     \item $\Gamma$ \textbf{alfabeto di lavoro}, tutti i possibili simboli che posso leggere
           o scrivere sul nastro di lavoro. Sul nastro di lavoro non è detto che posso trovare
           solo simboli di input, li posso elaborare e scriverne altri. Per questo $\Gamma$ estende
-          $\Sigma$, $\Gamma\supset\Sigma$ poiché contiene il simbolo speciale \textit{blank}.
+          $\Sigma$, $\Gamma\supset\Sigma$ poiché contiene il simbolo speciale \textbf{blank}.
+
     \item $\delta:Q\times\Gamma\rightarrow Q\times(\Gamma\setminus\{blank\})\times\{-1,0,+1\}$
           \textbf{funzione di transizione} che definisce le mosse. Una funzione che prende uno stato ed
-          un simbolo letto e restituisce uno stato, un simbolo sul nastro di lavoro (la nostra DTM non
-          puù "sbiancare" le celle, può solo leggere \textit{blank} e non scriverlo), quanto e come muovere la testina. Questa funzione di transizione
-          è parziale, non è definita per tutti i $Q$ e tutti i $\Gamma$, se noi arriviamo in un punto
-          in cui la funzione di transizione è definita, allora per convenzione diciamo che la macchina
-          si arresta.
-\end{itemize}
+          un simbolo letto e restituisce una tripla composta da:
+          stato prossimo, simbolo sul nastro di lavoro e come muovere la testina (in caso la si voglia muovere).
 
+          La nostra DTM non
+          puù "sbiancare" le celle, può solo leggere \textbf{blank} e non scriverlo, per questo motivo
+          è rimosso dall'insieme del secondo elemento della tripla.
+
+          Questa funzione di transizione
+          è \textbf{parziale}, in quanto non è definita per tutti i $Q$ e tutti i $\Gamma$,
+          per convenzione diciamo che la DTM si arresta nel caso in cui si raggiunga un punto indefinito.
+\end{itemize}
+\pagebreak
 \subsubsection{Funzionamento di una DTM (formale)}
-\paragraph{Inizializzazione}\mbox{}\\
+\paragraph{Fase di inizializzazione}\mbox{}\\
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/dtm_init.png}
     \caption{Inizializzazione DTM}
 \end{figure}
-Tutti i caratteri dal primo all'ultimo della stringa vengono messi partire dalla cella 1
-sul nastro di lavoro. La testina di lettura/scrittura viene messa sulla prima cella
+Tutti i caratteri dal primo all'ultimo della stringa vengono messi partire dalla prima cella
+sul \textbf{nastro}. La \textbf{testina} di lettura/scrittura viene messa sulla prima cella
 del nastro, il controllo a stati finiti viene impostato sullo stato iniziale $q_0$.
 
-\paragraph{Computazione}\mbox{}\\
-Sequenza di mosse dettata dalla funzione di transizione $\delta$, consideriamo
-il seguente esempio con $\delta(q,\gamma)=(q',\gamma',-1)$. Supponiamo che il controllo
-degli stati finiti si trovi nello stato $q$ e che la testina si trovi in posizione $k$
-sul simbolo $\gamma$ (lettura).
+\paragraph{Fase di computazione}\mbox{}\\
+Consiste in una sequenza di mosse dettata dalla \textbf{funzione di transizione} $\delta$, consideriamo
+il seguente esempio con $\delta(q,\gamma)=(q',\gamma',-1)$.
 
+Supponiamo che il \textbf{controllo
+degli stati finiti} si trovi nello stato $q$ e che la testina si trovi in posizione $k$
+sul simbolo $\gamma$ (in lettura).
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.45]{images/dtm_comp.png}
+    \caption{Funzione di transizione che modifica stato, simbolo e posizione della testina.}
 \end{figure}
-
-La funzione di transizione mi dice che soddisfo le premesse del controllo a stati finiti
-e di lettura del simbolo, allora eseguendo la mossa dovrò spostarmi nello stato $q'$
+La funzione di transizione mi dice che \textbf{soddisfo le premesse} sia per il controllo a stati finiti
+che per la lettura del simbolo, allora eseguendo la mossa dovrò spostarmi nello stato $q'$
 dopo aver scritto il simbolo $\gamma'$ spostandomi di una cella a sinistra.
+
 Ricordiamo che:
 \begin{itemize}
     \item Nel caso in cui la funzione di transizione non sia definita per lo stato
-          finito in cui ci si trova, allora la macchina $M$ si arresta.
+          finito in cui ci si trova, allora la macchina $M$ si arresta (questo per convenzione).
           $$\delta(q,\gamma)=\bot\implies M\text{ arresta}$$
-          non vado mai in situazioni dove una mossa non è definita.
-    \item Se la funzione di transizione è sempre definita è presente un
-          rischio loop, poiché la computazione
-          di $M$ $\delta$ potrebbe essere definita e non giungere mai ad uno stato finale, potrebbe
-          andare in un loop continuando a considerare lo stesso insieme di celle).
+          Significa che non vado mai in situazioni dove una mossa non è definita.
+
+    \item Se la funzione di transizione è \textbf{sempre definita}, allora è presente un
+          rischio loop, poiché la computazione di $\delta$ potrebbe non giungere mai ad uno stato finale,
+          e quindi imbattersi in un loop continuando a considerare lo stesso insieme di celle sul nastro.
+
     \item $M$ accetta $x\in\Sigma^*$ se e solo se la computazione si arresta
           in $q\in F$ (in uno stato finale/accettante).
+
     \item $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$
 \end{itemize}
 
 \subsubsection{Configurazioni di DTM}
-Posso definire la computazione di $M$ su input $x$ come una sequenza di configurazioni
-che vengono indotte dalla computazione di $M$ su input $x$, dove computazione intendo
-uno snapshot della macchina di Turing in quel momento. \textit{Cosa dovrebbe comparire
-    nello snapshot per definire uno stato generale della DTM?}
+Posso definire la computazione di $M$ su input $x$ come una sequenza di \textbf{configurazioni}
+che vengono indotte dalla computazione di $M$ su input $x$, dove per computazione intendo
+uno snapshot della DTM in quel dato istante.
+
+\textit{Cosa dovrebbe comparire nello snapshot per definire uno stato generale della DTM?}
 \begin{itemize}
-    \item $q\in Q$ Stato del controllo a stati finiti.
-    \item $k\in\mathbb{N}^+$ posizione in quel momento della testina di lettura sul nastro.
-    \item $w\in\Gamma^*$ contenuto non-blank del nastro.
+    \item $q\in Q$, ovvero lo \textbf{stato} attuale del controllo a stati finiti.
+    \item $k\in\mathbb{N}^+$, ovvero la \textbf{posizione} in quel momento della testina di lettura sul nastro.
+    \item $w\in\Gamma^*$, ovvero il \textbf{contenuto} non-\textbf{blank} della cella dove è posizionata la testina.
 \end{itemize}
 $$c=(q,k,w)$$
 \paragraph{Configurazione iniziale di $M$ su input $x\in\Sigma^*$}\mbox{}\\
@@ -4504,173 +4536,171 @@ $$c=(q,k,w),q\in F$$
 $$c=(q,k,w),\delta(q,w_k)=\bot$$
 Ovvero qualsiasi snapshot da cui io non so evolvere.
 \paragraph{Computazione di $M$ su $x\in\Sigma^*$}\mbox{}\\
-$$c_0\overset{\delta}{\implies}c_1\overset{\delta}{\implies}\dots\overset{\delta}{\implies}
-    c_i\overset{\delta}{\implies}c_{i+1}\overset{\delta}{\implies}\dots$$
-Una sequenza di configurazioni tale che: $c_0$ sia la configurazione iniziale e $\forall i$
-passo da una configurazione ad una altra grazie alla funzione di transizione.
+$$c_0\overset{\delta}{\rightarrow}c_1\overset{\delta}{\rightarrow}\dots\overset{\delta}{\rightarrow}
+    c_i\overset{\delta}{\rightarrow}c_{i+1}\overset{\delta}{\rightarrow}\dots$$
+Una sequenza di configurazioni tale per cui $c_0$ sia la \textbf{configurazione iniziale} e $\forall i$
+transito da una configurazione all'altra grazie alla funzione di transizione.
 
 \paragraph{$M$ accetta $x\in\Sigma^*$ se solo se}\mbox{}\\
-$$c_0\overset{*}{\implies}c_f$$
+$$c_0\overset{*}{\rightarrow}c_f$$
 $M$ accetta $x$ se la mia configurazione iniziale fa un certo numero di passi $*$ ed
-arriva ad incocciare una configurazione $c_f$ dove mi arresto ed è una funzione accettante
-(stato finale).
+arriva ad incocciare una configurazione $c_f$ dove mi arresto poiché è una configurazione accettante
+($q\in F$).
 
 \paragraph{Linguaggio accettato da $M$}\mbox{}\\
 $$L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$$
 Insieme delle stringhe dove $M$ accetta $x$ (funzionalità principale delle DTM è quello
-di riconoscere un linguaggio).
+di riconoscere un linguaggio). Ovvero, tutte quelle stringhe fornite in input che portano
+la computazione della DTM a terminare in uno stato accettante.
 
-\subsubsection{Alcune considerazioni}
-L'attributo deterministico definisce il fatto che la funzione di transizione èp definita in un
-certo modo, ovvero che data una certa configurazione quella successiva è
-\textbf{univocamente determinata} da $\delta$.
+\subsubsection{Alcune digressioni}
+L'attributo "\textbf{deterministico}" definisce il fatto che la \textbf{funzione di transizione}
+sia definita in un \textit{determinato} modo, ovvero che data una certa configurazione quella successiva è
+\textbf{univocamente determinata} da $\delta$ (altrimenti non mi evolvo, per convenzione mi arresto).
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/dtm_def.png}
-    \caption{Se mi trovo in una certa configurazione $c$ esiste una unica configurazione
-        successiva $c_1$ (oppure non mi evolvo e mi arresto)}
+    \caption{Partendo da una configurazione $c$ esiste una univoca configurazione
+        successiva $c'$}
 \end{figure}
-
-Le macchine di Turing non deterministiche (NTM), nelle macchine di Turing non deterministiche
-$\delta$ è tale per cui data una configurazione si possono giungere a molteplici configurazioni
+Le macchine di Turing \textbf{non deterministiche} (NTM), la \textbf{funzione di transizione}
+$\delta$ è tale per cui data una configurazione si possono giungere a \textit{molteplici} configurazioni
 successive.
 \begin{figure}[H]
     \centering
-    \caption{Non-Deterministic Turing Machine}
     \includegraphics[scale=0.6]{images/NTM.png}
+    \caption{Non-Deterministic Turing Machine}
 \end{figure}
-Le macchine di Turing probabilistiche (PTM), sono delle particolari TM dove io posso evolvere
+Le macchine di Turing \textbf{probabilistiche} (PTM), permettono di evolvere
 in successive configurazioni in base ad una certa probabilità su cui si basa la funzione
 di transizione $\delta$.
 $p_i\in[0,1]$ probabilità della transizione $c\rightarrow c_i$ con $\sum_{i=1}^k p_i=1$
 \begin{figure}[H]
     \centering
-    \caption{Probabilistic Turing Machine}
     \includegraphics[scale=0.6]{images/PTM.png}
+    \caption{Probabilistic Turing Machine}
 \end{figure}
-Nelle macchine di Turing quantistiche invece delle probabilità ho le ampiezze che sono
+Nelle macchine di Turing \textbf{quantistiche} invece delle probabilità ho le ampiezze che sono
 numeri complessi che soddisfano certe proprietà.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/QTM.png}
     \caption{Quantum Turing Machine}
 \end{figure}
-
 Il modello originale è quello DTM, in base a differenti implementazioni di $\delta$ posso
 definire le altre macchine di Turing. Nel nostro caso considereremo le DTM dove la computazione
 è un cammino di configurazioni (nelle NTM è un albero).
-
 \subsubsection{Funzionalità di una DTM}
-Una macchina di Turing la cosa che sa fare meglio è quella di \textit{riconoscere i linguaggi},
-un linguaggio $L\subseteq\Sigma^*$ è riconoscibile da una DTM se so esibire una DTM $M$ per il
-quale il linguaggio accettato è esattamente $L$ (ovvero $L=L_M$).
+La cosa che una DTM sa fare meglio è quella di \textit{riconoscere i linguaggi},
+un linguaggio $L\subseteq\Sigma^*$ è riconoscibile da una DTM se sono in grado di
+esibire una macchina $M$ tale per cui il linguaggio accettato è esattamente $L$ (ovvero $L=L_M$).
 
 La capacità di riconoscere i linguaggi è cruciale perché una volta ottenuta ciò la DTM
-acquisisce ulteriori caratteristiche, come \textbf{riconoscere insiemi}.
+acquisisce ulteriori caratteristiche, come quella di \textbf{riconoscere insiemi}.
+
 \paragraph{DTM per riconoscere insiemi}\mbox{}\\
-$A\subseteq\mathbb{N}$, come riconoscerlo per DTM? Basta che io imponga una codifica
-a gli elementi di questi insiemi.
+Consideriamo un insieme $A\subseteq\mathbb{N}$, come faccio a riconoscerlo con una DTM?
+Basta che io imponga una codifica per tutti gli elementi di questo insieme.
 $$cod:\mathbb{N}\rightarrow\Sigma^*$$
 Se codifico i numeri naturali su una
 stringa proveniente da un particolare alfabeto (es. $\Sigma=\{0,1\}$), allora grazie a questa codifica
-posso associare ad $A$ il suo linguaggio che non è altro che la codifica degli elementi appartenenti ad $A$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/dtm_accept_a.png}
-\end{figure}
-Un insieme $A$ è riconoscibile su una DTM solo se esiste una DTM $M$ tale che $L_A=L_M$, ovvero
+posso \textbf{associare} ad $A$ il suo \textbf{linguaggio} che non è altro che la codifica degli
+elementi appartenenti ad $A$.
+$$A\implies CODIFICA\implies L_A=\{cod(a):a\in A\}$$
+Un insieme $A$ è riconoscibile su una DTM solo se esiste una DTM $M$ tale per cui $L_A=L_M$, ovvero
 se è in grado di accettare le codifiche appartenenti a quell'insieme.
 \paragraph{Attenzione}\mbox{}\\
 \textit{Come avviene il riconoscimento di una DTM su un insieme $A$?} Oppure,
 cosa vuol dire che una DTM riconosce l'insieme $A$?
 Vuol dire che accetta le stringhe appartenenti a $L_A$, vuol dire che la DTM sulla
 codifica dell'input in $A$ si arresta ed accetta, questo per gli elementi appartenenti ad $A$.
-Per gli elementi non appartenenti ad $A$ la DTM può arrestarsi rifiutando, oppure, andare in loop.
+Per gli elementi non appartenenti ad $A$ la DTM può arrestarsi rifiutando (per convenzione),
+oppure, andare in \textbf{loop} ($\bot$).
+
 Rifiutare una stringa per una DTM significa andare in loop. Da questo punto di vista una DTM
 viene vista come una procedura di riconoscimento di un linguaggio, ovvero un processo
-di calcolo che a volte non può terminare.
+di calcolo che a volte può \textbf{non terminare}.
 
 \subsubsection{Potenza di riconoscimento degli insiemi su DTM}
 \paragraph{Teorema}\mbox{}\\
 La classe gli insiemi riconosciuti da DTM coincide con la classe degli insiemi
 \textbf{ricorsivamente numerabili}. Questo era lo scopo per cui sono state costruite
-le DTM, testare i limiti della calcolabilità e non tanto della complessità.
+le DTM, testare i limiti della calcolabilità (non tanto della complessità).
 
 \paragraph{Definizione}\mbox{}\\
-Un algoritmo deterministico per riconoscere un insieme $A\subseteq\mathbb{N}$ è una DTM $M$
-per riconoscere quell'insieme ma che si arresta su ogni input. Ovvero $M$ tale che
-$L_A=L_m$ e tale che $M$ si arresta su ogni input.
+Un \textbf{algoritmo deterministico} per riconoscere un insieme $A\subseteq\mathbb{N}$
+non è altro che una DTM $M$ per riconoscere il linguaggio di quell'insieme, e che si arresta su ogni input.
+
+Ovvero $M$ tale che $L_A=L_M$ e tale che $M$ si arresta su ogni input.
 
 \paragraph{Teorema}\mbox{}\\
-La classe degli insiemi riconosciuti da algoritmi deterministici, allora questa classe
-degli insiemi si chiama classe degli insiemi \textbf{ricorsivi}.
+La classe degli insiemi riconosciuti da algoritmi deterministici, coincide con la classe
+degli \textbf{insiemi ricorsivi}.
 
 \subsubsection{DTM per risolvere problemi di decisione}
-Altra funzionalità che ottengo dalla possibilità di riconoscere linguaggi è quella
-di risolvere problemi di decisione.
-Come possiamo adattare una DTM per risolvere un problema di decisione:
+Un'altra funzionalità che ottengo dalla possibilità di riconoscere linguaggi è quella
+di \textbf{risolvere problemi di decisione}.
+\textit{Come possiamo adattare una DTM per risolvere un problema di decisione?} Consideriamo
+il seguente problema di decisione:
 $$\pi$$
 $$\text{Istanza: } x\in D$$
 $$\text{Domanda: }p(x)$$
-
 Imponiamo una codifica a tutti gli oggetti $x$ che possono essere dati in input alle DTM
-(coppia di Cantor), a questo problema di decisione posso associare il linguaggio delle istanze
-a riposta positiva, ovvero dove la mia macchina di Touring accetta tale stringa:
+(coppia di Cantor), a questo problema di decisione posso associare il \textbf{linguaggio delle istanze
+a risposta positiva}, ovvero quello dove la mia DTM accetta tale stringa:
 $$\pi\rightarrow cod\rightarrow L_\pi=\{cod(x):x\in D\land p(x)\}$$
-La DTM risolve $\pi$ se $M$ è un algoritmo deterministico per il linguaggio $L_\pi$:
+La DTM risolve $\pi$ se $M$ è un \textbf{algoritmo deterministico} per il linguaggio $L_\pi$:
 \begin{itemize}
-    \item $M$ accetta le stringhe che soddisfano tale proprietà $p(x)$,
+    \item $M$ \textbf{accetta} le stringhe che soddisfano tale proprietà $p(x)$,
           ovvero codifiche di istanze che soddisfano tale proprietà $cod(x)$.
-    \item $M$ non deve accettare sulle stringhe che non soddisfano la data proprietà,
-          $\lnot p(x)$.
+
+    \item $M$ \textbf{non deve accettare} le stringhe che non soddisfano la data proprietà,$\lnot p(x)$.
 \end{itemize}
+
 \paragraph{Esempio}\mbox{}\\
 $$\text{Parità}$$
 $$\text{Istanza: }x\in\mathbb{N}$$
 $$\text{Domanda: }x\text{ è pari}$$
 Impongo la codifica binaria ai numeri naturali
 $$cod:\mathbb{N}\rightarrow\{0,1\}^*$$
-ed il linguaggio associato a questo problema di decisione non è nient'altro che il linguaggio
-dei numeri pari.
+ed il linguaggio associato a questo problema di decisione non è nient'altro che il \textbf{linguaggio
+dei numeri pari}.
 $$L_\pi=L_{PARI}=\{x\in\{0,1\}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}$$
-se io sono in grado di esibire una DTM che su ogni stringa digitale si ferma e mi riesce a
-dire SI se la codifica è quella di un numero pari o NO altrimenti (fondamentalmente
+se io sono in grado di esibire una DTM che su ogni stringa binaria si ferma e mi riesce a
+dire $SI$ se la \textbf{codifica} è quella di un numero pari o $NO$ altrimenti (fondamentalmente
 controlla se l'ultimo bit è 0), significa che ho costruito una DTM
-in tale che sia un algoritmo deterministico in grado
+tale che sia un \textbf{algoritmo deterministico} in grado
 di riconoscere il linguaggio $L_{PARI}$, allora ho risolto il problema di decisione.
 
 \subsubsection{Algoritmo deterministico per parità}
 $$L_\pi=L_{PARI}=\{x\in\{0,1\}^*:x_1=1\land x_{|x|}=0\}\cup\{0\}=1\{0,1\}^*0\cup 0$$
-Sono presenti due approcci per il problema di parità il pià banale:
-cominciare dall'estremo sinistro (come sempre), ignorare quello che legge
-fino a giungere a fine dell'input e poi controllare se l'ultimo bit è 0,
-in tal caso entrare in uno state accettante, altrimenti in uno stato
-non accettante. Questa dinamica necessità di un metodo per la DTM
-per capire quando si trova nell'ultimo carattere della stringa,
+Sono presenti due approcci per il problema di parità il più banale
+comincia dall'estremo sinistro, ed \textit{ignora} quello che legge
+fino a giungere alla fine dell'input per poi controllare se l'ultimo bit è $0$.\newline\newline
+In tale caso si entra in uno \textbf{state accettante}, altrimenti in uno \textbf{stato
+non accettante}. Questa dinamica necessità di un metodo per la DTM
+per capire quando si trova nell'ultimo carattere della \textbf{stringa in input},
 ma questo è possibile continuando a leggere carattere per carattere fino a
-giungere all'ultima stringa.
-
-Ma a dire il vero per riconoscere tale linguaggio basterebbe un automa a stati
-finiti per riconoscere questo linguaggio. Il secondo approccio considero
-ogni passo considerando come se fosse l'ultimo, procedo così fino a che non
-giungo al \textit{blank}, fin quando giungo al blank. Per ogni 0 e 1 ad ogni
+giungere all'ultima stringa.\newline\newline
+Ma a dire il vero per riconoscere tale linguaggio basterebbe un \textbf{automa a stati
+finiti}.\newline\newline Il secondo approccio considera
+ogni passo come se fosse l'ultimo, procedendo così fino a che non
+giungo al primo \textit{blank}. Per ogni 0 e 1 ad ogni
 passo cambio il mio stato in finale se 0 o non finale se 1.
+\pagebreak
 $$M=(Q,\Sigma,\Gamma,\delta,p,F)$$
-\begin{itemize}
-    \item $Q=\{p,z1,\mu,z,r\}$
-    \item $\Sigma_1=\{0,1\}$
-    \item $\Gamma=\{0,1,blank\}$
-    \item $p=\text{stato iniziale}$
-    \item $F=\{z1,z\}$
-    \item $$\delta:Q\times\Gamma\rightarrow Q\times\Sigma\times\{-1,0,1\}$$
-          $$\delta(\;,\;)=\bot\implies HALT$$
-\end{itemize}
-
+$$Q=\{p,z1,\mu,z,r\}$$
+$$\Sigma_1=\{0,1\}$$
+$$\Gamma=\{0,1,blank\}$$
+$$p=\text{stato iniziale}$$
+$$F=\{z1,z\}$$
+$$\delta:Q\times\Gamma\rightarrow Q\times\Sigma\times\{-1,0,1\}$$
+$$\delta(\;,\;)=\bot\implies HALT$$
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/dtm_lpari.png}
+    \caption{Funzioni di transizione delle varie mosse}
 \end{figure}
-
 \begin{itemize}
     \item stato iniziale $p$:
           \begin{enumerate}
@@ -4684,110 +4714,116 @@ $$M=(Q,\Sigma,\Gamma,\delta,p,F)$$
     \item $\dots$
 \end{itemize}
 Questa DTM $M$ è in grado di accettare il linguaggio $L_{PARI}$, ma questo linguaggio
-non è altro che la riproposizione die numeri pari dai un punto di
+non è altro che la riproposizione di numeri pari dai un punto di
 vista del linguaggio, vuol dire che questa DTM è in grado di riconoscere l'insieme
 dei numeri pari.
 
-La DTM è precisa, è però un fatto che programmare una DTM è un compito abbastanza
+La DTM è precisa, però è un dato di fatto che programmare una DTM è un compito
 scomodo, vuol dire progettare tutti gli stati, immaginarsi la funzione delta, $\dots$
 \textit{Cosa si fa per specificare una DTM in maniera non esattamente
     formale ma che sia più immediato?} Solitamente le DTM non vengono descritte
-in maniera esplicita ma attraverso uno pseudo codice.
+in maniera esplicita ma attraverso uno \textit{pseudo codice}.
 
 \subsubsection{Specificare DTM}
-Per semplificare il compito di descrivere una DTM si utilizza uno pseudo codice,
-il quale non è nient'altro che la DTM stessa. Non sono specificati gli stati,
-la $\delta$, ma solamente la dinamica che la DTM implementa.
+Per semplificare il compito di descrivere una DTM si utilizza uno \textit{pseudo codice},
+il quale non è nient'altro che la DTM stessa. Non sono specificati ne stati e ne
+la funzione $\delta$, ma solamente la dinamica che la DTM implementa.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/pseudo_DTM.png}
-    \caption{Pseudo-codice DTM per riconoscere $L_{PARI}$}
-\end{figure}
+\begin{algorithm}[hbt!]
+    \caption{Pseudo-codice DTM per riconoscere $L_{PARI}$}\label{alg:two}
+    \KwIn{$x$}
+    $i:=1$\;
+    $f:=false$\;
+    \Switch{$(x[i])$}{
+        \Case{$0$}{
+            $i++$\;
+            $f:=(x[i]==blank)$\;
+            $break$\;
+        }
+        \Case{$1$}
+        {
+            \Do{$(x[i]!=blank)$}{
+                $i++$\;
+                $f=(x[i]==0)$\;
+            }
+        }
+    }
+    $return\;f;$
+\end{algorithm}
 Prima di tutto ho pensato che i caratteri della stringa $x$ sul
-nastro di lavoro vengono prelevati come se fossero su un array con $x[i]$,
-con $i$ che è la testina della DTM. Mi preparo un flag $f$ booleano impostato
-a false, il quale fa le veci degli stati finali e non finali, se esso
-al termine del codice vale \textit{true} allora
-la stringa appartiene al linguaggio, altrimenti la stringa non appartiene
-a $L_{PARI}$.
-
-Nello switch controlliamo
-solamente il primo carattere vediamo che prende una decisione sul primo carattere fornito
-in ingresso , \textit{quanti caratteri
-    possiamo leggere all'inizio?} Sono tre, notiamo che non è presente un
+nastro vengono prelevati come se fossero su un array con $x[i]$,
+con $i$ che è la testina della DTM.\newline\newline Mi preparo un flag $f$ booleano impostato
+a false, il quale fa le veci degli stati finali e non finali, se esso al termine del
+codice vale \textbf{true} allora
+la stringa appartiene al \textbf{linguaggio dei numeri pari}, altrimenti la stringa non appartiene
+a $L_{PARI}$.\newline\newline
+Nello \textbf{switch} controlliamo solamente il primo carattere vediamo che prende una
+decisione sul primo carattere fornito
+in ingresso, \textit{quanti caratteri possiamo leggere all'inizio?}
+Sono tre, notiamo che non è presente un
 \textbf{case} per il \textit{blank}, ma questo va benissimo perché andrebbe
-direttamente sul return e saremmo in uno stato non accettante.
-
-Se fosse uno 0 dobbiamo assicurarci che sia l'ultimo, e che non sia seguito
+direttamente sul return e saremmo in uno stato non accettante.\newline\newline
+Se fosse uno $0$ dobbiamo assicurarci che sia l'ultimo, e che non sia seguito
 da nessuno altro numero. Allora lo leggiamo, andiamo alla cella successiva,
 effettuo un confronto di uguaglianza tra il carattere letto e \textit{blank},
-allora perfetto termino. Nel caso in cui il primo carattere sia un 1, allora
+allora perfetto termino. Nel caso in cui il primo carattere sia un $1$, allora
 inizio un loop tale per cui continuo ad avanzare la testina finché non leggo
-blank, e continuando ad aggiornare il flag con il confronto tra l'attuale
+blank, e continuando ad aggiornare il flag con il \textbf{confronto} tra l'attuale
 cella ed lo 0 (stato accettante se 0 e non accettante altrimenti).
 
 \paragraph{Note}\mbox{}\\
 In letteratura quando si vuole specificare una DTM si utilizza sempre uno
-pseudo codice che sia evocativo di quello che fa la macchina. In questo approccio
-non siamo inaccurati, sono presenti dei teoremi matematici importanti
-che dimostrano che da una DTM è possibile estrarre uno pseudo codice
+\textbf{pseudo codice} che sia \textbf{evocativo} di quello che fa la macchina.
+In questo approccio non siamo inaccurati, sono presenti dei \textbf{teoremi matematici}
+importanti che dimostrano che da una DTM è possibile estrarre uno pseudo codice
 come quello appena visto.
 
 \subsubsection{Calcolare funzioni su una DTM}
 Una DTM può fare molto altro, è in grado di calcolare funzioni, e quindi
-sono in grado di generare problemi generali (ogni problema può essere
-rappresentato come la sua funzione soluzione, quella che data in istanza
-mi rispondo quale è la soluzione per quella istanza). Quindi non solo
-problemi di decisione.
-
+sono in grado di generare \textbf{problemi generali}. Ogni problema può essere
+rappresentato come la sua \textbf{funzione soluzione}, quella che data un istanza
+rispondo quale è la soluzione per quella istanza. Quindi non solo problemi di decisione.
+\newline\newline
 Data una funzione $f:\Sigma^*\rightarrow\Gamma^*$, la DTM $M$ calcola $f$ se
 e solo se:
 \begin{itemize}
     \item $f(x)\downarrow$, ovvero se la funzione è definita sull'input $x$,
-          allora la computazione di $M$ su $x$ termina con $f(x)$ output rappresentato
-          sul nastro.
+          allora la computazione di $M$ su $x$ \textbf{termina} con $f(x)$ output
+          rappresentato sul nastro.
 
-    \item $f(x)\uparrow$, ovvero se la funzione non è definita sull'input $x$ ($\in\mathcal{P}$), allora $M$ va in un
-          loop infinito.
+    \item $f(x)\uparrow$, ovvero se la funzione non è definita sull'input $x$,
+        allora $M$ va in un \textbf{loop}.
 \end{itemize}
 Ci si chiede \textit{quali sono le funzioni calcolabili da una DTM?} Le DTM
-sono in grado di calcolare tutte e sole le funzioni ricorsive parziali. Se
-una funzione è tale sono in grado di costruire una DTM che la calcola.
-Visto che abbiamo le DTMs che calcolano le funzioni parziali come era scritta
-originariamente.
-\paragraph{Tesi di Church-Turing}\mbox{}\\
-\textit{"Una funzione è intuitivamente calcolabile se e solo se è calcolata
-    da una DTM."}
+sono in grado di calcolare tutte e sole le \textbf{funzioni ricorsive parziali} ($\mathcal{P}$).
+Se una funzione è tale, allora sono in grado di costruire una DTM che la calcoli.
 
-Inoltre, si dimostra che le DTM sono delle s.p.a., questo dimostrando
+\paragraph{Tesi di Church-Turing}\mbox{}\\
+\textit{"Una funzione è intuitivamente calcolabile se e solo se è calcolata da una DTM."}
+Inoltre, si dimostra che le DTM sono dei s.p.a., questo dimostrando
 i seguenti punti:
 \begin{enumerate}
-    \item Si può dimostrare che le DTM calcolano tutte e sole le funzioni ricorsive
-          parziali.
-    \item Esiste una DTM universale, ovvero una in grado di simulare una qualsiasi
-          altra DTM fornita in ingresso.
-    \item Vale il teorema $S_n^m$, la possibilità di scrivere DTM più specifiche
-          a partire da DTM più generali.
+    \item Si può dimostrare che le DTM \textbf{calcolano} tutte e sole le \textbf{funzioni ricorsive parziali}.
+    \item Esiste una DTM \textbf{universale}, ovvero una in grado di \textbf{simulare} una qualsiasi altra DTM fornita in ingresso.
+    \item Vale il \textbf{teorema $S_n^m$}, la possibilità di scrivere DTM più \textbf{specifiche} a partire da DTM più generali.
 \end{enumerate}
 Le DTM sanno fare molte cose: accettano linguaggi, riconoscono insiemi,
 calcolano funzioni.
 
 \subsection{Complessità in tempo}
-Sia la DTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$, la DTM grazie alla sua semplicità
-ci permette di stabilire in maniera precisa che cosa è il tempo di calcolo
+Sia la DTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$, grazie alla sua semplicità
+ci permette di stabilire in maniera precisa che cosa è il \textbf{tempo di calcolo}
 della nostra macchina $M$ su un particolare input $x$. Abbiamo una definizione
 locale di tempo, ovvero definito su una stringa in input.
 
 \paragraph{Tempo di calcolo di $M$ su input $x\in\Sigma^*$}\mbox{}\\
-$$T(x)=\text{n° di mosse della computazione di }M\text{ su input }x\text{ anche }\infty$$
+$$T(x)=\text{n° di mosse della computazione di }M\text{ su input }x\text{ (anche }\infty)$$
 Ogni computazione di $M$ è una sequenza di mosse (singole
 applicazioni di $\delta$), la lunghezza di questa
 sequenza di mosse è il $T(x)$
-
 \paragraph{Complessità in tempo di $M$ (worst case)}\mbox{}\\
 $$t:\mathbb{N}\rightarrow\mathbb{N}$$
-$$t(n)=max\{T(x):x\in\Sigma^*\land|x|=n$$
+$$t(n)=max\{T(x):x\in\Sigma^*\land|x|=n\}$$
 Una funzione che non è localmente confinata su una stringa, tale per cui
 si consideri il peggiore tempo di calcolo sulle stringhe la cui dimensione
 è $n$. Il \textit{"worst case"} indica il fatto che $t(n)$ rappresenta il
@@ -4796,24 +4832,21 @@ si consideri il peggiore tempo di calcolo sulle stringhe la cui dimensione
 una visione abbastanza prudente di quello che è il tempo di calcolo
 di quella DTM. In secondo luogo è la più usata perché è la più
 "manovrabile" matematicamente.
-\paragraph{Esempio di calcolo della complessità in tempo}\mbox{}\\
-Consideriamo la seguente DTM, supponiamo che $x$ sia lungo $n$, quanto
-tempo impiega la computazione su quell'input ? Ovvero, \textit{quanto
-    vale $T(n)$?}
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.5]{images/pseudo_DTM.png}
-\end{figure}
-Non fa altro che consumare tutti gli $n$ simboli compreso del simbolo blank,
+\paragraph{Esempio di complessità in tempo}\mbox{}\\
+Consideriamo la DTM per il riconoscimento di $L_{PARI}$ (algoritmo \ref{alg:two}),
+supponiamo che $x$ sia lungo $n$, quanto
+tempo impiega la computazione su quell'input ? Ovvero, \textit{quanto vale $t(n)$?}
+\newline\newline
+La DTM non fa altro che consumare tutti gli $n$ simboli compreso il simbolo \textbf{blank},
 poiché legge pure quello, quindi effettua $n+1$ letture.
 $$t(n)=n+1$$
 \textit{Ma è sempre così?} Notiamo che su input di lunghezza $n$ a volte
 ci impiegano 2 passi, (entro nel primo case) ma siccome mi interessa
 solamente il caso peggiore do importanza a questo.
-
+\pagebreak
 \subsubsection{Linguaggi, insiemi e problemi di decisione}
-Il linguaggio $L\subseteq \Sigma^*$ è riconoscibile in tempo
-deterministico $f(n)$ se e solo se esiste una DTM $M$ tale che:
+Il linguaggio $L\subseteq\Sigma^*$ è \textbf{riconoscibile in tempo
+deterministico} $f(n)$ se e solo se esiste una DTM $M$ tale che:
 \begin{enumerate}
     \item $L=L_M$
     \item $t(n)\leq f(n)$
@@ -4824,37 +4857,49 @@ Allo stesso modo possiamo dire che:
           se e solo se il corrispondente linguaggio è riconosciuto in tempo $f(n)$
           $$L_A=\{cod(A):a\in A\}$$
     \item Il problema di decisione $\pi$ è risolubile in tempo $f(n)$, se
-          il corrispondente linguaggio che è il linguaggio soluzione è riconosciuto
+          il corrispondente linguaggio che è il \textbf{linguaggio soluzione} è riconosciuto
           in tempo $f(n)$
           $$L_\pi=\{cod(x):p(x)\}$$
     \item In seguito vedremo anche il tempo di calcolo di funzioni.
 \end{itemize}
-Nel seguito, quando parleremo di linguaggi intenderemo equivalentemente insiemi
-o problemi di decisione.
+Nel seguito, quando parleremo di \textbf{linguaggi} intenderemo equivalentemente \textbf{insiemi}
+o \textbf{problemi di decisione}.
 
 \paragraph{Esempio di complessità in tempo}\mbox{}\\
-Abbiamo mostrato che una DTM che riconosce il linguaggio $L_{PARI}=1\{0,1\}^*0\cup0$
-con complessità in tempo $t(n)=n+1$. Quindi, abbiamo:
+Abbiamo mostrato che una DTM che riconosce il linguaggio $$L_{PARI}=1\{0,1\}^*0\cup0$$
+con complessità in tempo $t(n)=n+1$, quindi abbiamo:
 \begin{itemize}
-    \item Il linguaggio $L_{PARI}$ è riconoscibile in $n+1$.
-    \item L'insieme dei numeri pari è riconoscibile in tempo $n+1$.
-    \item Il problema di decisione dei numeri pari può essere risolto
-          in tempo $n+1$.
+    \item Il \textbf{linguaggio} $L_{PARI}$ è riconoscibile in $n+1$.
+    \item L'\textbf{insieme} dei numeri pari è riconoscibile in tempo $n+1$.
+    \item Il \textbf{problema di decisione} dei numeri pari può essere risolto in tempo $n+1$.
 \end{itemize}
 
-\paragraph{Un altro esempio: palindrome}\mbox{}\\
-Un altro problema molto famoso, una palindroma è una stringa che se letta
-da entrambe le direzioni si legge nella stessa maniera. Più formalmente,
-data $x=x_1 x_2\dots x_n\in\Sigma^*$, sia $x^R=x_n x_{n-1}\dots x_1$:
-$$L_{PAL}=\{x\in\Sigma^*:x=x^R\}$$
+\paragraph{Un altro esempio: Palindrome}\mbox{}\\
+Un altro problema molto famoso è quello delle palindrome,
+una palindroma è una stringa che se letta da entrambe le direzioni
+si legge nella stessa maniera. Più formalmente, data una stringa:
+$$x=x_1 x_2\dots x_n\in\Sigma^*$$ allora la palindroma sarà:
+$$x^R=x_n x_{n-1}\dots x_1 : L_{PAL}=\{x\in\Sigma^*:x=x^R\}$$
 \textit{Come è fatta una DTM che accetta questo linguaggio?} Dovrebbe
 controllare che i caratteri in posizione simmetrica rispetto al centro
 della stringa siano uguali.
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/DTM_pal.png}
-    \caption{Pseudo-codice per una DTM che riconosce $L_{PAL}$}
-\end{figure}
+
+\begin{algorithm}[hbt!]
+    \caption{Pseudo-codice DTM per riconoscere $L_{PAL}$}\label{alg:pal}
+    \KwIn{$x$}
+    $i:=1$\;
+    $j:=n$\;
+    $f:=true$\;
+    \While{$(i<j)$}{
+        \If{$(x[i]!=x[j])$}
+        {
+            $f:=false$\;
+        }
+        $i++$\;
+        $j--$\;
+    }
+    $return\;f;$
+\end{algorithm}
 Finché $i<j$, e finché non hai trovato una discordanza, confronta i due caratteri
 se sono diversi metti $f$ a false, altrimenti se sono uguali incrementi $i$ e decrementi
 $j$. Se tutti questi confronti passano indenni il segnalino $f$ restituirà true,
@@ -4862,9 +4907,10 @@ altrimenti false. \textit{Quanto è la complessità in tempo?} Chiaramente
 farò $\frac{n}{2}$ passi con un identificatore ed un altro, però nella valutazione
 della computazione dobbiamo essere \textit{"onesti"}, soprattutto verso il
 modello di calcolo che abbiamo sott'occhio e che implementa questa routine, perché
-nel momento in cui scriviamo $i$ e $j$ noi non abbiamo due testine, intuitivamente
-se avessimo un accesso diretto che costa 1 avrei un costo $t(n)=3$ (due
-posizionamenti più il confronto). Peccato che non sia così, la DTM ha una
+nel momento in cui scriviamo $i$ e $j$ noi \textbf{non abbiamo due testine}, intuitivamente
+se avessimo un accesso diretto che costa 1 avrei un costo $T(n)=3$ (due posizionamenti più il confronto).
+\newline\newline
+Peccato che non sia così, la DTM ha una
 sola testina, la testina nel momento in cui si deve effettuare il confronto
 tra il carattere in posizione $i$ e quello in $j$, essa dovrà percorrere
 $j-i$ passi.
@@ -4874,9 +4920,9 @@ Quindi, quando si deve confrontare il primo elemento con l'ultimo si dovranno
 effettuare $n$ passi, per il secondo con il penultimo $n-1$ passi, $\dots$
 finché non deve fare 0. Quindi se io devo calcolare il numero di passi che
 la DTM fa devo sommare il numero di passi per tutti i cammini compiuti
-dalla testina. Quindi una sommatoria da 0 a $n$ di $k$, dove $k$ solo il numero
+dalla testina. Quindi una sommatoria da 0 a $n$ di $k$, dove $k$ sono il numero
 di passi dei vari cammini, quindi un tempo quadratico a discapito del lineare
-che inizialmente si aveva ipotizzato.
+che inizialmente si aveva ipotizzato.\newline\newline
 
 Nelle nostre valutazioni della complessità in tempo, se utilizziamo il modello
 della DTM dobbiamo stare attenti a rispettare il modello della macchina
@@ -4888,7 +4934,8 @@ Vogliamo misurare questa risorsa computazionale per capire se una DTM (che è un
 complessità in tempo $t_1(n)=2n$, mentre il secondo ha $t_2(n)=\frac{1}{100}n^2+\frac{1}{2}n+1$.
 La domanda nasce spontanea: \textit{quale è l'algoritmo migliore?} Dove per migliore si intende
 il più veloce, poiché porta alla risposta nel numero minore di passi.
-\textit{il secondo algoritmo è sempre da preferire rispetto al secondo?} Questo dipende da $n$,
+\textit{il secondo algoritmo è sempre da preferire rispetto al secondo?} Questo
+\textbf{dipende da $n$},
 se analizzo le due funzioni noto che la complessità $t_2$ pur essendo quadratica è più
 piccola di $t_1$ per $n\leq 149$.
 $$t_2(n)\leq t_1(n)\text{ se }n\leq 149$$
@@ -4898,20 +4945,20 @@ piccoli sono dei valori inutili da considerare, i nostri algoritmi devono essere
 "ragionevolmente grandi". Quando dobbiamo valutare dobbiamo considerare la sua complessità
 in tempo per valori grandi (nessuno costruisce algoritmi veloci su istanze di dimensione $n=5$,
 ma piuttosto per $n=1000000$).
-
+\newline\newline
 Se guardassi le due complessità come funzioni ed analizzassi l'andamento di queste, i termini
 che sono importanti sono quelli di ordine superiore rispettivamente per $t_1$ e $t_2$,
 i termini dominanti sono $n$ e $n^2$, le costanti sono ininfluenti. Quando valuteremo
 queste complessità ci interessano questi termini per elaborare una valutazione \textbf{asintotica}.
-
+\pagebreak
 \subsubsection{Simboli di Landau}
-Sono degli strumenti matematici che ci parlano dell'andamento asintotico delle funzioni, il
+Sono degli strumenti matematici che ci parlano dell'\textbf{andamento asintotico} delle funzioni, il
 quale ci permette di confrontare le varie funzioni di complessità. Date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$,
 diremo $f(n)=O(g(n))$ se e solo se $\exists c>0$ e $n_0\in\mathbb{N}$ tale che $\forall n\geq n_0$
-vale che $f(n)\leq c\dot g(n)$.
+vale che $f(n)\leq c\cdot g(n)$.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/ogrande.png}
+    \includegraphics[scale=0.4]{images/ogrande.png}
     \caption{$f(n)=O(g(n))$}
 \end{figure}
 Per esempio $f(n)=3n^2+4\sqrt{n}+\log n=O(n^2)$, ovvero esiste una costante $c$ che moltiplicata
@@ -4923,7 +4970,7 @@ Date due funzioni $f,g:\mathbb{N}\rightarrow\mathbb{N}$, diremo $f(n)=\Omega(g(n
 se $\exists c>0$ e $n_0\in\mathbb{N}$ tale che $\forall n\geq n_0$ vale $f(n)\geq c\cdot g(n)$.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/omegagrande.png}
+    \includegraphics[scale=0.4]{images/omegagrande.png}
     \caption{$f(n)=\Omega (g(n))$}
 \end{figure}
 Riconsiderando l'esempio precedente $f(n)=3n^2+4\sqrt{n}+\log n=\Omega(n^2)$, una possibile
@@ -4954,13 +5001,14 @@ delle funzioni di complessità, tralasciando i costi moltiplicativi, termini pi�
 \subsubsection{Classificazioni di funzioni}
 Una funzione $f:\mathbb{N}\rightarrow\mathbb{N}$ si dice:
 \begin{itemize}
-    \item Logaritmica: $f(n)=O(\log n)$, per noi informatici esiste solamente $log_2$,
+    \item \textbf{Logaritmica}: $f(n)=O(\log n)$, per noi informatici esiste solamente $log_2$,
           in realtà non importa la base del logaritmo, perché posso sempre cambiare la base
           moltiplicando da una costante che però viene "mangiata" dal $O$.
-    \item Lineare: $f(n)=O(n)$
-    \item Quadratica: $f(n)=O(n^2)$
-    \item Polinomiale: $f(n)=O(n^k)$ per $k\in\mathbb{N}$ fissato.
-    \item Esponenziale: $f(n)$ non è polinomiale, per esempio $O(2^n),O(e^n),\dots$. In questa
+    \item \textbf{Lineare}: $f(n)=O(n)$
+    \item \textbf{Quadratica}: $f(n)=O(n^2)$
+    \item \textbf{Polinomiale}: $f(n)=O(n^k)$ per $k\in\mathbb{N}$ fissato.
+    \item \textbf{Esponenziale}: viene chiamata così quando
+            $f(n)$ \textbf{non è polinomiale}, per esempio $O(2^n),O(e^n),\dots$. In questa
           categoria ricadono funzioni che non sono esponenziali ma in teoria della complessità
           vengono considerati tali; per esempio $n^{\log n}$ è considerata esponenziale
           perché non è polinomiale (sebbene in matematica del continuo essa non sia una funzione
@@ -4971,31 +5019,32 @@ Una funzione $f:\mathbb{N}\rightarrow\mathbb{N}$ si dice:
 Siamo in grado di raggruppare i problemi in base alle richieste di risorse di calcolo
 che servono per la loro risoluzione automatica. L'idea è quella di introdurre il concetto
 di \textbf{classe di complessità}: insieme di problemi risolti entro i medesimi vincoli
-su una o pià risorse computazionali.\mbox{}\newline
-
-$DTIME(f(n))$ (\textit{deterministic time}): la classe dei linguaggi
-(o problemi di decisione/insiemi) che vengono
-accettati da DTM in tempo deterministico $O(f(n))$. Tutti i linguaggi per cui sono in grado
-di costruire una DTM deterministica che accetta quel linguaggio con una complessità lineare.
-
-Le DTM le abbiamo definite come dispositivi che calcolano funzioni, possiamo definire
+su una o più \textbf{risorse computazionali}.\newline\newline
+$DTIME(f(n))$ (\textbf{deterministic time}): la \textbf{classe dei linguaggi}
+(problemi di decisione o insiemi) che vengono accettati da DTM in \textbf{tempo deterministico}
+$O(f(n))$. Tutti i linguaggi per cui sono in grado
+di costruire una DTM che accetta quel linguaggio con una \textbf{complessità lineare}.
+\newline\newline
+Le DTM le abbiamo definite come dispositivi che \textbf{calcolano funzioni}, possiamo definire
 anche classi di complessità non solo di linguaggi ma anche di funzioni. La complessità
-in tempo rimane uguale a quella del linguaggio. Consideriamo $f:\Sigma^*\rightarrow\Gamma^*$
-è calcolata con complessità in tempo $t(n)$ dalla DTM $M$ se e solo se ogni input $x$
-di lunghezza $n$ la computazione di $M$ su $x$ si arresta entro $t(n)$ passi avendo $f(x)$
-sul nastro. Quindi la complessità in tempo del calcolo delle funzioni misura sempre il caso peggiore
-del calcolo della funzione su input di lunghezza $n$. Quindi possiamo definire
-la classe delle complessità delle funzioni.\mbox{}\newline
+in tempo rimane uguale a quella del linguaggio.\newline\newline
+Consideriamo $f:\Sigma^*\rightarrow\Gamma^*$
+è calcolata con complessità in tempo $t(n)$ dalla DTM $M$ \textbf{se e solo se} per ogni input $x$
+di lunghezza $n$ la computazione di $M$ su $x$ si \textbf{arresta} entro $t(n)$ passi avendo $f(x)$
+sul nastro.
 
-$FTIME(f(n))$: la classe delle funzioni che sono calcolate dalle DTM in tempo $O(f(n))$. Tutto
+Quindi la complessità in tempo del calcolo delle funzioni misura sempre il caso peggiore
+del calcolo della funzione su input di lunghezza $n$. Quindi possiamo definire
+la classe delle complessità delle funzioni.\newline\newline
+$FTIME(f(n))$: la \textbf{classe delle funzioni} che sono calcolate dalle DTM in tempo $O(f(n))$. Tutto
 questo ci porta a definire le due classi più importanti nella teoria della complessità.\mbox{}\newline
 $$P=\bigcup_{k\geq 0}DTIME(n^k)$$
-La classe dei linguaggi accettate da DTM in tempo \textbf{polinomiale}.
+La \textbf{classe dei linguaggi accettati} da DTM in tempo \textbf{polinomiale}.
 $$FP=\bigcup_{k\geq 0}FTIME(n^k)$$
-La classe delle funzioni calcolate da DTM in tempo \textbf{polinomiale}.
-Esse sono considerate le classi più importanti poiché vengono considerate \textit{universalmente} come
-racchiudere quei problemi che vengono efficientemente risolti in tempo. Tutti quei problemi
-che vengono risolti in tempo polinomiale, quindi la teoria della complessità stabilisce
+La \textbf{classe delle funzioni calcolate} da DTM in tempo \textbf{polinomiale}.
+Esse sono universalmente considerate le classi più importanti poiché
+racchiudono tutti quei problemi che vengono \textbf{risolti efficientemente in tempo},
+ovvero in \textbf{tempo polinomiale}. Quindi la teoria della complessità stabilisce
 questo sinonimo efficiente=polinomiale, ed un algoritmo è considerato efficiente
 se riesco a dimostrare che ha un tempo polinomiale.
 
@@ -5004,11 +5053,13 @@ $\mathcal{P}$. Nella teoria della complessità lo scopo è rispondere alla doman
 \textit{che cosa è efficientemente calcolabile?} $P$ e $FP$.
 
 \subsubsection{Polinomiale sinonimo di efficiente in tempo}
+\paragraph{Motivi pratici}\mbox{}\\
 Da quando è nata la teoria della complessità tutti cercano di scrivere algoritmi
 polinomiali, sono presenti dei motivi pragmatici. Supponiamo di avere un calcolatore
-con un processore che va a $4Ghz$ (molto veloce, mai esistiti problemi di surriscaldamento).
-Tale per cui il tempo della singola operazione $\frac{1}{4\cdot 10^9}sec=\frac{1}{4}sec$ (4
-miliardi di operazioni al secondo).
+con un processore che va a $4Ghz$ (molto veloce, ovvimente questi non sono mai esistiti per
+problemi di surriscaldamento).
+Tale per cui il \textbf{tempo della singola operazione} $\frac{1}{4\cdot 10^9}sec=\frac{1}{4}sec$ (4
+miliardi di operazioni al secondo).\newline\newline
 Facciamo girare su tale processore quattro algoritmi con complessità temporali differenti che lavorano su un
 input di dimensione $4.000$. Abbiamo progettato 4 algoritmi con complessità diverse rispetto
 all'input $n$:
@@ -5022,60 +5073,59 @@ all'input $n$:
         $3^n$                        & $\tilde 2$ secoli e $\frac{1}{2}$
     \end{tabular}
 \end{center}
-
-
-
-Notiamo che tempi esponenziali su delle istanze molto piccole (4000 caratteri sono mezza
-pagina), hanno dei tempi proibitivi. Per questo polinomiale si intende efficiente.
-
-Ma sono presenti anche motivi "composizionali", nel senso: se io ho un algoritmo efficiente
-quindi polinomiale, che richiama una sub routine che è anch'essa polinomiale, io
-globalmente ho ancora un algoritmo efficiente (polinomiale).
-
+Notiamo dei \textbf{tempi esponenziali} su delle istanze \textbf{molto piccole} (4000 caratteri sono mezza
+pagina), hanno dei tempi proibitivi. Proprio per questo con "polinomiale" si intende "efficiente".
+\paragraph{Motivi composizionali}\mbox{}\\
+Sono presenti anche motivi "\textbf{composizionali}", nel senso,
+se io ho un algoritmo efficiente quindi polinomiale,
+che richiama una sub routine che è anch'essa polinomiale, io
+\textbf{globalmente} ho ancora un algoritmo efficiente (polinomiale).
+\newline\newline
 I programmi efficienti che richiamano routine efficienti rimangono efficienti (continuano
 a girare in tempo polinomiale).
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/efficienti_esemp.png}
+    \includegraphics[scale=0.6]{images/efficienti_esemp.png}
+    \caption{Composizione di algoritmi polinomiali}
 \end{figure}
 Consideriamo un algoritmo $P$ che ad un certo punto richiama una routine $R$, questo algoritmo
-in maniera efficiente ricevendo un input $n$, con $p(n)$ passi riesce a produrre una
-stringa $y$ su quale richiama la routine $R$ che anch'essa è polinomiale ($q(n)$). La risposta a questo
-problema in uscita è $z$.
-
-\textit{Il tempo di sviluppo $P$ è ancora efficiente?} Iniziamo a rispondere alla domanda
-\textit{Quanto vale $t_P(n)$?} Prima di tutto spende un tempo $p(n)$  sommato al tempo
-di attivazione della routine $R$ su $y$ (non su $n$ ma sull'istanza di lunghezza $y$, $n$
-potrebbe essere stato modificato).
+riceve un input $n$, con $p(n)$ passi riesce a produrre una
+stringa $y$ in maniera efficiente. Sulla stringa richiama la routine $R$ che anch'essa è polinomiale/efficiente ($q(n)$).
+La risposta a questo problema in uscita è $z$.
+\newline\newline
+\textit{Il tempo di sviluppo $P$ è ancora efficiente?} Prima rispondiamo ad un altra domanda,
+\textit{quanto vale $t_P(n)$?} Prima di tutto l'algoritmo spende un tempo $p(n)$ 
+sommato al tempo di attivazione della routine $R$ su $y$
+(non su $n$ ma sull'istanza di lunghezza $y$, $n$ potrebbe essere stato modificato).
 $$t_P(n)=p(n)+t_R(|y|)$$
 Vorrei che tutto fosse espresso su $n$, sappiamo che la stringa potrà essere al massimo lunga
 un numero $p(n)$ di passi, per cui $|y|\leq p(n)$. Quindi, abbiamo che:
 $$t_P(n)=p(n)+t_R(|y|)\leq p(n)+q(p(n))=p(n)+h(n)=poly(n)$$
-
+\paragraph{Motivi di robustezza}\mbox{}\\
 Sono presenti anche altri motivi, ovvero quelli di "\textbf{robustezza}", le classi $P$ e $FP$ rimangono
-invariate a prescindere dai molti modelli di calcolo utilizzati per circoscrivere i problemi
+\textbf{invariate} a prescindere dai molti modelli di calcolo utilizzati per circoscrivere i problemi
 efficientemente risolti. Si potrebbero ridefinire le classi utilizzando le macchine RAM, WHILE,
 circuiti, $\dots$
-
-Qualunque modello di calcolo fin'ora introdotto per definire l'efficienza allora quel
-modello di calcolo ha lasciato invariato la definizione di $P$ e $FP$, che è robusta per
-specificare l'efficienza.\begin{figure}[H]
+\newline\newline
+Qualunque modello di calcolo fin'ora introdotto per definire l'efficienza
+ha lasciato invariato la definizione di $P$ e $FP$, che è robusta per
+specificare l'efficienza.
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/robustezza.png}
     \caption{Aumento il numero di nastri su una DTM, diventando la generalizzazione
         di quelle a singolo nastro.}
 \end{figure}
 Un nastro potrebbe essere riservato a mantenere la stringa in input utilizzando un numero
-costante di nastri, magari queste DTM ci danno più velocità, ma in realtà non è così. Se ho
+costante di nastri, magari queste DTM ci danno più velocità, \textbf{ma in realtà non è così}. Se ho
 una DTM a più nastri e riesco a risolvere un problema in tempo $t(n)$, allora lo stesso
 problema può essere risolto da una DTM mono-nastro in tempo $O(t^2(n))$. Significa
 che rimane polinomiale, e che quindi chiaramente $P$ e $FP$ non cambiano da una macchina
 all'altra, i problemi rimangono polinomiali da una macchina all'altra (robustezza).
 
 \subsubsection{Tesi di Church-Turing estesa}
-La classe dei problemi \textbf{efficientemente risolubili} in tempo coincide con
-la classe dei problemi risolti in tempo polinomiale su DTM.
-
+La \textbf{classe dei problemi efficientemente risolubili} in tempo coincide con
+la \textbf{classe dei problemi risolti in tempo polinomiale} su DTM.
 \paragraph{Esempi di problemi risolti efficientemente in tempo}\mbox{}\\
 Problemi in $P$:
 \begin{itemize}
@@ -5097,39 +5147,40 @@ che non esistono tali algoritmi.
 
 \subsubsection{Alcune riflessioni: Teoria vs Pratica}
 \begin{itemize}
-    \item Sebbene da un punto di vista teorico polinomiale in tempo vuol dire efficiente,
-          un algoritmo di complessità $n^{1000}$ non è praticabile (seppur polinomiale).
-          Questo polinomio è tanto impraticabile quanto un esponenziale, in pratica l'esponente non
-          deve superare 2. Qualunque tempo di esecuzione che superi il quadratico dal punto
-          di vista pratico diventa difficoltoso.
+    \item Sebbene da un punto di vista teorico con polinomiale in tempo si intende efficiente,
+          un algoritmo di complessità $n^{1000}$ \textbf{non è praticabile} (seppur polinomiale).
+          Questo polinomio è tanto impraticabile quanto un \textbf{esponenziale},
+          in pratica l'esponente non deve superare 2. \textbf{Qualunque tempo di esecuzione che superi il quadratico dal punto
+          di vista pratico diventa difficoltoso}.
           \begin{itemize}
-              \item Per esempio, pensando al test di primalità (se un numero è primo o meno); esiste
+              \item Per esempio, pensando al \textbf{test di primalità} (se un numero è primo o meno); esiste
                     un algoritmo per testare la primalità che funziona in tempo $O(\log n^{6+6})$ ed
-                    è esatto (1994), e polinomiale. L'algoritmo A.K.S. polinomiale proposto era un'algoritmo
+                    è esatto (1994), e polinomiale.\newline\newline
+                    L'algoritmo \textbf{A.K.S.} polinomiale proposto era un'algoritmo
                     che ha un esponente di 12. Con il passare del tempo è stato migliorato, trovare un
-                    algoritmo polinomiale apre la possibilità di trovare miglioramenti, cosa che non è
+                    algoritmo polinomiale apre la \textbf{possibilità di trovare miglioramenti}, cosa che non è
                     altrettanto possibile con un esponenziale. Adesso la complessità è stata portata
                     ad $O(\log n^6)$, molto meglio ma non siamo ancora contenti, da un punto di vista
-                    pratico questo algoritmo non si utilizza. Si utilizzano degli algoritmi molto veloci detti
+                    pratico questo algoritmo non si utilizza.\newline\newline Si utilizzano degli algoritmi molto veloci detti
                     \textbf{probabilistici}, ovvero riescono a dare una risposta in tempi assolutamente veloci ma con una
                     probabilità di errore. Questi algoritmi hanno anche la capacità di rendere questa probabilità
                     di errore piccola a piacere rimanendo veloce, praticamente quasi nulla. Accetto tali algoritmi
                     probabilistici perché sono estremamente efficienti (Miller-Rabin, $\dots$).
           \end{itemize}
 
-    \item  Un algoritmo polinomiale molto probabilmente si riesce a migliorare, i primi algoritmi
+    \item Un algoritmo \textbf{polinomiale molto probabilmente si riesce a migliorare}, i primi algoritmi
           efficienti dati per i problemi erano polinomiali con gradi molto alti, ma essendo polinomiali
-          il grado è sempre stato abbassato. Questa cosa non funzione mai con l'algoritmo esponenziale,
+          il grado è sempre stato abbassato. Questa cosa \textbf{non funzione mai con l'algoritmo esponenziale},
           se lo si vuole migliorare l'algoritmo esponenziale va scartato.
 
-    \item La nostra analisi di complessità \textit{"worst case"} talora restituisce tempi troppo
-          pessimistici, anche perché a volte le istanze che danno il peggior tempo di calcolo non capitano
+    \item La nostra analisi di complessità \textbf{worst case} talvolta restituisce tempi \textbf{troppo
+          pessimistici}, anche perché a volte le istanze che danno il peggior tempo di calcolo non capitano
           praticamente mai (a volte worst-case sovradimensiona il tempo di calcolo).
           \begin{itemize}
-              \item Per esempio: nei problemi di ottimizzazione lineare, ovvero funzioni in cui i vincoli
+              \item Per esempio: nei \textbf{problemi di ottimizzazione lineare}, ovvero funzioni in cui i vincoli
                     alla funzione obiettivo sono le funzioni lineari. Esiste un bellissimo algoritmo polinomiale
-                    di Karmarkar. Esso è un algoritmo polinomiale che è lento, perché ha un grado del polinomio
-                    che è molto alto, viene utilizzato poco. Si preferisce utilizzare l'algoritmo del simplesso,
+                    di \textbf{Karmarkar}. Esso è un algoritmo polinomiale che è lento, perché ha un grado del polinomio
+                    che è molto alto, viene utilizzato poco. Si preferisce utilizzare l'\textbf{algoritmo del simplesso},
                     un algoritmo molto semplice, il problema è che ha un tempo di esecuzione esponenziale, però
                     si è notato che l'esponente salta fuori su istanze che non capitano mai in natura.
           \end{itemize}
@@ -5141,17 +5192,17 @@ che non esistono tali algoritmi.
           average case.
 
     \item Attenzione alle costanti nascoste, le notazioni di Landau sono fatte apposta per
-          rimuovere le costanti moltiplicative, ma anche qui nella pratica le costanti moltiplicative
-          ed i termini di ordine inferiore contano! Un conto è dire che un algoritmo va come $5n^2$
+          rimuovere le costanti moltiplicative, ma anche qui nella pratica le \textbf{costanti moltiplicative}
+          ed i \textbf{termini di ordine inferiore contano}. Un conto è dire che un algoritmo va come $5n^2$
           che è diverso da $10n^2$.
           \begin{itemize}
               \item Questo è quello che succede proprio con gli algoritmi di ordinamento
                     basati su confronti (che ricordiamo sono tutti $\Theta (n\log n)$). Per
-                    esempio l'algoritmo di ordinamento merge-sort ha tempo $O(n\log n)$ ed
-                    è quindi ottimale. Spesso però si preferisce utilizzare il quick-sort, sebbene
+                    esempio l'algoritmo di ordinamento \textbf{merge sort} ha tempo $O(n\log n)$ ed
+                    è quindi ottimale. Spesso però si preferisce utilizzare il \textbf{quick sort}, sebbene
                     quest'ultimo abbia un caso worst-case $O(n^2)$. Questo perché nella media
-                    impiega $O(n\log n)$ ($90\%$ dei casi), e la costante moltiplicativa del quick-sort
-                    è più piccola di quella del merge-sort.
+                    impiega $O(n\log n)$ ($90\%$ dei casi), e la costante moltiplicativa del quick sort
+                    è più piccola di quella del merge sort.
           \end{itemize}
 
 \end{itemize}
@@ -5159,40 +5210,45 @@ La teoria ci deve guidare, se ci troviamo sulla strada giusta, mentre la pratica
 come aggiustare ulteriormente il tiro per fare funzionare molto meglio le cose.
 
 \subsection{Complessità in spazio}
-La risorsa spazio intesa come spazio di lavoro (memoria), le variabili che utilizziamo e vengono
-create devono essere memorizzate in strutture dati. Vogliamo che i nostri programmi utilizzino
-il minor numero di memoria possibile.
+La risorsa spazio intesa come \textbf{spazio di lavoro} (memoria), sono sostanzialmente le
+variabili che utilizziamo per le quali vengono
+create e memorizzate in \textbf{strutture dati}. Vogliamo che i nostri programmi utilizzino
+la minor quantità di memoria possibile.
 $$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
 Consideriamo la nostra DTM $M$, allora definiamo lo spazio di calcolo di $M$ su input $x\in\Sigma^*$
-come $S(x)$, non è altro che il numero di celle del nastro occupate durante la computazione
-di $M$ su $x$. Come nel tempo noi vogliamo avere una visione globale di quanto spazio viene
-occupato dalla nostra DTM non so una particolare stringa. Allora definizione una funzione
+come $S(x)$, non è altro che il \textbf{numero di celle del nastro occupate durante la computazione}
+di $M$ su $x$ (o visitate). Come nel tempo noi vogliamo avere una \textbf{visione globale} di quanto spazio viene
+occupato dalla nostra DTM non solo su una particolare stringa $x$. Allora definisco una funzione
 complessità in spazio della nostra DTM.
 $$s:\mathbb{N}\rightarrow\mathbb{N}$$
+tele che:
 $$s(n)=max\{S(x):x\in\Sigma^*\land|x|=n\}$$
 Andiamo a vedere la DTM nella quale vogliamo calcolare $s(x)$ su input di lunghezza $n$.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/computazione_DTM.png}
+    \caption{Il nastro occupa almeno $|x|=n$ celle}
 \end{figure}
-Notiamo che la complessità in spazio purtroppo deve essere almeno lineare, perché il numero
+Notiamo che la complessità in spazio purtroppo deve essere \textbf{almeno lineare}, perché il numero
 di celle diverse occupate sarà sempre $n$, dato un input $n$. Quindi questa funzione $s(n)$
 deve essere quanto meno lineare (ne posso occupare di più volendo). Questo è un peccato
-perché vorrei che $s(n)$ mi misurasse solamente lo spazio di calcolo e non l'interferenza
-causata dall'input, l'input seppur memoria è un qualcosa di esterno, il mio programma
-non deve allocare spazio per mantenere l'input. Lo spazio di lavoro è la memoria che utilizza
-l'algoritmo. \textit{Come faccio a togliere l'interferenza causata dallo spazio
-    dell'input?} Sarebbe bello arricchire la DTM con un nastro solo per l'input read-only letto
+perché vorrei che $s(n)$ mi misurasse solamente lo spazio di calcolo e non l'\textbf{interferenza
+causata dall'input}, l'input seppur memoria è un qualcosa di \textbf{esterno}, il mio programma
+non deve allocare spazio per mantenere l'input.
+\newline\newline Lo spazio di lavoro è la memoria che utilizza
+l'algoritmo. \textit{Come faccio a togliere l'interferenza causata dallo spazio dell'input?}
+Sarebbe bello arricchire la DTM con un \textbf{nastro} solo per l'input \textbf{read-only} letto
 da una testina ad-hoc, nel quale è deposto l'input. Quando la nostra DTM deve effettuare i conti
 essa lo farà su un nastro di lavoro, il quale è read/write.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/nastri_sep_input.png}
-    \caption{Architettura multi-nastro}
+    \caption{Architettura multi-nastro per isolare l'input}
 \end{figure}
-Ci stiamo muovendo da un'architettura mono-nastro ad una multi-nastro. Lo spazio sarà contato
-solamente sul nastro di lavoro il quale è r/w, ed anch'esso scorso da una testina ad-hoc. In
-un architettura del genera la stringa di input viene racchiusa sul nastro da due caratteri
+Ci stiamo muovendo da un'architettura mono-nastro ad una \textbf{multi-nastro}, in questa
+maniera lo \textbf{spazio di lavoro} sarà calcolato solamente sul \textbf{nastro di lavoro} il quale è r/w,
+ed anch'esso scorso da una testina ad-hoc. In
+un architettura del genere la stringa di input viene racchiusa sul nastro da due caratteri
 di inizio e fine stringa, così da limitare i movimenti della sua testina.
 La definizione di una DTM di questo tipo è identica a quella di prima con delle piccole modifiche:
 $$M=(Q,\Sigma\cup\{\cancel{c},\cancel{\$} \},\Gamma,\delta,q_0,F)$$
