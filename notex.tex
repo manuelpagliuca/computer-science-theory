@@ -5248,30 +5248,28 @@ essa lo farà su un nastro di lavoro, il quale è read/write.
 Ci stiamo muovendo da un'architettura mono-nastro ad una \textbf{multi-nastro}, in questa
 maniera lo \textbf{spazio di lavoro} sarà calcolato solamente sul \textbf{nastro di lavoro} il quale è r/w,
 ed anch'esso scorso da una testina ad-hoc. In
-un architettura del genere la stringa di input viene racchiusa sul nastro da due caratteri
-di inizio e fine stringa, così da limitare i movimenti della sua testina.
+un architettura del genere la stringa di input sul nastro \textbf{viene racchiusa da due caratteri
+di inizio e fine stringa}, così da limitare i movimenti della sua testina.
 La definizione di una DTM di questo tipo è identica a quella di prima con delle piccole modifiche:
 $$M=(Q,\Sigma\cup\{\cancel{c},\cancel{\$} \},\Gamma,\delta,q_0,F)$$
 L'unica cosa che veramente cambia è la funzione di transizione $\delta$, che deve tenere
 conto di due cose, l'input ed il nastro di lavoro.
-
 $$\delta:Q\times(\Sigma\cup\{\cancel{c},\cancel{\$} \})\times\Gamma\rightarrow Q\times(\Gamma\setminus\{blank\})\times\{-1,0,+1\}\times \{-1,0,+1\}$$
 La mossa mi dice quale sarà il prossimo stato che cosa modificherai sul nastro di lavoro, e
 come muovere la testina dell'input e del nastro di lavoro.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/DTM_input_transition.png}
-    \caption{Esempio di una mossa della DTM con due nastri per diversificare input da
-        spazio di lavoro}
+    \caption{Esempio di una mossa della DTM con due nastri per differenziare l'input dallo spazio di lavoro}
 \end{figure}
-Anche la configurazione cambia, prima avevamo come una possibile configurazione come
-$c=(q,k,w)$ dove $q$ è lo stato, $k$ è la posizione dell'unica testina e $w$ il contenuto non-blank
+Anche la \textbf{configurazione cambia}, prima avevamo come una possibile configurazione come
+$c=(q,k,w)$ dove $q$ è lo stato, $k$ è la posizione dell'unica testina e $w$ il contenuto non-\textbf{blank}
 del nastro. Adesso abbiamo una quadrupla $c=(q,i,j,w)$, aggiungiamo un campo che consideri
 la testina di input $i$, che sia diversa
 da quella del nastro di lavoro $j$, non ci interessa anche il contenuto del
-nastro di input, tanto quello non cambia mai. L'unico contenuto che può variare è $w$ (non-blank)
+nastro di input, tanto quello non cambia mai. L'unico contenuto che può variare è $w$ (non-\textbf{blank})
 ovvero il nastro di lavoro.
-
+\newline\newline
 Il fatto di utilizzare questa architettura non cambia le classi $P$ e $FP$, esse rimangono
 invariate a seconda del numero dei nastri (avevamo già discusso).
 
@@ -5292,17 +5290,20 @@ ad esibire una DTM $M$ tale che:
 \end{itemize}
 Riconoscere un linguaggio vuol anche dire riconoscere un insieme o risolvere un problema di
 decisione.
-
 \subsubsection{Spazio di calcolo delle funzioni}
-Le DTM servono anche per calcolare delle funzioni, abbiamo anche definito della classe
-di funzioni. Vogliamo usare le DTM per calcolare la complessità in spazio di calcolare una funzione.
+Le DTM servono anche per \textbf{calcolare delle funzioni}, abbiamo anche definito delle classi
+di funzioni. Vogliamo usare le DTM per calcolare la complessità in spazio
+del calcolo di una funzione.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/DTM_func.png}
+    \caption{DTM per il calcolo delle funzioni. Lo spazio di lavoro risulta isolato
+    utilizzando due nastri extra per l'input e l'output}
 \end{figure}
-Quando io uso una DTM per calcolare una funzione e voglio esaminare in particolare lo spazio
-di calcolo di quella funzione, mi preparo un nastro di input ma anche un nastro di output, sul
-quale metterò la $f(x)$ su input $x$. In questa maniera riuscirò a misurare lo spazio di lavoro
+Quando io uso una DTM per calcolare una funzione della quale voglio esaminare lo spazio
+di calcolo di quella funzione, mi preparo un \textbf{nastro di input} (read-only)
+ma anche un \textbf{nastro di output} (write-only),
+sul quale metterò la $f(x)$ su input $x$. In questa maniera riuscirò a misurare lo spazio di lavoro
 effettivo del mio modello, la complessità verrà misurata solamente sul nastro di lavoro senza
 tenere conto dello spazio per memorizzare il risultato e quello dell'elemento fornito in ingresso.
 
@@ -5326,13 +5327,13 @@ Ricapitolando questo modello ha i seguenti pregi:
 \end{itemize}
 
 \subsubsection{Classi di complessità in spazio}
-$DSPACE(f(n))$, la classe dei linguaggi che vengono riconosciute da DTM in spazio $O(f(n))$.
-$FSPACE(f(n))$, la classe di funzioni calcolate e risolte da DTM in spazio $O(f(n))$.
+$DSPACE(f(n))$, la \textbf{classe dei linguaggi riconosciuti} da una DTM in spazio $O(f(n))$.\newline\newline
+$FSPACE(f(n))$, la \textbf{classe delle funzioni calcolate} (e risolte) da una DTM in spazio $O(f(n))$.\newline\newline
 Nota, le classi $DSPACE$ e $FSPACE$ non cambiano se aggiungiamo alle nostre DTM un numero
 costante di nastri di lavoro.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/dtm_nastrilavoro.png}
+    \includegraphics[scale=0.6]{images/dtm_nastrilavoro.png}
     \caption{DTM con un numero costante di nastri di lavoro.}
 \end{figure}
 Per questo modello di calcolo che è più comodo le classi di complessità appena definite
@@ -5341,40 +5342,71 @@ in tempo), anche aumentando la quantità di nastri di lavoro.
 
 \paragraph{Esempio di calcolo di complessità in spazio}\mbox{}\\
 Riprendiamo ancora il linguaggio dei numeri pari $L_{PARI}$, con il medesimo
-algoritmo che avevamo proposto.
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/prog_pari.png}
-\end{figure}
+algoritmo che avevamo proposto (algoritmo \ref{alg:two}).\newline\newline
+\begin{algorithm}[hbt!]
+    \caption{Pseudo-codice DTM per riconoscere $L_{PARI}$}\label{alg:two}
+    \KwIn{$x$}
+    $i:=1$\;
+    $f:=false$\;
+    \Switch{$(x[i])$}{
+        \Case{$0$}{
+            $i++$\;
+            $f:=(x[i]==blank)$\;
+            $break$\;
+        }
+        \Case{$1$}
+        {
+            \Do{$(x[i]!=blank)$}{
+                $i++$\;
+                $f=(x[i]==0)$\;
+            }
+        }
+    }
+    $return\;f;$
+\end{algorithm}
 Questo algoritmo occupava in tempo $n+1$ passi, quindi usando la definizione delle
 classi di complessità possiamo dire che $L_{PARI}\in DTIME(n)$. In termini di spazio,
 riconoscere tale linguaggio ha un costo costante di 1, in realtà neanche 1 perché
-il flag $f$ potrebbe essere mantenuto negli stati. Questo linguaggio viene riconosciuto
-in spazio 0, la posizione della testina $i$ non ha bisogno di essere memorizzata,
+il flag $f$ potrebbe essere mantenuto negli \textbf{stati}. Questo linguaggio viene riconosciuto
+in spazio "$0$", la posizione della testina $i$ non ha bisogno di essere memorizzata,
 al massimo posso memorizzare $f$ sul nastro di lavoro, ma a dire il vero posso
-esprimere la stessa intenzione utilizzando gli stati finali o non accettanti. Infatti
-in questo linguaggio non serve spazio di lavoro, perché è un linguaggio regolare
-riconosciuto su un automa a stati finiti. Un automa a stati finiti è una DTM
+esprimere la stessa intenzione utilizzando gli stati finali o non accettanti.
+\newline\newline
+Infatti in questo linguaggio non serve spazio di lavoro, perché è un \textbf{linguaggio regolare}
+riconosciuto da un \textbf{automa stati finiti}. Un automa a stati finiti è una DTM
 con nastro di input ed output ma senza nastro di lavoro.
-
+\newline\newline
 Il fatto che non usi il nastro di lavoro della DTM non è un caso, questo accade
 perché il linguaggio in questione è un \textbf{linguaggio regolare}, i linguaggi regolari sono
 linguaggi che possono essere riconosciuti da DTM che non occupano spazio di lavoro. Si può
 dimostrare che i linguaggi regolari sono i linguaggi riconosciuti da una DTM con
 un numero costante di celle.
 $$REG=DSPACE(1)$$
-\paragraph{Altro esempio: palindrome}\mbox{}\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/DTM_pal.png}
-\end{figure}
+\paragraph{Altro esempio: Palindrome}\mbox{}\\
+\begin{algorithm}[hbt!]
+    \caption{Pseudo-codice DTM per riconoscere $L_{PAL}$}\label{alg:pal}
+    \KwIn{$x$}
+    $i:=1$\;
+    $j:=n$\;
+    $f:=true$\;
+    \While{$(i<j)$}{
+        \If{$(x[i]!=x[j])$}
+        {
+            $f:=false$\;
+        }
+        $i++$\;
+        $j--$\;
+    }
+    $return\;f;$
+\end{algorithm}
+
 $$t(n)=n^2$$
 Per quanto riguarda la complessità in spazio, il costo del riconoscimento di tale
 linguaggio ha un costo che dipende dalla posizioni di $i$ e $j$, le quali vanno
-mantenute. Lo spazio di lavoro è rappresentato proprio dalle due variabili
+mantenute. Lo \textbf{spazio di lavoro} è rappresentato proprio dalle due variabili
 che guidano il pescaggio dei caratteri da confrontare sul nastro di input.
 $$s(n)=\text{spazio per mantenere i puntatori di posizione }i,j$$
-$$i\in\{1,\dots,\frac{n}{2}\}\;j\in\{\frac{n}{2},\dots,n\}$$
+$$i\in\left\{1,\dots,\frac{n}{2}\right\}\;j\in\left\{\frac{n}{2},\dots,n\right\}$$
 Se devo mantenere dei numeri che arrivano fino ad $n$, ed uso una notazione binaria
 per rappresentarli allora ho bisogni di $O(\log n)$ bit.
 $$s(n)=O(\log n)$$
@@ -5414,55 +5446,57 @@ seguente condizione: $s(n)\cdot t(n)=\Omega(n^2)$ (almeno $n^2$).
 \subsubsection{Efficienza in termini di spazio}
 L'efficienza in termine di spazio si concretizza con spazio logaritmico (e non polinomiale
 come nel tempo). Le classi dei problemi risolti efficientemente in termini di spazio sono $L$
-e $FL$.
-$L=DSPACE(\log n)$: la classe dei linguaggi accettati e risolti in spazio deterministico $O(\log n)$.
-$FL=FSPACE(\log n)$: la classe delle funzioni (o problemi) calcolate/risolte in spazio deterministico
-$O(\log n)$.
+e $FL$.\newline\newline
+$L=DSPACE(\log n)$: la \textbf{classe dei linguaggi riconosciuti} in \textbf{spazio deterministico} $O(\log n)$.
+\newline\newline
+$FL=FSPACE(\log n)$: la \textbf{classe delle funzioni calcolate}(e risolte) in \textbf{spazio deterministico}
+$O(\log n)$.\newline\newline
 Le classi $L$ e $FL$ sono universalmente considerati i problemi risolti efficientemente in termini
 di spazio. Abbiamo dunque stabilito due sinonimi:
 \begin{itemize}
-    \item Efficiente in tempo = \textit{polinomiale} in tempo.
-    \item Efficiente in spazio = \textit{logaritmico} in spazio.
+    \item Efficiente in tempo = \textbf{polinomiale in tempo}.
+    \item Efficiente in spazio = \textbf{logaritmico in spazio}.
 \end{itemize}
 
 \paragraph{Perché logaritmico è efficiente in termini di spazio?}\mbox{}\\
-
-Da un punto di vista \textbf{pratico} di gestione dei dati noi sappiamo che i dati sono sempre più grandi. Allora
-sono talmente grandi che tipicamente non possono essere caricate in memoria centrale, la quale
-è molto limitata. A noi piacerebbe caricare i file direttamente in memoria centrale in quanto
+Da un punto di vista \textbf{pratico} di gestione dei dati noi sappiamo che i dati sono sempre più grandi.
+Allora sono talmente grandi che tipicamente non possono essere caricati in \textbf{memoria centrale}, la quale
+è molto limitata.
+\newline\newline
+A noi piacerebbe caricare i file direttamente in memoria centrale in quanto
 dispositivo ad accesso veloce, \textit{soluzione?} Dobbiamo riuscire a gestire una grande
 mole di dati con uno spazio estremamente limitato, per esempio introducendo delle tecniche che ci
 permettono di copiare una parte del dato in memoria centrale, o individuare determinati puntatori.
-Delle tecniche che ci permettono di avere una visione parziale sul dato in ingresso. Su un input
-di lunghezza $n$ uno spazio di dimensione $O(\log n)$ ci permette di implementare queste tecniche,
+\newline\newline
+Delle tecniche che ci permettono di avere una \textbf{visione parziale} sul dato in ingresso. Su un input
+di lunghezza $n$ uno spazio di dimensione $O(\log n)$ ci \textbf{permette di implementare queste tecniche},
 come fissare una posizione rappresentata in $\log n$ bit, oppure di contare certe occorrenze.
-
-Utilizzare uno spazio logaritmico che cresce molto lentamente rispetto ad uno lineare vuol dire che
-stiamo progettando degli algoritmi che usano molta poca memoria, abbiamo guadagnato una conoscenza
+\newline\newline
+Utilizzare uno \textbf{spazio logaritmico} che cresce molto lentamente rispetto ad uno lineare vuol dire che
+stiamo progettando degli algoritmi che usano poca memoria, abbiamo guadagnato una conoscenza
 molto profonda del problema, possiamo puntare solamente a certi punti limitati dell'input.
-
+\newline\newline
 Come si può gestire il riconoscimento delle palindrome? Si prende la stringa in input e la si copia
 sul nastro di lavoro, ma con questo approccio stiamo sprecando molto spazio (spazio lineare, copia
 diretta). Questa stringa potrebbe essere molto lunga ed in una situazione con $n$ molto grandi
 abbiamo dei problemi, allora introduciamo un algoritmo più sofisticato che introduce
 le posizioni da confrontare utilizzando "due puntatori" per indicizzare gli elementi di una stringa.
-
+\newline\newline
 Prima o poi i dati diventano molto grandi, così tanto che non possono stare in memoria centrale,
 prima o poi sarà necessario effettuare una riduzione e questo è possibile utilizzando uno spazio
 logaritmico (quindi ristretto) che permette di utilizzare efficientemente la memoria centrale.
-
-Sono presenti anche motivi \textbf{composizionali}: se io ho un programma che lavora efficientemente
+\paragraph{Motividi composizionali}\mbox{}\\
+Se io ho un programma che lavora efficientemente
 in termini di spazio e richiama una routine che anch'essa lavora in spazio logaritmico, globalmente
 ottengo un programma che è ancora efficiente in termini di spazio (come nel tempo).
-
-Per motivi di \textbf{robustezza}: le classi $L$ e $FL$ rimangono invariate a prescindere dai molti modelli
+\paragraph{Motividi di robustezza}\mbox{}\\
+Le classi $L$ e $FL$ rimangono invariate a prescindere dai molti modelli
 di calcolo utilizzati per caratterizzare i problemi efficientemente risolubili in termini di spazio.
 
 \subsubsection{Tesi di Church-Turing estesa per lo spazio}
 La classe dei problemi efficientemente risolubili in termini di spazio coincide con la classe dei problemi
 risolti in spazio logaritmico da DTM.
-
-\subsubsection{Esempi di problemi efficienti in spazio}
+\paragraph{Esempi di problemi efficienti in spazio}\mbox{}\\
 Problemi in $L$:
 \begin{itemize}
     \item Testare la raggiungibilità tra due nodi in un grafo non diretto.
@@ -5491,7 +5525,7 @@ carpirne una relazione.
 Studiamo la relazione tra $DTIME(f(n))$ e $DSPACE(f(n))$, sono due insiemi di problemi, quindi
 possiamo porre una relazione insiemistica fra queste due classi. Se io ho un linguaggio
 che viene riconosciuto con $f(n)$ passi al massimo può sprecare $f(n)$ celle.
-
+\newline\newline
 Dimostrazione formale: $L\in DTIME(f(n))$, ovvero esiste una DTM che riconosce quel linguaggio in
 $O(f(n))$. Come si comporta tele DTM su un input un input $x$ di lunghezza $n$?
 Vuol dire che la DTM $M$ compie $O(f(n))$ passi,
@@ -5509,10 +5543,10 @@ $$FTIME(f(n))\subseteq FSPACE(f(n))$$
 
 \paragraph{È vero anche il contrario?}\mbox{}\\
 $$DSPACE(f(n))\subseteq DTIME(f(n))?$$
-Significa: un limite in spazio di un algoritmo può implicare un limite in tempo? Su uno spazio
+Ovvero, un limite in spazio di un algoritmo può implicare un limite in tempo? Su uno spazio
 di una sola cella è possibile effettuare un comportamento infinito, mandando avanti e indietro
 la testina della DTM. Quindi in uno spazio atomico possono avviare un comportamento infinito (loop).
-
+\newline\newline
 Dimostrazione: Prendiamo un linguaggio $L\in DSPACE(f(n))$, quindi esiste una DTM $M$ che riconosce
 questo linguaggio in spazio che è $O(f(n))\leq\alpha\cdot f(n)$ per una opportuna costante in
 $\alpha >0$ e per ogni $n\geq n_0$. Vediamo la computazione di $M$ su input $x\in\Sigma^*$ con $|x|=n$:
