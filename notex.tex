@@ -103,7 +103,7 @@ Una funzione dall'insieme $A$ all'insieme $B$ è una \textbf{legge}, che chiamia
 
 Dal punto di vista formale l'espressione della funzione viene definita \textbf{globalmente}:
 $$f:A\rightarrow B$$
-Dove $A$ viene chiamato \textbf{dominio} e $B$ \textbf{codominio}, questa notazione dice che ogni elemento del dominio è associato attraverso una legge $f$ ad un elemento del codominio. Esiste anche uan notazione che permette di stabilire localmente l'operato della funzione, essa rappresenta l'operato della legge $f$ sull'elemento $a$ che porta all'elemento $b$.
+Dove solitamente $A$ viene chiamato \textbf{dominio} e $B$ \textbf{codominio}, questa notazione dice che ogni elemento del dominio è associato attraverso una legge $f$ ad un elemento del codominio. Esiste anche uan notazione che permette di stabilire localmente l'operato della funzione, essa rappresenta l'operato della legge $f$ sull'elemento $a$ che porta all'elemento $b$.
 $$a \xrightarrow[\text{}]{\text{f}} b$$
 \newline
 La notazione comunemente più utilizzata (in particolare nei libri di testo, ma anche nei corsi di matematica), è la seguente:
@@ -198,7 +198,7 @@ N.B. L'operazione di composizione restituisce una funzione, e l'operatore $\circ
 
 \subsubsection{Funzione identità}
 La funzione identità sull'insieme $A$ è una funzione che effettua un mappaggio ricorsivo sullo stesso elemento.
-$$i_A:A\rightarrow A : i_A(a)=a\text{ }\forall a\in A$$
+$$i_A:A\rightarrow A : i_A(a)=a,\text{ }\forall a\in A$$
 Per esempio la funzione identità sull'insieme $\mathbb{N}$ è $i_\mathbb{N}(n)=n$.
 
 \subsubsection{Definizione alternativa di funzione inversa}
@@ -230,7 +230,7 @@ ovvero quell'insieme costituito da tutti gli elementi di $A$ tali per cui è def
 $$Dom_f=\left\{\forall a\in A : f(a)\downarrow \right\}\subseteq A$$
 
 Allora vale precisare le due seguenti regole:
-$$Dom_f\nsubseteq A\implies f\text{ parziale}$$
+$$Dom_f\subsetneq A\implies f\text{ parziale}$$
 $$Dom_f\equiv A\implies f \text{ totale}$$
 
 Alcuni esempi:
@@ -379,23 +379,20 @@ I sistemi di calcolo servono per calcolare le funzioni, ogni programma che immet
 nel mio sistema di calcolo mi viene calcolato. Indico con potenza computazionale
 del mio sistema di calcolo come "\textit{tutto quello che sa fare}" il mio sistema di
 calcolo, o meglio, tutte quelle funzioni che il mio sistema di calcolo può calcolare.
-
+\newline\newline
 Tutte le funzioni che può calcolare il mio sistema di calcolo è un sottoinsieme
 di tutte le funzioni immaginabili che possono andare da dati in dati. I programmi
 in generale sono delle funzioni da dati in dati, quindi il mio sistema di calcolo
 è ovvio che calcoli questo tipo di funzioni, è un sottoinsieme perché non so quali
 funzioni è in grado di risolvere il mio sistema di calcolo (e questa è la domanda
 a \textit{cosa} a cui deve rispondere l'informatica teorica).
-
 $$F(\mathcal{C})=\{\mathcal{C}(P,\_):P\in PROG\}\subseteq DATI_{\bot}^{DATI}$$
-
 Questo significa che esistono delle funzioni che non possono essere risolte dal mio
 sistema di calcolo, e che quindi \textbf{non sono automatizzabili}.
-$$F(\mathcal{C})\nsubseteq DATI_{\bot}^{DATI}$$
-Sono presenti funzioni che l'informatica può risolvere e fare tutto.
-
+$$F(\mathcal{C})\subsetneq DATI_{\bot}^{DATI}$$
+Sono presenti funzioni che l'informatica può risolvere e fare tutto, ma non tutte
+le funzioni possibili possono essere risolvibili dall'informatica.
 $$F(\mathcal{C})=DATI_{\bot}^{DATI}$$
-
 Quindi abbiamo ridotto il quesito \textit{che cosa sono in grado di fare i programmi},
 ad un quesito matematico di inclusione propria ed impropria.
 \subsubsection{Importanza del calcolo di funzione}
@@ -403,9 +400,8 @@ Calcolare una funzione significa risolvere problemi in \textit{generale}. Questo
 perchè ad ogni problema posso associare una \textit{funzione soluzione}, non è altro che
 quella funzione che ad un dato input associa una determinata \textit{soluzione}.
 Per esempio, il \textit{problema del calcolo del determinante}:
-\newline
-DET:
-\begin{algorithm}[H]
+\begin{algorithm}[hbt!]
+    \caption{DET}\label{alg:det}
     \KwIn{$M\in \mathbb{R}^{n\times n}$}
     \KwOut{Determinante di $M$}
 \end{algorithm}
@@ -415,9 +411,8 @@ $$f_{DET}(M)=Det(M):$$
 Vediamo che risolvere il dato problema consiste nel calcolare la funzione soluzione,
 o risolvere il problema significa sostanzialmente avere un programma in grado
 di risolvere quella funzione.
-
-Find-Replace:
-\begin{algorithm}[H]
+\begin{algorithm}[hbt!]
+    \caption{Find-Replace}\label{alg:find-replace}
     \KwIn{Testo, parola da cercare, parola da sostituire}
     \KwOut{Testo in cui ogni occorrenza della parola da cercare è sostituita dall'altra}
 \end{algorithm}
@@ -430,21 +425,21 @@ Siamo arrivati al primo punto fondamentale, il \textit{cosa} dell'informatica, e
 abbiamo visto che si concretizza nell'interrogarsi sulla relazione tra l'insieme della
 potenza computazionale e quello di tutte le funzioni che vanno da dati in dati possibili.
 $$F(\mathcal{C})\text{ ? }DATI_{\bot}^{DATI}$$
-
+\newline\newline
 Per cercare di dare una dimostrazione sul carattere dell'inclusione, è molto utile
-fare riferimento al concetto matematica di \textbf{cardinalità}.
-
+fare riferimento al concetto matematico di \textbf{cardinalità}.
+\newline\newline
 Dato un insieme $A$, la sua cardinalità si indica con $|A|$. Intuitivamente che la cardinalità
 di un insieme è il numero di elementi da cui è formato l'insieme. Questa idea intuitiva
-è abbastanza corretta quando si ha a che fare con insiemi finiti (la cardinalità mi può
+è abbastanza corretta quando si ha a che fare con \textbf{insiemi finiti} (la cardinalità mi può
 aiutare a capire quale insieme è più grande degli altri).
-
-Purtroppo però quando tiriamo in ballo insiemi di cardinalità infinita, questo potrebbe
+\newline\newline
+Purtroppo però quando tiriamo in ballo insiemi di cardinalità \textbf{infinita}, questo potrebbe
 portare a conclusioni più complicate da elaborare. Si potrebbe \textit{erroneamente}
 pensare $|\mathbb{N}|=\infty=|\mathbb{B}|$, ma questo sappiamo che
-non è assolutamente vero, perchè l'insieme dei numeri reali è molto più fitto
+non è assolutamente vero, perchè l'insieme dei numeri reali è molto più \textbf{fitto}
 di quello dei numeri interi.
-
+\newline\newline
 Quindi dobbiamo aggiungere dei nuovi concetti, visto che \textit{"l'infinito di $\mathbb{R}$"} è
 diverso da quello di $\mathbb{N}$. Il concetto da introdurre è quello di \textbf{relazione}.
 
@@ -505,24 +500,20 @@ gli elementi che sono in relazione con $a$, notazione:
 $$[a]_R=\{b\in A: a\text{ R }b\}$$
 Si dimostra facilmente che :
 \begin{itemize}
-    \item Non esistono classi di equivalenza vuote, questo per via della proprietà
-          \textit{riflessiva} delle relazioni di equivalenza.
-    \item Se prendo due elementi diversi del dominio, le classi di equivalenza relative
-          possono essere disgiunte oppure sono la stessa classe di equivalenza: $a,b\in A$ vale che
-          $[a]_R\cap[b]_R=\emptyset$ o $[a]_R = [b]_R$.
+    \item Non esistono classi di equivalenza vuote, questo per via della \textbf{proprietà
+          riflessiva} delle relazioni di equivalenza.
+    \item Se prendo due elementi diversi del dominio, le relative classi di equivalenza
+          possono essere \textbf{disgiunte} (portano all'insieme vuoto) oppure sono la \textbf{stessa} classe di equivalenza $a,b\in A$ vale che
+          $[a]_R\cap[b]_R=\emptyset\lor[a]_R = [b]_R$.
     \item $\bigcup\limits_{a\in A}[a]_R=A$
 \end{itemize}
-
-Quindi la partizione indotta da una relazione di equivalenza non è altro che l'insieme
+Quindi la \textbf{partizione indotta} da una relazione di equivalenza non è altro che l'insieme
 delle classi di equivalenza relative a quella relazione.
-\newline
-L'insieme delle classi di equivalenza di $R$ è la partizione indotta da $R$ su $A$.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{images/rel_equi_graph.png}
-    \caption{Insieme $A$ partizionato}
+    \caption{L'insieme delle classi di equivalenza di $R$ è la partizione indotta da $R$ su $A$.}
 \end{figure}
-
 L'insieme $A$ partizionato rispetto alla relazione $R$ è detto \textbf{insieme quoziente}:
 $$A / R$$
 
@@ -6401,7 +6392,7 @@ algoritmi paralleli efficienti (si crede molto fermamente).
     \caption{Situazione attuale delle classi di complessità affrontate durante il corso.}
 \end{figure}
 Quello che abbiamo dimostrato è che la classe dei problemi risolubili efficientemente in termini
-di spazio $L$ risiede nella classe dei problemi risolubili efficientemente in termini di tempo $P$
+di \textbf{spazio} $L$ risiede nella classe dei problemi risolubili efficientemente in termini di \textbf{tempo} $P$
 (non si sa nulla se l'inclusione sia propria o meno).
 \newline\newline
 Abbiamo anche scoperto la classe
@@ -6413,10 +6404,10 @@ $L\subset P$.
 Nella classe $NP$ abbiamo individuato la classe dei problemi $NP-C$, che simmetricamente
 non ha (o si pensa abbia) una intersezione con la classe dei problemi $P$, altrimenti $P=NP$.
 \newline\newline
-Ogni problema in $NP$ ha sicuramente un algoritmo esponenziale deterministico, quindi è incluso
+Ogni problema in $NP$ ha sicuramente un algoritmo esponenziale \textbf{deterministico}, quindi è incluso
 sicuramente nella classe $EXPTIME$. Attualmente si pensa che tutte queste inclusioni siano proprie,
 tutta via ancora nessuno ha dimostrato la proprietà di queste inclusioni.
-
+\newline\newline
 L'unica inclusione dimostrata come propria è che $P\subsetneq EXPTIME$, questo per motivi di gerarchia.
 
 \end{document}
