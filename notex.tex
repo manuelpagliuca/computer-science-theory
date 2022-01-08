@@ -5548,38 +5548,39 @@ di una sola cella è possibile effettuare un comportamento infinito, mandando av
 la testina della DTM. Quindi in uno spazio atomico possono avviare un comportamento infinito (loop).
 \newline\newline
 Dimostrazione: Prendiamo un linguaggio $L\in DSPACE(f(n))$, quindi esiste una DTM $M$ che riconosce
-questo linguaggio in spazio che è $O(f(n))\leq\alpha\cdot f(n)$ per una opportuna costante in
-$\alpha >0$ e per ogni $n\geq n_0$. Vediamo la computazione di $M$ su input $x\in\Sigma^*$ con $|x|=n$:
-
+questo linguaggio in \textbf{spazio} che è $O(f(n))\leq\alpha\cdot f(n)$ per una opportuna costante in
+$\alpha >0$ e per ogni $n\geq n_0$.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/comput_DTM_c.png}
+    \caption{Computazione di $M$ su input $x\in\Sigma^*$ con $|x|=n$}
 \end{figure}
-
 Sappiamo che la computazione $M$ su input $x$ è una sequenza di configurazioni $c$ del tipo: $c=(q,i,j,w)$ (stato,
 testina nastro input, testina nastro lavoro, contenuto nastro lavoro).
 $$c_0\overset{\delta}{\rightarrow}c_1\overset{\delta}{\rightarrow}\dots c_i\overset{\delta}{\rightarrow}c_{i+1}\dots$$
-
+\newline\newline
 La domanda che
 ci si pone è la seguente: \textit{Quanto può essere lunga una computazione di questo tipo?}
-Può essere lunga tanto quante configurazioni diverse esistono di $M$ con un input $x$ di lunghezza $n$.
-\textit{Perché questo è il limite?} Perché se vado a vanti un passo in più, per il \textbf{principio
-    della piccionaia}, vuol dire che rivedo una computazione che ho fatto prima, quindi la DTM sarebbe
-in un loop che non servirebbe per accettare o rifiutare $x$.
-
-Quindi il numero di passi di una computazione di una macchina non può essere più lunga di quante
-configurazioni diverse su input di lunghezza $n$ esistono, se è più lunga vuol dire che qualche
-computazione è ricomparsa, ma siccome è una DTM vuol dire che sono entrato in un loop. Questo
+Può essere lunga tanto quanto le configurazioni diverse di $M$ con un input $x$ di lunghezza $n$.
+\textit{Perché questo è il limite?}
+\newline\newline Il \textbf{principio dei cassetti} (o legge della piccionaia) dice che se ho
+$n+k$ oggetti da disporre in $n$ cassetti, allora uno di questi cassetti conterrà più di un oggetto.
+\newline\newline
+Proprio per questo motivo, se la computazione della DTM fosse più lunga significherebbe che
+entrerei due volte in una stessa configurazione e quindi la DTM sarebbe in un \textbf{loop} che non
+servirebbe per accettare o rifiutare $x$.
+\newline\newline
+Questo
 vuol dire che se $M$ deve decidere se accettare o meno l'input $x$ lo deve fare in un numero di passi
 che è pari al numero di configurazioni diverse su input di lunghezza $n$.
-
+\newline\newline
 Il problema quindi è il seguente, visto che riesco a mettere questo limite sulla lunghezza della computazione
 allora mi chiedo \textit{quante sono le configurazioni diverse di $M$ su input di lunghezza $n$?}
-Questo numero se lo trovo è un time-out a $t(n)$ di $M$, dove oltre quello è inutile andare
+Questo numero se lo trovo è un \textbf{time-out} a $t(n)$ di $M$, dove oltre quello è inutile andare
 perché la risposta l'ho già ottenuta prima e quindi mi troverei in un loop.
-
+\newline\newline
 \textit{Quante configurazioni di $M$ su input di lunghezza $n$ diverse esistono?} (quante
-quadruple diverse esistono?) Questo significa:
+\textbf{quadruple} diverse esistono?) Questo significa:
 \begin{itemize}
     \item Quante possibilità per $q$? $|Q|$.
     \item Quante possibilità per $i$? $n+2$ (considerando i due marker).
@@ -5593,32 +5594,31 @@ quadruple diverse esistono?) Questo significa:
 Le diverse possibili configurazioni di $M$ su input $n$ sono date dalla moltiplicazione di questi
 differenti elementi.
 $$\leq |Q|\cdot(n+2)\cdot(\alpha f(n)+1)\cdot|\Gamma|^{\alpha f(n)}\leq$$
-
-$$|Q|\cdot(n+2)\cdot|\Gamma^{\alpha f(n)+1}\cdot|\Gamma|^{\alpha f(n)}\leq$$
+$$|Q|\cdot(n+2)\cdot|\Gamma|^{\alpha f(n)+1}\cdot|\Gamma|^{\alpha f(n)}\leq$$
 $$|Q|\cdot|\Gamma|\cdot(n+2)\cdot|\Gamma|^{2\alpha f(n)}=|Q|\cdot|\Gamma|\cdot(n+2)\cdot2^{2\alpha f(n)\cdot\log |\Gamma|}=$$
 $$O(n\cdot 2^{O(f(n))})$$
 Utilizzo la notazione O-grande per semplificare la lettura rimuovendo le costanti. Questo numero è
-il tempo in cui deve accettare o rifiutare la stringa $x\in\Sigma^n$ (time-out sulla computazione di $M$).
-
+il tempo in cui deve \textbf{accettare o rifiutare} la stringa $x\in\Sigma^n$
+(\textbf{time-out sulla computazione} di $M$).
+\newline\newline
 Allora come è fatta una DTM che accetta quel linguaggio con un limite di tempo? Data DTM $M$ che accetta
 $L$ con $s(n)\leq\alpha\cdot f(n)$, posso costruire una DTM $M'$ che su input $x\in\Sigma^*$ con $|x|=n$.
 \begin{enumerate}
-    \item Scrive in unario una su un nastro il time-out $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
-    \item Simula $M$ e ad ogni mossa cancella un simbolo dal nastro time-out (in
-          sostanza implemento un count-down, lo scala di 1).
+    \item Scrive in unario su un nastro appostito il \textbf{time-out} $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
+    \item \textbf{Simula} $M$ e ad ogni mossa \textbf{cancella} un simbolo dal nastro time-out (in
+          sostanza implemento un count-down che viene decrementato di 1 per iterazione).
     \item Se $M$ accetta o rifiuta prima del time-out allora $M'$ accetta o rifiuta.
-    \item Se allo scadere del time-out $M$ non ho ancora preso una decisione allora $M'$ rifiuta (loop),
+    \item Se allo scadere del time-out $M$ non ho ancora preso una decisione allora $M'$ \textbf{rifiuta} (loop),
           perchè non siamo in uno stato accettante.
 \end{enumerate}
 Quindi ho una DTM $M'$ che replicando $M$ accetta sicuramente $L$ ed il tempo è
 dato da $t(n)=O(n\cdot 2^{O(f(n))})$.
-
 Questo significa che:
 $$DSPACE(f(n))\subseteq DTIME(n\cdot 2^{O(f(n))})$$
 Una limitazione in spazio significa una limitazione in tempo. In generale, un limite sullo spazio porta
-ad un limite esponenziale sul tempo.
+ad un \textbf{limite esponenziale} sul tempo.
 
-\subsubsection{Conseguenza importante: Eff.Spazio vs Eff.Tempo}
+\subsubsection{Efficienza in spazio vs efficienza in tempo}
 \paragraph{Teoremi/Proprietà}\mbox{}\\
 \begin{enumerate}
     \item $DSPACE(f(n))\subseteq DTIME(n\cdot 2^{O(f(n))})$
@@ -5632,16 +5632,22 @@ efficiente in termini di tempo, allora:
 \paragraph{Teorema}\mbox{}\\
 $$L\subseteq P\text{ e }FL\subseteq FP$$
 La prima inclusione è data perché
-$$L=DSPACE(\log n)\subseteq DTIME(n\cdot 2^{O(\log n)})=DTIME(n^s)\subseteq \bigcup_{k\geq 0}DTIME(n^k)=P$$
-applico la proprietà 1 usando $f(n)=\log n$. Consideriamo una costante $s$ non definito,
-poiché non è 2. Ovviamente appartiene all'unione delle classi di complessità in tempo polinomiali
+$$L=DSPACE(\log n)\overset{(1)}{\subseteq} DTIME(n\cdot 2^{O(\log n)})$$
+$$DTIME(n\cdot 2^{O(\log n)})=DTIME(n^s)$$
+$$DTIME(n^s)\subseteq \bigcup_{k\geq 0}DTIME(n^k)=P$$
+$$L\subseteq P\text{ e }FL\subseteq FP$$
+Applico la proprietà $1$ usando $f(n)=\log n$. Successivamente considero una costante $s$ non definita
+al posto del O-grande (che viene considerato come una costante),
+poiché non è 2, quindi $DTIME(n\cdot 2^{O(\log n)})=DTIME(n^s)$.
+Ovviamente questa classe di complessità apparterrà all'unione delle classi di complessità in tempo polinomiali
 e quindi è incluso in $P$. Allo stesso modo, con la proprietà 2 ottengo che $FL\subseteq FP$.
-Questa è una conseguenza profonda, se produco degli algoritmi efficienti in termini di spazio
-quegli stessi algoritmi con la tecnica di time-out possono essere trasformati in algoritmi efficienti
-in termini di tempo.
+Questa è una conseguenza profonda, se produco degli \textbf{algoritmi efficienti in termini di spazio}
+quegli stessi algoritmi con la tecnica di time-out possono essere trasformati in \textbf{algoritmi efficienti
+in termini di tempo}.
 Alcune riflessioni su queste due inclusioni:
 \begin{itemize}
-    \item Prima di tutto non si sa se queste inclusioni siano proprie o meno.
+    \item Prima di tutto non si sa se queste inclusioni siano proprie o meno, si suppone di si
+    rimane uno dei più grandi problemi aperti nella teoria della complessità.
     \item Quindi, \textit{in teoria}, algoritmi efficienti in spazio portando immediati
           algoritmi efficienti in tempo (il viceversa non è vero).
     \item \textit{In pratica}, il grado del polinomio ottenuto da un algoritmo efficiente
@@ -5650,17 +5656,17 @@ Alcune riflessioni su queste due inclusioni:
 \end{itemize}
 
 \subsection{Zona grigia e non determinismo}
-Esiste una zona grigia di problemi che è in relazione con il \textbf{non determinismo}. Le macchine
-di Turing non deterministiche, NTM servono a caratterizzare una zona grigia di problemi.
-La zona grigia di problemi è un insieme di problemi di decisione importanti e hanno un sacco di applicazioni
-per i quali però purtroppo non abbiamo in mano nessun algoritmo efficiente. Però nessuno ha dimostrato
+Esiste una zona grigia di problemi che è in relazione con il \textbf{non determinismo}.
+Le NTM servono a caratterizzare una \textbf{zona grigia} di problemi.
+La zona grigia di problemi è un insieme di \textbf{problemi di decisione importanti} e hanno un sacco di applicazioni
+per i quali però purtroppo non abbiamo in mano \textbf{nessun algoritmo efficiente}. Però nessuno ha dimostrato
 che sia presente un algoritmo efficiente per questi problemi. Il meglio che abbiamo per la risoluzione
-di questi problemi sono una complessità in tempo esponenziale, ma rimangono aperti.
-
-Sono problemi che per il momento non abbiamo soluzioni efficienti, ma allo stesso tempo sono algoritmi
+di questi problemi sono una complessità in \textbf{tempo esponenziale}, ma rimangono \textbf{aperti}.
+\newline\newline
+Sono problemi che per il momento non hanno soluzioni efficienti, ma allo stesso tempo sono algoritmi
 \textbf{efficientemente verificabili}, ovvero se mi date un istanza di questo problema e mi date un
-pezzo di informazione io sono in grado di verificare velocemente quell'informazione dicendo SI o NO.
-
+pezzo di informazione io sono in grado di \textbf{verificare velocemente} quell'informazione dicendo SI o NO.
+\newline\newline
 Quindi visti nella loro generalità purtroppo hanno algoritmi esponenziali ma diventerebbero facili se
 qualcuno mi desse un pezzo dell'informazione, perché mi permetterebbe di dare una risposta immediata.
 Il problema che ottenere questa informazione costa, il non determinismo serve proprio a catturare questi
@@ -5668,19 +5674,20 @@ problemi che per il momento hanno soluzioni inefficienti ma sono facilmente veri
 
 \subsubsection{Problema della soddisfacibilità booleana}
 \begin{itemize}
-    \item Formula booleana, formata da variabili booleane connesse da connettivi logici che legano
+    \item \textbf{Formula booleana}, formata da \textbf{variabili booleane} connesse da connettivi logici che legano
           tali variabili.
           $$\phi(x,y,z)=x\implies(y\land \overline{z})$$
     \item Una formula booleana è \textbf{soddisfacibile} se e solo se riesco a creare un assegnamento
           di verità di tali variabili in maniera che la formula venga resa vera. Se una formula non è
           mai soddisfacibile si chiama \textbf{contraddizione}, tuttavia a noi interessano quelle
           soddisfacibili.
-    \item Una formula booleana si dice in \textbf{CNF}, se è espressa come congiunzione di disgiunzioni
-          ovvero come AND di gruppi di OR, dove i gruppi di OR si chiamano clausole.
+    \item Una formula booleana si dice in \textbf{CNF} (Conjunctive Normal Form o \textit{Forma Normal Congiuntiva}),
+        se è espressa come congiunzione di disgiunzioni ovvero come AND di gruppi di OR, dove i gruppi di OR si chiamano \textbf{clausole}.
+    \item Qualsiasi formula booleana ammette la sua CNF che risulta essere \textbf{logicamente equivalente}:
           $$\phi(x,y,z)=x\implies(y\land\overline{z})=\overline{x}\lor (y\land\overline{z})=$$
-          $$(\overline{x}\land y)\land(\overline{x}\land\overline{z})\leftarrow CNF$$
+          $$(\overline{x}\land y)\land(\overline{x}\land\overline{z})\leftarrow CNF\text{ (due clausole)}$$
           Si applicano le proprietà dei connettivi logici sulla formula booleana in maniera da ottenere
-          la CNF. In questo caso le operazioni svolte: riscrittura dell'implicazione, proprietà distributiva
+          la CNF. In questo caso le operazioni svolte sono la riscrittura dell'implicazione e la proprietà distributiva
           dell'OR. Questa formula CNF è logicamente equivalente alla formula booleana binaria.
 \end{itemize}
 Il nostro problema parla di formule booleane in CNF e si chiede se sono soddisfacibili o meno.

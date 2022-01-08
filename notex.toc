@@ -249,49 +249,49 @@
 \contentsline {paragraph}{Teorema I}{154}{section*.141}%
 \contentsline {paragraph}{Teorema II}{154}{section*.142}%
 \contentsline {paragraph}{È vero anche il contrario?}{154}{section*.143}%
-\contentsline {subsubsection}{\numberline {5.5.1}Conseguenza importante: Eff.Spazio vs Eff.Tempo}{156}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.1}Efficienza in spazio vs efficienza in tempo}{156}{subsubsection.5.5.1}%
 \contentsline {paragraph}{Teoremi/Proprietà}{156}{section*.144}%
-\contentsline {paragraph}{Teorema}{156}{section*.145}%
+\contentsline {paragraph}{Teorema}{157}{section*.145}%
 \contentsline {subsection}{\numberline {5.6}Zona grigia e non determinismo}{157}{subsection.5.6}%
-\contentsline {subsubsection}{\numberline {5.6.1}Problema della soddisfacibilità booleana}{157}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.1}Problema della soddisfacibilità booleana}{158}{subsubsection.5.6.1}%
 \contentsline {subsubsection}{\numberline {5.6.2}Circuiti Hamiltoniani}{159}{subsubsection.5.6.2}%
-\contentsline {paragraph}{Piccola digressione}{160}{section*.146}%
-\contentsline {paragraph}{Teorema di Eulero}{160}{section*.147}%
+\contentsline {paragraph}{Piccola digressione}{161}{section*.146}%
+\contentsline {paragraph}{Teorema di Eulero}{161}{section*.147}%
 \contentsline {subsection}{\numberline {5.7}Algoritmi non deterministici}{161}{subsection.5.7}%
-\contentsline {paragraph}{Algoritmo non deterministico}{161}{section*.148}%
-\contentsline {paragraph}{Esempio Alg.Non-Det. per CNF-SAT}{162}{section*.149}%
-\contentsline {paragraph}{Esempio Alg.Non-Det. per HC}{162}{section*.150}%
+\contentsline {paragraph}{Algoritmo non deterministico}{162}{section*.148}%
+\contentsline {paragraph}{Esempio Alg.Non-Det. per CNF-SAT}{163}{section*.149}%
+\contentsline {paragraph}{Esempio Alg.Non-Det. per HC}{163}{section*.150}%
 \contentsline {subsection}{\numberline {5.8}Tempo di calcolo algoritmo non deterministico}{163}{subsection.5.8}%
 \contentsline {subsection}{\numberline {5.9}Macchina di Turing non deterministica}{164}{subsection.5.9}%
 \contentsline {subsubsection}{\numberline {5.9.1}NDTM per riconoscere linguaggi e risolvere problemi di decisione}{165}{subsubsection.5.9.1}%
 \contentsline {paragraph}{Definizione}{165}{section*.151}%
-\contentsline {paragraph}{Definizione}{165}{section*.152}%
-\contentsline {paragraph}{Complessità in tempo non deterministica}{165}{section*.153}%
+\contentsline {paragraph}{Definizione}{166}{section*.152}%
+\contentsline {paragraph}{Complessità in tempo non deterministica}{166}{section*.153}%
 \contentsline {paragraph}{Definizione}{166}{section*.154}%
 \contentsline {subsubsection}{\numberline {5.9.2}Classi di complessità non deterministiche}{166}{subsubsection.5.9.2}%
-\contentsline {subsubsection}{\numberline {5.9.3}Relazione tra $P$ e $NP$}{166}{subsubsection.5.9.3}%
-\contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{166}{section*.155}%
+\contentsline {subsubsection}{\numberline {5.9.3}Relazione tra $P$ e $NP$}{167}{subsubsection.5.9.3}%
+\contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{167}{section*.155}%
 \contentsline {subsubsection}{\numberline {5.9.4}$NTIME(f(n))\subseteq DTIME(?)$}{167}{subsubsection.5.9.4}%
 \contentsline {paragraph}{Tornando alla questione $NP\subseteq P$ p $P=NP$?}{169}{section*.156}%
-\contentsline {paragraph}{Attenzione sulla notezione}{169}{section*.157}%
-\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{169}{subsubsection.5.9.5}%
+\contentsline {paragraph}{Attenzione sulla notezione}{170}{section*.157}%
+\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{170}{subsubsection.5.9.5}%
 \contentsline {subsubsection}{\numberline {5.9.6}Definizione formale $\pi _1\leq \pi _2$}{170}{subsubsection.5.9.6}%
 \contentsline {paragraph}{Definizione}{170}{section*.158}%
-\contentsline {paragraph}{Teorema}{170}{section*.159}%
+\contentsline {paragraph}{Teorema}{171}{section*.159}%
 \contentsline {subsubsection}{\numberline {5.9.7}Problemi $NP-Completi$}{172}{subsubsection.5.9.7}%
 \contentsline {paragraph}{Teorema fondamentale}{172}{section*.160}%
 \contentsline {paragraph}{Dimostrazione}{172}{section*.161}%
-\contentsline {paragraph}{CNF}{172}{section*.162}%
-\contentsline {paragraph}{HC}{172}{section*.163}%
+\contentsline {paragraph}{CNF}{173}{section*.162}%
+\contentsline {paragraph}{HC}{173}{section*.163}%
 \contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in NP-C$}{173}{section*.164}%
-\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{173}{subsubsection.5.9.8}%
+\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{174}{subsubsection.5.9.8}%
 \contentsline {paragraph}{Riduzione in spazio logaritmico}{174}{section*.165}%
 \contentsline {paragraph}{Teorema}{174}{section*.166}%
-\contentsline {paragraph}{Dimostrazione del teorema}{174}{section*.167}%
-\contentsline {subsubsection}{\numberline {5.9.9}Problemi $P-completi$}{175}{subsubsection.5.9.9}%
-\contentsline {paragraph}{Teorema}{175}{section*.168}%
-\contentsline {paragraph}{Dimostrazione}{175}{section*.169}%
+\contentsline {paragraph}{Dimostrazione del teorema}{175}{section*.167}%
+\contentsline {subsubsection}{\numberline {5.9.9}Problemi $P-completi$}{176}{subsubsection.5.9.9}%
+\contentsline {paragraph}{Teorema}{176}{section*.168}%
+\contentsline {paragraph}{Dimostrazione}{176}{section*.169}%
 \contentsline {paragraph}{Esempi di problemi P-completi}{176}{section*.170}%
-\contentsline {paragraph}{Nota interessante}{176}{section*.171}%
-\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{176}{section*.172}%
+\contentsline {paragraph}{Nota interessante}{177}{section*.171}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{177}{section*.172}%
 \contentsline {subsection}{\numberline {5.10}Classi di complessità}{177}{subsection.5.10}%
