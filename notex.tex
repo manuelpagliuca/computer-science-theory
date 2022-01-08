@@ -4563,7 +4563,7 @@ sia definita in un \textit{determinato} modo, ovvero che data una certa configur
     \caption{Partendo da una configurazione $c$ esiste una univoca configurazione
         successiva $c'$}
 \end{figure}
-Le macchine di Turing \textbf{non deterministiche} (NTM), la \textbf{funzione di transizione}
+Le macchine di Turing \textbf{non deterministiche} (NDTM), la \textbf{funzione di transizione}
 $\delta$ è tale per cui data una configurazione si possono giungere a \textit{molteplici} configurazioni
 successive.
 \begin{figure}[H]
@@ -4589,7 +4589,7 @@ numeri complessi che soddisfano certe proprietà.
 \end{figure}
 Il modello originale è quello DTM, in base a differenti implementazioni di $\delta$ posso
 definire le altre macchine di Turing. Nel nostro caso considereremo le DTM dove la computazione
-è un cammino di configurazioni (nelle NTM è un albero).
+è un cammino di configurazioni (nelle NDTM è un albero).
 \subsubsection{Funzionalità di una DTM}
 La cosa che una DTM sa fare meglio è quella di \textit{riconoscere i linguaggi},
 un linguaggio $L\subseteq\Sigma^*$ è riconoscibile da una DTM se sono in grado di
@@ -5657,7 +5657,7 @@ Alcune riflessioni su queste due inclusioni:
 
 \subsection{Zona grigia e non determinismo}
 Esiste una zona grigia di problemi che è in relazione con il \textbf{non determinismo}.
-Le NTM servono a caratterizzare una \textbf{zona grigia} di problemi.
+Le NDTM servono a caratterizzare una \textbf{zona grigia} di problemi.
 La zona grigia di problemi è un insieme di \textbf{problemi di decisione importanti} e hanno un sacco di applicazioni
 per i quali però purtroppo non abbiamo in mano \textbf{nessun algoritmo efficiente}. Però nessuno ha dimostrato
 che sia presente un algoritmo efficiente per questi problemi. Il meglio che abbiamo per la risoluzione
@@ -5698,75 +5698,89 @@ Purtroppo questo problema importantissimo non è ancora risolto (utilizzato ampl
 il meglio che possiamo fare è un algoritmo esaustivo (brute-force), si provano tutti i possibili
 assegnamenti delle variabili per trovare quello che porta la verità. Questo algoritmo ha lo svantaggio
 del tempo che è almeno $t(n)=2^n$ (tutti gli assegnamenti di verità).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/cnf.png}
-    \caption{Miglior algoritmo proposto per l'attuale CNF-SAT}
-\end{figure}
+\begin{algorithm}[hbt!]
+    \caption{Miglior algoritmo per $CNF-SAT$}\label{alg:cnf}
+    \KwIn{$\phi(x_1,\dots,x_n)$}
+    \ForEach{$(x\in\{0,1\}^n)$}
+    {
+        \If{$(\phi(x_1,\dots,x_n)==1)$}
+        {
+            return $1$\;
+        }
+    }
+    return $0$\;
+\end{algorithm}
 $$t(n)=2^n\cdot \{\text{tempo per verificare }\phi(x)==1\} = O(n\cdot 2^n)$$
-ed ecco la \textit{facile verifica} (tempo per verificare $\phi (x)==1$), se data una formula ed un assegnamento particolare
+ed ecco la \textbf{facile verifica} (tempo per verificare $\phi (x)==1$), se data una formula ed un assegnamento particolare
 è facile verificare se quell'assegnamento funziona, ha complessità $O(n)$. Il problema
-è che questa "facile verifica" viene ripetuta un numero esponenziale di volte. Il problema
+è che questa "facile verifica" viene ripetuta un numero \textbf{esponenziale} di volte. Il problema
 è globalmente inefficiente ma nasconde una fase di facile verifica (come tutti i problemi
 della zona grigia).
 
 \subsubsection{Circuiti Hamiltoniani}
 \begin{itemize}
-    \item Consideriamo un grafo non orientati $G=(V,E)$.
-    \item Un cammino in $G$ è una sequenza di archi.
-    \item Un circuito che parte e termina nello stesso vertice.
+    \item Consideriamo un \textbf{grafo non orientato} $G=(V,E)$.
+    \item Un \textbf{cammino} in $G$ è una sequenza di archi.
+    \item Un \textbf{circuito} che parte e termina nello stesso vertice.
 \end{itemize}
-Un circuito Hamiltoniano (scoperto da Hamilton, che ha scoperto anche i quaternioni) è un cammino chiuso dove tutti i nodi del grafo compaiono
-tutti una ed una sola volta.
+Un \textbf{circuito Hamiltoniano} (scoperto da Hamilton, che ha scoperto anche i quaternioni) è un
+cammino chiuso dove tutti i nodi del grafo compaiono tutti una ed una sola volta.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/hamiltonian_circuit.png}
-    \caption{Circuito Hamiltoniano, i nodi compaiono una ed una sola volta.}
+    \caption{Circuito Hamiltoniano (frecce blu)}
 \end{figure}
 Un controesempio:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/non_hamiltonian.png}
-    \caption{Questo grafo non contiene un circuito Hamiltoniano, dovrà passare per il centro
-        almeno due volte.}
+    \caption{Circuito non Hamiltoniano}
 \end{figure}
 $$HC$$
 $$\text{Istanza: }G=(\{v_1,\dots,v_n\},E)$$
 $$\text{Domanda: }G \text{ contiene un }HC?$$
-
 Questo è un problema che per il momento non possiamo trovare un algoritmo efficiente
 che ci porti ad una soluzione, l'unica soluzione attuale è molto simile alla risoluzione
 delle CNF, si provano tutti i possibili HC (Hamiltonian Circuit).
-
-Nota: ad ogni HC corrisponde una permutazione dei nodi di $G$, se mi segnassi tutti i nodi
+\newline\newline
+\textbf{Nota}: ad ogni HC corrisponde una \textbf{permutazione dei nodi} di $G$, se mi segnassi tutti i nodi
 attraversati da questo HC essi comparirebbe una ed una sola volta, quindi se li mettessi
-in fila otterrei una \textit{permutazione} dei vertici di partenza (è chiaro
+in fila otterrei una \textbf{permutazione dei vertici} di partenza $V$ (è chiaro
 che non vale il viceversa, una permutazione dei nodi non è al 100\% un HC). Allora
 vado a considerare il seguente algoritmo:
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{images/algo_HC.png}
-    \caption{Algoritmo per trovare un circuito Hamiltoniano.}
-\end{figure}
-Posso partire dal grafo di partenza e generare tutte le possibili permutazioni dei nodi
-$\pi$,e successivamente $\forall\pi$ vado a verificare che quella permutazione corrisponde ad un circuito,
-quindi se esistono gli archi che uniscono tale permutazione.
-In questa maniera provo tutte le possibilità, non tutti i circuiti, questo mi evita di controllare
-circuiti che non sono permutazioni dei vertici, ma rimane tutta via un algoritmo che itera
-su tutte le permutazioni degli oggetti. Le possibili permutazioni degli oggetti sono $n!$,
-quindi il tempo di complessità sarà $t(n)=n!$ la verifica che una certa permutazione sia un
-cammino. Anche qui la "facile verifica" di HC consiste che se viene fornito un insieme $\pi$
-di archi io riesco a controllare che esso sia un circuito in $G$ ($t(n)=O(n^2)$).
+\begin{algorithm}[hbt!]
+    \caption{Miglior algoritmo per $HC$}\label{alg:hc}
+    \KwIn{$(G=\{v_1,\dots,v_n\},E)$}
+    \ForEach{$\pi(v_1,\dots,v_n)$}
+    {
+        \If{$\pi(v_1,\dots,v_n)\text{ è una circuito in }G$}
+        {
+            return $1$\;
+        }
+    }
+    return $0$\;
+\end{algorithm}
+\begin{itemize}
+    \item Posso partire dal grafo di partenza e generare tutte le possibili permutazioni dei nodi
+    $\pi$,e successivamente $\forall\pi$ vado a verificare che quella permutazione corrisponde ad un circuito,
+    quindi se esistono gli archi che uniscono tale permutazione.
 
-Se qualcuno mi da un pezzo dell'informazione allora quell'informazione può essere facilmente
-verificata.
+    \item In questa maniera provo tutte le possibilità, non tutti i circuiti, questo mi evita di controllare
+    circuiti che non sono permutazioni dei vertici, ma rimane tutta via un algoritmo che itera
+    su tutte le permutazioni degli oggetti.
+
+    \item Le possibili permutazioni degli oggetti sono $n!$,
+    quindi il tempo di complessità sarà $t(n)=n!$ la verifica che una certa permutazione sia un
+    cammino. Anche qui la "facile verifica" di HC consiste che se viene fornito un insieme $\pi$
+    di archi io riesco a controllare che esso sia un circuito in $G$ ($t(n)=O(n^2)$). Se qualcuno mi da
+    un pezzo dell'informazione allora quell'informazione può essere \textbf{facilmente verificata}.
+\end{itemize}
+
 
 \paragraph{Piccola digressione}\mbox{}\\
 A volte cambiando leggermente le condizioni di un problema si può cambiare dal giorno
 alla notte la complessità del problema. Abbiamo un problema simile a questo ma è
 molto diverso invece, è il problema dei \textbf{circuiti Euleriani}.
-
 Un circuito Euleriano in $G$ è un circuito in cui tutti gli archi di $G$ compaiono una e una
 sola volta (Problema dei sette ponti di Königsberg, 1736).
 \paragraph{Teorema di Eulero}\mbox{}\\
@@ -5785,8 +5799,6 @@ calcolo che funzioni come segue:
 $$\pi$$
 $$\text{Istanza: }x\in D$$
 $$\text{Domanda: }p(x)?$$
-
-
 \begin{enumerate}
     \item Mi piacerebbe avere un algoritmo che su input $x$ \textbf{generi una congettura}, in parole
           povere venga generata una struttura che dipende dal problema (numero, permutazione, $\dots$)
@@ -5799,29 +5811,27 @@ Questa dinamica dell'algoritmo non è più lineare come quella deterministica vi
 con le DTM, non è più presente un cammino di configurazioni. Nella attuale situazione
 dove ho un multi-verso di mondi in ognuno dei quali viene generata una istruzione
 all'inizio, la dinamica globale dell'algoritmo è una dinamica ad albero.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{images/dinamica_albero.png}
+    \includegraphics[scale=0.7]{images/dinamica_albero.png}
     \caption{Nella fase congetturale (rosa) viene generata una struttura per ogni "mondo".
         Nella fase di verifica (rosso), la quale è una fase assolutamente deterministica,
         gioverà sia dell'input che della congettura generata.}
 \end{figure}
-Al termine di ogni fase di verifica di ciascun mondo (DTM) avrò una risposta numerica
+Al termine di ogni fase di verifica di ciascun mondo (DTM) avrò una risposta numerica,
 1 se la proprietà è presente per quel dato insieme $(x,S_1)$, altrimenti 0.
 
 \paragraph{Algoritmo non deterministico}\mbox{}\\
 Un algoritmo non deterministico funziona proprio con queste due fasi:
 \begin{itemize}
-    \item Apertura di un multi-verso, dove vengono preparate tante strutture
+    \item \textbf{Apertura di un multi-verso}, dove vengono preparate tante strutture
           da testare in parallelo senza costi aggiuntivi in maniera da utilizzare
-          solo il costo in tempo della verifica (fase congetturale).
-    \item Fase di verifica.
+          solo il costo in tempo della verifica (\textbf{fase congetturale}).
+    \item \textbf{Fase di verifica}.
 \end{itemize}
-Quindi il costo della computazione non è univoca ma scinde in tante computazioni che
+Quindi il costo della computazione non è univoco ma scinde in tante computazioni che
 giovano di un pezzo dell'informazione generato automaticamente. Una volta finita la fase
 di congettura ciascun mondo è un mondo deterministico (una routine DTM).
-
 \textit{In che senso un algoritmo non deterministico risolve un problema
     di decisione $\pi$?} Ovvero la verifica della proprietà $p(x)$.
 In questo senso:
@@ -5834,27 +5844,36 @@ In questo senso:
     \item Su ogni $x$ che non ammette $p(x)$ (falsa) non esiste alcuna
           computazione che accetti $(x,s_k)$ per ogni $s_k$.
 \end{enumerate}
-
 Abbiamo a disposizione un algoritmo che esplora moltissime possibilità e se in qualcuna
 di queste esplorazioni dice "SI", allora si riconosce l'opzione come appartenente
 al linguaggio.
-
-\paragraph{Esempio Alg.Non-Det. per CNF-SAT}\mbox{}\\
+\paragraph{Esempio algoritmo non deterministico per CNF-SAT}\mbox{}\\
 Semplicemente mi faccio generare un assegnamento e lo verifico.
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{images/CNFndet.png}
-    \caption{Algoritmo non deterministico per $CNF$.}
-\end{figure}
+\begin{algorithm}[hbt!]
+    \caption{Algoritmo Non-Deterministico per $CNF-SAT$}\label{alg:ntm-cnf}
+    \KwIn{$\phi(x_1,\dots,x_n)$}
+    genera assegnamento $x\in\{0,1\}^n$\;
+    \If{$(\phi(x_1,\dots,x_n)==1)$}
+        {
+            return $1$\;
+        }
+    return $0$\;
+\end{algorithm}
 
-\paragraph{Esempio Alg.Non-Det. per HC}\mbox{}\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{images/HCndet.png}
-    \caption{Algoritmo non deterministico per $HC$.}
-\end{figure}
+\paragraph{Esempio algoritmo non deterministico per HC}\mbox{}\\
+Genero una permutazione e verifico che essa sia un circuito del grafo.
+\begin{algorithm}[hbt!]
+    \caption{Algoritmo Non-Deterministico per $HC$}\label{alg:ntm-hc}
+    \KwIn{$\phi(x_1,\dots,x_n)$}
+    genera permutazione $\pi(v_1,\dots,v_n)$\;
+    \If{$(\pi(v_1,\dots,v_n)$ è un circuito in $G)$}
+    {
+        return $1$\;
+    }
+    return $0$\;
+\end{algorithm}
 
-\subsection{Tempo di calcolo algoritmo non deterministico}
+\subsection{Tempo di calcolo di un algoritmo non deterministico}
 Il tempo di calcolo in un algoritmo non deterministico, abbiamo una fase congetturale
 che essendo "magica" ha costo zero. L'unico tempo che valutiamo è quello che viene
 dalla fase di verifica, il quale corrisponde al numero di passi della computazione che più
@@ -5862,12 +5881,14 @@ velocemente porta all'accettazione.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/tempondet.png}
+    \caption{$T(x)$ corrisponde ai passi di computazione di un singolo mondo (una delle tante DTM)}
 \end{figure}
-Quindi confrontando tutti i mondo che mi accettano la proprietà scelgo quello con il numero
-minore di passi che mi portano a verificare la proprietà $p(x)$. Non solamente questo algoritmo
+Quindi confrontando tutti i mondi che mi accettano la proprietà scelgo quello con il numero
+minore di passi che mi portano a verificare la proprietà $p(x)$, ovvero
+la DTM con $T(x)$ minore. Non solamente questo algoritmo
 sgrava da qualsiasi problema di generazione, ma il tempo di esecuzione in questi mondi
-che sono reali viene calcolato sul mondo migliore.
-
+che sono reali viene calcolato sul \textbf{mondo migliore}.
+\newline\newline
 Tutto ciò è un modello teorico, non esiste un generatore che riesce a prepararmi le congetture
 corrette in tale maniera. Rimane vero comunque che i problemi nella zona grigia hanno un tempo
 di verifica efficiente che purtroppo va ripetuto un numero di volte
@@ -5884,13 +5905,12 @@ $$M=(Q,\Sigma,\Gamma,\delta,q_0,F)$$
 \end{figure}
 Una NDTM ha tante possibili definizioni, si può vedere nel caso degli automi a stati finiti
 esistono degli automi deterministici e non deterministici. Gli ultimi possono evolvere da uno
-stato a più stati possibili, una NDTM la $\delta$ fornisce un insieme di possibili mondi
-successivi. Vogliamo un'altra definizione di NDTM che sia più attinente alla fase
+stato a più stati possibili, una NDTM la $\delta$ fornisce un \textbf{insieme di possibili mondi
+successivi}. Vogliamo un'altra definizione di NDTM che sia più attinente alla fase
 congetturale e quella di verifica.
-
 Possiamo vederla come una classica DTM, dove come novità è presente:
 \begin{itemize}
-    \item \textbf{Natro bi-infinito}: un nastro che è infinito sia a destra
+    \item \textbf{Nastro bi-infinito}: un nastro che è infinito sia a destra
           che a sinistra. A destra viene messo l'input, nella parte sinistra viene
           generata la congettura.
     \item \textbf{Modulo congetturale}: un modulo adibito alla creazione
@@ -5907,8 +5927,8 @@ Quindi saranno integrate le due fasi degli algoritmi non deterministici:
 \end{enumerate}
 In questo caso $M$ accetta $x\in\Sigma^*$ se e solo se $\exists\gamma\in\Gamma^*$ tale
 che $(\gamma,x)$ viene deterministicamente accettata.
-Questo perchè una NDTM a differenza di una DTM ha un range di computazioni, quindi
-il riconoscimento è diverso.
+Questo perchè una NDTM a differenza di una DTM ha un \textbf{range di computazioni}
+dato dalle infinite possibilità delle congetture, quindi il riconoscimento è diverso.
 Ed il linguaggio accettato da $M$ viene definito come $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$.
 
 \subsubsection{NDTM per riconoscere linguaggi e risolvere problemi di decisione}
@@ -5917,7 +5937,6 @@ Le NDTM come le DTM hanno come loro prima funzione quella di riconoscere linguag
 Un linguaggio $L\subseteq\Sigma^*$ è accettato da un algoritmo non deterministico
 se e solo se $\exists$ NDTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$ tale che $L=L_M$ (il
 linguaggio accettato sia il linguaggio di partenza).
-
 $$\pi$$
 $$\text{Istanza: }x\in D$$
 $$\text{Domanda: }p(x)?$$
@@ -5930,7 +5949,7 @@ $$cod:D\rightarrow\Sigma^*\implies L_{\pi}=\{cod(x):x\in D\land p(x)\}$$
 Un algoritmo non deterministico per la soluzione di $\pi$ è una NDTM $M$ tale che $L_\pi=L_M$.
 Ovviamente, mediante opportuna codifica, possiamo definire NDTM che accettano insiemi:
 \paragraph{Complessità in tempo non deterministica}\mbox{}\\
-Una NDTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$ ha complessità in tempo  $t:\mathbb{N}\rightarrow\mathbb{N}$
+Una NDTM $M=(Q,\Sigma,\Gamma,\delta,q_0,F)$ ha complessità in tempo $t:\mathbb{N}\rightarrow\mathbb{N}$
 se e solo se per ogni input $x\in L_M$ con $|x|=n$ esiste una computazione accettante di $M$
 che impiega $t(n)$ passi.
 \begin{figure}[H]
