@@ -516,10 +516,8 @@ delle classi di equivalenza relative a quella relazione.
 \end{figure}
 L'insieme $A$ partizionato rispetto alla relazione $R$ è detto \textbf{insieme quoziente}:
 $$A / R$$
-
 Quindi il quoziente di $A$ rispetto a $R$ è lo \textit{"spezzettamento"} di $A$ in classi
 di equivalenza.
-
 Consideriamo il seguente esempio di insieme quoziente, consideriamo la relazione di equivalenza $\equiv_4\subseteq\mathbb{N}$.
 \textit{Quali classi di equivalenza ammette questa relazione ?}
 $$[0]_4={4k}\text{ tutti i multipli di 4 hanno lo stesso resto di 1}$$
@@ -527,7 +525,7 @@ $$[1]_4={4k+1}\text{ tutti i multipli di 4 aumentati di 1 hanno lo stesso resto 
 $$[2]_4={4k+2}; [3]_4={4k+3};...$$
 \textit{Ne esistono altre ?} No, non esistono altre classi di equivalenza perché
 ogni caso successivo a quelli \textit{"base"} si riconduce a quelli \textit{"base"}.
-$$\langle n\rangle_2\in\{0,1,2,3\}$$
+$$\langle n\rangle_4\in\{0,1,2,3\}$$
 Voglio vedere se queste classi di equivalenza può rappresentare una partizione:
 \begin{itemize}
     \item Nessuna classe è vuota.
@@ -546,17 +544,14 @@ $\{[i]_4 : 0\leq i\leq 3\}$ è una partizione di $\mathbb{N}$ indotta dalla rela
 $\equiv_4$, tale per cui mi dia il rispettivo insieme quoziente (a volte impropriamente
 chiamato $\mathbb{Z}_4$):
 $$N / \equiv_4 \text{ }=\{[i]_4 : 0\leq i\leq 3\}=\mathbb{Z}_4$$
-
 Adesso abbiamo in mano gli strumenti per definire in maniera molto più fine il concetto
 di cardinalità.
-
 \subsubsection{Cardinalità degli insiemi - II°}
 Sia $\mathcal{U}$ (insieme universo) la classe di tutti gli insiemi,
 definiamo la relazione $\sim\subseteq\mathcal{U}^2$ detta relazione
 di \textit{equi numerosità} (hanno la stessa dimensione numerica), tra le coppie degli insiemi, se e solo se esiste
 una \textbf{biezione} tra $A$ e $B$ (ovvero, se riesco ad esibire una funzione
 iniettiva e suriettiva che va da $A$ in $B$).
-
 Questa relazione tra insiemi è una relazione di equivalenza, poiché:
 \begin{itemize}
     \item $\sim$ è riflessiva, se utilizzo la funzione identità $i_A$.
@@ -566,29 +561,25 @@ Questa relazione tra insiemi è una relazione di equivalenza, poiché:
           funzione biettiva.
 \end{itemize}
 
-Due insiemi che stanno in questa relazione vengono detti \textit{equi numerosi}. Ora
+Sue insiemi che stanno in questa relazione vengono detti \textbf{equi numerosi}. Ora
 considerando l'insieme quoziente del nostro universo $\mathcal{U}$ rispetto alla
 relazione di equi numerosità $\sim$ (quindi stesso numero di elementi in entrambi
 i due insiemi), esso mi rappresenta il concetto di \textbf{cardinalità}
-di un insieme.
-
+di un insieme rispetto ad un altro.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{images/insieme_quoziente_cardinalità.png}
     \caption{Insieme quoziente $\mathcal{U} / \sim$}
 \end{figure}
-
 Quindi spezzettando l'insieme $\mathcal{U}$ in classi di equivalenza
 in questa classe di equivalenza ci sono tutti gli insiemi
 che sono equi numerosi (seppur diversi).
-
 Questo concetto mi permetterà anche di parlare in maniera molto precisa anche di
 insiemi di cardinalità infinita.
 \newline
 \newline
 Per esempio, consideriamo $n\in\mathbb{N}^+$, si consideri l'insieme $J_n=\{1,2,...,n\}$. Per questo
 insieme è ovvio quale sia il concetto di cardinalità perchè è finito.
-
 Allora diciamo che un insieme $A$ ha cardinalità \textbf{finita} se è equi
 numeroso con $J_n$ (ovvero $A\sim J_n$) per un dato $n$ ed in quel caso scriviamo che $|A|=n$.
 
@@ -604,21 +595,18 @@ parlato ancora di cardinalità finita, ma adesso faremo un esempio con cardinali
 
 \subsubsection{Insiemi numerabili}
 $A$ si dice \textbf{numerabile} se è nella stessa classe di equivalenza dell'insieme dei numeri naturali
-$\mathbb{N}$, ovvero se esiste una \textit{biezione} tra l'insieme $A$ e l'insieme $\mathbb{N}$.
-
+$\mathbb{N}$, ovvero se esiste una relazione di \textbf{equinumerosità} tra l'insieme $A$ e l'insieme $\mathbb{N}$.
+$$A\sim\mathbb{N}$$
 Siccome stanno in relazione di equi numerosità
 vuol dire che è presente una biezione fra i due elementi, quindi due elementi non possono collidere.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/A_numerabile_N.png}
     \caption{$A$ è un insieme numerabile}
 \end{figure}
-
 La presenza di questa biezione significa che come $A$ può essere \textbf{listato} con
 $f(0),f(1),f(2),...$ su $\mathbb{N}$ senza perdere un elemento, anche l'insieme $\mathbb{N}$ può essere
 listato a sua volta su $A$.
-
 Alcuni esempi di insiemi numerabili:
 \begin{itemize}
     \item I numeri pari $f(n)=2n$ , essi sembrerebbero la metà dei numeri naturali ma sono tanti quanto i numeri
@@ -634,8 +622,10 @@ Alcuni esempi di insiemi numerabili:
 \subsection{Insiemi non numerabili}
 Esistono degli insiemi che non sono listabili, dette in altre parole sono più fitti di $\mathbb{N}$,
 è un altro tipo di categoria di infinito.
-$$\mathbb{R}\text{ non è numerabile}$$
-\paragraph{Dimostrazione}\mbox{}\\L'idea consiste nel dimostra per assurdo che non esiste una biezione
+$$A\nsim\mathbb{N}$$
+$\mathbb{R}$ è un insieme non numerabile.
+\paragraph{Dimostrazione}\mbox{}\\
+L'idea consiste nel dimostrare per assurdo che non esiste una biezione
 perchè sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazione:
 \begin{itemize}
     \item Dimostro che $\mathbb{R}\sim[0,1]$ (si dice che è \textit{isomorfo/equi numeroso} all'intervallo $[0,1]$),
@@ -644,9 +634,9 @@ perchè sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazion
     \item $\mathbb{R}\sim[0,1]\nsim\mathbb{N}\implies\mathbb{R}\nsim\mathbb{N}$
 \end{itemize}
 
-\paragraph{Dimostrazione $R\sim[0,1]$}\mbox{}\\ \noindent Significa riuscire a rappresentare una funzione
+\paragraph{Dimostrazione $R\sim[0,1]$}\mbox{}\\
+Significa riuscire a rappresentare una funzione
 che mappa gli elementi tra i due insiemi in maniera che sia suriettiva ed iniettiva.
-
 Prima di tutto abbiamo una retta cartesiana con un origine fissata e che copre tutti i numeri reali.
 Pongo l'intervallo $[0,1]$ in modo che si trovi in corrispondenza del punto mediano della retta $0$,
 successivamente prendo un compasso punto il centro nel mediano dell'intervallo e traccio la
@@ -656,13 +646,11 @@ semi circonferenza rispetto alla metà dell'intervallo.
     \includegraphics[scale=0.5]{images/dim_1.png}
     \caption{Dimostrazione  $R\sim[0,1]$}
 \end{figure}
-
 Gli elementi dell'insieme $\mathbb{R}$ vengono mappati tracciando una retta in direzione del punto
 mediano di $[0,1]$, nel punto di intersezione si traccia la retta perpendicolare che interseca
 l'intervallo ed in quel punto si trova il valore corrispondente. Si può fare lo stesso
 in maniera opposta partendo da $[0,1]$, trovando l'intersezione si parte dal punto mediano
 di quest'ultima e si attraversa l'intersezione toccando $\mathbb{R}$.
-
 Questo dimostra che tutti i valori di $\mathbb{R}$ sono associabili
 su $[0,1]$, quindi $\mathbb{R}\sim[0,1]$.
 
@@ -681,7 +669,6 @@ all'interno di questo numero seguono il formato "$0.$", quindi:
 \]
 Se riesco a costruire un numero che non fa parte di questa lista infinita (elusivo alla biezione),
 allora vuol dire che la lista non è elencabile, e quindi $[0,1]$ non è numerabile.
-
 Per costruire questo numero elusivo che non si trova in nessuno di questi elementi della lista,
 vado a guardare le cifre sulla \textit{diagonale}.\\Costruiamo il numero elusivo alla lista
 $$0.c_1c_2c_3c_4$$
@@ -722,11 +709,9 @@ Un altro insieme non numerabile è quello costituito dalla famiglia di sottoinsi
 quindi mettendo assieme uno dopo l'altro tutti i sottoinsiemi di differenti cardinalità (talvolta chiamato
 \textbf{insieme potenza} o \textbf{booleano di} $\mathbb{N}$). Per esempio su un insieme $S=\{a,b,c\}$,
 l'insieme delle parti è $\mathcal{P}(S)=\{\emptyset,\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},S\}$.
-
 $$\mathcal{P}(\mathbb{N})=2^{\mathbb{N}} = \{\text{sottoinsiemi di }\mathbb{N}\}\nsim\mathbb{N}$$
 Anche questa dimostrazione avviene per diagonalizzazione, per assurdo suppongo che esista una
 biezione che mi permetta di elencare tutti i sottoinsiemi di $\mathbb{N}$.
-
 Posso rappresentare i sotto insiemi di $\mathbb{N}$ utilizzando un \textbf{vettore caratteristico}
 $A\subseteq\mathbb{N}$, questo è un vettore dove metto il bit di appartenenza rispetto alla corrispondenza
 dell'elemento.
@@ -748,8 +733,8 @@ di $\mathbb{N}$, questo elencandone i vettori caratteristici.
 \[
     \begin{array}{ccccc}
         \underline{b_{11}} & b_{12}             & b_{13}             & b_{14}             & ... \\
-        b_{21}             & \underline{0.b_{22}} & b_{23}             & b_{24}             & ... \\
-        b_{31}             & b_{32}             & \underline{0.b_{33}} & b_{34}             & ... \\
+        b_{21}             & \underline{b_{22}} & b_{23}             & b_{24}             & ... \\
+        b_{31}             & b_{32}             & \underline{b_{33}} & b_{34}             & ... \\
         b_{41}             & b_{42}             & b_{43}             & \underline{b_{44}} & ... \\
         ...                  & ...                  & ...                  & ...                  & ... \\
     \end{array}
@@ -764,13 +749,10 @@ allora l'insieme delle parti non è un insieme numerabile poiché non è equi-nu
 \]
 riesco a constatare che esso non appartiene alla lista nonostante sia un sottoinsieme di $\mathbb{N}$
 in quanto composto solo da valori booleani.
-
 $$\mathcal{P}(\mathbb{N})\nsim\mathbb{N}$$
-
 \subsubsection{Insieme $\mathbb{N}^{\mathbb{N}}$}
 Consideriamo l'insieme di tutte le funzioni possibili che vanno da $\mathbb{N}$ in $\mathbb{N}$.
 $$\mathbb{N}^{\mathbb{N}}=\{f:\mathbb{N}\rightarrow\mathbb{N}\}$$
-
 Ipotizzando che $\mathbb{N}^{\mathbb{N}}$ sia numerabile ($\mathbb{N}^{\mathbb{N}}\sim\mathbb{N}$),
 consideriamo la seguente tabella dove nella prima
 colonna si trova l'elenco esaustivo di tutte le funzioni $\in\mathbb{N}$, e nelle colonne successive tutto
@@ -798,7 +780,7 @@ rispetto a quelle elencate nella tabella.\\ Quindi abbiamo una funzione elusiva 
 $$\varphi(0)=f_0(0)+1\neq f_0(0)$$
 $$\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$$
 N.B.: Gli insiemi $\mathcal{P}(\mathbb{N})$ e $\mathbb{N}^{\mathbb{N}}$ sono detti \textbf{insiemi continui},
-e sono equinumerosi a $\mathbb{R}$.
+e sono equi numerosi a $\mathbb{R}$.
 
 \section{Teoria della calcolabilità}
 \subsection{Cosa è calcolabile?}
