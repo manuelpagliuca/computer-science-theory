@@ -806,7 +806,6 @@ $$F(\mathcal{C})\sim PROG\sim\mathbb{N}$$
 Sapendo che l'insieme dei dati in dati definito come $DATI_{\bot}^{DATI}$, grazie alla
 seconda assunzione che abbiamo fatto allora possiamo asserire:
 $$DATI_{\bot}^{DATI}\sim\mathbb{N}_{\bot}^{\mathbb{N}}$$
-
 Abbiamo visto precedentemente che $\mathbb{N}^{\mathbb{N}}\nsim\mathbb{N}$, allora unendo le precedenti
 dimostrazioni possiamo confermare:
 $$F(\mathcal{C})\sim PROG\sim\mathbb{N}\nsim\mathbb{N}^{\mathbb{N}}\sim DATI_{\bot}^{DATI}$$
@@ -820,11 +819,11 @@ di funzioni (o problemi) calcolabili (fitto quanto i reali $\mathbb{N}_{\bot}^{\
 Vogliamo stabilire una corrispondenza \textbf{biunivoca} tra dati e numeri naturali, ovvero
 che devo riuscire a "nascondere" un dato all'interno di un numero naturale, tale che
 se lo dovessi riportare all'insieme dei dati otterrei esattamente quel dato (e non un altro).
-
+\newline\newline
 Questa biezione la voglia rendere effettiva e programmabile, ovvero costruirci delle primitive che
 operino direttamente sulla codifica numerica dei dati così che possiamo smaterializzare completamente
 il mondo dei dati in quello dei numeri.
-
+\newline\newline
 Questa volta vogliamo dimostrare che l'\textbf{insieme delle coppie} $\mathbb{N}\times\mathbb{N}$
 è numerabile. Questo avverrà per passi, prima dimostreremo che l'insieme delle coppie è isomorfo a
 $\mathbb{N}^+$ (quindi escluso lo $0$) e poi di conseguenza che lo è per tutto $\mathbb{N}$.
@@ -836,7 +835,7 @@ $$\langle x,y\rangle =n$$
 La \textbf{funzione coppia di Cantor} è definita per mezzo delle parentesi
 angolari, prende due argomenti $x,y$ e restituisce un numero $n$, questo
 in maniera iniettiva e suriettiva (biettività).
-
+\newline\newline
 Ovvero che coppie diverse vengono mappate in numeri diversi, e se
 ho un numero devo essere in grado di tornare alla stessa coppia $x,y$. Quindi esibiremo sia
 l'andata della funzione coppia di Cantor che il ritorno, esibiremo anche i due proiettori
@@ -882,7 +881,6 @@ la cui seconda coordinata è $0$, le chiamiamo $\langle z,0\rangle$. Notiamo nel
 c'è una correlazione con gli elementi di $x$, e vediamo che l'elemento $i$-esimo della prima
 colonna corrisponde alla somma tra il corrispettivo elemento $x$ e l'elemento $i-1$ della colonna,
 allora riusciamo ad esprimere una \textbf{legge matematica} per descrivere questa \textit{codifica}.
-
 \begin{enumerate}
     \item $\langle x,y\rangle =\langle x+y,0\rangle +y$
     \item $\langle z,0\rangle ? \implies \langle z,0\rangle = \sum_{i=1}^z i+1=\frac{z(z+1)}{2}+1$
@@ -890,7 +888,7 @@ allora riusciamo ad esprimere una \textbf{legge matematica} per descrivere quest
 \noindent Allora $(1)+(2)$:
 $$\langle x,y\rangle = \langle x+y,0\rangle+y=\frac{(x+y)(x+y+1)}{2}+y+1$$
 
-\paragraph{Come tornare da $\mathbb{N}^2$ a $\mathbb{N}^+$}
+\paragraph{Come tornare da $\mathbb{N}^+$ a $\mathbb{N}^+2$}
 Ovvero, come trovare le funzioni $sin$ e $des$.
 $$\langle x,y \rangle = n \longrightarrow sin(n)=x \text{ e } des(n)=y$$
 \begin{figure}
@@ -898,7 +896,6 @@ $$\langle x,y \rangle = n \longrightarrow sin(n)=x \text{ e } des(n)=y$$
     \includegraphics[scale=0.5]{images/coord_dim_2.png}
     \caption{$n=13$}
 \end{figure}
-
 Partiamo da un elemento $n$ presente nell'intersezione dei due insiemi definiti da
 $x$ e $y$ e vogliamo individuare le due relative componenti. Procedo trovando
 le coordinate dell'origine della diagonale che passa per $n$, ovvero $\langle\gamma ,0\rangle$.
@@ -933,12 +930,12 @@ Adesso noi abbiamo dimostrato che $\mathbb{N}^2\sim\mathbb{N}^+$.
 
 \paragraph{Dimostrazione $\mathbb{N}\times\mathbb{N}\sim\mathbb{N}$}
 Definisco una nuova funzione:
-$$[,]:\mathbb{N}\times\mathbb{N}\text{ tale che }[x,y]=\langle x,y\rangle-1$$
+$$[,]:\mathbb{N}\times\mathbb{N}\rightarrow\mathbb{N}\text{ tale che }[x,y]=\langle x,y\rangle-1$$
 Adesso ho una funzione esplicita per mappare $\mathbb{N}^2$ su $\mathbb{N}$.\\Nota: A questo
 punto otteniamo che l'insieme dei razionali $\mathbb{Q}$ sono coppie di interi $(num,den)$. Dunque
 $[,]$ mostra che $\mathbb{Q}$ è numerabile.
 
-\paragraph{Dimostrazione rigorosa che $DATI\approxeq\mathbb{N}$}
+\paragraph{Dimostrazione rigorosa che $DATI\sim\mathbb{N}$}
 Mostriamo le nozioni appena apprese sulle principali strutture dati.
 \paragraph{Liste d'interi}\mbox{}\\
 $$\textit{codifichiamo } x_1,x_2,...,x_n\rightarrow\langle x_1,x_2,...,x_n\rangle$$
@@ -946,10 +943,8 @@ Quindi il numero che rappresenta la codifica è indicato con il numero all'inter
 L'idea consiste nell'incapsulare il risultato di una coppia di elementi come elemento destro
 della coppia più esterna. Non sapendo quanto sia lunga la lista dovrò porre un elemento che mi
 segnali il termine, e questo lo posso fare con $\langle x_n,0 \rangle$.
-
 $$\langle x_1,x_2,...,x_n\rangle = \langle x_1,\langle x_2,\langle ...\langle x_n,0\rangle ...\rangle\rangle\rangle$$
-
-\noindent Per esempio:
+Per esempio:
 $$\textit{codifica }1,2,5\rightarrow\langle 1,2,5\rangle=\langle 1,\langle 2,\langle 5,0\rangle\rangle\rangle=$$
 $$\langle 1,\langle2,16\rangle\rangle=\langle 1,188\rangle=$$
 $$=18144$$
@@ -959,7 +954,6 @@ risultato ma la lista di coppie incapsulate) come un albero binario.
     \centering
     \includegraphics[scale=0.5]{images/bin.png}
 \end{figure}
-
 Allora dato questo albero il figlio
 sinistro è l'elemento sinistro (la testa della lista) ed il figlio destro è la parte restante della lista,
 allora continuando a considerare il figlio sinistro come una struttura dati lineare ottengo
@@ -985,7 +979,6 @@ void decode(int $n$){
     }
 }
 \end{lstlisting}
-
 Altre operazioni utili possono essere sono quelle per calcolare la \textbf{lunghezza}:
 \begin{lstlisting}[mathescape]
 int length(int n){
@@ -1020,7 +1013,6 @@ int proj(int $t$, int $n$){
     \end{cases}
 \]
 $decr(t,n)=\text{ come sopra ma con }\langle x_1,...,x_t-1,...,x_m\rangle$
-
 \paragraph{Corrispondente numerico : $DATI\sim\mathbb{N}$}\mbox{}\\
 Adesso sappiamo codificare liste di interi, questo ci da un idea del fatto che i dati siano
 isomorfi ad $\mathbb{N}$. Questo ci da un modo per nascondere testi, suoni, immagini dietro ad
@@ -1091,20 +1083,19 @@ Grazie alla semplicità di questo potrò mostrare molto semplicemente:
     \item Ed altrettanto formalmente potrò definire la potenza computazionale $F(RAM)$, questo fornirà
           un idea di \textit{che cosa è calcolabile}.
 \end{itemize}
-Il linguaggio RAM è un \textit{assembly} molto semplificato, per questo motivo l'idea di
+Il linguaggio \textbf{RAM} è un \textit{assembly} molto semplificato, per questo motivo l'idea di
 calcolabilità è altamente criticabile, poiché il modello potrebbe fare scappare qualcosa
 per via della banalità.
-
-Si introduce un altro modello molto più sofisticato la macchina WHILE (\textit{Java Virtual Machine}), quello
+Si introduce un altro modello molto più sofisticato la macchina \textbf{WHILE} (es., \textit{Java Virtual Machine}), quello
 che è calcolabile è effettivamente calcolabile da questo.
-
+\newline\newline
 Metteremo poi a confronto il modello formale $F(RAM)$ con quello sofisticato $F(WHILE)$. Se
 queste due idee di calcolabilità risultassero diverse allora la cosa è un po'
 pericolosa, perchè l'idea di calcolabilità dipenderebbe dal periodo storico.
 Se invece due idee così diametralmente opposte risultassero uguali, ovvero che calcolano
 lo stesso insieme di funzioni, allora incomincio a capire che l'idea di calcolabilità è intrinseca
-ai problemi. Ed è questo che ci porterà alla \textbf{tesi di Church} (spoiler).
-
+ai problemi (portandoci alla \textbf{tesi di Church}).
+\newline\newline
 Prima di arrivare a ciò dobbiamo dimostrare che $PROG\sim\mathbb{N}$, e per fare questo dobbiamo
 introdurre la macchina RAM.
 
@@ -1115,13 +1106,13 @@ L'hardware della macchina RAM:
           i numeri naturali arbitrariamente grandi (non hanno una capienza).
           Il registro $R1$ è il registro di input; $R0$ registro di output.
 
-    \item Il \textbf{program counter} $L$, un registro contenente l'indirizzo della prossima
+    \item Il \textbf{Program Counter} (PC) $L$, un registro contenente l'indirizzo della prossima
           istruzione da eseguire.
 
     \item Un \textbf{programma} $P$, costituito da una  sequenza di istruzioni, un istruzione RAM può essere:
           \begin{itemize}
               \item Incremento: $R_k \leftarrow R_k +1$
-              \item Decremento: $R_k \leftarrow R_k -1$ (non può mai andare sotto lo zero)
+              \item Decremento: $R_k \leftarrow R_k \dot{-}1$ (l'operatore di "\textbf{meno puntato}" è una sottrazione che non può mai andare al di sotto dello zero)
                     \[
                         x-y=
                         \begin{cases}
@@ -1139,7 +1130,7 @@ L'hardware della macchina RAM:
     \item Si comincia ad eseguire l'istruzione al posto $1$, e man mano
           il PC continua ad incrementare così da poi eseguire l'istruzione successiva
           (eccetto nel caso in cui non si incontri un istruzione di salto).
-    \item Per convenzione la macchina si arresta quanto ik PC il numero $0$
+    \item Per convenzione la macchina si arresta quando il PC è a $0$
           $$L=0\implies HALT$$
           c'è possibilità per via dell'istruzione di salto di mandare in loop
           l'esecuzione della macchina.
@@ -1162,7 +1153,7 @@ in maniera formale e corretta la semantica del programma.
 Introduciamo il concetto di \textbf{semantica operazionale}, questo è il tipo di semantica
 più semplice. Significa specificare che cosa fa una data istruzione andando a vedere quale
 è l'effetto di quell'istruzione sulla data macchina.
-
+\newline\newline
 Per descrivere l'effetto di un istruzione, prendiamo una foto della macchina prima dell'esecuzione
 e dopo. La "foto" solitamente si chiama \textbf{stato} della macchina. Quindi spiego la semantica
 di una istruzione specificando il cambiamento di stato indotto dall'esecuzione di quell'istruzione.
@@ -1170,14 +1161,14 @@ Questo significa dare la semantica operazionale di una macchina.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/cambio_stato.png}
+    \caption{Cambio di stato indotto da una istruzione}
 \end{figure}
 
-\paragraph{Esecuzione di un programma $P$ e sua semantica}
+\paragraph{Esecuzione di un programma P e la sua semantica}\mbox{}\\
 L'esecuzione di un programma consiste nell'esecuzione di molteplici cambiamenti di stato a partire
-dallo stato iniziale $S_{init}$ (partendo un inpput $n$)
+dallo stato iniziale $S_{init}$ (partendo un input $n$)
 e giungendo a quello finale $S_{final}$. Si dice che la computazione
 di $P$ induce una sequenza di stati.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/stati_seq.png}

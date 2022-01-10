@@ -39,10 +39,10 @@
 \contentsline {subsection}{\numberline {4.1}Cosa è calcolabile?}{25}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Dimostrazione $DATI\sim \PazoBB {N}$}{26}{subsubsection.4.1.1}%
 \contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}^+$}{26}{section*.6}%
-\contentsline {paragraph}{Come tornare da $\PazoBB {N}^2$ a $\PazoBB {N}^+$}{28}{section*.7}%
+\contentsline {paragraph}{Come tornare da $\PazoBB {N}^+$ a $\PazoBB {N}^+2$}{28}{section*.7}%
 \contentsline {paragraph}{Esempio andata e ritorno tra $\PazoBB {N}^2$ e $\PazoBB {N}^+$}{29}{section*.8}%
 \contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}$}{30}{section*.9}%
-\contentsline {paragraph}{Dimostrazione rigorosa che $DATI\approxeq \PazoBB {N}$}{30}{section*.10}%
+\contentsline {paragraph}{Dimostrazione rigorosa che $DATI\sim \PazoBB {N}$}{30}{section*.10}%
 \contentsline {paragraph}{Liste d'interi}{30}{section*.11}%
 \contentsline {paragraph}{Implementazione codifica}{31}{section*.12}%
 \contentsline {paragraph}{Implementazione decodifica}{31}{section*.13}%
