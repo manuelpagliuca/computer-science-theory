@@ -80,7 +80,7 @@ L'informatica è una disciplina che studia l'informazione e l'elaborazione autom
 
 Ma sappiamo che tutti i problemi sono risolubili per via automatica, e questo porta proprio alla nostra domanda, quali problemi sono in grado di risolvere \textit{automaticamente}?
 
-Ciò che studia il \textit{cosa} dell'informatica si chiama \textbf{teoria della calcolabilità}, mostreremo nelle successive lezioni che non è una domanda cosi facile da rispondere, poichè esistono delle cose che non sono calcolabili. Quindi dato che non ci sono cose calcolabili, la teoria della calcolabilità si domanda \textit{che cosa è calcolabile?}.
+Ciò che studia il \textit{cosa} dell'informatica si chiama \textbf{teoria della calcolabilità}, mostreremo nelle successive lezioni che non è una domanda cosi facile da rispondere, poiché esistono delle cose che non sono calcolabili. Quindi dato che non ci sono cose calcolabili, la teoria della calcolabilità si domanda \textit{che cosa è calcolabile?}.
 \newline
 Nella teoria della calcolabilità vogliamo una risposta generale, non cerchiamo dei casi particolari per dire questo è calcolabile o meno, esistono delle proprietà che accomunano tutto ciò che è calcolabile ? La risposta è si, la nozione di calcolabilità è denotabile attraverso la matematica e quindi posso affrontare l'insieme di cose fattibili dell'informatica con gli strumenti della matematica.
 \subsection{Come l'informatica risolve i problemi?}
@@ -113,7 +113,7 @@ Solitamente $b$ è l'\textbf{immagine} di $a$ secondo $f$, e meno usualmente si 
 \newline
 Per esempio:
 $$f:\mathbb{N} \rightarrow \mathbb{N}$$
-Dove $\mathbb{N}$ è l'insieme dei numberi naturali ${0,1,2,3,...}$, e per utilizzi futuri denotiamo con $\mathbb{N}^+$ l'insieme dei numeri naturali positivi (zero escluso) ${1,2,3,4,...}$.
+Dove $\mathbb{N}$ è l'insieme dei numeri naturali ${0,1,2,3,...}$, e per utilizzi futuri denotiamo con $\mathbb{N}^+$ l'insieme dei numeri naturali positivi (zero escluso) ${1,2,3,4,...}$.
 \newline
 Ora vediamo la specifica della funzione $f$
 $$f(n)=\lfloor \sqrtsign{n}\rfloor$$
@@ -146,18 +146,18 @@ $$f:A\implies B\text{ sse } \forall b\in B, \exists a \in A : f(a)=b$$
 \noindent
 \textit{Esempio 1}
 \newline
-$f(n)=\lfloor\sqrt{n}\rfloor$ è suriettiva, questo perchè $\forall m\in \mathbb{N}, m=\lfloor\sqrt{m^2}\rfloor=f(m^2)$. Sostanzialmente, posso tornare con facilità al dominio perchè mi basta elevare al quadrato l'immagine, e questo è fattibile per tutto l'insieme dei numeri naturali.
+$f(n)=\lfloor\sqrt{n}\rfloor$ è suriettiva, questo perché $\forall m\in \mathbb{N}, m=\lfloor\sqrt{m^2}\rfloor=f(m^2)$. Sostanzialmente, posso tornare con facilità al dominio perché mi basta elevare al quadrato l'immagine, e questo è fattibile per tutto l'insieme dei numeri naturali.
 \noindent
 \newline
 \linebreak
 \textit{Esempio 2}
 \newline
-$f(n)=[n]_2$ non è una funzione suriettiva, questo perchè per esempio $3$ non è immagine di niente rispetto a $f$ (il codominio è tutto $\mathbb{n}$).
+$f(n)=[n]_2$ non è una funzione suriettiva, questo perché per esempio $3$ non è immagine di niente rispetto a $f$ (il codominio è tutto $\mathbb{n}$).
 
 \subsection{Insieme immagine di una funzione}
 $$Im_f={b\in B:\exists a,f(a)=b}:a\in A$$
 
-Data $f$ definitiamo l'\textbf{insieme immagine di $f$} come gli elementi del codominio $\in B$ che sono immagine di un elemento del dominio $A$.
+Data $f$ definiamo l'\textbf{insieme immagine di $f$} come gli elementi del codominio $\in B$ che sono immagine di un elemento del dominio $A$.
 \newline
 La relazione tra questo insieme $Im_f$ ed il codominio stesso di $f$ quale è $B$, consiste in:
 $$Im_f\subseteq B$$
@@ -397,7 +397,7 @@ Quindi abbiamo ridotto il quesito \textit{che cosa sono in grado di fare i progr
 ad un quesito matematico di inclusione propria ed impropria.
 \subsubsection{Importanza del calcolo di funzione}
 Calcolare una funzione significa risolvere problemi in \textit{generale}. Questo
-perchè ad ogni problema posso associare una \textit{funzione soluzione}, non è altro che
+perché ad ogni problema posso associare una \textit{funzione soluzione}, non è altro che
 quella funzione che ad un dato input associa una determinata \textit{soluzione}.
 Per esempio, il \textit{problema del calcolo del determinante}:
 \begin{algorithm}[hbt!]
@@ -437,7 +437,7 @@ aiutare a capire quale insieme è più grande degli altri).
 Purtroppo però quando tiriamo in ballo insiemi di cardinalità \textbf{infinita}, questo potrebbe
 portare a conclusioni più complicate da elaborare. Si potrebbe \textit{erroneamente}
 pensare $|\mathbb{N}|=\infty=|\mathbb{B}|$, ma questo sappiamo che
-non è assolutamente vero, perchè l'insieme dei numeri reali è molto più \textbf{fitto}
+non è assolutamente vero, perché l'insieme dei numeri reali è molto più \textbf{fitto}
 di quello dei numeri interi.
 \newline\newline
 Quindi dobbiamo aggiungere dei nuovi concetti, visto che \textit{"l'infinito di $\mathbb{R}$"} è
@@ -579,7 +579,7 @@ insiemi di cardinalità infinita.
 \newline
 \newline
 Per esempio, consideriamo $n\in\mathbb{N}^+$, si consideri l'insieme $J_n=\{1,2,...,n\}$. Per questo
-insieme è ovvio quale sia il concetto di cardinalità perchè è finito.
+insieme è ovvio quale sia il concetto di cardinalità perché è finito.
 Allora diciamo che un insieme $A$ ha cardinalità \textbf{finita} se è equi
 numeroso con $J_n$ (ovvero $A\sim J_n$) per un dato $n$ ed in quel caso scriviamo che $|A|=n$.
 
@@ -610,7 +610,7 @@ listato a sua volta su $A$.
 Alcuni esempi di insiemi numerabili:
 \begin{itemize}
     \item I numeri pari $f(n)=2n$ , essi sembrerebbero la metà dei numeri naturali ma sono tanti quanto i numeri
-          naturali perchè esiste questa biezione (vale anche per i dispari $f(n)=2n+1$).
+          naturali perché esiste questa biezione (vale anche per i dispari $f(n)=2n+1$).
     \item L'insieme $\mathbb{Z}$, possono essere presenti diverse funzioni, per esempio
           posso mappare i negativi sui numeri pari ed i positivi sui numeri dispari.
     \item L'insieme $\mathbb{Q}$, vedremo più avanti.
@@ -626,7 +626,7 @@ $$A\nsim\mathbb{N}$$
 $\mathbb{R}$ è un insieme non numerabile.
 \paragraph{Dimostrazione}\mbox{}\\
 L'idea consiste nel dimostrare per assurdo che non esiste una biezione
-perchè sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazione:
+perché sono presenti dei "buchi" tra le associazioni. Ordine della dimostrazione:
 \begin{itemize}
     \item Dimostro che $\mathbb{R}\sim[0,1]$ (si dice che è \textit{isomorfo/equi numeroso} all'intervallo $[0,1]$),
           ovvero che è fitto quanto l'intervallo citato.
@@ -681,7 +681,7 @@ Tale che rispetti la seguente regola rispetto alla diagonale del elenco dei nume
     \end{cases}
 \]
 Ora usando questa regola non riuscirò mai a posizionare il mio nuovo numero
-tra quelli elencati, questo perchè ovviamente cambio le cifre (il perché questo accade
+tra quelli elencati, questo perché ovviamente cambio le cifre (il perché questo accade
 probabilmente è collegato al fatto che $\mathbb{R}$ è più fitto di $\mathbb{N}$, proprio
 quello che vogliamo dimostrare).
 Il numero $0.c_1c_2...\in[0,1]$, ma non appartiene nelle liste poiché:
@@ -1091,7 +1091,7 @@ che è calcolabile è effettivamente calcolabile da questo.
 \newline\newline
 Metteremo poi a confronto il modello formale $F(RAM)$ con quello sofisticato $F(WHILE)$. Se
 queste due idee di calcolabilità risultassero diverse allora la cosa è un po'
-pericolosa, perchè l'idea di calcolabilità dipenderebbe dal periodo storico.
+pericolosa, perché l'idea di calcolabilità dipenderebbe dal periodo storico.
 Se invece due idee così diametralmente opposte risultassero uguali, ovvero che calcolano
 lo stesso insieme di funzioni, allora incomincio a capire che l'idea di calcolabilità è intrinseca
 ai problemi (portandoci alla \textbf{tesi di Church}).
@@ -1203,7 +1203,7 @@ Dove $\bot$ mi indica una sequenza infinita di stati in loop.
           $$S(R_j) = \textit{contenuto di } R_j\text{ durante lo stato } S$$
 
     \item \textbf{Stato finale} della macchina RAM, uno stato tale per cui:$$S(L)=0\implies HALT$$
-    \item \textbf{Dato}, rappresentato da $\mathbb{N}$, questo perchè sappiamo che $\mathbb{N}\sim DATI$.
+    \item \textbf{Dato}, rappresentato da $\mathbb{N}$, questo perché sappiamo che $\mathbb{N}\sim DATI$.
     \item \textbf{Inizializzazione}, dato il dato $n$ prepara la macchina nello stato iniziale
           con input $n$. Quindi sarà una funzione $in$ questa creerà uno stato $S_{init}$ a partire
           da un input $n$:
@@ -1285,30 +1285,45 @@ $$F(RAM)=\{f\in\mathbb{N}^{\mathbb{N}}:\exists P\in PROG,\varphi_P = f\}=\{\varp
 Ovvero tutte le funzioni per cui esiste un programma $P$ tale per cui $\varphi_P = f$ (o $\varphi_P$ al variare di $P$).
 
 \paragraph{Alcuni programmi RAM e le loro funzioni che vengono calcolate}\mbox{}
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/2n.png}
-    \caption{$n$}
-\end{figure}
+\begin{algorithm}[hbt!]
+    \caption{$P,\varphi_P(n)=2n$}\label{alg:varphi_2n}
+    {IF $R_1=0$ THEN GOTO 6}\;
+    $R_0\leftarrow R_0+1$\;
+    $R_0\leftarrow R_0+1$\;
+    $R_1\leftarrow R_1\dot{-}1$\;
+    {IF $R_2=0$ THEN GOTO 1}\;
+    $R_1\leftarrow R_1\dot{-}1$
+\end{algorithm}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/n_complx.png}
-    \caption{Funzione più complicata}
-\end{figure}
-
+\begin{algorithm}[hbt!]
+    \caption{$P,\varphi_P(n)$ definita a pezzi}\label{alg:varphi_pieces}
+    $R_1\leftarrow R_1\dot{-}1$\;
+    $R_1\leftarrow R_1\dot{-}1$\;
+    $R_1\leftarrow R_1\dot{-}1$\;
+    {IF $R_1=0$ THEN GOTO 1}\;
+    {IF $R_1=0$ THEN GOTO 9}\;
+    $R_0\leftarrow R_0+1$\;
+    $R_1\leftarrow R_1\dot{-}1$\;
+    {IF $R_2=0$ THEN GOTO 5}\;
+    $R_0\leftarrow R_0+1$\;
+\end{algorithm}
+La cui semantica è:
+\[
+    \varphi_P(n)=
+    \begin{cases}
+        \bot & n\leq 3\\
+        n-2 & n>3
+    \end{cases}
+\]
 Questi programmi possono essere spiegati formalmente con gli strumenti matematici precedentemente
 forniti, per esempio con il primo programma:
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{images/n_formale.png}
     \caption{Rappresentazione formale di $\varphi_P(n)=2n$}
 \end{figure}
-
 Questo è il modo corretto di procedere, e questo modo permette di definire formalmente
 la potenza computazionale di una macchina RAM, non lasciando nulla al caso.
-
 \paragraph{Alcune considerazioni}
 \begin{itemize}
     \item $F(RAM)$ \textit{conterrà funzioni più complesse o solo quelle banali?} In realtà
@@ -1321,10 +1336,8 @@ la potenza computazionale di una macchina RAM, non lasciando nulla al caso.
 \subsubsection{Dimostrazione $PROG\sim\mathbb{N}$}
 Dato un programma RAM vogliamo associare un numero a tale programma
 in maniera che partendo quel numero sia possibile tornare al sorgente.
-
 Ovvero vogliamo dimostrare che anche i programmi possono essere in corrispondenza biunivoca
 con i numeri naturali (utilizzeremo la semplicità della macchina RAM).
-
 $$P\equiv Istr_1,Istr_2,...,Istr_m$$
 Il primo passo consiste nell'aritmetizzazione dell'istruzione, ovvero trasformare una lista
 di istruzioni in una lista di codici numerici. Successivamente utilizzando la funzione lista
@@ -1336,18 +1349,17 @@ di Cantor possiamo trasformare questo elenco di codici in un singolo numero $n$.
 Sappiamo che la funzione lista di Cantor è invertibile quindi possiamo ricostruire le codifiche
 associate alle istruzioni. Ora se l'operazione di aritmetizzazione del sorgente è
 invertibile, allora ci sarà possibile risalire al sorgente partendo da $n$.
-
+\newline\newline
 In generale un procedimento che fa corrispondere ad una qualsiasi struttura matematica
 un numero, si chiama operazione di \textbf{aritmetizzazione} o \textbf{Godelizzazione}.
-
 Il nostro scopo è quello di aritmetizzare ogni istruzione.
 
 \paragraph{Aritmetizzare biunivocamente le istruzioni RAM}
 $$Ar:Istr\rightarrow\mathbb{N}\text{ e }Ar^{-1}:\mathbb{N}\rightarrow Istr\text{ t.c. }
     Ar(Istr)=n\Leftrightarrow Ar^{-1}(n)=Istr$$
 Nel caso di un programma RAM significa aritmetizzare tre tipi di istruzioni.
-$$Ar(R_n\leftarrow R_n+1)=3k$$
-$$Ar(R_n\leftarrow R_n-1)=3k+1$$
+$$Ar(R_k\leftarrow R_k+1)=3k$$
+$$Ar(R_k\leftarrow R_k-1)=3k+1$$
 $$Ar(\text{If }R_k=0\text{ then goto }m)=3\langle k,m\rangle-1$$
 In questa maniera posso sapere da che registro proviene l'istruzione.
 Come è fatta $Ar^{-1}$? La funzione di decodifica è biunivoca ? La funzione
@@ -1357,17 +1369,14 @@ attraverso l'operatore di modulo per $3$.
     \centering
     \includegraphics[scale=0.4]{images/mod3.png}
 \end{figure}
-
 Ricapitolando, il passaggio da programmi a numeri è molto semplice
 $$cod(P)=\langle Ar(Istr_1),...,Ar(Istr_m)\rangle$$
 mentre il passaggio da numeri a programmi, parto da $n$ e trovo la parte sinistra e
 la parte destra. Vediamo passo per passo:
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/decod_bin.png}
 \end{figure}
-
 Al primo passo dalla parte sinistra trovo il codice della prima istruzione
 (aritmetizzato), quindi nel caso in cui io voglia il sorgente del programma
 quello che devo fare è applicare $Ar^{-1}$ sulla parte sinistra. Questo finché
@@ -1376,24 +1385,28 @@ scompattare il programma $P$ e dato $n$ io volessi sapere il numero di istruzion
 del programma $|P|$, che cosa devo calcolare?
 $$|P|=length(cod(P))$$
 Abbiamo quindi dimostrato in maniera inequivocabile il secondo tassello, ovvero
-che i programmi sono equinumerosi rispetto ai numeri naturali.
+che i programmi sono equi numerosi rispetto ai numeri naturali.
 $$PROG\sim\mathbb{N}$$
-
 Adesso che abbiamo acquisito gli strumenti, proviamo a vedere ad occhio qualche
 esempio.
-
 \paragraph{Primo programma RAM}\mbox{}\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/prog_1.png}
-\end{figure}
-
-La corrispettiva aritmetizzazione delle istruzioni :
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/cod_1.png}
-\end{figure}
+Considerando il primo programma RAM che abbiamo visto:
+\begin{algorithm}[hbt!]
+    \caption{$P,\varphi_P(n)=2n$}\label{alg:varphi_2n}
+    {IF $R_1=0$ THEN GOTO 6}\;
+    $R_0\leftarrow R_0+1$\;
+    $R_0\leftarrow R_0+1$\;
+    $R_1\leftarrow R_1\dot{-}1$\;
+    {IF $R_2=0$ THEN GOTO 1}\;
+    $R_1\leftarrow R_1\dot{-}1$
+\end{algorithm}
+la corrispettiva aritmetizzazione delle istruzioni sarà:
+\begin{itemize}
+    \item $Ar($IF $R_0=0$ THEN GOTO 4$)=3\cdot\langle0,4\rangle-1=44$
+    \item $Ar(R_0\leftarrow R_0\dot{-}1)=3\cdot 0+1=1$
+    \item $Ar($IF $R_1=0$ THEN GOTO 1$)=3\cdot\langle1,1\rangle-1=14$
+    \item $Ar(R_0\leftarrow R_0\dot{-}1)=3\cdot 0+1=1$
+\end{itemize}
 $$cod(P)=\langle 44,\langle 1,\langle 14,\langle 1,0\rangle\rangle\rangle\rangle=50556496$$
 Questo non è un ottimo modo per compattare i programmi ram, poiché cresce esponenzialmente
 rispetto al programma. Tuttavia questo ha scopi didattici.
@@ -1408,10 +1421,10 @@ la prima istruzione sarà:
 $$\text{If }R_1=0\text{ then goto }1$$
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/sorgente_p.png}
-
+    \includegraphics[scale=0.4]{images/sorgente_p.png}
+    \caption{Albero del programma rappresentante la lista di Cantor delle istruzioni aritmetizzate}
 \end{figure}
-Quale é la semantica di questo programma ? (ovvero $\varphi_P(n)$)
+Quale é la semantica di questo programma? (ovvero $\varphi_P(n)$)
 \[
     \varphi_P(n)=\varphi_{311}(n)=
     \begin{cases}
@@ -1443,12 +1456,13 @@ altrimenti parto dalla terza istruzione.
 \subsubsection{Il sistema di calcolo While}
 Il linguaggio è basato su un linguaggio moderno, contrapposto all'assembly della macchina RAM (quindi
 anni 50'), adesso ci troviamo nell'utilizzo di un linguaggio strutturato.
-
+\newline\newline
 Hardware:
 \begin{itemize}
     \item \textbf{Memoria} costituita da 21 registri. Siccome parliamo di linguaggio strutturato
           non si parla più con il termine registri ma ci si riferirà con \textit{variabili}.
-          $$x_0,x_1,...,x_{20}$$. La variabile $x_1$ ci si troverà l'input del programma, mentre
+          $$x_0,x_1,...,x_{20}$$
+          La variabile $x_1$ ci si troverà l'input del programma, mentre
           l'output si troverà su $x_0$.
     \item Program counter non presente, poiché si parla di linguaggio strutturato, ed in questo
           le istruzioni vengono eseguite una dopo l'altra (punti di inizio ciclo e finale
@@ -1473,19 +1487,26 @@ complesse):
 Come si può vedere sono strutture che sono in grado di nascondere altre strutture, di per sè
 un programma WHILE è un comando composto.\\Indicheremo com $W-PROG=\{\text{programmi WHILE}\}$
 come l'insieme dei programmi WHILE, dove ciascuno è un programma costruito induttivamente.
-
-\paragraph{Esempio di programma WHILE}\mbox{}\\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{images/esempio_prog_while.png}
-\end{figure}
+\begin{algorithm}[hbt!]
+    \caption{Esempio programma WHILE, $w$}\label{alg:while-prog}
+    $x_2:=x_1+1$\;
+    $x_2:=x_2\dot{-}1$\;
+    \While{$x_1\neq 0$}
+    {
+        $x_0:=x_0+1$\;
+        $x_1:=x_1\dot{-}1$\;
+    }
+    \While{$x_2\neq 0$}
+    {
+        $x_0:=x_0+1$\;
+        $x_2:=x_2\dot{-}1$\;
+    }
+\end{algorithm}
 Indicheremo con $\psi_w$ le semantiche dei programmi WHILE (in questo caso il programma $w$).
 $$\psi_w :\mathbb{N}\rightarrow\mathbb{N}_\bot$$
 $$\psi_w (x)=2x$$
-
 Le prime due istruzioni sono messe perché non è possibile effettuare una copia diretta,
 non stiamo utilizzando il linguaggio di programmazione RAM.
-
 Il parsing del programma ne rivela la struttura induttiva,
 W-PROG è un insieme definito induttivamente (ovvero partendo
 dalla base ed utilizzando dei passi induttivi): per dimostrare una proprietà $P$ su W-PROG:
@@ -1499,10 +1520,8 @@ dalla base ed utilizzando dei passi induttivi): per dimostrare una proprietà $P
     \item Suppongo vera $P$ su $C_1,...,C_m$ e la dimostro vera su $\underline{\text{begin}}\text{ }
               C_1;...;C_m\text{ }\underline{\text{end}}$
 \end{enumerate}
-
-Quando abbiamo di fronte una struttura induttiva il modo migliore per dimostrare che una certa proprietà valaga su tutti
+Quando abbiamo di fronte una struttura induttiva il modo migliore per dimostrare che una certa proprietà valga su tutti
 gli elementi della struttura dobbiamo farlo per induzione (in questo caso si parla di \textbf{induzione strutturale}).
-
 \paragraph{Esempio}\mbox{}\\
 L'insieme degli alberi binari è un insieme definito induttivamente. Sappiamo che è un DAG.
 \begin{figure}[H]
@@ -1512,7 +1531,6 @@ L'insieme degli alberi binari è un insieme definito induttivamente. Sappiamo ch
 \end{figure}
 Possiamo definire l'insieme degli alberi binari come l'insieme di tutti gli oggetti composti come
 mostrato in figura \ref{fig:bt}. Oppure, possiamo definirli induttivamente
-
 \begin{itemize}
     \item Base: Un nodo solo è considerabile un albero binario (con una singola foglia).
     \item Induzione: Se $T_1$ e $T_2$ sono alberi binari anche
@@ -1526,7 +1544,6 @@ mostrato in figura \ref{fig:bt}. Oppure, possiamo definirli induttivamente
 Allora vogliamo dimostrare pre induzione la proprietà $P$, tale che:
 $$P\equiv \parbox[t]{.6\textwidth}{"Su ogni albero binario, il numero dei nodi interni è minore di uno rispetto
         a quello delle foglie."}$$
-
 Allora dimostriamola per induzione:
 \begin{itemize}
     \item Base: \textit{è vero che se ho un solo nodo la proprietà $P$ è vera?} Si poiché
@@ -1585,7 +1602,6 @@ Considerando un input $n$
           Nel primo caso l'output lo andiamo a leggere nella variabile $x_0$ (se HALT), altrimenti diciamo che è indefinito
           $\bot$. Definendo così la semantica del programma $w$, $\psi_w(n)=cont(x_0)/\bot$.
 \end{itemize}
-
 Vogliamo essere precisi anche in questo caso, ed espandere il discorso della sequenza di istruzioni durante l'esecuzione
 di un programma WHILE (introducendo anche qui il concetto di stato).
 
@@ -1672,22 +1688,25 @@ da uno stato iniziale),
 significa che se il programma termina devo pescare il contenuto di $x_0$ (la proiezione di uno stato finale
 di un programma $w$).
 Nel caso in cui non avvenisse l'HALT allora avrò una semantica indefinita $\bot$.
-
 \paragraph{Esempio di semantica di un piccolo programma while}\mbox{}\\
+\begin{algorithm}[hbt!]
+    \caption{$w:\Psi_w(n)=2n$}\label{alg:psi_2n}
+    \While{$x_1\neq 0$}
+    {
+        $x_0:=x_0+1$\;
+        $x_0:=x_0+1$\;
+        $x_1:=x_1+1$\;
+    }
+\end{algorithm}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{images/smallprog.png}
-    \caption{Programma che calcola $2n$}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{images/comanodwhiòe.png}
+    \includegraphics[scale=0.6]{images/comanodwhiòe.png}
     \caption{Deduzione della semantica $\Psi_w$}
 \end{figure}
 
 \paragraph{Potenza computazionale del sistema WHILE}\mbox{}\\
-$$F(WHILE)=\{f\in\mathbb{N}_\bot^\mathbb{N} : \exists w\in W-PROG, f=\Psi_w\}=\{\Psi_w : w\in W-PROG\}$$
+$$F(WHILE)=\{f\in\mathbb{N}_\bot^\mathbb{N} : \exists w\in W-PROG, f=\Psi_w\}=$$
+$$=\{\Psi_w : w\in W-PROG\}$$
 Definiamo la potenza computazionale di
 una macchina WHILE come l'insieme di tutte le funzioni per cui
 esiste un programma WHILE per cui si può calcolare quella funzione.
@@ -1724,7 +1743,7 @@ $$=\{\Psi_{P_1}:P_1\in\mathcal{C}_1-PROG\}$$
 $$F(\mathcal{C}_2)=\{f\in\mathbb{N}_\bot^\mathbb{N}: f=\varphi_{P_2}\text{ per qualche }P_2\in\mathcal{C}_2-PROG\}=$$
 $$=\{\varphi_{P_2}:P_2\in\mathcal{C}_2-PROG\}$$
 Cominciamo a cercare degli strumenti per confrontare le potenze computazionali. Come faccio a dimostrare
-$F(\mathcal{C}_1)\subseteq F(\mathcal{C}_2)$
+$F(\mathcal{C}_1)\subseteq F(\mathcal{C}_2)?$
 Per dimostrare che tale inclusione sia vera, mi basta dimostrare che un elemento di un insieme appartenga
 all'altro, in linguaggio matematico:
 $$\forall f\in F(\mathcal{C}_1)\implies f\in F(\mathcal{C}_2)$$
@@ -1745,7 +1764,7 @@ con le seguenti proprietà (che sono quelle che vogliamo nei nostri compilatori)
     \item deve essere \textbf{completa}, ovvero che traduce \textit{ogni} programma scritto in $\mathcal{C}_1$ in
           uno scritto in $\mathcal{C}_2$.
     \item deve essere \textbf{corretta}, ovvero che mantiene la semantica del programma
-          $$\forall P\in\mathcal{C}_1-PROG :\varphi_{T(P)}=\Psi_P$$
+          $$\forall P\in\mathcal{C}_1-PROG:\varphi_{T(P)}=\Psi_P$$
 \end{itemize}
 questa è la formalizzazione del concetto di compilatore. Allora il \textbf{teorema} che posso scrivere
 è il seguente, se esiste $T:\mathcal{C}_1-PROG\rightarrow\mathcal{C}_2-PROG$, allora $F(\mathcal{C}_1)\subseteq F(\mathcal{C}_2)$
@@ -1777,12 +1796,10 @@ rispetta le tre proprietà). Per pura comodità, scrivere un compilatore da un p
 RAM vuol dire prendere un programma del primo tipo e scrivere un frammento del secondo, per semplicità
 ammetterò di utilizzare un programma RAM che utilizza delle \textit{label} (cosa che mi permette
 di fare salti nel codice).
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{images/ram_etichettato.png}
 \end{figure}
-
 semplicemente al posto di utilizzare i riferimenti numerici alle righe utilizzeremo delle parole,
 con un semplice post-processing posso trasformare il "RAM etichettato" in "RAM puro" (l'aggiunta
 di etichette non aumenta la potenza del linguaggio RAM).
@@ -1790,7 +1807,6 @@ di etichette non aumenta la potenza del linguaggio RAM).
 \paragraph{Forma del compilatore}\mbox{}\\
 Teniamo conto della natura degli oggetti su cui agirà il compilatore $W-PROG$ è un insieme definito
 induttivamente. Questo significa che anche $Comp$ può essere definito induttivamente.
-
 \begin{enumerate}
     \item mostriamo come compilare le basi di quel linguaggio, quindi gli assegnamenti (base).
     \item posso usare l'ipotesi induttiva, quindi assumo di saper compilare il comando $Comp(C_1),\dots,Comp(C_m)$ e ti
@@ -1799,7 +1815,6 @@ induttivamente. Questo significa che anche $Comp$ può essere definito induttiva
     \item posso usare l'ipotesi induttiva, quindi di saper compilare $Comp(C)$ e mostrarlo come compilare il comando
           $while$ che ha come corpo $C$, $\underline{\text{while}}\;x_n\neq 0\;\underline{\text{do}}\;C$
 \end{enumerate}
-
 In tale maniera si saprà come compilare tutto $W-PROG$. Sia nota la seguente proprietà di compilazione,
 ogni volta che durante una traduzione incontreremo nel programma una variabile $x_k$ ad essa verrà
 associata il registro $R_k$ (abbiamo tranquillamente lo spazio per mappare tutte le variabili, visto
@@ -1873,19 +1888,18 @@ Il problema in questo caso è dato dal fatto che si deve gestire l'operazione di
 è presente nel linguaggio WHILE (ed è proprio per questo motivo che utilizzare
 "go to" nei linguaggi strutturati è un problema). Dimostreremo come è possibile evitare l'utilizzo
 delle istruzioni "go to" nella programmazione strutturata.
-
+\newline\newline
 Introduciamo il concetto di \textbf{interprete}, per quasi tutti i linguaggi di programmazione
 ormai c'è la possibilità di avere la versione compilata che interpretata
 (con differenze prestazionali).
 La compilazione produce un programma equivalente che sta in piedi da solo (\textit{stand-alone})
 che può essere eseguito direttamente dalla macchina, l'interpretazione simula l'esecuzione
 di un programma attraverso un interprete.
-
+\newline\newline
 Vediamo come scrivere un interprete di programmi RAM scritto in WHILE, che chiameremo $I_W$.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/interprete_while.png}
+    \includegraphics[scale=0.4]{images/interprete_while.png}
 \end{figure}
 Esso prenderà in ingresso un programma scritto in RAM ed un input, e produrrà in uscita
 non un codice oggetto ma la semantica del programma $P$ sul dato $x$. Notiamo che in ingresso
@@ -1893,13 +1907,11 @@ viene dato un programma $P$ che è listato, ma sappiamo che i nostri programmi W
 sulle stringhe. Un programma WHILE ha una sola variabile di input $x_1$ che può solo contenere
 numeri. \textit{Come facciamo a fornire il listato di $P$ al programma WHILE?} Il mio $I_W$
 prenderà in ingresso la codifica del programma $P$ che sarà fornita sotto forma di numero.
-
+\newline\newline
 \textit{Ma il nostro programma può veramente prendere due dati in questa maniera?} Notiamo bene
 che nel linguaggio WHILE $x_1$ non può prendere una coppia di numeri distinti, ma allora
 dobbiamo passare un ulteriore coppia di Cantor di questi due numeri.
-
 Il risultato sarà il funzionamento del programma con codice $n$ che in realtà è $P$.
-
 Quindi la semantica di $I_W$:
 $$\forall x,n\in\mathbb{N}:\Psi_{I_W}(\langle x,n\rangle)=\varphi_n(x)=\varphi_P(x)$$
 
@@ -1908,18 +1920,16 @@ Siccome devo scrivere un interprete in WHILE, voglio facilitarmi il lavoro utili
 versione modificata del linguaggio (sempre permettendo di tornare al WHILE puro e senza
 avere guadagni o perdite prestazionali). Questo per permettere di scrivere un codice
 più semplice.
-
 Per esempio:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{images/macro-while.png}
 \end{figure}
-
 Come vediamo queste non sono istruzioni di WHILE puro, dovremmo scrivere molte più istruzioni
 per ottenere ciò. Si ha anche la possibilità di rappresentare la coppia di Cantor di due numeri,
 visto che si ottengono con somme/sottrazioni, ed anche la possibilità di rappresentare la
 lista di Cantor.
-
+\newline\newline
 Ciascuna di queste MACRO può essere sostituita da un frammento di WHILE puro (seppur risulti piò comodo
 da utilizzare)
 $$F(MACRO-WHILE)=F(WHILE)$$
@@ -1928,7 +1938,7 @@ $$F(MACRO-WHILE)=F(WHILE)$$
 Lo scopo di questo interprete è quello di ricreare esattamente al suo interno (scritto
 in WHILE) utilizzando le variabili la situazione della macchina RAM, entro cui fare
 eseguire il programma.
-
+\newline\newline
 Sappiamo che la macchina RAM riceve un programma $P$ che è un listato delle istruzioni di un programma
 RAM. Sappiamo che la memoria della macchina RAM ha un numero infinito di registri
 (a destra) ed un registro $L$ che è il program counter.
@@ -2065,7 +2075,7 @@ $$F(RAM)=F(WHILE)$$
 Utilizzando una concatenazione logica, sappiamo che
 grazie alla Gödelizzazione che la potenza computazionale di una macchina RAM è equinumerosa
 al numero di programmi, che a sua volta sono tanti quanti i numeri naturali (che non sono
-equinumerosi a tutte le funzioni calcolabili dai naturali ai naturali):
+equi numerosi a tutte le funzioni calcolabili dai naturali ai naturali):
 $$\mathbb{N}^{\mathbb{N}}_\bot\nsim\mathbb{N}\sim PROG \sim F(RAM)=F(WHILE)$$
 
 A questo punto la nozione di calcolabilità si capisce che è intrinseca ai problemi,
@@ -2321,7 +2331,7 @@ per generare cose calcolabili.
 $ELEM^{COMP}$ effettivamente amplia $ELEM$, infatti:
 $$f(x)=x+2\notin ELEM\text{ ma }f(x)\in ELEM^{COMP}$$
 Non fosse altro che la mia funzione x+2, è banalmente dimostrabile che $f(x)$ (la funzione
-che somma 2 ad x) appartiene ad $ELEM^{COMP}$, questo perchè basta
+che somma 2 ad x) appartiene ad $ELEM^{COMP}$, questo perché basta
 comporre la funzione successore con se stessa. Infatti $$f(x)=COMP(s,s)(x)=s(s(x))=s(x+1)=x+2=f(x)$$
 
 Abbiamo visto che qualcosa in più riusciamo a calcolare, ma la domanda è \textit{questa
@@ -2429,7 +2439,7 @@ La dimostrazione seguirà i seguenti punti:
               \item Le funzioni in $ELEM$ sono in $RICPRIM$
               \item Se prendo delle funzioni $RICPRIM$ allora la loro composizione è
                     $RICPRIM$ anch'essa.
-              \item Se prendo delle funzioni $RICPRIM$ allora la loro composizione mendiante l'operatore
+              \item Se prendo delle funzioni $RICPRIM$ allora la loro composizione mediante l'operatore
                     di ricorsione primitiva genera una funzione $RP$.
               \item Nient'altro è in $RICPRIM$
           \end{enumerate}
@@ -2770,7 +2780,7 @@ costante. Io so scrivere $COMP(h,g_1,\dots,g_k)$ con $k$ costante. Quindi ci si 
         f_C(T(x,y-1)) & y>0
     \end{cases}
 \]
-Da notare che questo costrutto è ricorsivo parziale, perchè è ottenuto attraverso una
+Da notare che questo costrutto è ricorsivo parziale, perché è ottenuto attraverso una
 ricorsione primitiva sfruttando delle funzioni $f_C$ che sappiamo per induzione essere ricorsive
 parziali. Ed è proprio quello che ci serviva, posso riscrivere utilizzando l'operatore
 ricorsivo parziale:
@@ -3103,7 +3113,7 @@ dopo la dimostrazione):
           i tre assiomi fondamentali (enumerati per applicazione nell'equazione):
           $$\Psi_{t(i)}(x)\overset{(2)}{=}\Psi_u(x,t(i))\overset{(1)}{=}\varphi_e(x,t(i))\overset{(3)}{=}\varphi_{S_1^1(e,t(i))}(x)$$
           La funzione $S_1^1$ dipende solamente da una variabile, perché la $e$ è fissata, in più è
-          una funzione ricorsiva totale questo perchè anche $t(i)\in\mathcal{T}$ (e la stessa $S_1^1$ è per
+          una funzione ricorsiva totale questo perché anche $t(i)\in\mathcal{T}$ (e la stessa $S_1^1$ è per
           il terzo assioma). Quindi in realtà lei è una funzione
           $$g(i)=S_1^1(e,t(i))$$ è la composizione di $t,S_1^1\in\mathcal{T}$, e quindi $g\in\mathcal{T}$
           questo significa che posso applicare il teorema di ricorsione:
@@ -3294,7 +3304,7 @@ Quindi le due definizioni si equivalgono, il programma $P_\pi$ calcola $\Phi_\pi
 che $\Phi_\pi\in\mathcal{T}$. E se esiste una $\Phi_\pi\in\mathcal{T}$ allora esiste un
 programma che calcola $\Phi_\pi$ e che ha il comportamento di $P_\pi$.
 
-Quindi abbiamo un problema decidibile perchè siamo in gradi di esibire un programma, o perché
+Quindi abbiamo un problema decidibile perché siamo in gradi di esibire un programma, o perché
 la sua funzione soluzione è una ricorsiva totale. Riassumendo, dato il problema di decisione
 $\pi$, posso dimostrare la decidibilità:
 \begin{enumerate}
@@ -3537,7 +3547,7 @@ spesso si dice che "un insieme ricorsivo è decidibile" ma può essere decidibil
 solamente un problema di decisione non gli insieme.
 
 Però in realtà un insieme ricorsivo
-possiamo chiamarlo insieme decidibile, perchè se è un insieme ricorsivo allora è decidibile
+possiamo chiamarlo insieme decidibile, perché se è un insieme ricorsivo allora è decidibile
 il corrispondente \textbf{problema di riconoscimento}. Cio è dato un insieme $A$ possiamo
 associare a questo insieme il problema di riconoscimento:
 $$RIC_A$$
@@ -4011,7 +4021,7 @@ un numero finito di pagine \textbf{per volta} in tutti e due gli elenchi.
 \end{enumerate}
 Quindi sfogliare gli elementi non in maniera esclusiva, così da evitare di andare
 in loop su un solo elenco. \textit{Perché sono sicuro che questo algoritmo non
-    andrà in loop?} Questo perchè un elemento appartiene ad $A$ o ad $A^c$, quindi
+    andrà in loop?} Questo perché un elemento appartiene ad $A$ o ad $A^c$, quindi
 è ovvio che se ho un elemento in input esso comparirà in uno dei due elenchi (l'unione
 genera l'intero universo delle possibilità).
 Quindi ho un algoritmo che sfruttando questi due libri mi permette di riconoscere
@@ -4029,7 +4039,7 @@ un ciclo infinito con un contatore $i$ inizializzato a 0, dentro al ciclo contro
 se $x$ compare nell'elenco di $A$, altrimenti controllo se $x$ appartiene ad $A^c$
 in tal caso darò in output 0. Se entrambi i controlli non sono verificati
 aggiorno il contatore e ripeto il ciclo.
-L'algoritmo termina sempre perchè prima o poi manderà in output un risultato (return),
+L'algoritmo termina sempre perché prima o poi manderà in output un risultato (return),
 in quando l'elemento appartiene sicuramente ad uno dei due insiemi.
 
 Questo teorema ci fornisce un ulteriore strumento di indagine su gli insiemi, per esempio
@@ -5568,12 +5578,12 @@ il tempo in cui deve \textbf{accettare o rifiutare} la stringa $x\in\Sigma^n$
 Allora come è fatta una DTM che accetta quel linguaggio con un limite di tempo? Data DTM $M$ che accetta
 $L$ con $s(n)\leq\alpha\cdot f(n)$, posso costruire una DTM $M'$ che su input $x\in\Sigma^*$ con $|x|=n$.
 \begin{enumerate}
-    \item Scrive in unario su un nastro appostito il \textbf{time-out} $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
+    \item Scrive in unario su un nastro apposito il \textbf{time-out} $O(n\cdot 2^{O(f(n))})$ di una computazione di $M$.
     \item \textbf{Simula} $M$ e ad ogni mossa \textbf{cancella} un simbolo dal nastro time-out (in
           sostanza implemento un count-down che viene decrementato di 1 per iterazione).
     \item Se $M$ accetta o rifiuta prima del time-out allora $M'$ accetta o rifiuta.
     \item Se allo scadere del time-out $M$ non ho ancora preso una decisione allora $M'$ \textbf{rifiuta} (loop),
-          perchè non siamo in uno stato accettante.
+          perché non siamo in uno stato accettante.
 \end{enumerate}
 Quindi ho una DTM $M'$ che replicando $M$ accetta sicuramente $L$ ed il tempo è
 dato da $t(n)=O(n\cdot 2^{O(f(n))})$.
@@ -5891,7 +5901,7 @@ Quindi saranno integrate le due fasi degli algoritmi non deterministici:
 \end{enumerate}
 In questo caso $M$ accetta $x\in\Sigma^*$ se e solo se $\exists\gamma\in\Gamma^*$ tale
 che $(\gamma,x)$ viene deterministicamente accettata.
-Questo perchè una NDTM a differenza di una DTM ha un \textbf{range di computazioni}
+Questo perché una NDTM a differenza di una DTM ha un \textbf{range di computazioni}
 dato dalle infinite possibilità delle congetture, quindi il riconoscimento è diverso.
 Ed il linguaggio accettato da $M$ viene definito come $L_M=\{x\in\Sigma^*:M\text{ accetta }x\}$.
 
@@ -6064,7 +6074,7 @@ di soluzione esponenziali è falso.
 
 \subsubsection{Rimane il problema aperto $P=NP$ o $NP\subseteq P$}
 Per mostrare che $NP\subseteq P$ potrei prendere ogni problema in $NP$ e trovare
-un algoritmo di soluzione polinomiale. Questo è impossibile perchè il numero
+un algoritmo di soluzione polinomiale. Questo è impossibile perché il numero
 di problemi in $NP$ è infinito e di composizione eterogenea, quindi non posso effettuare
 questo tipo di indagine.
 \newline\newline
@@ -6175,7 +6185,7 @@ Poiché $\pi\in NP-C$, per la proprietà (2) abbiamo che per ogni problema $\til
 vale che $\tilde{\pi}\leq_p\pi$. Ma assumendo che $\pi\in P$ e considerando il teorema
 $A\leq_p B\land B\in P\implies A\in P$, otteniamo che per ogni problema $\tilde{\pi}$
 vale $\tilde{\pi}\in P$ quindi possiamo concludere che $NP\subseteq P$ e quindi $P=NP$.
-\textit{Esistono problemi $NP-completi$?} Si \textit{Sono state trovate soluzioi
+\textit{Esistono problemi $NP-completi$?} Si \textit{Sono state trovate soluzioni
     efficienti per almeno un problema $NP-completo$?} Ancora no.
 \paragraph{CNF}\mbox{}\\
 Il primo problema $NP-completo$ è stato il $CNF-SAT$. Mostrarne l'appartenenza in $NP$
