@@ -1,0 +1,296 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cosa studia l'informatica?}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Come l'informatica risolve i problemi?}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Syllabus}{6}{section.2}%
+\contentsline {section}{\numberline {3}Il nostro linguaggio: la matematica}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Funzione}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Classi di funzioni}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Funzioni iniettive}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Funzioni suriettive}{8}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Insieme immagine di una funzione}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Funzioni biettive}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Inversa di una funzione}{9}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Composizione di funzioni}{9}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Funzione identità}{10}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Definizione alternativa di funzione inversa}{10}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Funzioni totali e parziali}{10}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Totalizzazione di una funzione parziale}{11}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Prodotto cartesiano}{11}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Insieme di funzioni}{12}{subsubsection.3.6.6}%
+\contentsline {subsubsection}{\numberline {3.6.7}Funzione di valutazione}{13}{subsubsection.3.6.7}%
+\contentsline {subsection}{\numberline {3.7}Modellare teoricamente un sistema di calcolo}{13}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Potenza computazionale}{14}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Importanza del calcolo di funzione}{15}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Cardinalità degli insiemi - I°}{15}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Relazione}{16}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Relazioni di equivalenza e partizioni}{17}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Cardinalità degli insiemi - II°}{19}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Insiemi numerabili}{20}{subsubsection.3.7.7}%
+\contentsline {subsection}{\numberline {3.8}Insiemi non numerabili}{21}{subsection.3.8}%
+\contentsline {paragraph}{Dimostrazione}{21}{section*.2}%
+\contentsline {paragraph}{Dimostrazione $R\sim [0,1]$}{22}{section*.3}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\nsim [0,1]$ (per diagonalizzazione)}{22}{section*.4}%
+\contentsline {paragraph}{Conclusione}{23}{section*.5}%
+\contentsline {subsubsection}{\numberline {3.8.1}Insieme delle parti di $\PazoBB {N}$}{23}{subsubsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.2}Insieme $\PazoBB {N}^{\PazoBB {N}}$}{24}{subsubsection.3.8.2}%
+\contentsline {section}{\numberline {4}Teoria della calcolabilità}{25}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Cosa è calcolabile?}{25}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Dimostrazione $DATI\sim \PazoBB {N}$}{26}{subsubsection.4.1.1}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}^+$}{26}{section*.6}%
+\contentsline {paragraph}{Come tornare da $\PazoBB {N}^+$ a $\PazoBB {N}^+2$}{28}{section*.7}%
+\contentsline {paragraph}{Esempio andata e ritorno tra $\PazoBB {N}^2$ e $\PazoBB {N}^+$}{29}{section*.8}%
+\contentsline {paragraph}{Dimostrazione $\PazoBB {N}\times \PazoBB {N}\sim \PazoBB {N}$}{30}{section*.9}%
+\contentsline {paragraph}{Dimostrazione rigorosa che $DATI\sim \PazoBB {N}$}{30}{section*.10}%
+\contentsline {paragraph}{Liste d'interi}{30}{section*.11}%
+\contentsline {paragraph}{Implementazione codifica}{31}{section*.12}%
+\contentsline {paragraph}{Implementazione decodifica}{31}{section*.13}%
+\contentsline {paragraph}{Esercizi - $incr,decr$ (da implementare)}{31}{section*.14}%
+\contentsline {paragraph}{Corrispondente numerico : $DATI\sim \PazoBB {N}$}{32}{section*.15}%
+\contentsline {paragraph}{Codifica di altre stutture dati}{32}{section*.16}%
+\contentsline {paragraph}{Conclusione}{33}{section*.17}%
+\contentsline {subsubsection}{\numberline {4.1.2}Prefazione alla dimostrazione $PROG\sim \PazoBB {N}$}{33}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Sistema di calcolo RAM}{34}{subsubsection.4.1.3}%
+\contentsline {paragraph}{Esecuzione su una macchina RAM}{34}{section*.18}%
+\contentsline {paragraph}{Definizione formale di semantica di un programma RAM}{35}{section*.19}%
+\contentsline {paragraph}{Esecuzione di un programma P e la sua semantica}{35}{section*.20}%
+\contentsline {paragraph}{Ingredienti della definizione formale della semantica}{36}{section*.21}%
+\contentsline {paragraph}{Esecuzione del programma $P\in PROG$}{38}{section*.22}%
+\contentsline {paragraph}{Alcuni programmi RAM e le loro funzioni che vengono calcolate}{38}{section*.23}%
+\contentsline {paragraph}{Alcune considerazioni}{39}{section*.24}%
+\contentsline {subsubsection}{\numberline {4.1.4}Dimostrazione $PROG\sim \PazoBB {N}$}{40}{subsubsection.4.1.4}%
+\contentsline {paragraph}{Aritmetizzare biunivocamente le istruzioni RAM}{41}{section*.25}%
+\contentsline {paragraph}{Primo programma RAM}{42}{section*.26}%
+\contentsline {paragraph}{Sorgente RAM da un numero}{43}{section*.27}%
+\contentsline {paragraph}{Riflessioni su $PROG\sim \PazoBB {N}$}{43}{section*.28}%
+\contentsline {subsubsection}{\numberline {4.1.5}Il sistema di calcolo While}{44}{subsubsection.4.1.5}%
+\contentsline {paragraph}{Esempio}{45}{section*.29}%
+\contentsline {paragraph}{Esempio 2}{47}{section*.30}%
+\contentsline {paragraph}{Esecuzione su una macchina WHILE}{47}{section*.31}%
+\contentsline {subsubsection}{\numberline {4.1.6}Definizione formale di semantica di un programma WHILE}{48}{subsubsection.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.1.7}Definizione induttiva della semantica while}{48}{subsubsection.4.1.7}%
+\contentsline {paragraph}{Semantica di $W$ e $W-PROG$}{49}{section*.32}%
+\contentsline {paragraph}{Esempio di semantica di un piccolo programma while}{50}{section*.33}%
+\contentsline {paragraph}{Potenza computazionale del sistema WHILE}{50}{section*.34}%
+\contentsline {paragraph}{Confrontiamo $F(RAM)$ e $F(WHILE)$}{51}{section*.35}%
+\contentsline {subsubsection}{\numberline {4.1.8}Concetto di traduzione}{52}{subsubsection.4.1.8}%
+\contentsline {paragraph}{Dimostrazione}{52}{section*.36}%
+\contentsline {subsubsection}{\numberline {4.1.9}Dimostrazine $F(WHILE)\subseteq F(RAM)$}{52}{subsubsection.4.1.9}%
+\contentsline {paragraph}{Forma del compilatore}{53}{section*.37}%
+\contentsline {paragraph}{Base: assegnamenti}{54}{section*.38}%
+\contentsline {paragraph}{Passo induttivo}{55}{section*.39}%
+\contentsline {paragraph}{Ricapitolando}{55}{section*.40}%
+\contentsline {subsubsection}{\numberline {4.1.10}Dimostrazione $F(RAM)\subseteq F(WHILE)$}{56}{subsubsection.4.1.10}%
+\contentsline {paragraph}{Macro-WHILE}{57}{section*.41}%
+\contentsline {paragraph}{Interprete WHILE di programmi RAM}{57}{section*.42}%
+\contentsline {paragraph}{Conseguenze di $I_W$}{60}{section*.43}%
+\contentsline {paragraph}{Teorema di Böhm Jacopini - 1970}{61}{section*.44}%
+\contentsline {paragraph}{Conseguenza 1 $F(RAM)=F(WHILE)$}{61}{section*.45}%
+\contentsline {paragraph}{Conseguenza 2: interprete universale}{62}{section*.46}%
+\contentsline {paragraph}{Riflessione sul concetto di calcolabilità}{62}{section*.47}%
+\contentsline {subsection}{\numberline {4.2}Concetto di calcolabilità}{63}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Strumenti matematici (chiusure di insiemi)}{63}{subsubsection.4.2.1}%
+\contentsline {paragraph}{Per esempio}{63}{section*.48}%
+\contentsline {paragraph}{Esempio}{63}{section*.49}%
+\contentsline {paragraph}{Esempio}{64}{section*.50}%
+\contentsline {paragraph}{Teorema}{64}{section*.51}%
+\contentsline {paragraph}{Esempi di chiusure}{65}{section*.52}%
+\contentsline {subsubsection}{\numberline {4.2.2}Il nucleo di funzioni calcolabili}{67}{subsubsection.4.2.2}%
+\contentsline {paragraph}{L'operatore di composizione di funzioni}{68}{section*.53}%
+\contentsline {paragraph}{Ampliamo ELEM chiudendo rispetto a COMP}{68}{section*.54}%
+\contentsline {paragraph}{L'operatore di ricorsione primitiva}{69}{section*.55}%
+\contentsline {subsubsection}{\numberline {4.2.3}$RICPRIM$ vs $F(WHILE)$}{70}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}$RICPRIM\subseteq F(WHILE)$}{71}{subsubsection.4.2.4}%
+\contentsline {paragraph}{Ulteriori considerazioni su $RICPRIM$}{73}{section*.56}%
+\contentsline {paragraph}{Funzioni di Ackermann}{73}{section*.57}%
+\contentsline {paragraph}{Operatore di minimalizzazione di funzioni}{74}{section*.58}%
+\contentsline {subsubsection}{\numberline {4.2.5}$\mathcal {P}\subseteq F(WHILE)$}{75}{subsubsection.4.2.5}%
+\contentsline {paragraph}{Dimostrazione che $MIN(f)$ è $WHILE$-programmabile}{75}{section*.59}%
+\contentsline {subsubsection}{\numberline {4.2.6}Dimostrazione $F(WHILE)\subseteq \mathcal {P}$}{76}{subsubsection.4.2.6}%
+\contentsline {paragraph}{Dimostrazione che $f_C\in \mathcal {P}$}{77}{section*.60}%
+\contentsline {subsubsection}{\numberline {4.2.7}Tesi di Church-Turing}{80}{subsubsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.3}Sistemi di programmazione}{80}{subsection.4.3}%
+\contentsline {paragraph}{Definizione di sistema di programmazione accettabile}{80}{section*.61}%
+\contentsline {subsubsection}{\numberline {4.3.1}Proprietà auspicabili per un sistema di programmazione}{81}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Esistenza di compilatori tra S.P.A.}{84}{subsubsection.4.3.2}%
+\contentsline {paragraph}{Teorema}{85}{section*.62}%
+\contentsline {paragraph}{Corollario}{85}{section*.63}%
+\contentsline {subsubsection}{\numberline {4.3.3}Teorema di isomorfismo di Rogers}{86}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Teorema di ricorsione}{86}{subsubsection.4.3.4}%
+\contentsline {paragraph}{Primo quesito}{86}{section*.64}%
+\contentsline {paragraph}{Secondo quesito}{87}{section*.65}%
+\contentsline {paragraph}{Teorema di ricorsione}{87}{section*.66}%
+\contentsline {paragraph}{Dimostrazione del teorema di ricorsione}{89}{section*.67}%
+\contentsline {paragraph}{Conseguenze}{90}{section*.68}%
+\contentsline {subsubsection}{\numberline {4.3.5}Equazioni su s.p.a.}{90}{subsubsection.4.3.5}%
+\contentsline {paragraph}{Esempio 1}{90}{section*.69}%
+\contentsline {subsection}{\numberline {4.4}Problemi di decisione}{91}{subsection.4.4}%
+\contentsline {paragraph}{Esempio problema: Parità}{91}{section*.70}%
+\contentsline {paragraph}{Esempio problema: Equazioni diofantee}{91}{section*.71}%
+\contentsline {paragraph}{Esempio problema: Fermat}{92}{section*.72}%
+\contentsline {paragraph}{Esempio problemi sui grafi}{92}{section*.73}%
+\contentsline {subsubsection}{\numberline {4.4.1}Decidibilità}{93}{subsubsection.4.4.1}%
+\contentsline {paragraph}{Parità}{93}{section*.74}%
+\contentsline {paragraph}{Equazioni Diofantee}{94}{section*.75}%
+\contentsline {paragraph}{Fermat}{94}{section*.76}%
+\contentsline {paragraph}{Raggiungibilità}{94}{section*.77}%
+\contentsline {paragraph}{Hamiltonian circuit}{94}{section*.78}%
+\contentsline {paragraph}{Eulerian circuit}{95}{section*.79}%
+\contentsline {subsubsection}{\numberline {4.4.2}Esistono problemi indecidibili?}{95}{subsubsection.4.4.2}%
+\contentsline {paragraph}{Dimostrazione per assurdo}{96}{section*.80}%
+\contentsline {subsubsection}{\numberline {4.4.3}Il problema generale dell'arresto}{97}{subsubsection.4.4.3}%
+\contentsline {paragraph}{Dimostrazione per assurdo}{98}{section*.81}%
+\contentsline {subsection}{\numberline {4.5}Riconoscibilità automatica di insiemi}{98}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Insiemi ricorsivi}{98}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Ricorsivo vs Decidibile}{99}{subsubsection.4.5.2}%
+\contentsline {paragraph}{Esempi di insiemi ricorsivi}{100}{section*.82}%
+\contentsline {subsubsection}{\numberline {4.5.3}Esistono insiemi non ricorsivi?}{100}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Relazioni ricorsive}{101}{subsubsection.4.5.4}%
+\contentsline {paragraph}{Esempio}{101}{section*.83}%
+\contentsline {paragraph}{Importante relazione ricorsiva}{102}{section*.84}%
+\contentsline {paragraph}{Ancora sull'insime dell'arresto $A$}{102}{section*.85}%
+\contentsline {subsubsection}{\numberline {4.5.5}Insiemi ricorsivamente numerabili}{103}{subsubsection.4.5.5}%
+\contentsline {paragraph}{Definizione formale}{104}{section*.86}%
+\contentsline {subsubsection}{\numberline {4.5.6}Caratteristiche insiemi ricorsivamente numerabili}{105}{subsubsection.4.5.6}%
+\contentsline {paragraph}{Teorema}{105}{section*.87}%
+\contentsline {paragraph}{Dimostrazione}{105}{section*.88}%
+\contentsline {paragraph}{$1\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}2$}{105}{section*.89}%
+\contentsline {paragraph}{$2\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}3$}{106}{section*.90}%
+\contentsline {paragraph}{$3\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}1$}{106}{section*.91}%
+\contentsline {subsubsection}{\numberline {4.5.7}Un insieme ricorsivamente numerabile}{107}{subsubsection.4.5.7}%
+\contentsline {subsubsection}{\numberline {4.5.8}Ricorsivi vs Ricorsivi enumerabili}{108}{subsubsection.4.5.8}%
+\contentsline {paragraph}{Teorema}{109}{section*.92}%
+\contentsline {subsubsection}{\numberline {4.5.9}Complemento dell'insieme dell'arresto $A=\{x:\varphi _x(x)\downarrow \}$}{111}{subsubsection.4.5.9}%
+\contentsline {paragraph}{Teorema}{111}{section*.93}%
+\contentsline {paragraph}{Dimostrazione informale del teorema}{111}{section*.94}%
+\contentsline {paragraph}{Dimostrazione formale del teorema}{112}{section*.95}%
+\contentsline {paragraph}{Situazione finale}{113}{section*.96}%
+\contentsline {subsubsection}{\numberline {4.5.10}Proprietà di chiusura degli insiemi ricorsivamente numerabili}{113}{subsubsection.4.5.10}%
+\contentsline {paragraph}{Dimostrazione}{113}{section*.97}%
+\contentsline {subsubsection}{\numberline {4.5.11}Il teorema di Rice}{114}{subsubsection.4.5.11}%
+\contentsline {paragraph}{Esempio}{115}{section*.98}%
+\contentsline {paragraph}{Dimostrazione}{115}{section*.99}%
+\contentsline {subsubsection}{\numberline {4.5.12}Mostrare che un insieme non è ricorsivo}{116}{subsubsection.4.5.12}%
+\contentsline {paragraph}{Esempio di insieme non ricorsivo}{116}{section*.100}%
+\contentsline {subsubsection}{\numberline {4.5.13}Teorema di Rice e verifica automatica del SW}{116}{subsubsection.4.5.13}%
+\contentsline {paragraph}{Problema}{117}{section*.101}%
+\contentsline {paragraph}{}{117}{section*.102}%
+\contentsline {section}{\numberline {5}Teoria della complessità}{118}{section.5}%
+\contentsline {paragraph}{Alcune domande nella teoria della complessità}{118}{section*.103}%
+\contentsline {subsection}{\numberline {5.1}Risorse computazionali}{119}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Richiami di teoria di linguaggi formali}{119}{subsubsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.2}Macchina di Turing (DTM)}{120}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Passo di computazione: mossa}{121}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Funzionamento di una DTM (informale)}{121}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Definizione formale di DTM}{122}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Funzionamento di una DTM (formale)}{123}{subsubsection.5.2.4}%
+\contentsline {paragraph}{Fase di inizializzazione}{123}{section*.104}%
+\contentsline {paragraph}{Fase di computazione}{123}{section*.105}%
+\contentsline {subsubsection}{\numberline {5.2.5}Configurazioni di DTM}{124}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Configurazione iniziale di $M$ su input $x\in \Sigma ^*$}{124}{section*.106}%
+\contentsline {paragraph}{Configurazione accettante}{124}{section*.107}%
+\contentsline {paragraph}{Configurazione di arresto}{124}{section*.108}%
+\contentsline {paragraph}{Computazione di $M$ su $x\in \Sigma ^*$}{124}{section*.109}%
+\contentsline {paragraph}{$M$ accetta $x\in \Sigma ^*$ se solo se}{125}{section*.110}%
+\contentsline {paragraph}{Linguaggio accettato da $M$}{125}{section*.111}%
+\contentsline {subsubsection}{\numberline {5.2.6}Alcune digressioni}{125}{subsubsection.5.2.6}%
+\contentsline {subsubsection}{\numberline {5.2.7}Funzionalità di una DTM}{127}{subsubsection.5.2.7}%
+\contentsline {paragraph}{DTM per riconoscere insiemi}{127}{section*.112}%
+\contentsline {paragraph}{Attenzione}{128}{section*.113}%
+\contentsline {subsubsection}{\numberline {5.2.8}Potenza di riconoscimento degli insiemi su DTM}{128}{subsubsection.5.2.8}%
+\contentsline {paragraph}{Teorema}{128}{section*.114}%
+\contentsline {paragraph}{Definizione}{128}{section*.115}%
+\contentsline {paragraph}{Teorema}{128}{section*.116}%
+\contentsline {subsubsection}{\numberline {5.2.9}DTM per risolvere problemi di decisione}{128}{subsubsection.5.2.9}%
+\contentsline {paragraph}{Esempio}{129}{section*.117}%
+\contentsline {subsubsection}{\numberline {5.2.10}Algoritmo deterministico per parità}{129}{subsubsection.5.2.10}%
+\contentsline {subsubsection}{\numberline {5.2.11}Specificare DTM}{131}{subsubsection.5.2.11}%
+\contentsline {paragraph}{Note}{132}{section*.118}%
+\contentsline {subsubsection}{\numberline {5.2.12}Calcolare funzioni su una DTM}{132}{subsubsection.5.2.12}%
+\contentsline {paragraph}{Tesi di Church-Turing}{132}{section*.119}%
+\contentsline {subsection}{\numberline {5.3}Complessità in tempo}{133}{subsection.5.3}%
+\contentsline {paragraph}{Tempo di calcolo di $M$ su input $x\in \Sigma ^*$}{133}{section*.120}%
+\contentsline {paragraph}{Complessità in tempo di $M$ (worst case)}{133}{section*.121}%
+\contentsline {paragraph}{Esempio di complessità in tempo}{133}{section*.122}%
+\contentsline {subsubsection}{\numberline {5.3.1}Linguaggi, insiemi e problemi di decisione}{134}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Esempio di complessità in tempo}{134}{section*.123}%
+\contentsline {paragraph}{Un altro esempio: Palindrome}{134}{section*.124}%
+\contentsline {subsubsection}{\numberline {5.3.2}Crescita aritmetica}{136}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Simboli di Landau}{137}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Alcuni semplici fatti}{138}{section*.125}%
+\contentsline {subsubsection}{\numberline {5.3.4}Classificazioni di funzioni}{138}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Classi di complessità in tempo}{139}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.6}Polinomiale sinonimo di efficiente in tempo}{140}{subsubsection.5.3.6}%
+\contentsline {paragraph}{Motivi pratici}{140}{section*.126}%
+\contentsline {paragraph}{Motivi composizionali}{140}{section*.127}%
+\contentsline {paragraph}{Motivi di robustezza}{141}{section*.128}%
+\contentsline {subsubsection}{\numberline {5.3.7}Tesi di Church-Turing estesa}{142}{subsubsection.5.3.7}%
+\contentsline {paragraph}{Esempi di problemi risolti efficientemente in tempo}{142}{section*.129}%
+\contentsline {subsubsection}{\numberline {5.3.8}Alcune riflessioni: Teoria vs Pratica}{142}{subsubsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.4}Complessità in spazio}{144}{subsection.5.4}%
+\contentsline {paragraph}{Nozione fedele di spazio di calcolo}{146}{section*.130}%
+\contentsline {paragraph}{Complessità in spazio di $M$ (worst-case)}{146}{section*.131}%
+\contentsline {subsubsection}{\numberline {5.4.1}Complessità in spazio di linguaggi}{146}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Spazio di calcolo delle funzioni}{146}{subsubsection.5.4.2}%
+\contentsline {paragraph}{Definizione}{147}{section*.132}%
+\contentsline {paragraph}{Definizione}{147}{section*.133}%
+\contentsline {subsubsection}{\numberline {5.4.3}Classi di complessità in spazio}{148}{subsubsection.5.4.3}%
+\contentsline {paragraph}{Esempio di calcolo di complessità in spazio}{148}{section*.134}%
+\contentsline {paragraph}{Altro esempio: Palindrome}{149}{section*.135}%
+\contentsline {subsubsection}{\numberline {5.4.4}Efficienza in termini di spazio}{151}{subsubsection.5.4.4}%
+\contentsline {paragraph}{Perché logaritmico è efficiente in termini di spazio?}{151}{section*.136}%
+\contentsline {paragraph}{Motividi composizionali}{152}{section*.137}%
+\contentsline {paragraph}{Motividi di robustezza}{152}{section*.138}%
+\contentsline {subsubsection}{\numberline {5.4.5}Tesi di Church-Turing estesa per lo spazio}{152}{subsubsection.5.4.5}%
+\contentsline {paragraph}{Esempi di problemi efficienti in spazio}{152}{section*.139}%
+\contentsline {subsection}{\numberline {5.5}Tempo vs Spazio}{152}{subsection.5.5}%
+\contentsline {paragraph}{Teorema I}{153}{section*.140}%
+\contentsline {paragraph}{Teorema II}{153}{section*.141}%
+\contentsline {paragraph}{È vero anche il contrario?}{153}{section*.142}%
+\contentsline {subsubsection}{\numberline {5.5.1}Efficienza in spazio vs efficienza in tempo}{155}{subsubsection.5.5.1}%
+\contentsline {paragraph}{Teoremi/Proprietà}{155}{section*.143}%
+\contentsline {paragraph}{Teorema}{156}{section*.144}%
+\contentsline {subsection}{\numberline {5.6}Zona grigia e non determinismo}{156}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Problema della soddisfacibilità booleana}{157}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}Circuiti Hamiltoniani}{158}{subsubsection.5.6.2}%
+\contentsline {paragraph}{Piccola digressione}{160}{section*.145}%
+\contentsline {paragraph}{Teorema di Eulero}{160}{section*.146}%
+\contentsline {subsection}{\numberline {5.7}Algoritmi non deterministici}{160}{subsection.5.7}%
+\contentsline {paragraph}{Algoritmo non deterministico}{161}{section*.147}%
+\contentsline {paragraph}{Esempio algoritmo non deterministico per CNF-SAT}{162}{section*.148}%
+\contentsline {paragraph}{Esempio algoritmo non deterministico per HC}{162}{section*.149}%
+\contentsline {subsection}{\numberline {5.8}Tempo di calcolo di un algoritmo non deterministico}{162}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.9}Macchina di Turing non deterministica}{163}{subsection.5.9}%
+\contentsline {subsubsection}{\numberline {5.9.1}NDTM per riconoscere linguaggi e risolvere problemi di decisione}{164}{subsubsection.5.9.1}%
+\contentsline {paragraph}{Definizione}{164}{section*.150}%
+\contentsline {paragraph}{Definizione}{165}{section*.151}%
+\contentsline {paragraph}{Complessità in tempo non deterministica}{165}{section*.152}%
+\contentsline {paragraph}{Definizione}{165}{section*.153}%
+\contentsline {subsubsection}{\numberline {5.9.2}Classi di complessità non deterministiche}{165}{subsubsection.5.9.2}%
+\contentsline {subsubsection}{\numberline {5.9.3}Relazione tra P e NP}{166}{subsubsection.5.9.3}%
+\contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{166}{section*.154}%
+\contentsline {subsubsection}{\numberline {5.9.4}$NTIME(f(n))\subseteq DTIME(?)$}{167}{subsubsection.5.9.4}%
+\contentsline {paragraph}{Tornando alla questione $NP\subseteq P$ o $P=NP$?}{169}{section*.155}%
+\contentsline {paragraph}{Attenzione sulla notazione}{169}{section*.156}%
+\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{169}{subsubsection.5.9.5}%
+\contentsline {subsubsection}{\numberline {5.9.6}Relazioni di difficoltà (definizione formale)}{170}{subsubsection.5.9.6}%
+\contentsline {paragraph}{Riduzione polinomiale (definizione)}{170}{section*.157}%
+\contentsline {paragraph}{Teorema}{170}{section*.158}%
+\contentsline {subsubsection}{\numberline {5.9.7}Problemi NP-Completi}{171}{subsubsection.5.9.7}%
+\contentsline {paragraph}{Teorema fondamentale}{172}{section*.159}%
+\contentsline {paragraph}{Dimostrazione}{172}{section*.160}%
+\contentsline {paragraph}{CNF}{172}{section*.161}%
+\contentsline {paragraph}{HC}{172}{section*.162}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in NP-C$}{173}{section*.163}%
+\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{173}{subsubsection.5.9.8}%
+\contentsline {paragraph}{Riduzione in spazio logaritmico}{174}{section*.164}%
+\contentsline {paragraph}{Teorema}{174}{section*.165}%
+\contentsline {paragraph}{Dimostrazione del teorema}{174}{section*.166}%
+\contentsline {subsubsection}{\numberline {5.9.9}Problemi P-completi}{175}{subsubsection.5.9.9}%
+\contentsline {paragraph}{Teorema}{175}{section*.167}%
+\contentsline {paragraph}{Dimostrazione}{175}{section*.168}%
+\contentsline {paragraph}{Esempi di problemi P-completi}{176}{section*.169}%
+\contentsline {paragraph}{Nota interessante}{176}{section*.170}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{176}{section*.171}%
+\contentsline {subsection}{\numberline {5.10}Classi di complessità}{177}{subsection.5.10}%

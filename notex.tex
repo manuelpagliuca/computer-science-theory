@@ -2424,11 +2424,11 @@ $RICPRIM$ contiene molte funzioni e potrei già chiedermi se ho raggiunto $F(WHI
 che $RICPRIM\subseteq F(WHILE)$ per induzione strutturale. Vogliamo capire che tipo di relazione
 c'è tra la mia idea di calcolabilità matematica e informatica. Quello che mostreremo
 è che questa idea di calcolabilità matematica è inclusa all'interno di quella informatica.
-
+\newline\newline
 Ovvero che ogni funzione presente in $RICPRIM$ sia $WHILE$-programmabile, ovvero che sia
 possibile scrivere un programma $WHILE$ che la calcoli. Significa che siamo sulla strada
 giusta che ci stiamo muovendo su qualcosa di significativo.
-
+\newline\newline
 Possiamo notare che però in $RICPRIM$ sono presenti funzioni totali, ovvero che terminano,
 le funzioni non possono andare in loop, quindi l'inclusione dovrà essere per forza propria
 se dimostrata.
@@ -2444,7 +2444,6 @@ La dimostrazione seguirà i seguenti punti:
               \item Nient'altro è in $RICPRIM$
           \end{enumerate}
 \end{itemize}
-
 Quindi data questa definizione induttiva abbiamo dimostrato che $ELEM\subseteq F(WHILE)$,
 proseguirò sempre per induzione sui seguenti punti:
 \begin{itemize}
@@ -2453,7 +2452,6 @@ proseguirò sempre per induzione sui seguenti punti:
     \item Assumo per ipotesi induttiva che $g,h\in RICPRIM$ siano in $F(WHILE)$
           e dimostro che $RP(g,h)$ e $F(WHILE)$.
 \end{itemize}
-
 allora per induzione avrò dimostrato che le ricorsive primitive sono un sottoinsieme
 dell'insieme $WHILE$.
 
@@ -2501,7 +2499,6 @@ dell'insieme $WHILE$.
 Allora ho dimostrato che per induzione strutturale che la classe delle funzioni ricorsive primitive
 è all'interno delle funzioni $WHILE$
 $$RICPRIM\subseteq F(WHILE)$$
-
 A sto punto ci chiediamo se questo sotto insieme sia proprio oppure no. Questo però è facile
 da dimostrare, tutte le $RICPRIM$ sono funzioni totali:
 \begin{itemize}
@@ -2520,7 +2517,7 @@ Le $RICPRIM$ caratterizzano la potenza computazionale con un linguaggio più sem
 di quello WHILE, ovvero il $FOR$ language, questo come un \textit{for loop} del PASCAL dove è presente
 una variabile di controllo che scandisce le iterazioni, che parte da un certo valore
 e termina in un altro valore e che non può essere toccata nel FOR.
-
+\newline\newline
 Prendiamo tale $FOR$-language, e vediamo che le $RICPRIM$ sono esattamente la classe delle funzioni
 calcolate da questo linguaggio che ha un numero di iterazioni che è fissato e non
 potrà mai andare all'infinito (non stiamo considerando for loop del C/Java ma quello del PASCAL).
@@ -2532,12 +2529,12 @@ Ora effettuiamo un ulteriore considerazione, ipotizziamo di usare un linguaggio 
 che non possa andare in loop, quindi mi restringo ad una classe $\tilde{F}(WHILE)$
 di funzioni WHILE che non possono andare in loop. \textit{Adesso come sarà il
     confronto tra il $FOR$ language ed il $WHILE$ indebolito?} L'inclusione è propria?
-
+\newline
 Le $RICPRIM$ sono incluse propriamente nella classe delle funzioni $\tilde{F}(WHILE)$,
 questo è dimostrabile sia per diagonalizzazione che utilizzando la funzione di Ackermann.
 Una funzione di Ackermann (1928) è una funzione che non è ricorsiva primitiva ma
 può essere calcolata da un programma $WHILE$ che termina.
-
+\newline\newline
 Questa funzione sfrutta una doppia induzione, perché lo schema ricorsivo della funzione
 di Ackermann non è lo stesso di quello delle $RICPRIM$.
 
@@ -2754,14 +2751,13 @@ adesso vediamo la funzione stato prossimo per i comandi composti
 
     \item $C'\equiv\text{while }\;x_k\neq 0\text{ do }C$, consideriamo sempre per ipotesi
           induttiva che la funzione composta faccia parte delle ricorsive parziali $f_c\in\mathcal{P}$
-
           $$f_{c'}(x)=f_c^{e(x)}(x)\text{ con }e(x)=\mu y(Pro(k,f_c^y(x))=0)$$
           ovvero applichiamo il comando $C$ nello stato $x$ un numero $e$ di volte, tale per cui
           questo numero sia il più piccolo numero di volte che serve per azzerare la variabile $k$.
-
-          Inizio a notare qualcosa che m i piace, ci sono operazioni di minimizzazione e proiezione,
+\newline\newline
+          Inizio a notare qualcosa che mi piace, ci sono operazioni di minimizzazione e proiezione,
           questi sono costrutti ricorsivi parziali.
-
+\newline\newline
           Siamo attualmente tentati da dire che la semantica del $WHILE$ sia ricorsiva parziale, ma
           c'é qualcosa che non va. Ma questa composizione non è un costrutto ricorsivo parziale, questo
           perché questa composizione è parametrizzata rispetto ad $y$. Il nostro operatore $COMP$ è definito
@@ -2933,7 +2929,7 @@ quali siano le proprietà più auspicabili, consideriamo il sistema RAM:
           programma che esattamente lo stesso significato di $n$ dove $y$ è fissato su una delle variabili.
           Significa che per il sistema $RAM$ vale il teorema $S_1^1$: Dato il sistema $RAM$ $\{\varphi_i\}$,
           esiste una funzione $S_1^1\in\mathcal{T}$ tale che $\forall n,x,y\in\mathbb{N}$:
-          $$\varphi_n\left(\langle x,n\rangle\right)=\varphi_{S_1^1(n,y)}(x)$$
+          $$\varphi_n\left(\langle x,y\rangle\right)=\varphi_{S_1^1(n,y)}(x)$$
           Anche il teorema $S_1^1$ è una proprietà auspicabile, per le stesse ragioni per cui mi piacerebbe
           un interprete universale, perché sono in grado di avere un algebra dei programmi che mi permetta di
           prendere un programma e restringerlo sul dominio degli input.
@@ -2952,7 +2948,7 @@ definito accettabile se:
 \begin{enumerate}
     \item aderisce alla testi di Church-turing.$$\{\varphi_i\}=\mathcal{P}$$
     \item esiste un interprete universale.$$\exists u\in\mathbb{N}:\varphi_u\left(\langle x,n\right)=\varphi_n(x)$$
-    \item se vale il teorema $S_n^m$.$$\exists S_n^m\in\mathcal{T}:\forall k\in\mathbb{N},\underline{x}\in\mathbb{N}^m,\underline{y}\in\mathbb{N}^n\text{ vale }\varphi_n\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_n^m(k,\underline{y})(\langle\underline{x}\rangle)}$$
+    \item se vale il teorema $S_n^m$.$$\exists S_n^m\in\mathcal{T}:\forall k\in\mathbb{N},\underline{x}\in\mathbb{N}^m,\underline{y}\in\mathbb{N}^n\text{ vale }\varphi_k\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_n^m(k,\underline{y}) (\langle\underline{x}\rangle)}$$
 \end{enumerate}
 Questi non sono assiomi restrittivi, il rischio è che la serie di assiomi individuano pochi oggetti
 perché sono molto restrittivi, in realtà tutti i linguaggi di programmazione che abbiamo
