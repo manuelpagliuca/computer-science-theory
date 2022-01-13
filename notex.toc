@@ -139,158 +139,158 @@
 \contentsline {paragraph}{Eulerian circuit}{95}{section*.79}%
 \contentsline {subsubsection}{\numberline {4.4.2}Esistono problemi indecidibili?}{95}{subsubsection.4.4.2}%
 \contentsline {paragraph}{Dimostrazione per assurdo}{96}{section*.80}%
-\contentsline {subsubsection}{\numberline {4.4.3}Il problema generale dell'arresto}{97}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.3}Il problema generale dell'arresto}{98}{subsubsection.4.4.3}%
 \contentsline {paragraph}{Dimostrazione per assurdo}{98}{section*.81}%
 \contentsline {subsection}{\numberline {4.5}Riconoscibilità automatica di insiemi}{98}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Insiemi ricorsivi}{98}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.1}Insiemi ricorsivi}{99}{subsubsection.4.5.1}%
 \contentsline {subsubsection}{\numberline {4.5.2}Ricorsivo vs Decidibile}{99}{subsubsection.4.5.2}%
 \contentsline {paragraph}{Esempi di insiemi ricorsivi}{100}{section*.82}%
-\contentsline {subsubsection}{\numberline {4.5.3}Esistono insiemi non ricorsivi?}{100}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.3}Esistono insiemi non ricorsivi?}{101}{subsubsection.4.5.3}%
 \contentsline {subsubsection}{\numberline {4.5.4}Relazioni ricorsive}{101}{subsubsection.4.5.4}%
-\contentsline {paragraph}{Esempio}{101}{section*.83}%
+\contentsline {paragraph}{Esempio}{102}{section*.83}%
 \contentsline {paragraph}{Importante relazione ricorsiva}{102}{section*.84}%
-\contentsline {paragraph}{Ancora sull'insime dell'arresto $A$}{102}{section*.85}%
+\contentsline {paragraph}{Ancora sull'insieme dell'arresto $A$}{103}{section*.85}%
 \contentsline {subsubsection}{\numberline {4.5.5}Insiemi ricorsivamente numerabili}{103}{subsubsection.4.5.5}%
 \contentsline {paragraph}{Definizione formale}{104}{section*.86}%
 \contentsline {subsubsection}{\numberline {4.5.6}Caratteristiche insiemi ricorsivamente numerabili}{105}{subsubsection.4.5.6}%
 \contentsline {paragraph}{Teorema}{105}{section*.87}%
 \contentsline {paragraph}{Dimostrazione}{105}{section*.88}%
-\contentsline {paragraph}{$1\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}2$}{105}{section*.89}%
+\contentsline {paragraph}{$1\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}2$}{106}{section*.89}%
 \contentsline {paragraph}{$2\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}3$}{106}{section*.90}%
-\contentsline {paragraph}{$3\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}1$}{106}{section*.91}%
-\contentsline {subsubsection}{\numberline {4.5.7}Un insieme ricorsivamente numerabile}{107}{subsubsection.4.5.7}%
-\contentsline {subsubsection}{\numberline {4.5.8}Ricorsivi vs Ricorsivi enumerabili}{108}{subsubsection.4.5.8}%
+\contentsline {paragraph}{$3\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Relbar \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}1$}{107}{section*.91}%
+\contentsline {subsubsection}{\numberline {4.5.7}Un insieme ricorsivamente numerabile}{108}{subsubsection.4.5.7}%
+\contentsline {subsubsection}{\numberline {4.5.8}Ricorsivi vs Ricorsivi enumerabili}{109}{subsubsection.4.5.8}%
 \contentsline {paragraph}{Teorema}{109}{section*.92}%
 \contentsline {subsubsection}{\numberline {4.5.9}Complemento dell'insieme dell'arresto $A=\{x:\varphi _x(x)\downarrow \}$}{111}{subsubsection.4.5.9}%
-\contentsline {paragraph}{Teorema}{111}{section*.93}%
-\contentsline {paragraph}{Dimostrazione informale del teorema}{111}{section*.94}%
+\contentsline {paragraph}{Teorema}{112}{section*.93}%
+\contentsline {paragraph}{Dimostrazione informale del teorema}{112}{section*.94}%
 \contentsline {paragraph}{Dimostrazione formale del teorema}{112}{section*.95}%
 \contentsline {paragraph}{Situazione finale}{113}{section*.96}%
-\contentsline {subsubsection}{\numberline {4.5.10}Proprietà di chiusura degli insiemi ricorsivamente numerabili}{113}{subsubsection.4.5.10}%
-\contentsline {paragraph}{Dimostrazione}{113}{section*.97}%
-\contentsline {subsubsection}{\numberline {4.5.11}Il teorema di Rice}{114}{subsubsection.4.5.11}%
+\contentsline {subsubsection}{\numberline {4.5.10}Proprietà di chiusura degli insiemi ricorsivamente numerabili}{114}{subsubsection.4.5.10}%
+\contentsline {paragraph}{Dimostrazione}{114}{section*.97}%
+\contentsline {subsubsection}{\numberline {4.5.11}Il teorema di Rice}{115}{subsubsection.4.5.11}%
 \contentsline {paragraph}{Esempio}{115}{section*.98}%
 \contentsline {paragraph}{Dimostrazione}{115}{section*.99}%
 \contentsline {subsubsection}{\numberline {4.5.12}Mostrare che un insieme non è ricorsivo}{116}{subsubsection.4.5.12}%
-\contentsline {paragraph}{Esempio di insieme non ricorsivo}{116}{section*.100}%
-\contentsline {subsubsection}{\numberline {4.5.13}Teorema di Rice e verifica automatica del SW}{116}{subsubsection.4.5.13}%
+\contentsline {paragraph}{Esempio di insieme non ricorsivo}{117}{section*.100}%
+\contentsline {subsubsection}{\numberline {4.5.13}Teorema di Rice e verifica automatica del SW}{117}{subsubsection.4.5.13}%
 \contentsline {paragraph}{Problema}{117}{section*.101}%
-\contentsline {paragraph}{}{117}{section*.102}%
-\contentsline {section}{\numberline {5}Teoria della complessità}{118}{section.5}%
-\contentsline {paragraph}{Alcune domande nella teoria della complessità}{118}{section*.103}%
-\contentsline {subsection}{\numberline {5.1}Risorse computazionali}{119}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Richiami di teoria di linguaggi formali}{119}{subsubsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.2}Macchina di Turing (DTM)}{120}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Passo di computazione: mossa}{121}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Funzionamento di una DTM (informale)}{121}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Definizione formale di DTM}{122}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}Funzionamento di una DTM (formale)}{123}{subsubsection.5.2.4}%
-\contentsline {paragraph}{Fase di inizializzazione}{123}{section*.104}%
-\contentsline {paragraph}{Fase di computazione}{123}{section*.105}%
-\contentsline {subsubsection}{\numberline {5.2.5}Configurazioni di DTM}{124}{subsubsection.5.2.5}%
-\contentsline {paragraph}{Configurazione iniziale di $M$ su input $x\in \Sigma ^*$}{124}{section*.106}%
-\contentsline {paragraph}{Configurazione accettante}{124}{section*.107}%
-\contentsline {paragraph}{Configurazione di arresto}{124}{section*.108}%
-\contentsline {paragraph}{Computazione di $M$ su $x\in \Sigma ^*$}{124}{section*.109}%
-\contentsline {paragraph}{$M$ accetta $x\in \Sigma ^*$ se solo se}{125}{section*.110}%
-\contentsline {paragraph}{Linguaggio accettato da $M$}{125}{section*.111}%
-\contentsline {subsubsection}{\numberline {5.2.6}Alcune digressioni}{125}{subsubsection.5.2.6}%
-\contentsline {subsubsection}{\numberline {5.2.7}Funzionalità di una DTM}{127}{subsubsection.5.2.7}%
-\contentsline {paragraph}{DTM per riconoscere insiemi}{127}{section*.112}%
-\contentsline {paragraph}{Attenzione}{128}{section*.113}%
-\contentsline {subsubsection}{\numberline {5.2.8}Potenza di riconoscimento degli insiemi su DTM}{128}{subsubsection.5.2.8}%
-\contentsline {paragraph}{Teorema}{128}{section*.114}%
-\contentsline {paragraph}{Definizione}{128}{section*.115}%
-\contentsline {paragraph}{Teorema}{128}{section*.116}%
-\contentsline {subsubsection}{\numberline {5.2.9}DTM per risolvere problemi di decisione}{128}{subsubsection.5.2.9}%
-\contentsline {paragraph}{Esempio}{129}{section*.117}%
-\contentsline {subsubsection}{\numberline {5.2.10}Algoritmo deterministico per parità}{129}{subsubsection.5.2.10}%
-\contentsline {subsubsection}{\numberline {5.2.11}Specificare DTM}{131}{subsubsection.5.2.11}%
-\contentsline {paragraph}{Note}{132}{section*.118}%
-\contentsline {subsubsection}{\numberline {5.2.12}Calcolare funzioni su una DTM}{132}{subsubsection.5.2.12}%
-\contentsline {paragraph}{Tesi di Church-Turing}{132}{section*.119}%
-\contentsline {subsection}{\numberline {5.3}Complessità in tempo}{133}{subsection.5.3}%
-\contentsline {paragraph}{Tempo di calcolo di $M$ su input $x\in \Sigma ^*$}{133}{section*.120}%
-\contentsline {paragraph}{Complessità in tempo di $M$ (worst case)}{133}{section*.121}%
-\contentsline {paragraph}{Esempio di complessità in tempo}{133}{section*.122}%
-\contentsline {subsubsection}{\numberline {5.3.1}Linguaggi, insiemi e problemi di decisione}{134}{subsubsection.5.3.1}%
-\contentsline {paragraph}{Esempio di complessità in tempo}{134}{section*.123}%
-\contentsline {paragraph}{Un altro esempio: Palindrome}{134}{section*.124}%
-\contentsline {subsubsection}{\numberline {5.3.2}Crescita aritmetica}{136}{subsubsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.3}Simboli di Landau}{137}{subsubsection.5.3.3}%
-\contentsline {paragraph}{Alcuni semplici fatti}{138}{section*.125}%
-\contentsline {subsubsection}{\numberline {5.3.4}Classificazioni di funzioni}{138}{subsubsection.5.3.4}%
-\contentsline {subsubsection}{\numberline {5.3.5}Classi di complessità in tempo}{139}{subsubsection.5.3.5}%
-\contentsline {subsubsection}{\numberline {5.3.6}Polinomiale sinonimo di efficiente in tempo}{140}{subsubsection.5.3.6}%
-\contentsline {paragraph}{Motivi pratici}{140}{section*.126}%
-\contentsline {paragraph}{Motivi composizionali}{140}{section*.127}%
-\contentsline {paragraph}{Motivi di robustezza}{141}{section*.128}%
-\contentsline {subsubsection}{\numberline {5.3.7}Tesi di Church-Turing estesa}{142}{subsubsection.5.3.7}%
-\contentsline {paragraph}{Esempi di problemi risolti efficientemente in tempo}{142}{section*.129}%
-\contentsline {subsubsection}{\numberline {5.3.8}Alcune riflessioni: Teoria vs Pratica}{142}{subsubsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.4}Complessità in spazio}{144}{subsection.5.4}%
-\contentsline {paragraph}{Nozione fedele di spazio di calcolo}{146}{section*.130}%
-\contentsline {paragraph}{Complessità in spazio di $M$ (worst-case)}{146}{section*.131}%
-\contentsline {subsubsection}{\numberline {5.4.1}Complessità in spazio di linguaggi}{146}{subsubsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Spazio di calcolo delle funzioni}{146}{subsubsection.5.4.2}%
-\contentsline {paragraph}{Definizione}{147}{section*.132}%
-\contentsline {paragraph}{Definizione}{147}{section*.133}%
-\contentsline {subsubsection}{\numberline {5.4.3}Classi di complessità in spazio}{148}{subsubsection.5.4.3}%
-\contentsline {paragraph}{Esempio di calcolo di complessità in spazio}{148}{section*.134}%
-\contentsline {paragraph}{Altro esempio: Palindrome}{149}{section*.135}%
-\contentsline {subsubsection}{\numberline {5.4.4}Efficienza in termini di spazio}{151}{subsubsection.5.4.4}%
-\contentsline {paragraph}{Perché logaritmico è efficiente in termini di spazio?}{151}{section*.136}%
-\contentsline {paragraph}{Motividi composizionali}{152}{section*.137}%
-\contentsline {paragraph}{Motividi di robustezza}{152}{section*.138}%
-\contentsline {subsubsection}{\numberline {5.4.5}Tesi di Church-Turing estesa per lo spazio}{152}{subsubsection.5.4.5}%
-\contentsline {paragraph}{Esempi di problemi efficienti in spazio}{152}{section*.139}%
-\contentsline {subsection}{\numberline {5.5}Tempo vs Spazio}{152}{subsection.5.5}%
-\contentsline {paragraph}{Teorema I}{153}{section*.140}%
-\contentsline {paragraph}{Teorema II}{153}{section*.141}%
-\contentsline {paragraph}{È vero anche il contrario?}{153}{section*.142}%
-\contentsline {subsubsection}{\numberline {5.5.1}Efficienza in spazio vs efficienza in tempo}{155}{subsubsection.5.5.1}%
-\contentsline {paragraph}{Teoremi/Proprietà}{155}{section*.143}%
-\contentsline {paragraph}{Teorema}{156}{section*.144}%
-\contentsline {subsection}{\numberline {5.6}Zona grigia e non determinismo}{156}{subsection.5.6}%
-\contentsline {subsubsection}{\numberline {5.6.1}Problema della soddisfacibilità booleana}{157}{subsubsection.5.6.1}%
-\contentsline {subsubsection}{\numberline {5.6.2}Circuiti Hamiltoniani}{158}{subsubsection.5.6.2}%
-\contentsline {paragraph}{Piccola digressione}{160}{section*.145}%
-\contentsline {paragraph}{Teorema di Eulero}{160}{section*.146}%
-\contentsline {subsection}{\numberline {5.7}Algoritmi non deterministici}{160}{subsection.5.7}%
-\contentsline {paragraph}{Algoritmo non deterministico}{161}{section*.147}%
-\contentsline {paragraph}{Esempio algoritmo non deterministico per CNF-SAT}{162}{section*.148}%
-\contentsline {paragraph}{Esempio algoritmo non deterministico per HC}{162}{section*.149}%
-\contentsline {subsection}{\numberline {5.8}Tempo di calcolo di un algoritmo non deterministico}{162}{subsection.5.8}%
-\contentsline {subsection}{\numberline {5.9}Macchina di Turing non deterministica}{163}{subsection.5.9}%
-\contentsline {subsubsection}{\numberline {5.9.1}NDTM per riconoscere linguaggi e risolvere problemi di decisione}{164}{subsubsection.5.9.1}%
-\contentsline {paragraph}{Definizione}{164}{section*.150}%
-\contentsline {paragraph}{Definizione}{165}{section*.151}%
-\contentsline {paragraph}{Complessità in tempo non deterministica}{165}{section*.152}%
-\contentsline {paragraph}{Definizione}{165}{section*.153}%
-\contentsline {subsubsection}{\numberline {5.9.2}Classi di complessità non deterministiche}{165}{subsubsection.5.9.2}%
-\contentsline {subsubsection}{\numberline {5.9.3}Relazione tra P e NP}{166}{subsubsection.5.9.3}%
-\contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{166}{section*.154}%
-\contentsline {subsubsection}{\numberline {5.9.4}$NTIME(f(n))\subseteq DTIME(?)$}{167}{subsubsection.5.9.4}%
-\contentsline {paragraph}{Tornando alla questione $NP\subseteq P$ o $P=NP$?}{169}{section*.155}%
-\contentsline {paragraph}{Attenzione sulla notazione}{169}{section*.156}%
-\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{169}{subsubsection.5.9.5}%
-\contentsline {subsubsection}{\numberline {5.9.6}Relazioni di difficoltà (definizione formale)}{170}{subsubsection.5.9.6}%
-\contentsline {paragraph}{Riduzione polinomiale (definizione)}{170}{section*.157}%
-\contentsline {paragraph}{Teorema}{170}{section*.158}%
-\contentsline {subsubsection}{\numberline {5.9.7}Problemi NP-Completi}{171}{subsubsection.5.9.7}%
-\contentsline {paragraph}{Teorema fondamentale}{172}{section*.159}%
-\contentsline {paragraph}{Dimostrazione}{172}{section*.160}%
-\contentsline {paragraph}{CNF}{172}{section*.161}%
-\contentsline {paragraph}{HC}{172}{section*.162}%
-\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in NP-C$}{173}{section*.163}%
-\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{173}{subsubsection.5.9.8}%
-\contentsline {paragraph}{Riduzione in spazio logaritmico}{174}{section*.164}%
-\contentsline {paragraph}{Teorema}{174}{section*.165}%
-\contentsline {paragraph}{Dimostrazione del teorema}{174}{section*.166}%
-\contentsline {subsubsection}{\numberline {5.9.9}Problemi P-completi}{175}{subsubsection.5.9.9}%
-\contentsline {paragraph}{Teorema}{175}{section*.167}%
-\contentsline {paragraph}{Dimostrazione}{175}{section*.168}%
-\contentsline {paragraph}{Esempi di problemi P-completi}{176}{section*.169}%
-\contentsline {paragraph}{Nota interessante}{176}{section*.170}%
-\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{176}{section*.171}%
-\contentsline {subsection}{\numberline {5.10}Classi di complessità}{177}{subsection.5.10}%
+\contentsline {paragraph}{}{118}{section*.102}%
+\contentsline {section}{\numberline {5}Teoria della complessità}{119}{section.5}%
+\contentsline {paragraph}{Alcune domande nella teoria della complessità}{119}{section*.103}%
+\contentsline {subsection}{\numberline {5.1}Risorse computazionali}{120}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Richiami di teoria di linguaggi formali}{120}{subsubsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.2}Macchina di Turing (DTM)}{121}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Passo di computazione: mossa}{122}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Funzionamento di una DTM (informale)}{122}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Definizione formale di DTM}{123}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Funzionamento di una DTM (formale)}{124}{subsubsection.5.2.4}%
+\contentsline {paragraph}{Fase di inizializzazione}{124}{section*.104}%
+\contentsline {paragraph}{Fase di computazione}{124}{section*.105}%
+\contentsline {subsubsection}{\numberline {5.2.5}Configurazioni di DTM}{125}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Configurazione iniziale di $M$ su input $x\in \Sigma ^*$}{125}{section*.106}%
+\contentsline {paragraph}{Configurazione accettante}{125}{section*.107}%
+\contentsline {paragraph}{Configurazione di arresto}{125}{section*.108}%
+\contentsline {paragraph}{Computazione di $M$ su $x\in \Sigma ^*$}{125}{section*.109}%
+\contentsline {paragraph}{$M$ accetta $x\in \Sigma ^*$ se solo se}{126}{section*.110}%
+\contentsline {paragraph}{Linguaggio accettato da $M$}{126}{section*.111}%
+\contentsline {subsubsection}{\numberline {5.2.6}Alcune digressioni}{126}{subsubsection.5.2.6}%
+\contentsline {subsubsection}{\numberline {5.2.7}Funzionalità di una DTM}{128}{subsubsection.5.2.7}%
+\contentsline {paragraph}{DTM per riconoscere insiemi}{128}{section*.112}%
+\contentsline {paragraph}{Attenzione}{129}{section*.113}%
+\contentsline {subsubsection}{\numberline {5.2.8}Potenza di riconoscimento degli insiemi su DTM}{129}{subsubsection.5.2.8}%
+\contentsline {paragraph}{Teorema}{129}{section*.114}%
+\contentsline {paragraph}{Definizione}{129}{section*.115}%
+\contentsline {paragraph}{Teorema}{129}{section*.116}%
+\contentsline {subsubsection}{\numberline {5.2.9}DTM per risolvere problemi di decisione}{129}{subsubsection.5.2.9}%
+\contentsline {paragraph}{Esempio}{130}{section*.117}%
+\contentsline {subsubsection}{\numberline {5.2.10}Algoritmo deterministico per parità}{130}{subsubsection.5.2.10}%
+\contentsline {subsubsection}{\numberline {5.2.11}Specificare DTM}{132}{subsubsection.5.2.11}%
+\contentsline {paragraph}{Note}{133}{section*.118}%
+\contentsline {subsubsection}{\numberline {5.2.12}Calcolare funzioni su una DTM}{133}{subsubsection.5.2.12}%
+\contentsline {paragraph}{Tesi di Church-Turing}{133}{section*.119}%
+\contentsline {subsection}{\numberline {5.3}Complessità in tempo}{134}{subsection.5.3}%
+\contentsline {paragraph}{Tempo di calcolo di $M$ su input $x\in \Sigma ^*$}{134}{section*.120}%
+\contentsline {paragraph}{Complessità in tempo di $M$ (worst case)}{134}{section*.121}%
+\contentsline {paragraph}{Esempio di complessità in tempo}{134}{section*.122}%
+\contentsline {subsubsection}{\numberline {5.3.1}Linguaggi, insiemi e problemi di decisione}{135}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Esempio di complessità in tempo}{135}{section*.123}%
+\contentsline {paragraph}{Un altro esempio: Palindrome}{135}{section*.124}%
+\contentsline {subsubsection}{\numberline {5.3.2}Crescita aritmetica}{137}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Simboli di Landau}{138}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Alcuni semplici fatti}{139}{section*.125}%
+\contentsline {subsubsection}{\numberline {5.3.4}Classificazioni di funzioni}{139}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Classi di complessità in tempo}{140}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.6}Polinomiale sinonimo di efficiente in tempo}{141}{subsubsection.5.3.6}%
+\contentsline {paragraph}{Motivi pratici}{141}{section*.126}%
+\contentsline {paragraph}{Motivi composizionali}{141}{section*.127}%
+\contentsline {paragraph}{Motivi di robustezza}{142}{section*.128}%
+\contentsline {subsubsection}{\numberline {5.3.7}Tesi di Church-Turing estesa}{143}{subsubsection.5.3.7}%
+\contentsline {paragraph}{Esempi di problemi risolti efficientemente in tempo}{143}{section*.129}%
+\contentsline {subsubsection}{\numberline {5.3.8}Alcune riflessioni: Teoria vs Pratica}{143}{subsubsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.4}Complessità in spazio}{145}{subsection.5.4}%
+\contentsline {paragraph}{Nozione fedele di spazio di calcolo}{147}{section*.130}%
+\contentsline {paragraph}{Complessità in spazio di $M$ (worst-case)}{147}{section*.131}%
+\contentsline {subsubsection}{\numberline {5.4.1}Complessità in spazio di linguaggi}{147}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Spazio di calcolo delle funzioni}{147}{subsubsection.5.4.2}%
+\contentsline {paragraph}{Definizione}{148}{section*.132}%
+\contentsline {paragraph}{Definizione}{148}{section*.133}%
+\contentsline {subsubsection}{\numberline {5.4.3}Classi di complessità in spazio}{149}{subsubsection.5.4.3}%
+\contentsline {paragraph}{Esempio di calcolo di complessità in spazio}{149}{section*.134}%
+\contentsline {paragraph}{Altro esempio: Palindrome}{150}{section*.135}%
+\contentsline {subsubsection}{\numberline {5.4.4}Efficienza in termini di spazio}{152}{subsubsection.5.4.4}%
+\contentsline {paragraph}{Perché logaritmico è efficiente in termini di spazio?}{152}{section*.136}%
+\contentsline {paragraph}{Motividi composizionali}{153}{section*.137}%
+\contentsline {paragraph}{Motividi di robustezza}{153}{section*.138}%
+\contentsline {subsubsection}{\numberline {5.4.5}Tesi di Church-Turing estesa per lo spazio}{153}{subsubsection.5.4.5}%
+\contentsline {paragraph}{Esempi di problemi efficienti in spazio}{153}{section*.139}%
+\contentsline {subsection}{\numberline {5.5}Tempo vs Spazio}{153}{subsection.5.5}%
+\contentsline {paragraph}{Teorema I}{154}{section*.140}%
+\contentsline {paragraph}{Teorema II}{154}{section*.141}%
+\contentsline {paragraph}{È vero anche il contrario?}{154}{section*.142}%
+\contentsline {subsubsection}{\numberline {5.5.1}Efficienza in spazio vs efficienza in tempo}{156}{subsubsection.5.5.1}%
+\contentsline {paragraph}{Teoremi/Proprietà}{156}{section*.143}%
+\contentsline {paragraph}{Teorema}{157}{section*.144}%
+\contentsline {subsection}{\numberline {5.6}Zona grigia e non determinismo}{157}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Problema della soddisfacibilità booleana}{158}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}Circuiti Hamiltoniani}{159}{subsubsection.5.6.2}%
+\contentsline {paragraph}{Piccola digressione}{161}{section*.145}%
+\contentsline {paragraph}{Teorema di Eulero}{161}{section*.146}%
+\contentsline {subsection}{\numberline {5.7}Algoritmi non deterministici}{161}{subsection.5.7}%
+\contentsline {paragraph}{Algoritmo non deterministico}{162}{section*.147}%
+\contentsline {paragraph}{Esempio algoritmo non deterministico per CNF-SAT}{163}{section*.148}%
+\contentsline {paragraph}{Esempio algoritmo non deterministico per HC}{163}{section*.149}%
+\contentsline {subsection}{\numberline {5.8}Tempo di calcolo di un algoritmo non deterministico}{163}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.9}Macchina di Turing non deterministica}{164}{subsection.5.9}%
+\contentsline {subsubsection}{\numberline {5.9.1}NDTM per riconoscere linguaggi e risolvere problemi di decisione}{165}{subsubsection.5.9.1}%
+\contentsline {paragraph}{Definizione}{165}{section*.150}%
+\contentsline {paragraph}{Definizione}{166}{section*.151}%
+\contentsline {paragraph}{Complessità in tempo non deterministica}{166}{section*.152}%
+\contentsline {paragraph}{Definizione}{166}{section*.153}%
+\contentsline {subsubsection}{\numberline {5.9.2}Classi di complessità non deterministiche}{166}{subsubsection.5.9.2}%
+\contentsline {subsubsection}{\numberline {5.9.3}Relazione tra P e NP}{167}{subsubsection.5.9.3}%
+\contentsline {paragraph}{Dimostrazione $P\subseteq NP$}{167}{section*.154}%
+\contentsline {subsubsection}{\numberline {5.9.4}$NTIME(f(n))\subseteq DTIME(?)$}{168}{subsubsection.5.9.4}%
+\contentsline {paragraph}{Tornando alla questione $NP\subseteq P$ o $P=NP$?}{170}{section*.155}%
+\contentsline {paragraph}{Attenzione sulla notazione}{170}{section*.156}%
+\contentsline {subsubsection}{\numberline {5.9.5}Rimane il problema aperto $P=NP$ o $NP\subseteq P$}{170}{subsubsection.5.9.5}%
+\contentsline {subsubsection}{\numberline {5.9.6}Relazioni di difficoltà (definizione formale)}{171}{subsubsection.5.9.6}%
+\contentsline {paragraph}{Riduzione polinomiale (definizione)}{171}{section*.157}%
+\contentsline {paragraph}{Teorema}{171}{section*.158}%
+\contentsline {subsubsection}{\numberline {5.9.7}Problemi NP-Completi}{172}{subsubsection.5.9.7}%
+\contentsline {paragraph}{Teorema fondamentale}{173}{section*.159}%
+\contentsline {paragraph}{Dimostrazione}{173}{section*.160}%
+\contentsline {paragraph}{CNF}{173}{section*.161}%
+\contentsline {paragraph}{HC}{173}{section*.162}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in NP-C$}{174}{section*.163}%
+\contentsline {subsubsection}{\numberline {5.9.8}$P\subseteq L?$}{174}{subsubsection.5.9.8}%
+\contentsline {paragraph}{Riduzione in spazio logaritmico}{175}{section*.164}%
+\contentsline {paragraph}{Teorema}{175}{section*.165}%
+\contentsline {paragraph}{Dimostrazione del teorema}{175}{section*.166}%
+\contentsline {subsubsection}{\numberline {5.9.9}Problemi P-completi}{176}{subsubsection.5.9.9}%
+\contentsline {paragraph}{Teorema}{176}{section*.167}%
+\contentsline {paragraph}{Dimostrazione}{176}{section*.168}%
+\contentsline {paragraph}{Esempi di problemi P-completi}{177}{section*.169}%
+\contentsline {paragraph}{Nota interessante}{177}{section*.170}%
+\contentsline {paragraph}{Un ottima tecnica per mostrare che $\pi \in $ P-C}{177}{section*.171}%
+\contentsline {subsection}{\numberline {5.10}Classi di complessità}{178}{subsection.5.10}%
