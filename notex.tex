@@ -2941,7 +2941,6 @@ quali siano le proprietà più auspicabili, consideriamo il sistema RAM:
           $$\varphi_k\left(\langle\underline{x},\underline{y}\rangle\right)=\varphi_{S_n^m(k,\underline{y})}\left(\langle\underline{x}\rangle\right)$$
           La dimostrazione è una semplice generalizzazione di quella fornita per il teorema $S_1^1$.
 \end{enumerate}
-
 Queste sono le tre proprietà auspicabili di un sistema di programmazione per prenderlo da un punto
 di vista teorico. Questi vengono chiamati tre assiomi di Rogers (1959), un sistema di programmazione viene
 definito accettabile se:
@@ -3039,14 +3038,14 @@ di un filosofo americano W.Quine che aveva studiato nell'ambito della logica del
 parlavano di se stesse.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{images/python.png}
+    \includegraphics[scale=0.35]{images/python.png}
     \caption{Programma Quine in Python}
 \end{figure}
 Nel caso di linguaggi di programmazione come C, C++,Java, Python, SQL, PHP, \dots
 Il fatto che ci siano così tanti casi positivi per così molti linguaggi ci da una sensazione
 che la risposta generalmente sia si, ma noi vogliamo una dimostrazione astratta, generale e
 formale di ciò.
-
+\newline\newline
 Per fissare un contesto più matematico possiamo per esempio ambientare questa domanda nel
 sistema di programmazione RAM dove sappiamo che tutti i programmi possono essere rappresentati
 da dei numeri, allora posso rappresentare il quesito con questa domanda:
@@ -3080,7 +3079,7 @@ $$\exists n\in\mathbb{N}:\varphi_n=\varphi_{t(n)}$$
 ovvero, esisterà un programma la cui semantica non subirà alcuna trasformazione applicata dalla funzione
 $t$. Prendiamo $t$ (la funzione trasformazione dei programmi), qualsiasi sia la trasformazione esisterà
 almeno un programma che non sarà intaccato da questa trasformazione (qualsiasi trasformazione essa sia).
-
+\newline\newline
 Grazie al teorema di ricorsione riusciamo a rispondere ai precedenti due requisiti (vedremo
 dopo la dimostrazione):
 \begin{itemize}
@@ -3091,7 +3090,8 @@ dopo la dimostrazione):
               \includegraphics[scale=0.5]{images/P_teoremaric.png}
           \end{figure}
           Notiamo che è un programma che se ne frega, \textit{quale è la semantica di questo
-              programma?} (in $RAM$: $\exists j\in\mathbb{N}:\varphi_j(x)=j?$) Notiamo che il programma mette $j$ nel registro, quindi è $j$.
+              programma?} (in $RAM$: $\exists j\in\mathbb{N}:\varphi_j(x)=j?$). Notiamo che il programma mette $j$
+          nel registro, quindi è $j$.
           In poche parole la codifica di questo programma è la lista di Cantor $\langle0,0,\dots, 0\rangle$
           ovvero una funzione $Z(j)\in\mathcal{T}$ che mette $j$ volte lo 0 in lista di Cantor. Ovviamente
           questa è una funzione ricorsiva totale sempre definita su $j$.
@@ -3107,7 +3107,7 @@ dopo la dimostrazione):
           e restituisca un programma fallato nel linguaggio del s.p.a. $\Psi_i$, $t(i)$.
           Consideriamo la semantica del programma maltrattato, descriviamola utilizzando
           i tre assiomi fondamentali (enumerati per applicazione nell'equazione):
-          $$\Psi_{t(i)}(x)\overset{(2)}{=}\Psi_u(x,t(i))\overset{(1)}{=}\varphi_e(x,t(i))\overset{(3)}{=}\varphi_{S_1^1(e,t(i))}(x)$$
+          $$\Psi_{t(i)}(x)\overset{(2)}{=}\Psi_u(x,t(i))\overset{(1)}{=}\varphi_e(x,t(i))\overset{(3)}{=}\varphi_{S_1^1(e,t(i))}(x)=\varphi_{g(i)}(x)$$
           La funzione $S_1^1$ dipende solamente da una variabile, perché la $e$ è fissata, in più è
           una funzione ricorsiva totale questo perché anche $t(i)\in\mathcal{T}$ (e la stessa $S_1^1$ è per
           il terzo assioma). Quindi in realtà lei è una funzione
@@ -3167,7 +3167,7 @@ $$\varphi_{t(n)}(x)=\varphi_{t(S_1^1(e,m))}(x)=\varphi_{\varphi_m(m)}(x)$$
 Ma entrambe sono la stessa cosa, allora $\varphi_n=\varphi_{t(n)}$
 
 \paragraph{Conseguenze}\mbox{}\\
-Esistono sempre dei Quine negli s.p.a. e non è possibile progettare compilatori completamente
+Poiché esistono sempre dei Quine negli s.p.a. e non è possibile progettare compilatori completamente
 errati. Ovvero, almeno in un caso su tutti i programmi possibili il programma viene compilato
 correttamente.
 
