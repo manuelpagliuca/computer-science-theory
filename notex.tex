@@ -55,13 +55,14 @@
 \SetKwRepeat{Do}{do}{while}
 
 \title{%
-  \textbf{Informatica Teorica}\\
+  \textbf{Informatica Teorica}
+  \\[1cm]
+  \includegraphics[scale=0.12]{images/Logo_Università_degli_Studi_di_Milano.svg.png}~
+  \\[1cm]
   \large Prof. Mereghetti Carlo\\
     Università degli Studi di Milano\\
     Laurea Magistrale in Informatica, A.A. 2020/2021}
-
-
-    \author{Appunti di Manuel Pagliuca}
+    \author{Appunti a cura di Manuel Pagliuca}
 
 \begin{document}
 \maketitle
@@ -4223,7 +4224,7 @@ teorema di Rice vale.
 Esistono tre tappe per dimostrare che un insieme $A$ non sia ricorsivo, Rice ci dice di:
 \begin{enumerate}
     \item Dimostrare che $A$ rispetta le funzioni.
-    \item Dimostrare che $A=\emptyset$ e $A=\mathbb{N}$, ovvero che non sia un insieme banale.
+    \item Dimostrare che $A\neq\emptyset$ e $A\neq\mathbb{N}$, ovvero che non sia un insieme banale.
     \item Se ottenuti i punti precedenti allora grazie al teorema di Rice si può concludere che
           $A$ non è ricorsivo.
 \end{enumerate}
@@ -4249,7 +4250,7 @@ Il teorema di Rice dice che la correttezza dei programmi non può essere verific
 automaticamente, ovvero attraverso dei programmi. Abbiamo un problema, solitamente
 vogliamo costruire un programma che risolve quel problema, quel problema solamente
 è dato attraverso le sue \textbf{specifiche}.
-
+\newline\newline
 Un programma è \textbf{corretto} se quel programma risponde a quelle specifiche.
 
 \paragraph{Problema}\mbox{}\\
@@ -4258,24 +4259,23 @@ programma è corretto o meno?
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/programma_V.png}
+    \caption{Dato in ingresso un programma $P$, il programma $V$ mi dice se è corretto o errato}
 \end{figure}
 Il teorema di Rice mi dice che una verifica automatica non può avvenire, non posso
 avere dei diagnostici che mi testano la correttezza dei programmi. Vediamo in un contesto
 pi formale.
 $$PC=\{P:P\text{ è corretto}\}$$
-Consideriamo $PC$ come l'insieme dei programmi corretti, questo insieme può essere riconosciuto
+Consideriamo $PC$ come l'insieme dei \textbf{programmi corretti}, questo insieme può essere riconosciuto
 da un programma $V$? Se questo comportamento significa che $PC$ è ricorsivo. Allora ci si chiede
 la domanda $PC$ è ricorsivo? Per il teorema di Rice so che questo insieme non può essere
 ricorsivo, perché $PC$ rispetta le funzioni.
-
 $$p\in PC \land \varphi_P = \varphi_{P'}$$
 Se prendiamo un programma $P$ corretto, ed un altro programma $P'$ che ha la stessa semantica
 di $P$, allora quest'ultimo sarà anch'esso un programma corretto.
 $$P'\in PC$$
 Quindi $PC$ non è ricorsivo per il teorema di Rice (non è possibile verificare automaticamente
 la correttezza dei programmi).
-
-\paragraph{}\mbox{}\\
+\newline\newline
 In realtà sono presenti delle specifiche che si possono verificare automaticamente
 la correttezza semantica dei corrispondenti programmi:
 \begin{itemize}
@@ -6407,7 +6407,7 @@ algoritmi paralleli efficienti (si crede molto fermamente).
 \subsection{Classi di complessità}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.65]{images/classi_complessità.png}
+    \includegraphics[scale=0.5]{images/classi_complessità.png}
     \caption{Situazione attuale delle classi di complessità affrontate durante il corso.}
 \end{figure}
 Quello che abbiamo dimostrato è che la classe dei problemi risolubili efficientemente in termini
@@ -6422,7 +6422,6 @@ $L\subset P$.
 \newline\newline
 Nella classe $NP$ abbiamo individuato la classe dei problemi $NP-C$, che simmetricamente
 non ha (o si pensa abbia) una intersezione con la classe dei problemi $P$, altrimenti $P=NP$.
-\newline\newline
 Ogni problema in $NP$ ha sicuramente un algoritmo esponenziale \textbf{deterministico}, quindi è incluso
 sicuramente nella classe $EXPTIME$. Attualmente si pensa che tutte queste inclusioni siano proprie,
 tutta via ancora nessuno ha dimostrato la proprietà di queste inclusioni.
